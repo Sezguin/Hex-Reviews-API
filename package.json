@@ -1,0 +1,26 @@
+{
+  "name": "hex-reviews-api",
+  "version": "1.0.0",
+  "description": "Package forHex Reviews API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sezguin/Hex-Reviews-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sezguin/Hex-Reviews-API/issues"
+  },
+  "homepage": "https://github.com/Sezguin/Hex-Reviews-API#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
