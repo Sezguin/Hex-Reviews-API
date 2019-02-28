@@ -14,18 +14,20 @@ exports.list_all_games = function(req, res) {
 
 //  Create a new game in the database.
 exports.create_a_game = function(req, res) {
-    var new_game = new Gamepad(req.body);
+    var new_game = new Games(req.body);
 
     new_game.save(function(err, game) {
         if (err)
             res.send(err);
         res.json(game);
+
+        console.log("---------------------- " + game);
     });
 };
 
 //  List a single game from the database, by using supplied ID.
 exports.list_a_game = function(req, res) {
-    Games.findById(req.params.gameId, function(err, game) {
+    Games.findById(req.params.gameID, function(err, game) {
         if (err)
             res.send(err);
         res.json(game);
@@ -34,7 +36,7 @@ exports.list_a_game = function(req, res) {
 
 //  Update a game in the database.
 exports.update_a_game = function(req, res) {
-    Games.findOneAndUpdate({_id: req.params.gameId}, req.body, {new: true}, function(err, game) {
+    Games.findOneAndUpdate({_id: req.params.gameID}, req.body, {new: true}, function(err, game) {
         if (err)
             res.send(err);
         res.json(game);
@@ -43,8 +45,8 @@ exports.update_a_game = function(req, res) {
 
 //  Delete a game from the database.
 exports.delete_a_game = function(req, res) {
-    Games.remove({
-        _id: req.params.gameId
+    Games.deleteOne({
+        _id: req.params.gameID        
     }, function(err, game) {
         if (err)
             res.send(err);

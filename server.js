@@ -1,13 +1,13 @@
 var express = require('express'),
   app = express(),
   port = 4500,
-  mongoose = require('mongoose),')
+  mongoose = require('mongoose'),
   Games = require('./API/Models/HexReviewsAPIModel'),
   bodyParser = require('body-parser');
 
 //  Mongoose connection details to MongoDB.
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/GamesDatabase')
+mongoose.connect('mongodb://localhost/hex-reviews-database')
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
