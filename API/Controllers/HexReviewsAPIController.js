@@ -20,8 +20,6 @@ exports.create_a_game = function(req, res) {
         if (err)
             res.send(err);
         res.json(game);
-
-        console.log("---------------------- " + game);
     });
 };
 

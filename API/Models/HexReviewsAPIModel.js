@@ -6,110 +6,15 @@ var Schema = mongoose.Schema;
 var GameSchema = new Schema({
     game_title: {
         type: String,
-        required: 'Kindly enter the name of the game.'
+        required: 'A game title is required to create a new game in the database.'
     },
     game_description: {
         type: String,
-        default: 'No description has been added yet.'
+        default: 'No description information has been added yet.'
     },
-    game_genre: {
-        type: [{
-            type: String,
-            enum: [
-                'Action', 
-                'Action-Adventure', 
-                'Adventure', 
-                'Role-Playing', 
-                'Simulation', 
-                'Strategy', 
-                'Sports'
-            ]
-        }],
-        required: 'A genre for the game is required.'
-    },
-    game_sub_genre_primary: {
-        type: [{
-            type: String,
-            enum: [
-                'FPS',
-                'Platformer', 
-                'Shooter', 
-                'Fighting', 
-                'Stealth', 
-                'Survival', 
-                'Rhythm', 
-                'Survival Horror', 
-                'Metroidvania', 
-                'Text Adventure', 
-                'Graphic Adventure', 
-                'Visual Novel', 
-                'Interactive Movie', 
-                'Action RPG', 
-                'MMORPG', 
-                'MMO', 
-                'RPG', 
-                'Roguelike', 
-                'Tactical RPG', 
-                'Sandbox RPG', 
-                'Choices', 
-                'Fantasy', 
-                'Vehicle Simulation', 
-                'Life Simulation', 
-                'RTS', 
-                'RTT', 
-                'TBS', 
-                'TBT', 
-                'Wargame', 
-                'MOBA', 
-                'Racing', 
-                'Sports Game', 
-                'Competitive',
-                'None'
-            ]
-        }],
-        default: ['None']
-    },
-    game_sub_genre_secondary: {
-        type: [{
-            type: String,
-            enum: [
-                'FPS',
-                'Platformer', 
-                'Shooter', 
-                'Fighting', 
-                'Stealth', 
-                'Survival', 
-                'Rhythm', 
-                'Survival Horror', 
-                'Metroidvania', 
-                'Text Adventure', 
-                'Graphic Adventure', 
-                'Visual Novel', 
-                'Interactive Movie', 
-                'Action RPG', 
-                'MMORPG', 
-                'MMO', 
-                'RPG', 
-                'Roguelike', 
-                'Tactical RPG', 
-                'Sandbox RPG', 
-                'Choices', 
-                'Fantasy', 
-                'Vehicle Simulation', 
-                'Life Simulation', 
-                'RTS', 
-                'RTT', 
-                'TBS', 
-                'TBT', 
-                'Wargame', 
-                'MOBA', 
-                'Racing', 
-                'Sports Game', 
-                'Competitive',
-                'None'
-            ]
-        }],
-        default: ['None']
+    game_genre_tags: {
+        type: Array,
+        default: []
     },
     game_developer: {
         type: String,
@@ -119,31 +24,40 @@ var GameSchema = new Schema({
         type: String,
         default: 'No publisher information has been added yet.'
     },
-    game_age_rating: {
-        type: [{
-            type: String, 
-            enum: [
-                'Parental Guidance Recommended',
-                'Appropriate for ages rated 3+',
-                'Appropriate for ages rated 7+',
-                'Appropriate for ages rated 12+',
-                'Appropriate for ages rated 16+',
-                'Appropriate for ages rated 18+'
-            ]
-        }],
-        default: ['Please Select']
+    game_age_rating_tags: {
+        type: Array,
+        default: []
     },
     game_release_date: {
         type: Date,
-        required: 'Please enter a release date.'
+        default: '2000-01-01'
+    },
+    game_rating: {
+        type: Number,
+        default: 0.0
+    },
+    game_online: {
+        type: Boolean,
+        default: null
+    },
+    game_platform_tags: {
+        type: Array,
+        default: []
     },
     game_creation_date: {
         type: Date,
         default: Date.now
     },
-    game_rating: {
+    game_launch_price: {
         type: Number,
         default: 0.0
+    },
+    game_image: {
+        type: String,
+        media: {
+            binaryEncoding: 'base64',
+            type: 'image/png'
+        }
     }
 });
 
