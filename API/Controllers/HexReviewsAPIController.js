@@ -14,6 +14,9 @@ exports.list_all_games = function(req, res) {
 
 //  Create a new game in the database.
 exports.create_a_game = function(req, res) {
+
+    console.log("A new game is being created...");
+    
     var new_game = new Games(req.body);
 
     new_game.save(function(err, game) {
