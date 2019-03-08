@@ -46,6 +46,9 @@ exports.update_a_game = function(req, res) {
 
 //  Delete a game from the database.
 exports.delete_a_game = function(req, res) {
+    
+    console.log("A game is being deleted...");
+
     Games.deleteOne({
         _id: req.params.gameID        
     }, function(err, game) {
