@@ -26,6 +26,7 @@ function displayGame(result) {
     var gameTitle           = result.game_title;
     var gameDescription     = result.game_description;
     var gameGenres          = result.game_genre_tags;
+    var gameImage           = result.game_image;
 
     //  Results container to add game entries to.
     var resultsContainer = document.getElementById("gameResultsContainer");
@@ -52,6 +53,16 @@ function displayGame(result) {
     var gameGenreTagsElement = document.createElement("p");
     gameGenreTagsElement.textContent = gameGenres;
 
+    // Game image data.
+    var gameImageData = document.createElement("img");
+    image = gameImage.data;
+    console.log("-----------" + gameImage.data);
+
+    var b64encoded = btoa(String.fromCharCode.apply(null, image));
+    console.log("-----------" + gameImage.data);
+
+    gameImageData.src = 'data:image/png;base64,' + b64encoded;
+
     //  Button area properties.
     var gameButtonSection = document.createElement("p");
     gameButtonSection.className = "lead";
@@ -68,6 +79,7 @@ function displayGame(result) {
     gameJumbotron.appendChild(gameTitleElement);
     gameJumbotron.appendChild(gameDescriptionElement);
     gameJumbotron.appendChild(gameGenreTagsElement);
+    gameJumbotron.appendChild(gameImageData);
     gameJumbotron.appendChild(gameButtonSection);
     gameJumbotron.appendChild(deleteButton);
 

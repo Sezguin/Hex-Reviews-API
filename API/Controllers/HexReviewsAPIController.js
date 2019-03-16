@@ -1,7 +1,11 @@
 'use strict';
 
-var mongoose = require('mongoose'),
-    Games = mongoose.model('Games');
+var mongoose = require('mongoose');
+var fs = require('fs');
+var Games = mongoose.model('Games');
+var Buffer = require('buffer');
+
+var imgPath = __dirname + '/log.png';
 
 //  List all games in the database.
 exports.list_all_games = function(req, res) {
@@ -18,6 +22,12 @@ exports.create_a_game = function(req, res) {
     console.log("A new game is being created...");
     
     var new_game = new Games(req.body);
+
+    new_game.game_image.data = fs.readFileSync(imgPath);
+
+    let base64 = new_game.game_image.data.toString('base64');
+    console.log("---------------" + base64.substr(0,200));
+    new_game.game_image.contentType = 'image/png';
 
     new_game.save(function(err, game) {
         if (err)

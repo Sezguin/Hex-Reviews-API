@@ -66,7 +66,6 @@ var storage = new GridFsStorage({
 const upload = multer({ storage });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-  // res.json({file: req.file});
   res.redirect('/AddGamePage');
 });
 
@@ -131,6 +130,16 @@ app.get('/AddGamePage', (req, res) =>  {
       });
       res.render('HexReviewsAddGamePage', {files: files});
     }
+  });
+});
+
+app.delete('/files/:id', (req, res) => {
+  gfs.remove({_id: req.params.id, root: 'uploads'}, (err, gridStore) => {
+    if(err) {
+      return res.status(404).json({ err: err });
+    }
+
+    res.redirect('/AddGamePage');
   });
 });
 

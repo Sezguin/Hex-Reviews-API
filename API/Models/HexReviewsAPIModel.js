@@ -53,11 +53,8 @@ var GameSchema = new Schema({
         default: 0.0
     },
     game_image: {
-        type: String,
-        media: {
-            binaryEncoding: 'base64',
-            type: 'image/png'
-        }
+        data: Buffer,
+        contentType: String
     }
 });
 
