@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-6 m-auto">
                     <h1 class="text-center display-4 my-4">Image Upload</h1>
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <form action="/images/game" method="POST" enctype="multipart/form-data">
                         <div class="custom-file mb-3">
                             <input type="file" name="file" id="file" class="custom-file-input">
                             <label for="file" class="custom-file-label">Choose File</label>
@@ -49,7 +49,6 @@
             </div>
         </div>
         <hr>
-        <!-- EJS logic for grabbing and diplaying the image data. -->
         <% if(files) { %>
             <% files.forEach(function(file) { %>
                 <div class="card card-body mb-3">
@@ -126,6 +125,12 @@
 
                     <h4>Launch Price</h4>
                     <input id="game_launch_price" type="number" min="0.00" class="form-control" placeholder="...">
+
+                    <div id="wrapper">
+                        ENTER IMAGE
+                        <input id="imageUpload" type="file" accept="image/*" onchange="previewImage(event)">
+                        <img id="imageOutput"/>
+                    </div>
 
                     <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
                     <button id="goToViewGamesPageButton" class="bigMainButton">View Games</button>

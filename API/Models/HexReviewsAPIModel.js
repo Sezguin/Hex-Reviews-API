@@ -52,10 +52,26 @@ var GameSchema = new Schema({
         type: Number,
         default: 0.0
     },
+    game_image_id: {
+        type: String,
+        default: ""
+    }
+});
+
+var GameImageSchema = new Schema({
+    game_title: {
+        type: String,
+        default: ""
+    },
+    image_creation_date: {
+        type: Date,
+        default: Date.now
+    },
     game_image: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        default: ""
     }
 });
 
 module.exports = mongoose.model('Games', GameSchema);
+module.exports = mongoose.model('GameImages', GameImageSchema);

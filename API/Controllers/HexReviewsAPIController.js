@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var fs = require('fs');
 var Games = mongoose.model('Games');
-var Buffer = require('buffer');
+var GameImages = mongoose.model('GameImages');
 
 var imgPath = __dirname + '/log.png';
 
@@ -16,18 +16,25 @@ exports.list_all_games = function(req, res) {
     });
 };
 
+exports.create_an_image = function(req, res) {
+
+    console.log("A new game image is being created...");
+
+    var new_game_image = new GameImages(req.body);
+
+    console.log("Game image body: " + new_game_image);
+}
+
 //  Create a new game in the database.
 exports.create_a_game = function(req, res) {
 
     console.log("A new game is being created...");
     
     var new_game = new Games(req.body);
+    console.log("--------------------" + JSON.stringify(req.body));
+    // var new_game_image = new GameImages(req.body);
 
-    new_game.game_image.data = fs.readFileSync(imgPath);
-
-    let base64 = new_game.game_image.data.toString('base64');
-    console.log("---------------" + base64.substr(0,200));
-    new_game.game_image.contentType = 'image/png';
+    new_game.game_image = fs.readFileSync(imgPath).toString('base64');
 
     new_game.save(function(err, game) {
         if (err)

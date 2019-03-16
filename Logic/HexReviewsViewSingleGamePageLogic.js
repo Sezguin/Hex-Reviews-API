@@ -13,7 +13,7 @@ function getGame(gameId) {
         url: 'http://localhost:4500/games/' + gameId,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result));
+            console.log("Information from API: " + JSON.stringify(result.game_title));
             displayGame(result);
         }
     });
@@ -55,13 +55,8 @@ function displayGame(result) {
 
     // Game image data.
     var gameImageData = document.createElement("img");
-    image = gameImage.data;
-    console.log("-----------" + gameImage.data);
-
-    var b64encoded = btoa(String.fromCharCode.apply(null, image));
-    console.log("-----------" + gameImage.data);
-
-    gameImageData.src = 'data:image/png;base64,' + b64encoded;
+    btoa(String.fromCharCode.apply(null, gameImage.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+    gameImageData.src = 'data:image/png;base64,' + gameImage;
 
     //  Button area properties.
     var gameButtonSection = document.createElement("p");

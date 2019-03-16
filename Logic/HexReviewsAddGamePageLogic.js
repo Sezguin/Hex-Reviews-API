@@ -35,8 +35,25 @@ $(document).ready(function() {
     });
 });
 
+function previewImage(event) {
+    console.log("Changing image preview...");
+    var reader = new FileReader();
+
+    reader.onload = function() {
+
+        console.log("Collecting image data...")
+        var output = document.getElementById("imageOutput");
+        output.src = reader.result;
+        console.log("Reader result: " + reader.result);
+    }
+    reader.readAsDataURL(event.target.files[0]);
+
+}
+
 function addGame() {
     console.log("Add game button has been clicked.");
+
+    var addGameImageReader = new FileReader();
 
     var gameTitle   = $('#game_title').val();
     var gameDesc    = $('#game_description').val();
@@ -52,20 +69,27 @@ function addGame() {
         gameOnline = false;
     }
 
+    // // Post image information to API.
+    // $.post("http://localhost:4500/images/game", {
+    //     game_title: gameTitle,
+    //     game_image: thing
+    // });
+
     //  Post collected information to API.
-    $.post("http://localhost:4500/games/", 
-    {   
-        game_title: gameTitle,
-        game_description: gameDesc,
-        game_genre_tags: gameGenres,
-        game_developer: gameDev,
-        game_publisher: gamePub,
-        game_age_rating_tags: gameAgeRatings,
-        game_release_date: gameRelease,
-        game_platform_tags: gamePlatforms,
-        game_online: gameOnline,
-        game_launch_price: gameLaunch
-    });
+    // $.post("http://localhost:4500/games/", 
+    // {   
+    //     game_title: gameTitle,
+    //     game_description: gameDesc,
+    //     game_genre_tags: gameGenres,
+    //     game_developer: gameDev,
+    //     game_publisher: gamePub,
+    //     game_age_rating_tags: gameAgeRatings,
+    //     game_release_date: gameRelease,
+    //     game_platform_tags: gamePlatforms,
+    //     game_online: gameOnline,
+    //     game_launch_price: gameLaunch,
+    //     game_image_id: gameImageId
+    // });
 }
 
 function submitGenres() {
@@ -141,6 +165,11 @@ function submitPlatforms() {
     }
 
     $('#platformTagModal').modal("hide");
+}
+
+//  Conversion algorithm.
+function hexToBase64(str) {
+    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
 }
 
 

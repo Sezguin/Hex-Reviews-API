@@ -12,4 +12,7 @@ module.exports = function(app) {
         .get(hexReviewController.list_a_game)
         .put(hexReviewController.update_a_game)
         .delete(hexReviewController.delete_a_game);
+
+    app.route('/images/game')
+        .post(hexReviewController.create_an_image);
 };
