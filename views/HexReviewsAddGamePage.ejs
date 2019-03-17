@@ -34,45 +34,13 @@
             </div>
         </nav>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 m-auto">
-                    <h1 class="text-center display-4 my-4">Image Upload</h1>
-                    <form action="/images/game" method="POST" enctype="multipart/form-data">
-                        <div class="custom-file mb-3">
-                            <input type="file" name="file" id="file" class="custom-file-input">
-                            <label for="file" class="custom-file-label">Choose File</label>
-                        </div>
-                        <input type="submit" value="submit" class="btn btn-primary btn-block">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <% if(files) { %>
-            <% files.forEach(function(file) { %>
-                <div class="card card-body mb-3">
-                    <% if(file.isImage) { %>
-                        <img src="image/<%= file.filename %>" alt="">
-                    <% } else { %>
-                        <%= file.filename %>
-                    <% } %>
-                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
-                        <button class="btn btn-danger btn-block mt-4">Delete</button>
-                    </form>>
-                </div>
-            <% }) %>
-        <% } else { %>
-            <p>No images to show.</p>
-        <% } %>
-
         <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
             <h1>Add a New Game</h1>
         </div>
 
         <!-- All fields for adding in a new game. -->
         <div id="addNewGameArea">
-            <form class>
+            <form>
                 <div class="form-group form-group-lg addGameFormGroup">
 
                     <!-- Game Title -->
@@ -126,17 +94,20 @@
                     <h4>Launch Price</h4>
                     <input id="game_launch_price" type="number" min="0.00" class="form-control" placeholder="...">
 
-                    <div id="wrapper">
-                        ENTER IMAGE
-                        <input id="imageUpload" type="file" accept="image/*" onchange="previewImage(event)">
-                        <img id="imageOutput"/>
+                    <h4>Upload Images</h4>
+                    <input id="imageUpload" type="file" class="form-control-file" multiple>
+
+                    <div id="imagePreview">
+                        <!-- All uploaded images will be previewed here. -->
                     </div>
+                    <hr>
 
                     <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
                     <button id="goToViewGamesPageButton" class="bigMainButton">View Games</button>
-
                 </div>
             </form>
+            <button id="viewImageButton" class="bigMainButton" type="submit">View images</button>
+            <img id="imageOutput">
         </div>
 
         <nav class="navbar navbar-inverse navbar-fixed-bottom" id="homePageNavigationBarBottom">

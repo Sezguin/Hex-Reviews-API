@@ -33,28 +33,68 @@ $(document).ready(function() {
     $("#addGameButton").click(function() {
         addGame();
     });
+
+    $("#viewImageButton").click(function() {
+        getGameImage();
+    });
 });
 
-function previewImage(event) {
-    console.log("Changing image preview...");
-    var reader = new FileReader();
+//  Preview uploaded images.
+$(function () {
+    $("#imageUpload").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#imagePreview");
+            dvPreview.html("");
 
-    reader.onload = function() {
+            //  Regular expression for ensuring files have corrent extensions.
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp)$/;
 
-        console.log("Collecting image data...")
-        var output = document.getElementById("imageOutput");
-        output.src = reader.result;
-        console.log("Reader result: " + reader.result);
-    }
-    reader.readAsDataURL(event.target.files[0]);
+            $($(this)[0].files).each(function() {
+                var file = $(this);
+                if (regex.test(file[0].name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("style", "width: 200px");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
+                    }
 
+                    reader.readAsDataURL(file[0]);
+                } else {
+                    alert(file[0].name + " is not a valid image file.");
+                    dvPreview.html("");
+                    return false;
+                }
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    });
+});
+
+function getGameImage() {
+    $.ajax({
+        url: 'http://localhost:4500/images/game',
+        type: 'GET',
+        success: function(result) {
+            console.log("Information from API: " + JSON.stringify(result.game_title));
+            displayImage(result);
+        }
+    });
+}
+
+function displayImage(result) {
+    console.log("000000 " + result.game_image);
+
+    var output = document.getElementById("imageOutput");
+        output.src = result.game_image;
 }
 
 function addGame() {
     console.log("Add game button has been clicked.");
 
-    var addGameImageReader = new FileReader();
-
+    //  All game attributes from form.
     var gameTitle   = $('#game_title').val();
     var gameDesc    = $('#game_description').val();
     var gameDev     = $('#game_developer').val();
@@ -63,33 +103,66 @@ function addGame() {
     var gameOnline  = null;
     var gameLaunch  = $('#game_launch_price').val();
 
+    //  All image attributes from form.
+    var imageInput  = $('#imageUpload').get(0);
+    var imageArray  = [];
+
+    //  Check whether the online checkbox is selected.
     if($('#onlineCheckbox').prop("checked") == true) {
         gameOnline = true;
     } else if($('#onlineCheckbox').prop("checked") == false) {
         gameOnline = false;
     }
 
-    // // Post image information to API.
-    // $.post("http://localhost:4500/images/game", {
-    //     game_title: gameTitle,
-    //     game_image: thing
-    // });
+    $($(imageInput)[0].files).each(function() {
+        var file = $(this);
+        var reader = new FileReader();
 
-    //  Post collected information to API.
-    // $.post("http://localhost:4500/games/", 
-    // {   
-    //     game_title: gameTitle,
-    //     game_description: gameDesc,
-    //     game_genre_tags: gameGenres,
-    //     game_developer: gameDev,
-    //     game_publisher: gamePub,
-    //     game_age_rating_tags: gameAgeRatings,
-    //     game_release_date: gameRelease,
-    //     game_platform_tags: gamePlatforms,
-    //     game_online: gameOnline,
-    //     game_launch_price: gameLaunch,
-    //     game_image_id: gameImageId
-    // });
+        reader.onload = function() {
+
+            imageArray.push(reader.result);
+
+            // console.log("---------------" + reader.result);
+
+            console.log("The array is: " + imageArray);
+
+
+        }
+        reader.readAsDataURL(file[0]);
+    });
+
+    console.log("THe array outside is: " + imageArray);
+
+
+
+    file = imageInput.files[0];
+    fr = new FileReader();
+    fr.onload = receivedText;
+    fr.readAsDataURL(file);
+
+    function receivedText() {
+        $.post("http://localhost:4500/images/game", {
+            game_title: gameTitle,
+            game_image: fr.result
+        },
+        function(data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        });
+    }  
+
+    $.post("http://localhost:4500/games/", 
+    {   
+        game_title: gameTitle,
+        game_description: gameDesc,
+        game_genre_tags: gameGenres,
+        game_developer: gameDev,
+        game_publisher: gamePub,
+        game_age_rating_tags: gameAgeRatings,
+        game_release_date: gameRelease,
+        game_platform_tags: gamePlatforms,
+        game_online: gameOnline,
+        game_launch_price: gameLaunch,
+    });
 }
 
 function submitGenres() {

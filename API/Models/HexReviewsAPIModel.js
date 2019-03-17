@@ -68,8 +68,8 @@ var GameImageSchema = new Schema({
         default: Date.now
     },
     game_image: {
-        type: String,
-        default: ""
+        type: Array,
+        default: []
     }
 });
 
