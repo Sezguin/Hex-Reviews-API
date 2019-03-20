@@ -2,6 +2,7 @@ var gameGenres      = [];
 var gameAgeRatings  = [];
 var gamePlatforms   = [];
 
+
 $(document).ready(function() {
 
     //  All form related buttons.
@@ -74,8 +75,9 @@ $(function () {
 });
 
 function getGameImage() {
+    imageID = "5c8eb1cc8320dc4b38d5c50f";
     $.ajax({
-        url: 'http://localhost:4500/images/game',
+        url: 'http://localhost:4500/images/game/' + imageID,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result.game_title));
@@ -85,10 +87,8 @@ function getGameImage() {
 }
 
 function displayImage(result) {
-    console.log("000000 " + result.game_image);
-
     var output = document.getElementById("imageOutput");
-        output.src = result.game_image;
+        output.src = result.game_image_data;
 }
 
 function addGame() {
@@ -105,7 +105,6 @@ function addGame() {
 
     //  All image attributes from form.
     var imageInput  = $('#imageUpload').get(0);
-    var imageArray  = [];
 
     //  Check whether the online checkbox is selected.
     if($('#onlineCheckbox').prop("checked") == true) {
@@ -118,36 +117,17 @@ function addGame() {
         var file = $(this);
         var reader = new FileReader();
 
-        reader.onload = function() {
-
-            imageArray.push(reader.result);
-
-            // console.log("---------------" + reader.result);
-
-            console.log("The array is: " + imageArray);
-
-
+        reader.onload = function(event) {
+            receivedText(event.target.result);
         }
         reader.readAsDataURL(file[0]);
     });
 
-    console.log("THe array outside is: " + imageArray);
-
-
-
-    file = imageInput.files[0];
-    fr = new FileReader();
-    fr.onload = receivedText;
-    fr.readAsDataURL(file);
-
-    function receivedText() {
+    function receivedText(imageData) {
         $.post("http://localhost:4500/images/game", {
             game_title: gameTitle,
-            game_image: fr.result
-        },
-        function(data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
-        });
+            game_image_data: imageData
+        });        
     }  
 
     $.post("http://localhost:4500/games/", 
@@ -167,85 +147,63 @@ function addGame() {
 
 function submitGenres() {
     gameGenres = [];
-    document.getElementById("game_genre_tags").value = null;
-    
 
-    if($('#actionCheckbox').prop("checked") == true) {
-        gameGenres.push("Action");
-        document.getElementById("game_genre_tags").value += "Action ";
-    }
-    if($('#adventureCheckbox').prop("checked") == true) {
-        gameGenres.push("Adventure");
-        document.getElementById("game_genre_tags").value += "Adventure ";
-    }
-    if($('#survivalCheckbox').prop("checked") == true) {
-        gameGenres.push("Survival");
-        document.getElementById("game_genre_tags").value += "Survival ";
-    }
-    if($('#horrorCheckbox').prop("checked") == true) {
-        gameGenres.push("Horror");
-        document.getElementById("game_genre_tags").value += "Horror ";
-    }
+    badgeDiv = document.getElementById("genreBadges");
+    badgeDiv.innerHTML = "";
+
+    $('input[type=checkbox][class=genresCheckbox]').each(function () {
+        if(this.checked) {
+            elementValue = this.getAttribute("aria-label");
+            gameGenres.push(elementValue);
+
+            tempBadge = document.createElement("span");
+            tempBadge.className = "badge badge-primary";
+            tempBadge.textContent = elementValue;
+            badgeDiv.appendChild(tempBadge);
+        }
+    });
 
     $('#genreTagModal').modal("hide");
 }
 
 function submitAgeRatings() {
     gameAgeRatings = [];
-    document.getElementById("game_age_rating_tags").value = null;
-    
 
-    if($('#purchasesCheckbox').prop("checked") == true) {
-        gameAgeRatings.push("Includes in-game purchases");
-        document.getElementById("game_age_rating_tags").value += "Includes in-game purchases ";
-    }
-    if($('#gamblingCheckbox').prop("checked") == true) {
-        gameAgeRatings.push("May encourage gambling");
-        document.getElementById("game_age_rating_tags").value += "May encourage gambling ";
-    }
-    if($('#drugsCheckbox').prop("checked") == true) {
-        gameAgeRatings.push("May be frightening to children");
-        document.getElementById("game_age_rating_tags").value += "May be frightening to children ";
-    }
-    if($('#sexBox').prop("checked") == true) {
-        gameAgeRatings.push("Nudity or sexual behaviour");
-        document.getElementById("game_age_rating_tags").value += "Nudity or sexual behaviour ";
-    }
+    badgeDiv = document.getElementById("ageRatingBadges");
+    badgeDiv.innerHTML = "";
+
+    $('input[type=checkbox][class=ageRatingCheckbox]').each(function () {
+        if(this.checked) {
+            elementValue = this.getAttribute("aria-label");
+            gameAgeRatings.push(elementValue);
+
+            tempBadge = document.createElement("span");
+            tempBadge.className = "badge badge-primary";
+            tempBadge.textContent = elementValue;
+            badgeDiv.appendChild(tempBadge);
+        }
+    });
 
     $('#ageRatingTagModal').modal("hide");
 }
 
 function submitPlatforms() {
     gamePlatforms = [];
-    document.getElementById("game_platform_tags").value = null;
-    
 
-    if($('#pcCheckbox').prop("checked") == true) {
-        gamePlatforms.push("PC");
-        document.getElementById("game_platform_tags").value += "PC ";
-    }
-    if($('#xboxCheckbox').prop("checked") == true) {
-        gamePlatforms.push("Xbox");
-        document.getElementById("game_platform_tags").value += "Xbox ";
-    }
-    if($('#playstationCheckbox').prop("checked") == true) {
-        gamePlatforms.push("PlayStation");
-        document.getElementById("game_platform_tags").value += "PlayStation ";
-    }
-    if($('#switchCheckbox').prop("checked") == true) {
-        gamePlatforms.push("Switch");
-        document.getElementById("game_platform_tags").value += "Switch ";
-    }
+    badgeDiv = document.getElementById("platformBadges");
+    badgeDiv.innerHTML = "";
+
+    $('input[type=checkbox][class=platformCheckbox]').each(function () {
+        if(this.checked) {
+            elementValue = this.getAttribute("aria-label");
+            gameAgeRatings.push(elementValue);
+
+            tempBadge = document.createElement("span");
+            tempBadge.className = "badge badge-primary";
+            tempBadge.textContent = elementValue;
+            badgeDiv.appendChild(tempBadge);
+        }
+    });
 
     $('#platformTagModal').modal("hide");
 }
-
-//  Conversion algorithm.
-function hexToBase64(str) {
-    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
-}
-
-
-
-
-

@@ -52,9 +52,9 @@ var GameSchema = new Schema({
         type: Number,
         default: 0.0
     },
-    game_image_id: {
-        type: String,
-        default: ""
+    game_images_id: {
+        type: Array,
+        default: []
     }
 });
 
@@ -67,9 +67,9 @@ var GameImageSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    game_image: {
-        type: Array,
-        default: []
+    game_image_data: {
+        type: String,
+        default: ""
     }
 });
 

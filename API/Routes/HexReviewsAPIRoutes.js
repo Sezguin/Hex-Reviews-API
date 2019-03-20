@@ -14,6 +14,9 @@ module.exports = function(app) {
         .delete(hexReviewController.delete_a_game);
 
     app.route('/images/game')
-        .post(hexReviewController.create_an_image)
-        .get(hexReviewController.get_an_image);
+        .post(hexReviewController.create_an_image);
+        // .get(hexReviewController.get_an_image);
+    
+    app.route('/images/game/:imageID')
+        .get(hexReviewController.get_an_image)
 };

@@ -19,8 +19,8 @@ app.use(express.static(__dirname + '/Logic'));
 
 // Configuring app.
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 //  MongoDB configuration.
 const mongoURI = 'mongodb://localhost/hex-reviews-database';

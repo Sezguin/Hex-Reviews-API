@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#goToViewGamesPageButton").click(function() {
+    $("#viewGamesPageButton").click(function() {
         window.location.href = "/ViewGamesPage"
     });
 
@@ -25,4 +25,6 @@ function deleteGame(button) {
             console.log("Information from API: " + result.message);
         }
     });
+
+    window.location.href = "/ViewGamesPage"
 }
