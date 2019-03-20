@@ -1,253 +1,330 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Add Game</title>
 
-            <!-- All stylesheets and UI material. -->
+<head>
+    <title>Add Game</title>
 
-        <!-- Bootstrap Stylesheet dependencies. -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">        
-        <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <!-- All stylesheets and UI material. -->
 
-        <!-- Custom client stylesheets. -->
-        <link rel="stylesheet" href="CommonStylesheet.css">
-        <link rel="stylesheet" href="HexReviewsAddGamePageStylesheet.css">
+    <!-- Bootstrap Stylesheet dependencies. -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Custom icons and fonts. -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'> 
-        
-        <style>
-            img {
-                width: 100%;
-            }
-        </style>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh5u" crossorigin="anonymous">         -->
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
-    </head>
-    <body>
-        <!-- Top add game page navigation bar. -->
-        <nav class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Hex Reviews</a>
+    <!-- Custom client stylesheets. -->
+    <link rel="stylesheet" href="CommonStylesheet.css">
+    <link rel="stylesheet" href="Animations.css">
+    <link rel="stylesheet" href="HexReviewsAddGamePageStylesheet.css">
+
+    <!-- Custom icons and fonts. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <style>
+        img {
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Hex Reviews</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Add Game</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">View Games</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Admin Tools
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
+        <h1>Add a New Game</h1>
+    </div>
+
+    <!-- All fields for adding in a new game. -->
+    <div id="addNewGameArea">
+        <form>
+            <div class="form-group form-group-lg addGameFormGroup">
+
+                <!-- Game Title -->
+                <h5>Game Title</h5>
+                <input id="game_title" type="text" class="form-control" placeholder="..." required>
+
+                <h5>Description</h5>
+                <textarea id="game_description" type="text" class="form-control" rows="4" placeholder="..."></textarea>
+
+                <div class="row">
+                    <div class="col">
+                        <h5>Developer</h5>
+                        <input id="game_developer" type="text" class="form-control" placeholder="...">
+                    </div>
+                    <div class="col">
+                        <h5>Publisher</h5>
+                        <input id="game_publisher" type="text" class="form-control" placeholder="...">
+                    </div>
                 </div>
+
+                <h5>Genres</h5>
+                <div id="genreBadges" class="badgeDiv">
+                </div>
+
+                <button id="gameGenreButton" class="btn btn-primary btn-block tagBlockButton"
+                    class="btn btn-outline-secondary" type="button">Add Genre Tags</button>
+                
+                <h5>Age Rating</h5>
+                <div id="ageRatingBadges" class="badgeDiv">
+                </div>
+
+                <button id="gameAgeRatingButton" class="btn btn-primary btn-block tagBlockButton"
+                    class="btn btn-outline-secondary" type="button">Add Age Rating Tags</button>
+
+                <h5>Platforms</h5>
+                <div id="platformBadges" class="badgeDiv">
+                </div>
+
+                <button id="gamePlatformsButton" class="btn btn-primary btn-block tagBlockButton"
+                    class="btn btn-outline-secondary" type="button">Add Platform Tags</button>
+
+                <div class="row">
+                    <div class="col">
+                        <h5>Release Date</h5>
+                        <input id="game_release_date" type="date" class="form-control" placeholder="...">   
+                    </div>
+                    <div class="col">
+                        <h5>Launch Price</h5>
+                        <input id="game_launch_price" type="number" min="0.00" class="form-control" placeholder="...">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col">
+                        <h5>Mulitplayer Capability</h5>
+                        <label class="switch">
+                            <input id="onlineCheckbox" type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="col">
+                        <h5>Upload Images</h5>
+                        <input id="imageUpload" type="file" class="form-control-file" multiple>
+                    </div>
+                </div>
+
+                <div id="imagePreview">
+                    <hr>
+                    <!-- All uploaded images will be previewed here. -->
+                </div>
+
+
+                <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
+                <button id="viewGamesPageButton" class="bigMainButton">View Games</button>
             </div>
-        </nav>
+        </form>
+        <button id="viewImageButton" class="bigMainButton" type="submit">View images</button>
+        <img id="imageOutput">
+    </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 m-auto">
-                    <h1 class="text-center display-4 my-4">Image Upload</h1>
-                    <form action="/images/game" method="POST" enctype="multipart/form-data">
-                        <div class="custom-file mb-3">
-                            <input type="file" name="file" id="file" class="custom-file-input">
-                            <label for="file" class="custom-file-label">Choose File</label>
-                        </div>
-                        <input type="submit" value="submit" class="btn btn-primary btn-block">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <hr>
-        <% if(files) { %>
-            <% files.forEach(function(file) { %>
-                <div class="card card-body mb-3">
-                    <% if(file.isImage) { %>
-                        <img src="image/<%= file.filename %>" alt="">
-                    <% } else { %>
-                        <%= file.filename %>
-                    <% } %>
-                    <form method="POST" action="/files/<%= file._id %>?_method=DELETE">
-                        <button class="btn btn-danger btn-block mt-4">Delete</button>
-                    </form>>
-                </div>
-            <% }) %>
-        <% } else { %>
-            <p>No images to show.</p>
-        <% } %>
+    <nav class="navbar fixed-bottom navbar-dark bg-dark"><a class="navbar-brand" href="#">Welcome, Admin</a>
+    </nav>
 
-        <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
-            <h1>Add a New Game</h1>
-        </div>
-
-        <!-- All fields for adding in a new game. -->
-        <div id="addNewGameArea">
-            <form class>
-                <div class="form-group form-group-lg addGameFormGroup">
-
-                    <!-- Game Title -->
-                    <h4>Game Title</h4>
-                    <input id="game_title" type="text" class="form-control" placeholder="..." required>
-
-                    <h4>Description</h4>
-                    <input id="game_description" type="text" class="form-control" placeholder="...">
-
-                    <h4>Genres</h4>
-                    <div class="input-group input-group-lg">
-                        <input id="game_genre_tags" type="text" class="form-control" placeholder="...">
-                            <span class="input-group-btn">
-                                <button id="gameGenreButton" class="btn btn-primary" type="button"><span aria-hidden="true">
-                            </span> Add</button>
-                        </span>
-                    </div>
-
-                    <h4>Developer</h4>
-                    <input id="game_developer" type="text" class="form-control" placeholder="...">
-
-                    <h4>Publisher</h4>
-                    <input id="game_publisher" type="text" class="form-control" placeholder="...">
-
-                    <h4>Age Rating</h4>
-                    <div class="input-group input-group-lg">
-                        <input id="game_age_rating_tags" type="text" class="form-control" placeholder="...">
-                            <span class="input-group-btn">
-                                <button id="gameAgeRatingButton" class="btn btn-primary" type="button"><span aria-hidden="true">
-                            </span> Add</button>
-                        </span>
-                    </div>
-
-                    <h4>Release Date</h4>
-                    <input id="game_release_date" type="date" class="form-control" placeholder="...">
-
-                    <h4>Mulitplayer Capability</h4>
-                    <label>
-                        <input id="onlineCheckbox" type="checkbox" checked data-toggle="toggle" data-on="Yes" data-off="No">
-                    </label>
-
-                    <h4>Age Rating</h4>
-                    <div class="input-group input-group-lg">
-                        <input id="game_platform_tags" type="text" class="form-control" placeholder="...">
-                            <span class="input-group-btn">
-                                <button id="gamePlatformsButton" class="btn btn-primary" type="button"><span aria-hidden="true">
-                            </span> Add</button>
-                        </span>
-                    </div>
-
-                    <h4>Launch Price</h4>
-                    <input id="game_launch_price" type="number" min="0.00" class="form-control" placeholder="...">
-
-                    <div id="wrapper">
-                        ENTER IMAGE
-                        <input id="imageUpload" type="file" accept="image/*" onchange="previewImage(event)">
-                        <img id="imageOutput"/>
-                    </div>
-
-                    <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
-                    <button id="goToViewGamesPageButton" class="bigMainButton">View Games</button>
-
-                </div>
-            </form>
-        </div>
-
-        <nav class="navbar navbar-inverse navbar-fixed-bottom" id="homePageNavigationBarBottom">
-            <!-- Bottom navigation bar content goes here. -->
-        </nav>
-
-        <!-- Modals -->
-        <!-- Genre tag selection modal. -->
-        <div id = "genreTagModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    <!-- Modals -->
+    <!-- Genre tag selection modal. -->
+    <div id="genreTagModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Select Genres</h3>
                 </div>
                 <div class="modal-body">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="actionCheckbox">
-                        <label class="custom-control-label" for="actionCheckbox">Action</label>
-
-                        <input type="checkbox" class="custom-control-input" id="adventureCheckbox">
-                        <label class="custom-control-label" for="adventureCheckbox">Adventure</label>
-
-                        <input type="checkbox" class="custom-control-input" id="survivalCheckbox">
-                        <label class="custom-control-label" for="survivalCheckbox">Survival</label>
-
-                        <input type="checkbox" class="custom-control-input" id="horrorCheckbox">
-                        <label class="custom-control-label" for="horrorCheckbox">Horror</label>
+                        <ul style="list-style-type:none;">
+                            <li>
+                                <label class="container">Action
+                                    <input type="checkbox" class="genresCheckbox" id="actionCheckbox"
+                                        aria-label="Action">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Adventure
+                                    <input type="checkbox" class="genresCheckbox" id="adventureCheckbox"
+                                        aria-label="Adventure">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Survival
+                                    <input type="checkbox" class="genresCheckbox" id="survivalCheckbox"
+                                        aria-label="Survival">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Horror
+                                    <input type="checkbox" class="genresCheckbox" id="horrorCheckbox"
+                                        aria-label="Horror">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="submitGenresButton" type="button" class="btn btn-primary">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Age rating tag selection modal. -->
-        <div id = "ageRatingTagModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    <!-- Age rating tag selection modal. -->
+    <div id="ageRatingTagModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Select Age Restrictions</h3>
                 </div>
                 <div class="modal-body">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="purchasesCheckbox">
-                        <label class="custom-control-label" for="purchasesCheckbox">Includes in-game purchases</label>
-                        <p></p>
-                        <input type="checkbox" class="custom-control-input" id="gamblingCheckbox">
-                        <label class="custom-control-label" for="gamblingCheckbox">May encourage gambling</label>
-                        <p></p>
-                        <input type="checkbox" class="custom-control-input" id="drugsCheckbox">
-                        <label class="custom-control-label" for="drugsCheckbox">May be frightening to children</label>
-                        <p></p>
-                        <input type="checkbox" class="custom-control-input" id="sexBox">
-                        <label class="custom-control-label" for="sexBox">Nudity or sexual behaviour</label>
+                        <ul style="list-style-type:none;">
+                            <li>
+                                <label class="container">Includes in-game purchases
+                                    <input type="checkbox" class="ageRatingCheckbox" id="purchasesCheckbox"
+                                        aria-label="Includes in-game purchases">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Encourages gambling
+                                    <input type="checkbox" class="ageRatingCheckbox" id="gamblingCheckbox"
+                                        aria-label="Encourages gambling">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Frightening to children
+                                    <input type="checkbox" class="ageRatingCheckbox" id="drugsCheckbox"
+                                        aria-label="Frightening to children">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Nudity or sexual behaviour
+                                    <input type="checkbox" class="ageRatingCheckbox" id="sexBox"
+                                        aria-label="Nudity or sexual behaviour">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="submitAgeRatingsButton" type="button" class="btn btn-primary">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Platform tag selection modal. -->
-        <div id = "platformTagModal" class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+    <!-- Platform tag selection modal. -->
+    <div id="platformTagModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Select Platforms</h3>
                 </div>
                 <div class="modal-body">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="pcCheckbox">
-                        <label class="custom-control-label" for="purchasesCheckbox">PC</label>
-
-                        <input type="checkbox" class="custom-control-input" id="xboxCheckbox">
-                        <label class="custom-control-label" for="gamblingCheckbox">Xbox</label>
-
-                        <input type="checkbox" class="custom-control-input" id="playstationCheckbox">
-                        <label class="custom-control-label" for="drugsCheckbox">PlayStation</label>
-
-                        <input type="checkbox" class="custom-control-input" id="switchCheckbox">
-                        <label class="custom-control-label" for="sexBox">Switch</label>
+                        <ul style="list-style-type:none;">
+                            <li>
+                                <label class="container">PC
+                                    <input type="checkbox" class="platformCheckbox" id="pcCheckbox"
+                                        aria-label="PC">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Xbox
+                                    <input type="checkbox" class="platformCheckbox" id="xboxCheckbox"
+                                        aria-label="Xbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">PlayStation
+                                    <input type="checkbox" class="platformCheckbox" id="playstationCheckbox"
+                                        aria-label="PlayStation">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Switch
+                                    <input type="checkbox" class="platformCheckbox" id="switchCheckbox"
+                                        aria-label="Switch">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="submitPlatformsButton" type="button" class="btn btn-primary">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-                </div>
             </div>
         </div>
+    </div>
 
-            <!-- All JavaScript material. -->
+    <!-- All JavaScript material. -->
 
-        <!-- JQuery JavaScript dependencies. -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- JQuery JavaScript dependencies. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!-- Boostrap JavaScript Dependencies. -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    
-        <!-- Custom client JavaScript -->
-        <script src="CommonLogic.js"></script>
-        <script src="HexReviewsAddGamePageLogic.js"></script>
+    <!-- Boostrap JavaScript Dependencies. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
-    </body>
+    <!-- Materialize JavScript Dependencies. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Custom client JavaScript -->
+    <script src="CommonLogic.js"></script>
+    <script src="HexReviewsAddGamePageLogic.js"></script>
+
+</body>
+
 </html>

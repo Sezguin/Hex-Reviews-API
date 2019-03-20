@@ -22,8 +22,24 @@ exports.create_an_image = function(req, res) {
 
     var new_game_image = new GameImages(req.body);
 
-    console.log("Game image body: " + new_game_image);
-}
+    console.log("Creating image for: " + new_game_image.game_title);
+
+    new_game_image.save(function(err, game_image) {
+        if(err)
+            res.send(err);
+        res.json(game_image);
+    });
+};
+
+exports.get_an_image = function(req, res) {
+    console.log("An image is being listed...");
+
+    GameImages.findById(req.params.imageID, function(err, game_image) {
+        if (err)
+            res.send(err);
+        res.json(game_image);
+    });
+};
 
 //  Create a new game in the database.
 exports.create_a_game = function(req, res) {
@@ -31,11 +47,7 @@ exports.create_a_game = function(req, res) {
     console.log("A new game is being created...");
     
     var new_game = new Games(req.body);
-    console.log("--------------------" + JSON.stringify(req.body));
-    // var new_game_image = new GameImages(req.body);
-
-    new_game.game_image = fs.readFileSync(imgPath).toString('base64');
-
+    
     new_game.save(function(err, game) {
         if (err)
             res.send(err);

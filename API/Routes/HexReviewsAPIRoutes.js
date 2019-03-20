@@ -15,4 +15,8 @@ module.exports = function(app) {
 
     app.route('/images/game')
         .post(hexReviewController.create_an_image);
+        // .get(hexReviewController.get_an_image);
+    
+    app.route('/images/game/:imageID')
+        .get(hexReviewController.get_an_image)
 };
