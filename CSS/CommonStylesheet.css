@@ -1,8 +1,24 @@
+body {
+  font: 13px "Montserrat", sans-serif;
+  background-color: rgb(241, 241, 241);
+}
+
+
+
+/*****  Buttons ****/
+
 #deleteButton {
     width: 100px;
-    height: 40px;
+    height: 50px;
     color: white;
-    background-color: brown;
+    float: right;
+}
+
+#viewGameButton {
+  color: white;
+  width: 100px;
+  height: 50px;
+  float: left;
 }
 
 #gameIdElement {
@@ -15,42 +31,114 @@
     top: 5px;
 }
 
-.gameJumbotron {
-    width: 80%;
-    margin: 0 auto;
-    border-radius: 50px;
-    padding: 40px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
 .bigMainButton {
-    width: 300px;
-    height: 100px;
-    font-weight: 400;
-    font-size: 40px;
-    background-color: rgb(107, 219, 92);
+    width: 180px;
+    height: 60px;
+    font-size: 20px;
+    background-color: #27AE60;
     border: none;
     color: white;
     padding: 15px 15px;
     text-align: center;
-    border-radius: 50px;
-    margin: 20px;
+    border-radius: 10px;
+    margin: 10px;
     outline: none;
 }
 
 .bigMainButton:hover {
-    background-color: rgb(93, 194, 80);
+  background-color: rgb(33, 150, 81);
+  outline-color: #58D68D;
+  border-color: #27AE60;
 }
 .bigMainButton:focus {
-    background-color: rgb(82, 170, 70);
+  background-color: rgb(33, 150, 81) !important;
+  outline-color: #58D68D !important;
+  border-color: #27AE60 !important;
 }
 
-.fieldButtonSpan {
-    text-align: center;
-    background-color: aqua;
+/*  Green colours for all buttons. */
+.hexButtons {
+  background-color: #27AE60;
+  outline-color: #58D68D;
+  border-color: #27AE60;
 }
 
+.hexButtons:hover {
+  background-color: rgb(33, 150, 81);
+  outline-color: #58D68D;
+  border-color: #27AE60;
+}
+
+.hexButtons:focus {
+  background-color: rgb(33, 150, 81) !important;
+  outline-color: #58D68D !important;
+  border-color: #27AE60 !important;
+}
+
+
+
+/*****  Headings  *****/
+
+.mainPageHeading {
+  text-align: center;
+  margin-top: 40px;
+}
+
+
+/*****  General Divs  *****/
+
+.badgeDiv {
+  background-color: white;
+}
+
+.gameButtonSection {
+  padding: 20px 10px 20px 10px;
+}
+
+.addGamesButtonDiv {
+  text-align: center;
+}
+
+
+
+/*****  Badges  *****/
+
+.badge {
+  background-color: #27AE60 !important;
+  margin-right: 5px !important;
+}
+
+
+
+/*****  Jumbotrons  *****/
+
+.gameJumbotron {
+  width: 80%;
+  background-color: rgb(191, 221, 204);
+  border-color: #27AE60;
+  border-style: outset;
+  border-width: 10px;
+  margin: 0 auto;
+  border-radius: 20px;
+  padding: 20px 10px 60px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+/*****  Navigation Bars *****/
+
+/*  Green colours for all navigation bars. */
+.hexNavbar {
+  background-color: #27AE60;
+}
+
+
+
+/*****  Modals  *****/
+
+/*  Animations and opacity settings for all modals. */
 .modal {
     animation: zoomIn;
     animation-duration: 0.5s;
@@ -59,6 +147,8 @@
 .modal-backdrop {
     opacity: 0.5;
 }
+
+
 
 /* Customize the label (the container) */
 .container {
@@ -174,11 +264,11 @@
   }
   
   input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #27AE60;
   }
   
   input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #27AE60;
   }
   
   input:checked + .slider:before {

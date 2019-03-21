@@ -75,7 +75,7 @@ $(function () {
 });
 
 function getGameImage() {
-    imageID = "5c8eb1cc8320dc4b38d5c50f";
+    imageID = "";
     $.ajax({
         url: 'http://localhost:4500/images/game/' + imageID,
         type: 'GET',

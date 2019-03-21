@@ -6,6 +6,18 @@ $(document).ready(function() {
     $("#goToAddGamePageButton").click(function() {
         window.location.href = "/AddGamePage"
     });
+
+    $("#navHome").click(function() {
+        window.location.href = "/AdminHomePage"
+    });
+
+    $("#navAddGame").click(function() {
+        window.location.href = "/AddGamePage"
+    });
+
+    $("#navViewGames").click(function() {
+        window.location.href = "/ViewGamesPage"
+    });
 });
 
 function goToViewSingleGamePage(gameId) {

@@ -54,13 +54,9 @@ function buildGameCard(data) {
     var lineSeparator = document.createElement("hr");
     lineSeparator.className = "my-4";
 
-    //  Button area properties.
-    var gameButtonSection = document.createElement("p");
-    gameButtonSection.className = "lead";
-
     //  Delete game button properties.
     var deleteButton = document.createElement("a");
-    deleteButton.className = "btn btn-primary btn-lg";
+    deleteButton.className = "btn btn-danger btn-lg";
     deleteButton.id="deleteButton";
     deleteButton.setAttribute("onclick", "deleteGame(this)");
     deleteButton.textContent = "Delete";
@@ -76,7 +72,6 @@ function buildGameCard(data) {
     gameJumbotron.appendChild(gameIdElement);
     gameJumbotron.appendChild(gameTitleElement);
     gameJumbotron.appendChild(gameDescriptionElement);
-    gameJumbotron.appendChild(gameButtonSection);
     gameJumbotron.appendChild(lineSeparator);
     gameJumbotron.appendChild(deleteButton);
     gameJumbotron.appendChild(viewGameButton);
