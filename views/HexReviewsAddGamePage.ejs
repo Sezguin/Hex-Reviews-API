@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh5u" crossorigin="anonymous">         -->
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
@@ -21,17 +18,12 @@
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
-    <style>
-        img {
-            width: 100%;
-        }
-    </style>
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <!-- Top navigation bar. -->
+    <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
         <a class="navbar-brand" href="#">Hex Reviews</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,14 +31,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
+                <li class="nav-item">
+                    <a id="navHome" class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add Game</a>
+                    <a id="navAddGame" class="nav-link active" href="#">Add Game</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">View Games</a>
+                    <a id="navViewGames" class="nav-link" href="#">View Games</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -63,8 +55,9 @@
         </div>
     </nav>
 
-    <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
-        <h1>Add a New Game</h1>
+    <!-- Page heading. -->
+    <div class="page-header mainPageHeading">
+        <h2>Add a New Game</h2>
     </div>
 
     <!-- All fields for adding in a new game. -->
@@ -73,65 +66,65 @@
             <div class="form-group form-group-lg addGameFormGroup">
 
                 <!-- Game Title -->
-                <h5>Game Title</h5>
+                <h5 class="addGameh5">Game Title</h5>
                 <input id="game_title" type="text" class="form-control" placeholder="..." required>
 
-                <h5>Description</h5>
+                <h5 class="addGameh5">Description</h5>
                 <textarea id="game_description" type="text" class="form-control" rows="4" placeholder="..."></textarea>
 
                 <div class="row">
                     <div class="col">
-                        <h5>Developer</h5>
+                        <h5 class="addGameh5">Developer</h5>
                         <input id="game_developer" type="text" class="form-control" placeholder="...">
                     </div>
                     <div class="col">
-                        <h5>Publisher</h5>
+                        <h5 class="addGameh5">Publisher</h5>
                         <input id="game_publisher" type="text" class="form-control" placeholder="...">
                     </div>
                 </div>
 
-                <h5>Genres</h5>
+                <h5 class="addGameh5">Genres</h5>
                 <div id="genreBadges" class="badgeDiv">
                 </div>
 
-                <button id="gameGenreButton" class="btn btn-primary btn-block tagBlockButton"
+                <button id="gameGenreButton" class="btn btn-primary btn-block tagBlockButton hexButtons"
                     class="btn btn-outline-secondary" type="button">Add Genre Tags</button>
                 
-                <h5>Age Rating</h5>
+                <h5 class="addGameh5">Age Rating</h5>
                 <div id="ageRatingBadges" class="badgeDiv">
                 </div>
 
-                <button id="gameAgeRatingButton" class="btn btn-primary btn-block tagBlockButton"
+                <button id="gameAgeRatingButton" class="btn btn-primary btn-block tagBlockButton hexButtons"
                     class="btn btn-outline-secondary" type="button">Add Age Rating Tags</button>
 
-                <h5>Platforms</h5>
+                <h5 class="addGameh5">Platforms</h5>
                 <div id="platformBadges" class="badgeDiv">
                 </div>
 
-                <button id="gamePlatformsButton" class="btn btn-primary btn-block tagBlockButton"
+                <button id="gamePlatformsButton" class="btn btn-primary btn-block tagBlockButton hexButtons"
                     class="btn btn-outline-secondary" type="button">Add Platform Tags</button>
 
                 <div class="row">
                     <div class="col">
-                        <h5>Release Date</h5>
+                        <h5 class="addGameh5">Release Date</h5>
                         <input id="game_release_date" type="date" class="form-control" placeholder="...">   
                     </div>
                     <div class="col">
-                        <h5>Launch Price</h5>
+                        <h5 class="addGameh5">Launch Price</h5>
                         <input id="game_launch_price" type="number" min="0.00" class="form-control" placeholder="...">
                     </div>
                 </div>
                 
                 <div class="row">
                     <div class="col">
-                        <h5>Mulitplayer Capability</h5>
+                        <h5 class="addGameh5">Mulitplayer Capability</h5>
                         <label class="switch">
                             <input id="onlineCheckbox" type="checkbox">
                             <span class="slider"></span>
                         </label>
                     </div>
                     <div class="col">
-                        <h5>Upload Images</h5>
+                        <h5 class="addGameh5">Upload Images</h5>
                         <input id="imageUpload" type="file" class="form-control-file" multiple>
                     </div>
                 </div>
@@ -141,17 +134,15 @@
                     <!-- All uploaded images will be previewed here. -->
                 </div>
 
-
-                <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
-                <button id="viewGamesPageButton" class="bigMainButton">View Games</button>
+                <div class="addGamesButtonDiv">
+                    <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
+                    <button id="viewGamesPageButton" class="bigMainButton">View Games</button>
+                </div>
             </div>
         </form>
         <button id="viewImageButton" class="bigMainButton" type="submit">View images</button>
         <img id="imageOutput">
     </div>
-
-    <nav class="navbar fixed-bottom navbar-dark bg-dark"><a class="navbar-brand" href="#">Welcome, Admin</a>
-    </nav>
 
     <!-- Modals -->
     <!-- Genre tag selection modal. -->
@@ -196,7 +187,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitGenresButton" type="button" class="btn btn-primary">Save changes</button>
+                    <button id="submitGenresButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -245,7 +236,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitAgeRatingsButton" type="button" class="btn btn-primary">Save changes</button>
+                    <button id="submitAgeRatingsButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -294,7 +285,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitPlatformsButton" type="button" class="btn btn-primary">Save changes</button>
+                    <button id="submitPlatformsButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -317,9 +308,6 @@
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-
-    <!-- Materialize JavScript Dependencies. -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>

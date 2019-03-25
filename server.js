@@ -30,6 +30,7 @@ const conn = mongoose.createConnection(mongoURI);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/hex-reviews-database');
 
+app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'));
 app.get('/AddGamePage', (req, res) => res.render('HexReviewsAddGamePage.ejs'));
 app.get('/ViewGamesPage', (req, res) => res.render('HexReviewsViewGamesPage.ejs'));
 app.get('/ViewSingleGamePage', (req, res) => res.render('HexReviewsViewSingleGamePage.ejs'));
