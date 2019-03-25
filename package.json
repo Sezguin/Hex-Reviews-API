@@ -1,0 +1,36 @@
+{
+  "name": "hex-reviews-api",
+  "version": "1.0.0",
+  "description": "Package forHex Reviews API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sezguin/Hex-Reviews-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sezguin/Hex-Reviews-API/issues"
+  },
+  "homepage": "https://github.com/Sezguin/Hex-Reviews-API#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "awesome-bootstrap-checkbox": "^1.0.1",
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "gridfs-stream": "^1.1.1",
+    "js-base64": "^2.5.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.4.14",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3"
+  }
+}
