@@ -1,6 +1,7 @@
 var gameGenres      = [];
 var gameAgeRatings  = [];
 var gamePlatforms   = [];
+var gameImageIds    = [];
 
 
 $(document).ready(function() {
@@ -92,6 +93,7 @@ function displayImage(result) {
 }
 
 function addGame() {
+    // gameImageIds = [];
     console.log("Add game button has been clicked.");
 
     //  All game attributes from form.
@@ -127,8 +129,12 @@ function addGame() {
         $.post("http://localhost:4500/images/game", {
             game_title: gameTitle,
             game_image_data: imageData
-        });        
-    }  
+        },
+        function(data, status) {
+            console.log("Single image ID " + data);
+            gameImageIds.push(data);
+        });
+    } 
 
     $.post("http://localhost:4500/games/", 
     {   

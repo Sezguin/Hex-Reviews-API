@@ -16,6 +16,7 @@ exports.list_all_games = function(req, res) {
     });
 };
 
+//  Create a new image in the database.
 exports.create_an_image = function(req, res) {
 
     console.log("A new game image is being created...");
@@ -27,7 +28,7 @@ exports.create_an_image = function(req, res) {
     new_game_image.save(function(err, game_image) {
         if(err)
             res.send(err);
-        res.json(game_image);
+        res.json(game_image._id);
     });
 };
 
