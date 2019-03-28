@@ -50,9 +50,13 @@ exports.create_a_game = function(req, res) {
     var new_game = new Games(req.body);
     
     new_game.save(function(err, game) {
-        if (err)
-            res.send(err);
-        res.json(game);
+        if(err) {
+            res.send("failure");
+            console.log("There was an error creating the new game.");
+        } else {
+            res.send("success");
+            console.log("A new game has been created successfully.");
+        }       
     });
 };
 

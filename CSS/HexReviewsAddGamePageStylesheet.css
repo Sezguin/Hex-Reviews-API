@@ -1,3 +1,31 @@
+#successfulPostModalSpinner {
+    width: 150px;
+    height: 150px;
+    margin: 50px;
+}
+
+#successIcon {
+    color: #27AE60;
+}
+
+#failureIcon {
+    color: rgb(206, 94, 94);
+}
+
+#successfulModalCloseButton {
+    width: 150px;
+    height: 50px;
+    font-size: 24px;
+    margin: 0, auto;
+    text-align: center;
+}
+
+#successfulPostModalFooter {
+    text-align: center;
+    align-content: center;
+    border-top: none;
+}
+
 .badgeDiv {
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
