@@ -95,7 +95,7 @@ body {
   padding: 20px 10px 20px 10px;
 }
 
-.addGamesButtonDiv {
+.alignCenterDiv {
   text-align: center;
 }
 
@@ -143,6 +143,24 @@ body {
    margin: 50px;
 }
 
+#successIcon {
+  color: #27AE60;
+}
+
+#failureIcon {
+  color: rgb(206, 94, 94);
+}
+
+
+
+/*****  Spinners  *****/
+
+#successfulPostModalSpinner {
+  width: 150px;
+  height: 150px;
+  margin: 50px;
+}
+
 
 
 /*****  Modals  *****/
@@ -155,6 +173,28 @@ body {
 
 .modal-backdrop {
     opacity: 0.5 !important;
+}
+
+#successfulModalCloseButton {
+  width: 150px;
+  height: 50px;
+  font-size: 24px;
+  margin: 0, auto;
+  text-align: center;
+}
+
+#successfulModalLoginButton {
+  color: white;
+  width: 150px;
+  height: 50px;
+  font-size: 24px;
+  margin: 0, auto;
+  text-align: center;
+}
+
+#successfulPostModalFooter {
+  text-align: left;
+  border-top: none;
 }
 
 

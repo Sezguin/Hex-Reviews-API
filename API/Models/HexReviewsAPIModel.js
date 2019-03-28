@@ -73,5 +73,41 @@ var GameImageSchema = new Schema({
     }
 });
 
+var UserSchema = new Schema({
+    user_email: {
+        type: String,
+        required: 'An email is required to create an account.'
+    },
+    user_password: {
+        type: String,
+        required: 'A password is required to create an account.'
+    },
+    user_username: {
+        type: String,
+        required: 'A username is required to create an account.'
+    },
+    user_avatar: {
+        type: String,
+        default: ""
+    },
+    user_rank: {
+        type: String,
+        default: 'Novice'
+    },
+    user_admin: {
+        type: Boolean,
+        default: false
+    },
+    user_subscripbed_to: {
+        type: Array,
+        default: []
+    },
+    user_subcribers: {
+        type: Array,
+        default: []
+    }
+});
+
 module.exports = mongoose.model('Games', GameSchema);
 module.exports = mongoose.model('GameImages', GameImageSchema);
+module.exports = mongoose.model('Users', UserSchema);

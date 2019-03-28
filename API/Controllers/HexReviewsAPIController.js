@@ -2,10 +2,12 @@
 
 var mongoose = require('mongoose');
 var fs = require('fs');
+
 var Games = mongoose.model('Games');
 var GameImages = mongoose.model('GameImages');
+var Users = mongoose.model('Users');
 
-var imgPath = __dirname + '/log.png';
+    /*****  All game related functionality  *****/
 
 //  List all games in the database.
 exports.list_all_games = function(req, res) {
@@ -91,3 +93,26 @@ exports.delete_a_game = function(req, res) {
         res.json({ message: 'Game was successfully deleted.'});
     });
 };
+
+
+
+/*****  All user related functionality. *****/
+
+//  Create a user in the database.
+exports.create_a_user = function(req, res) {
+
+    console.log("A user is being created...");
+
+    var new_user = new Users(req.body);
+
+    new_user.save(function(err, user) {
+        if(err) {
+            res.send("failure");
+            console.log("There was an error when creating a user in the database.");
+            console.log("Error: " + err);
+        } else {
+            res.send("success");
+            console.log("The new user ahas been created successfully.");
+        }
+    });
+}
