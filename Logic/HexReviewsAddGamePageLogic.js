@@ -39,6 +39,16 @@ $(document).ready(function() {
     $("#viewImageButton").click(function() {
         getGameImage();
     });
+    
+    $("#viewModal").click(function() {
+        $("#successfulPostModal").modal("show");
+    });
+
+    //  Hide certain elements on page load.
+    document.getElementById("successIcon").style.display = 'none';
+    document.getElementById("failureIcon").style.display = 'none';
+    document.getElementById("successfulModalCloseButton").style.display = 'none';
+
 });
 
 //  Preview uploaded images.
@@ -93,8 +103,12 @@ function displayImage(result) {
 }
 
 function addGame() {
-    // gameImageIds = [];
     console.log("Add game button has been clicked.");
+    collectImages(postGame);
+}
+
+function postGame() {
+    console.log("Game is being posted...");
 
     //  All game attributes from form.
     var gameTitle   = $('#game_title').val();
@@ -105,15 +119,54 @@ function addGame() {
     var gameOnline  = null;
     var gameLaunch  = $('#game_launch_price').val();
 
-    //  All image attributes from form.
-    var imageInput  = $('#imageUpload').get(0);
-
     //  Check whether the online checkbox is selected.
     if($('#onlineCheckbox').prop("checked") == true) {
         gameOnline = true;
     } else if($('#onlineCheckbox').prop("checked") == false) {
         gameOnline = false;
     }
+
+    $.post("http://localhost:4500/games/", 
+    {   
+        game_title: gameTitle,
+        game_description: gameDesc,
+        game_genre_tags: gameGenres,
+        game_developer: gameDev,
+        game_publisher: gamePub,
+        game_age_rating_tags: gameAgeRatings,
+        game_release_date: gameRelease,
+        game_platform_tags: gamePlatforms,
+        game_online: gameOnline,
+        game_launch_price: gameLaunch,
+        game_images_id: gameImageIds
+    },
+    function(data, status) {
+        if(data == "success") {
+            $("#successModalTitle").text("Success!");
+            $("#successfulPostModalSpinner").hide();
+            document.getElementById("successIcon").style.display = 'block';
+            document.getElementById("successfulModalCloseButton").style.display = 'block';
+        } else {
+            $("#successModalTitle").text("Error :/");
+            $("#successfulPostModalSpinner").hide();
+            document.getElementById("failureIcon").style.display = 'block';
+            document.getElementById("successfulModalCloseButton").style.display = 'block';
+        }
+        console.log("Message from API: " + JSON.stringify(data));
+    });
+}
+
+function collectImages(callback) {
+    console.log("Images are being collected...");
+
+    //  Reset the image ID array.
+    gameImageIds = [];
+
+    //  All game attributes from form.
+    var gameTitle   = $('#game_title').val();
+
+    //  All image attributes from form.
+    var imageInput  = $('#imageUpload').get(0);
 
     $($(imageInput)[0].files).each(function() {
         var file = $(this);
@@ -134,21 +187,11 @@ function addGame() {
             console.log("Single image ID " + data);
             gameImageIds.push(data);
         });
-    } 
+    }
 
-    $.post("http://localhost:4500/games/", 
-    {   
-        game_title: gameTitle,
-        game_description: gameDesc,
-        game_genre_tags: gameGenres,
-        game_developer: gameDev,
-        game_publisher: gamePub,
-        game_age_rating_tags: gameAgeRatings,
-        game_release_date: gameRelease,
-        game_platform_tags: gamePlatforms,
-        game_online: gameOnline,
-        game_launch_price: gameLaunch,
-    });
+    //  Calling the callback function with a 2 second delay.
+    $("#successfulPostModal").modal("show");
+    window.setTimeout(callback, 2000);
 }
 
 function submitGenres() {

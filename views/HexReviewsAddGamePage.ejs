@@ -138,15 +138,13 @@
                     <hr>
                     <!-- All uploaded images will be previewed here. -->
                 </div>
-
-                <div class="addGamesButtonDiv">
-                    <button id="addGameButton" class="bigMainButton" type="submit">Add Game</button>
-                    <button id="viewGamesPageButton" class="bigMainButton">View Games</button>
-                </div>
             </div>
         </form>
-        <button id="viewImageButton" class="bigMainButton" type="submit">View images</button>
-        <img id="imageOutput">
+        <div class="addGamesButtonDiv">
+            <button id="addGameButton" class="bigMainButton">Add Game</button>
+            <button id="viewGamesPageButton" class="bigMainButton">View Games</button>
+            <button id="viewModal" class="bigMainButton">View Modal</button>
+        </div>
     </div>
 
     <!-- Modals -->
@@ -292,6 +290,27 @@
                 <div class="modal-footer">
                     <button id="submitPlatformsButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Successful post modal. -->
+    <div id="successfulPostModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
+                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i id="successIcon" class="material-icons md-48">done</i>
+                        <i id="failureIcon" class="material-icons md-48">clear</i>
+                    </div>
+                </div>
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

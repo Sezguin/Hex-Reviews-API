@@ -136,6 +136,15 @@ body {
 
 
 
+/*****  Icons *****/
+
+.material-icons.md-48 {
+   font-size: 150px;
+   margin: 50px;
+}
+
+
+
 /*****  Modals  *****/
 
 /*  Animations and opacity settings for all modals. */
@@ -145,9 +154,8 @@ body {
 }
 
 .modal-backdrop {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
-
 
 
 /* Customize the label (the container) */
