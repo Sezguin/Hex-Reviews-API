@@ -30,6 +30,7 @@ const conn = mongoose.createConnection(mongoURI);
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://SamPepper:moistman@hexdatabase-cejgb.mongodb.net/hex-reviews-database?retryWrites=true');
 
+app.get('/', (req, res) => res.render("HexReviewsAdminHomePage.ejs"));
 app.get('/LoginPage', (req, res) => res.render('HexReviewsLoginPage.ejs'));
 app.get('/CreateAccountPage', (req, res) => res.render('HexReviewsCreateAccountPage.ejs'));
 
