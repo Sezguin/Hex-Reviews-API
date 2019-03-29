@@ -23,12 +23,12 @@ app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 
 //  MongoDB configuration.
-const mongoURI = 'mongodb://localhost/hex-reviews-database';
+const mongoURI = 'mongodb+srv://SamPepper:moistman@hexdatabase-cejgb.mongodb.net/hex-reviews-database?retryWrites=true';
 
 //  Mongoose connection details to MongoDB.
 const conn = mongoose.createConnection(mongoURI);
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/hex-reviews-database');
+mongoose.connect('mongodb+srv://SamPepper:moistman@hexdatabase-cejgb.mongodb.net/hex-reviews-database?retryWrites=true');
 
 app.get('/LoginPage', (req, res) => res.render('HexReviewsLoginPage.ejs'));
 app.get('/CreateAccountPage', (req, res) => res.render('HexReviewsCreateAccountPage.ejs'));
