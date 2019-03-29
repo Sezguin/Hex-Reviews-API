@@ -18,6 +18,14 @@ $(document).ready(function() {
     $("#navViewGames").click(function() {
         window.location.href = "/ViewGamesPage"
     });
+
+    $("#createAccountButton").click(function() {
+        window.location.href = "/CreateAccountPage"
+    });
+
+    $("#successfulModalCloseButton").click(function() {
+        location.reload();
+    });
 });
 
 function goToViewSingleGamePage(gameId) {

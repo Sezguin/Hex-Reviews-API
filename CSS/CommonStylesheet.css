@@ -95,7 +95,7 @@ body {
   padding: 20px 10px 20px 10px;
 }
 
-.addGamesButtonDiv {
+.alignCenterDiv {
   text-align: center;
 }
 
@@ -136,6 +136,33 @@ body {
 
 
 
+/*****  Icons *****/
+
+.material-icons.md-48 {
+   font-size: 150px;
+   margin: 50px;
+}
+
+#successIcon {
+  color: #27AE60;
+}
+
+#failureIcon {
+  color: rgb(206, 94, 94);
+}
+
+
+
+/*****  Spinners  *****/
+
+#successfulPostModalSpinner {
+  width: 150px;
+  height: 150px;
+  margin: 50px;
+}
+
+
+
 /*****  Modals  *****/
 
 /*  Animations and opacity settings for all modals. */
@@ -145,9 +172,30 @@ body {
 }
 
 .modal-backdrop {
-    opacity: 0.5;
+    opacity: 0.5 !important;
 }
 
+#successfulModalCloseButton {
+  width: 150px;
+  height: 50px;
+  font-size: 24px;
+  margin: 0, auto;
+  text-align: center;
+}
+
+#successfulModalLoginButton {
+  color: white;
+  width: 150px;
+  height: 50px;
+  font-size: 24px;
+  margin: 0, auto;
+  text-align: center;
+}
+
+#successfulPostModalFooter {
+  text-align: left;
+  border-top: none;
+}
 
 
 /* Customize the label (the container) */
