@@ -42,6 +42,6 @@ app.get('/ViewSingleGamePage', (req, res) => res.render('HexReviewsViewSingleGam
 var routes = require('./API/Routes/HexReviewsAPIRoutes');
 routes(app);
 
-app.listen(port);
+app.listen(process.env.PORT || port);
 
 console.log('Hex Reviews API server started on port: ' + port);
