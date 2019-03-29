@@ -38,7 +38,7 @@ function deleteGame(button) {
     var name = button.parentNode.childNodes[1].innerHTML;
 
     $.ajax({
-        url: 'http://localhost:4500/games/' + id,
+        url: 'http://hex-reviews.herokuapp.com/games/' + id,
         type: 'DELETE',
         success: function(result) {
             console.log(name + " has successfully been removed from the database.");
