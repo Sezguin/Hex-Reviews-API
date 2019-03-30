@@ -112,7 +112,51 @@ exports.create_a_user = function(req, res) {
             console.log("Error: " + err);
         } else {
             res.send("success");
-            console.log("The new user ahas been created successfully.");
+            console.log("The new user has been created successfully.");
         }
     });
+}
+
+//  Check a username exists in the database.
+exports.check_a_username = function(req, res) {
+
+    console.log("Checking if " + req.params.userID + " exists...");
+
+    Users.find({user_username: req.params.userID}, function(err, user) {
+        if(user.length) {
+            res.send(true);
+            console.log("User exists in the database.");
+        } else {
+            res.send(false);
+            console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+        }
+    });
+}
+
+exports.check_user_password = function(req, res) {
+
+    console.log("Checking password for " + req.body.user_username + "...");
+
+    Users.find({user_username: req.body.user_username}, function(err, user) {
+        if(user.length) {
+
+            console.log("User: " + user);
+
+            console.log("Submitted password: " + req.body.user_password);
+            console.log("Actual password: " + user[0].user_password);
+
+            if(req.body.user_password === user[0].user_password) {
+                console.log("Password was correct.");
+                res.send(true);
+            } else {
+                console.log("Password was incorrect.")
+                res.send(false);
+            }
+        } else {
+            console.log("An unexpected error has occured.");
+            console.log("Error: " + err);
+            res.send("err");
+        }
+    });
+
 }

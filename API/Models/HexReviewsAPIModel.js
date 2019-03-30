@@ -98,11 +98,11 @@ var UserSchema = new Schema({
         type: Boolean,
         default: false
     },
-    user_subscripbed_to: {
+    user_subscribed_to: {
         type: Array,
         default: []
     },
-    user_subcribers: {
+    user_subscribers: {
         type: Array,
         default: []
     }

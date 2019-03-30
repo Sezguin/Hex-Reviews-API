@@ -35,4 +35,12 @@ module.exports = function(app) {
     //  Creating a new user.
     app.route('/users')
         .post(hexReviewController.create_a_user);
+
+    //  Retrieve a specific username.
+    app.route('/username/login/:userID')
+        .get(hexReviewController.check_a_username);
+
+    //  Check password entry.
+    app.route('/username/login')
+        .post(hexReviewController.check_user_password);
 };
