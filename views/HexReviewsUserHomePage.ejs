@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsLoginPageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserHomePageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,67 +32,36 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navTitle" class="nav-link" href="#">Home</a>
+                    <a id="navUserHome " class="nav-link active" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navLogin" class="nav-link active" href="#">Login</a>
+                    <a id="navWiteReview" class="nav-link" href="#">Write a Review</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navCreateAccount" class="nav-link" href="#">Create Account</a>
+                    <a id="navViewGames" class="nav-link" href="#">View Games</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navAbout" class="nav-link" href="#">About Us</a>
+                    <a id="navViewGames" class="nav-link" href="#">Subscriptions</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
+                        <a id="navMyReviews" class="dropdown-item" href="#">My Reviews</a>
+                        <a id="navLogout" class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </nav>
 
     <!-- Page heading. -->
     <div class="page-header mainPageHeading">
-        <h2>Login</h2>
-    </div>
-
-    <div class="login-form">
-        <form>
-            <h3 class="text-center">Welcome</h3>       
-            <div class="form-group">
-                <input id="usernameField" type="text" class="form-control" placeholder="Username" required="required">
-            </div>
-            <div class="form-group">
-                <input id="passwordField" type="password" class="form-control" placeholder="Password" required="required">
-            </div>
-    
-        </form>
-        <div class="text-center">
-            <button id="loginButton" type="submit" class="btn btn-primary btn-block hexButtons">Log in</button>
-            <h6 id="noAccountText" class="text-center">Don't have an account?</h6>
-            <button id="createAccountButton" class="btn btn-primary btn-block hexButtons">Create Account</button>
-        </div>  
-    </div>
-
-    <!-- All modals. -->
-
-    <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="text-center">
-                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
-                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                        <i id="successIcon" class="material-icons md-48">done</i>
-                        <i id="failureIcon" class="material-icons md-48">clear</i>
-                    </div>
-                </div>
-                <div id="successfulPostModalFooter" class="modal-footer">
-                    <h4 class="mr-auto" id="pleaseLogin"></h4>
-                    <button id="successfulModalContinueButton" type="button" class="btn hexButtons successfulModalButton">Continue</button>
-                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
+        <h1 id="userWelcome">Welcome</h1>
     </div>
 
     <!-- All JavaScript material. -->
@@ -114,7 +83,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsLoginPageLogic.js"></script>
+    <script src="HexReviewsUserHomePageLogic.js"></script>
 
 </body>
 

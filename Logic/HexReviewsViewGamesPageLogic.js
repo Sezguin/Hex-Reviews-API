@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function getGameList() {
-    $.get("https://hex-reviews.herokuapp.com/games/", function(data) {
+    $.get("http://localhost:4500/games/", function(data) {
         Object.keys(data).forEach(function(k) {
             console.log(JSON.stringify(data[k]));
 
@@ -47,7 +47,7 @@ function buildGameCard(data) {
     gameTitleElement.textContent = gameTitle;
 
     //  Game description area.
-    var gameDescriptionElement = document.createElement("p");
+    var gameDescriptionElement = document.createElement("h5");
     gameDescriptionElement.textContent = gameDescription;
 
     //  Line separator.

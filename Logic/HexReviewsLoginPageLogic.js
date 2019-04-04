@@ -27,9 +27,13 @@ function loginUser(callback) {
 
                 //  Calling the callback function to check the password with a 2 second delay.
                 $("#successfulPostModal").modal("show");
-                window.setTimeout(callback, 2000);
+                window.setTimeout(callback, 1000);
             } else {
                 console.log("Username does not exist in the database.");
+
+                //  Displaying no username information.
+                $("#successfulPostModal").modal("show");
+                window.setTimeout(noUsernameExists, 2000);
             }
         }
     });
@@ -50,10 +54,7 @@ function checkPassword() {
             console.log("Password was correct.");
 
             $("#successModalTitle").text("Welcome, " + username);
-            $("#successfulPostModalSpinner").hide();
-            $("#pleaseLogin").text("Please login to continue...");
-            document.getElementById("successIcon").style.display = 'block';
-            document.getElementById("successfulModalContinueButton").style.display = 'block';
+            window.setTimeout(goToUserHomePage(username), 1000);
 
         } else if (data == false) {
             console.log("Password was incorrect.");
@@ -66,6 +67,29 @@ function checkPassword() {
         } else if (data == "err") {
             console.log("An unexpected error has occured.")
         }
-        console.log("Message from API: " + JSON.stringify(data));
     });
+}
+
+function noUsernameExists() {
+
+    var username = $('#usernameField').val();
+
+    $("#successModalTitle").text("User: " + username + " does not exist...");
+    $("#successfulPostModalSpinner").hide();
+    document.getElementById("failureIcon").style.display = 'block';
+    document.getElementById("successfulModalCloseButton").style.display = 'block';
+}
+
+function goToUserHomePage(username) {
+
+    console.log("Transferring " + username + " to user home page...");
+
+    //  Setting cookie value for username.
+    document.cookie = "username=" + username;
+
+    var x = document.cookie;
+
+    console.log("Login Page Cookie: " + x);
+
+    window.location.href = "/UserHomePage";
 }
