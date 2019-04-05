@@ -15,6 +15,10 @@ $(document).ready(function() {
         window.location.href = "/AddGamePage"
     });
 
+    $("#navUserViewGames").click(function() {
+        window.location.href = "/UserViewGamesPage"
+    });
+
     $("#navViewGames").click(function() {
         window.location.href = "/ViewGamesPage"
     });
@@ -29,7 +33,19 @@ $(document).ready(function() {
 
     $("#navTitle").click(function() {
         window.location.href = "/"
-    })
+    });
+
+    $("#navUserHome").click(function() {
+        window.location.href = "/UserHomePage";
+    });
+
+    $("#navWriteReview").click(function() {
+        window.location.href = "/UserReviewPage";
+    });
+
+    $("#navLogout").click(function() {
+        logoutUser();
+    });
 
     $("#createAccountButton").click(function() {
         window.location.href = "/CreateAccountPage"
@@ -37,10 +53,6 @@ $(document).ready(function() {
 
     $("#successfulModalCloseButton").click(function() {
         location.reload();
-    });
-
-    $("#navLogout").click(function() {
-        logoutUser();
     });
 });
 

@@ -16,9 +16,13 @@ module.exports = function(app) {
         .put(hexReviewController.update_a_game)
         .delete(hexReviewController.delete_a_game);
 
+    //  Get list of games from a search query.
+    app.route('/games/search/:query')
+        .get(hexReviewController.list_games_from_search);
 
 
-    /*****  All game image realted routes.  *****/
+
+    /*****  All game image related routes.  *****/
 
     //  Creating new images.
     app.route('/images/game')
@@ -26,7 +30,11 @@ module.exports = function(app) {
 
     //  Retrieve a specific image.
     app.route('/images/game/:imageID')
-        .get(hexReviewController.get_an_image)
+        .get(hexReviewController.get_an_image);
+    
+    //  Retrieve a user's avatar.
+    app.route('/images/avatar/:userID')
+        .get(hexReviewController.get_an_avatar);
 
     
 

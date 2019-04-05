@@ -1,0 +1,51 @@
+#addNewReviewContainer {
+    width: 60%;
+    margin: 0 auto;
+}
+
+#ratingDiv {
+    width: 70%;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+    padding: 30px;
+    box-shadow: 5px 5px 10px grey inset;
+    border: solid;
+    border-color: rgb(190, 190, 190);
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+#showChooseGameModal {
+    width: 60%;
+    height: 70px;
+}
+
+#chooseGameButtonContianer {
+    text-align: center;
+    margin: 50px;
+}
+
+#chooseGameModalResultsContainer {
+    height: 500px;
+}
+
+#searchIcon {
+    margin-left: 30px;
+    font-size: 30px;
+    position: absolute;
+}
+
+#modalGameSearchButton {
+    color: white !important;
+}
+
+.addReviewh5 {
+    margin-top: 15px;
+}
+
+.list-group{
+    max-height: 500px;
+    margin-bottom: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}

@@ -2,6 +2,7 @@ body {
   font: 13px "Montserrat", sans-serif;
   background-image: url("/Images/BackgroundLightGrey.png");
   background-repeat: repeat;
+  color: rgb(70, 70, 70);
 }
 
 
@@ -134,7 +135,6 @@ body {
   width: 70%;
   background-image: url("/Images/BackgroundLightGreen.png");
   background-repeat: repeat;
-  /* background-color: rgb(191, 221, 204); */
   border-color: #27AE60;
   border-style: outset;
   border-width: 5px;
@@ -144,7 +144,6 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
-
 }
 
 

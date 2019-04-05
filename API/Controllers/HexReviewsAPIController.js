@@ -18,32 +18,6 @@ exports.list_all_games = function(req, res) {
     });
 };
 
-//  Create a new image in the database.
-exports.create_an_image = function(req, res) {
-
-    console.log("A new game image is being created...");
-
-    var new_game_image = new GameImages(req.body);
-
-    console.log("Creating image for: " + new_game_image.game_title);
-
-    new_game_image.save(function(err, game_image) {
-        if(err)
-            res.send(err);
-        res.json(game_image._id);
-    });
-};
-
-exports.get_an_image = function(req, res) {
-    console.log("An image is being listed...");
-
-    GameImages.findById(req.params.imageID, function(err, game_image) {
-        if (err)
-            res.send(err);
-        res.json(game_image);
-    });
-};
-
 //  Create a new game in the database.
 exports.create_a_game = function(req, res) {
 
@@ -94,6 +68,67 @@ exports.delete_a_game = function(req, res) {
     });
 };
 
+//  Get games from a search.
+exports.list_games_from_search = function(req, res) {
+
+    console.log("Searching for specific games containing " + req.params.query + "...");
+
+    Games.find({$text: {$search: req.params.query}}, function(err, games) {
+        if(err) {
+            console.log("There was an error when retrieving the games.");
+            console.log("Error: " + err);
+        } else {
+            res.send(games);
+        }
+    });
+}
+
+
+
+/*****  All image related functionality.    *****/
+
+//  Get a user's avatar.
+exports.get_an_avatar = function(req, res) {
+
+    console.log("Fetching user avatar...");
+
+    Users.find({user_username: req.params.userID}, function(err, user) {
+        if(user.length) {
+            console.log("Sending avatar data...");
+            res.send(user[0].user_avatar);
+        } else {
+            console.log("Unexpected error when retrieving avatar from the database...");
+            console.log("Perhaps the user has been deleted?");
+        }
+    });
+}
+
+//  Create a new image in the database.
+exports.create_an_image = function(req, res) {
+
+    console.log("A new game image is being created...");
+
+    var new_game_image = new GameImages(req.body);
+
+    console.log("Creating image for: " + new_game_image.game_title);
+
+    new_game_image.save(function(err, game_image) {
+        if(err)
+            res.send(err);
+        res.json(game_image._id);
+    });
+};
+
+exports.get_an_image = function(req, res) {
+
+    console.log("An image is being listed...");
+
+    GameImages.findById(req.params.imageID, function(err, game_image) {
+        if (err)
+            res.send(err);
+        res.json(game_image);
+    });
+};
 
 
 /*****  All user related functionality. *****/
@@ -139,12 +174,6 @@ exports.check_user_password = function(req, res) {
 
     Users.find({user_username: req.body.user_username}, function(err, user) {
         if(user.length) {
-
-            console.log("User: " + user);
-
-            console.log("Submitted password: " + req.body.user_password);
-            console.log("Actual password: " + user[0].user_password);
-
             if(req.body.user_password === user[0].user_password) {
                 console.log("Password was correct.");
                 res.send(true);

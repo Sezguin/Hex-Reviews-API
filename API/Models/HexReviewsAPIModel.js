@@ -108,6 +108,21 @@ var UserSchema = new Schema({
     }
 });
 
+
+
+/*****  Indexes for searching.   *****/
+
+//  Game title index.
+GameSchema.index({
+    game_title: 'text',
+    game_description: 'text',    
+}, {
+    weights: {
+        game_title: 5,
+        game_description: 1,
+    },
+});
+
 module.exports = mongoose.model('Games', GameSchema);
 module.exports = mongoose.model('GameImages', GameImageSchema);
 module.exports = mongoose.model('Users', UserSchema);
