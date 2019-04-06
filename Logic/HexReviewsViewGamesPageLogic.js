@@ -63,7 +63,7 @@ function buildGameCard(data) {
 
     //  View game button properties.
     var viewGameButton = document.createElement("a");
-    viewGameButton.className = "btn btn-primary btn-lg";
+    viewGameButton.className = "btn btn-success btn-lg";
     viewGameButton.id="viewGameButton";
     viewGameButton.setAttribute("onclick", "viewGame(this)");
     viewGameButton.textContent = "View";

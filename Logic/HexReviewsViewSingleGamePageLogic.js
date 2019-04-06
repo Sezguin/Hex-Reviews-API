@@ -57,7 +57,7 @@ function displayGame(result) {
 
     //  Delete game button properties.
     var deleteButton = document.createElement("a");
-    deleteButton.className = "btn btn-primary btn-lg";
+    deleteButton.className = "btn btn-danger btn-lg";
     deleteButton.id="deleteButton";
     deleteButton.setAttribute("onclick", "deleteGame(this)");
     deleteButton.textContent = "Delete";

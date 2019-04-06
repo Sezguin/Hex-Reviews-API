@@ -167,6 +167,24 @@ exports.check_a_username = function(req, res) {
         } else {
             res.send(false);
             console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+            console.log("Error: " + err);
+        }
+    });
+}
+
+//  Retrieve user's ID from the database.
+exports.get_user_id = function(req, res) {
+
+    console.log("Retrieving ID of user " + req.params.userID + "...");
+
+    Users.find({user_username: req.params.userID}, function(err, user) {
+        if(user.length) {
+            console.log("Sending user ID...");
+            res.send(user[0]._id);
+        } else {
+            res.send("failure");
+            console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+            console.log("Error: " + err);
         }
     });
 }
@@ -211,8 +229,61 @@ exports.create_a_review = function(req, res) {
             console.log("There was an error creating the review.");
             console.log("Error: " + err);
         } else {
-            res.send("success");
+            res.send(review._id);
             console.log("The review has been created successfully.");
         }       
     });
+}
+
+//  Get a user's reviews.
+exports.get_user_reviews = function(req, res) {
+    
+    console.log("Fetching reviews for " + req.params.userID + "...");
+
+    Reviews.find({user_id: req.params.userID}, function(err, reviews) {
+        if(reviews.length) {
+            res.send(reviews);
+            console.log("Reviews have been found.");
+        } else {
+            res.send(false);
+            console.log("No reviews were found.");
+            console.log("Error: " + err);
+        }
+    });
+}
+
+//  Add review ID to game and user.
+exports.add_review_ids = function(req, res) {
+    
+    console.log("Adding review ids...");
+
+    var userID      = req.body.user_id;
+    var gameID      = req.body.game_id;
+    var reviewID    = req.body.review_id;
+
+    console.log("User ID: " + userID + " Game ID: " + gameID + " Review ID: " + reviewID);
+
+    //  Add review ID to user's collection.
+    Users.findOneAndUpdate(
+        { _id: userID },
+        { $push: { user_reviews: reviewID } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+            } else {
+                console.log("Error: " + err);
+            }
+        }
+    );
+
+    //  Add review ID to game's collection.
+    Games.findOneAndUpdate(
+        { _id: gameID },
+        { $push: { game_reviews: reviewID } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+            } else {
+                console.log("Error: " + err);
+            }
+        }
+    );
 }

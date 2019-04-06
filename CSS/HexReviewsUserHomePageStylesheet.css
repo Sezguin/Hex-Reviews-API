@@ -6,3 +6,19 @@
     border-color: rgb(177, 177, 177);
     border-width: 2px;
 }
+
+#tempImage {
+    height: 400px;
+    width: 700px;
+    transform: rotate(180deg);
+    margin: 50px;
+    border: solid;
+    border-width: 3px;
+    border-radius: 20px;
+    box-shadow: 5px 10px 20px grey;
+
+}
+
+#tempImageDiv {
+    text-align: center;
+}

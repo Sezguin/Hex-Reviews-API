@@ -48,6 +48,10 @@ module.exports = function(app) {
     app.route('/username/login/:userID')
         .get(hexReviewController.check_a_username);
 
+    //  Retrieve a user's ID.
+    app.route('/users/id/:userID')
+        .get(hexReviewController.get_user_id);
+
     //  Check password entry.
     app.route('/username/login')
         .post(hexReviewController.check_user_password);
@@ -60,4 +64,12 @@ module.exports = function(app) {
     //  Creating a new review.
     app.route('/reviews')
         .post(hexReviewController.create_a_review);
+
+    //  Getting a user's reviews.
+    app.route('/reviews/:userID')
+        .get(hexReviewController.get_user_reviews);
+
+    //  Update review IDs in games and users.
+    app.route('/reviews/add/ids')
+        .post(hexReviewController.add_review_ids);
 };

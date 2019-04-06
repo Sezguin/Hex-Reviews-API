@@ -52,8 +52,7 @@ function checkPassword() {
     function(data) {
         if(data == true) {
             console.log("Password was correct.");
-
-            $("#successModalTitle").text("Welcome, " + username);
+            
             window.setTimeout(goToUserHomePage(username), 1000);
 
         } else if (data == false) {
@@ -84,12 +83,34 @@ function goToUserHomePage(username) {
 
     console.log("Transferring " + username + " to user home page...");
 
+
+    //  Get ID of user.
+    $.ajax({
+        url: 'http://localhost:4500/users/id/' + username,
+        type: 'GET',
+        success: function(result) {
+            console.log("Information from API: " + JSON.stringify(result));
+            if(result == "failure") {
+                console.log("Username does not exist in the database.");
+            } else {
+                console.log("ID of user: " + result);
+                
+                configureCookie(result, username);
+            }
+        }
+    });
+}
+
+function configureCookie(id, username) {
+
     //  Setting cookie value for username.
     document.cookie = "username=" + username;
+    document.cookie = "user_id=" + id;
 
-    var x = document.cookie;
+    var cookies = getCookies();
 
-    console.log("Login Page Cookie: " + x);
-
+    console.log("User ID from cookie: " + cookies.user_id);
+    console.log("User name from cookie: " + cookies.username);
+        
     window.location.href = "/UserHomePage";
 }

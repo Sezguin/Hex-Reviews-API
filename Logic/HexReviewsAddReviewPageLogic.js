@@ -1,3 +1,6 @@
+//  Globally grab cookies.
+var cookies = getCookies();
+
 $(document).ready(function() {
     $("#showChooseGameModal").click(function() {
         $("#chooseGameModal").modal("show");
@@ -30,6 +33,8 @@ function getGameList() {
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));
+
+            document.getElementById("searchedGamesContainer").innerHTML = "";
 
             result.forEach(function(element) {
                 console.log("Individual game: " + JSON.stringify(element));
@@ -107,6 +112,9 @@ function postReview() {
     var reviewSubtitle  = $('#reviewSubtitle').val();
     var reviewContent   = $('#reviewContent').val();
     var reviewRating    = $('#reviewRating').val();
+    
+    var userID = cookies.user_id;
+    var gameID = $('#reviewGameId').val();
 
     //  Post review.
     $.post("http://localhost:4500/reviews/", 
@@ -114,20 +122,50 @@ function postReview() {
         review_title: reviewTitle,
         review_subtitle: reviewSubtitle,
         review_content: reviewContent,
-        review_rating: reviewRating
+        review_rating: reviewRating,
+        game_id: gameID,
+        user_id: userID       
     },
     function(data, status) {
-        if(data == "success") {
-            $("#successModalTitle").text("Success!");
-            $("#successfulPostModalSpinner").hide();
-            document.getElementById("successIcon").style.display = 'block';
-            document.getElementById("successfulModalCloseButton").style.display = 'block';
-        } else {
+        if(data == "failure") {
             $("#successModalTitle").text("Error :/");
             $("#successfulPostModalSpinner").hide();
             document.getElementById("failureIcon").style.display = 'block';
             document.getElementById("successfulModalCloseButton").style.display = 'block';
+
+        } else {
+            $("#successModalTitle").text("Success!");
+            $("#successfulPostModalSpinner").hide();
+            document.getElementById("successIcon").style.display = 'block';
+            document.getElementById("successfulModalCloseButton").style.display = 'block';
+
+            postReviewIds(data);
         }
         console.log("Message from API: " + JSON.stringify(data));
     });
+}
+
+function postReviewIds(data) {
+
+        console.log("Posting IDs to update games and users...");
+
+        var userID = cookies.user_id;
+        var gameID = $("#reviewGameId").val();
+        var reviewID = data;
+
+        //  Post review IDs to games and users.
+        $.post("http://localhost:4500/reviews/add/ids", 
+        {   
+            review_id: reviewID,
+            game_id: gameID,
+            user_id: userID
+        },
+        function(data, status) {
+            if(data == "failure") {
+                console.log("Nope");
+            } else {
+                console.log("Yup");
+            }
+            console.log("Message from API: " + JSON.stringify(data));
+        });
 }

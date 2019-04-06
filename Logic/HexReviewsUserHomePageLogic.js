@@ -1,13 +1,11 @@
-var userID;
+var cookies;
 
 $(document).ready(function() {
 
     //  Grab session name from cookie.
-    userID = readCookies("username");
+    cookies = getCookies();
 
-    console.log("Cookie: " + userID);
-
-    $("#userWelcome").text("Welcome, " + userID);
+    $("#userWelcome").text("Welcome, " + cookies.username);
 
     //  Grab user's avatar.
     collectAvatar(displayAvatar);
@@ -16,7 +14,7 @@ $(document).ready(function() {
 function collectAvatar(callback) {
 
     $.ajax({
-        url: 'http://localhost:4500/images/avatar/' + userID,
+        url: 'http://localhost:4500/images/avatar/' + cookies.username,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));

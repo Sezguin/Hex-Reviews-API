@@ -80,14 +80,26 @@ function deleteGame(button) {
 function logoutUser() {
 
     //  Forcefully expiring the cookie.
-    document.cookie = "username= ; id= ;";
+    document.cookie = "username= ; user_id= ;";
 
     //  Redirecting to title page.
     window.location.href = "/";
 }
 
+var getCookies = function(){
+    var pairs = document.cookie.split(";");
+    var cookies = {};
+    for (var i=0; i<pairs.length; i++){
+      var pair = pairs[i].split("=");
+      cookies[(pair[0]+'').trim()] = unescape(pair[1]);
+    }
+    return cookies;
+  }
+
 
 function readCookies(request) {
+
+    console.log("Request to be searched: " + request);
 
     //  Grab all cookie information.
     var cookieChunk = document.cookie;
@@ -99,6 +111,7 @@ function readCookies(request) {
     
     //  Extract each element.
     for(var i=0; i < cookieInformation.length; i++) {
+
        name = cookieInformation[i].split('=')[0];
        value = cookieInformation[i].split('=')[1];
 
@@ -106,6 +119,12 @@ function readCookies(request) {
            console.log("Returning user session name of " + value + "...");
 
            return value;
+       }
+
+       if(request == "user_id" && name =="user_id") {
+           console.log("Returning user id of " + value + "...");
+
+           return value
        }
     }
 }
