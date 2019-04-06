@@ -55,6 +55,10 @@ var GameSchema = new Schema({
     game_images_id: {
         type: Array,
         default: []
+    },
+    game_reviews: {
+        type: Array,
+        default: []
     }
 });
 
@@ -105,6 +109,41 @@ var UserSchema = new Schema({
     user_subscribers: {
         type: Array,
         default: []
+    },
+    user_reviews: {
+        type: Array,
+        default: []
+    }
+});
+
+var ReviewSchema = new Schema({
+    review_title: {
+        type: String,
+        required: 'A review title is required.'
+    },
+    review_subtitle: {
+        type: String,
+        default: ""
+    },
+    review_content: {
+        type: String,
+        required: 'A review is required...'
+    },
+    review_rating: {
+        type: Number,
+        default: 0
+    },
+    review_comments: {
+        type: Array,
+        default: []
+    },
+    game_id: {
+        type: Array,
+        default: []
+    },
+    user_id: {
+        type: Array,
+        default: []
     }
 });
 
@@ -123,6 +162,11 @@ GameSchema.index({
     },
 });
 
+
+
+/*****  Exporting all schemas.  *****/
+
 module.exports = mongoose.model('Games', GameSchema);
 module.exports = mongoose.model('GameImages', GameImageSchema);
 module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('Reviews', ReviewSchema);

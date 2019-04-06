@@ -6,8 +6,11 @@ var fs = require('fs');
 var Games = mongoose.model('Games');
 var GameImages = mongoose.model('GameImages');
 var Users = mongoose.model('Users');
+var Reviews = mongoose.model('Reviews');
 
-    /*****  All game related functionality  *****/
+
+
+/*****  All game related functionality  *****/
 
 //  List all games in the database.
 exports.list_all_games = function(req, res) {
@@ -168,6 +171,7 @@ exports.check_a_username = function(req, res) {
     });
 }
 
+//  Check that the submitted password is correct.
 exports.check_user_password = function(req, res) {
 
     console.log("Checking password for " + req.body.user_username + "...");
@@ -188,4 +192,27 @@ exports.check_user_password = function(req, res) {
         }
     });
 
+}
+
+
+
+/*****  All review related functionality    *****/
+
+//  Create a new review.
+exports.create_a_review = function(req, res) {
+
+    console.log("Adding a new review...");
+
+    var new_review = new Reviews(req.body);
+    
+    new_review.save(function(err, review) {
+        if(err) {
+            res.send("failure");
+            console.log("There was an error creating the review.");
+            console.log("Error: " + err);
+        } else {
+            res.send("success");
+            console.log("The review has been created successfully.");
+        }       
+    });
 }

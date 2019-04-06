@@ -51,4 +51,13 @@ module.exports = function(app) {
     //  Check password entry.
     app.route('/username/login')
         .post(hexReviewController.check_user_password);
+
+
+    
+
+    /*****  All review related routes.  *****/
+
+    //  Creating a new review.
+    app.route('/reviews')
+        .post(hexReviewController.create_a_review);
 };
