@@ -14,7 +14,7 @@ $(document).ready(function() {
 function collectAvatar(callback) {
 
     $.ajax({
-        url: 'http://localhost:4500/images/avatar/' + cookies.username,
+        url: 'https://hex-reviews.herokuapp.com/images/avatar/' + cookies.username,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));

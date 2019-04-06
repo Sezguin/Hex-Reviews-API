@@ -29,7 +29,7 @@ function getGameList() {
     console.log("Query to be searched: " + query);
 
     $.ajax({
-        url: 'http://localhost:4500/games/search/' + query,
+        url: 'https://hex-reviews.herokuapp.com/games/search/' + query,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));
@@ -117,7 +117,7 @@ function postReview() {
     var gameID = $('#reviewGameId').val();
 
     //  Post review.
-    $.post("http://localhost:4500/reviews/", 
+    $.post("https://hex-reviews.herokuapp.com/reviews/", 
     {   
         review_title: reviewTitle,
         review_subtitle: reviewSubtitle,
@@ -154,7 +154,7 @@ function postReviewIds(data) {
         var reviewID = data;
 
         //  Post review IDs to games and users.
-        $.post("http://localhost:4500/reviews/add/ids", 
+        $.post("https://hex-reviews.herokuapp.com/reviews/add/ids", 
         {   
             review_id: reviewID,
             game_id: gameID,
