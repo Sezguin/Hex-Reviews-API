@@ -1,0 +1,20 @@
+#addReviewButtonContainer {
+    width: 70%;
+    background-image: url("/Images/LightGreyFabric.png");
+    background-repeat: repeat;
+    box-shadow: 5px 5px 10px grey inset;
+    border: solid;
+    border-color: rgb(190, 190, 190);
+    border-radius: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#addButton {
+    font-size: 120px;
+    height: 200px;
+    width: 200px;
+    margin: 50px;
+    border-radius: 500px;
+    box-shadow: 5px 10px 20px grey;
+}

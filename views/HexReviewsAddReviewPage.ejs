@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsLoginPageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsAddReviewPageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,45 +32,97 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navTitle" class="nav-link" href="#">Home</a>
+                    <a id="navUserHome" class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navLogin" class="nav-link active" href="#">Login</a>
+                    <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navCreateAccount" class="nav-link" href="#">Create Account</a>
+                    <a id="navUserViewGames" class="nav-link" href="#">View Games</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navAbout" class="nav-link" href="#">About Us</a>
+                    <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
+                        <a id="navMyReviews" class="dropdown-item" href="#">My Reviews</a>
+                        <a id="navLogout" class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </nav>
 
     <!-- Page heading. -->
     <div class="page-header mainPageHeading">
-        <h2>Login</h2>
+        <h1 id="userWelcome">Add a Review</h1>
     </div>
 
-    <div class="login-form">
+    <!-- All fields for adding in a new game. -->
+    <div id="addNewReviewContainer">
+        <div id="chooseGameButtonContianer">
+            <button id="showChooseGameModal" class="bigMainButton">Choose a Game 
+                <i id="searchIcon" class="material-icons">search</i>
+            </button>
+        </div>
+
         <form>
-            <h3 class="text-center">Welcome</h3>       
-            <div class="form-group">
-                <input id="usernameField" type="text" class="form-control" placeholder="Username" required="required">
+            <div class="form-group form-group-lg addGameFormGroup">
+
+                <input id="reviewGameId" type="text" class="form-control" placeholder="..." hidden>
+
+                <h5 class="addReviewh5">Title</h5>
+                <input id="reviewTitle" type="text" class="form-control" placeholder="Please choose a game..." disabled>
+
+                <h5 class="addReviewh5">Subtitle</h5>
+                <input id="reviewSubtitle" type="text" class="form-control" placeholder="..." required>
+
+                <h5 class="addReviewh5">Review</h5>
+                <textarea id="reviewContent" type="text" class="form-control" rows="8" placeholder="..." required></textarea>
+
+                <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
+                <div id="ratingDiv">
+                    <input id="reviewRating" type="number" class="form-control" placeholder="...">
+                </div>
             </div>
-            <div class="form-group">
-                <input id="passwordField" type="password" class="form-control" placeholder="Password" required="required">
-            </div>
-    
         </form>
-        <div class="text-center">
-            <button id="loginButton" type="submit" class="btn btn-primary btn-block hexButtons">Log in</button>
-            <h6 id="noAccountText" class="text-center">Don't have an account?</h6>
-            <button id="createAccountButton" class="btn btn-primary btn-block hexButtons">Create Account</button>
-        </div>  
+        <div class="alignCenterDiv">
+            <button id="submitReviewButton" class="bigMainButton">Submit</button>
+        </div>
     </div>
 
-    <!-- All modals. -->
+    <!-- Modals -->
+    <!-- Choose game modal. -->
+    <div id="chooseGameModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Choose a Game</h3>
+                </div>
+                <div class="modal-body">
+                    <div id="chooseGameModalSearchContainer">
+                        <div class="input-group mb-3">
+                        <input id="gameSearchBox" type="text" class="form-control" placeholder="Game title..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button id="modalGameSearchButton" class="btn btn-outline-secondary hexButtons" type="button">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chooseGameModalResultsContainer">
+                        <div id="searchedGamesContainer" class="list-group">
+                            <!-- Game will appear here when searched. -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Successful post modal. -->
     <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
@@ -87,8 +139,6 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
-                    <h4 class="mr-auto" id="pleaseLogin"></h4>
-                    <button id="successfulModalContinueButton" type="button" class="btn hexButtons successfulModalButton">Continue</button>
                     <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -114,7 +164,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsLoginPageLogic.js"></script>
+    <script src="HexReviewsAddReviewPageLogic.js"></script>
 
 </body>
 

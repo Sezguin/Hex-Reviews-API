@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 function getGame(gameId) {
     $.ajax({
-        url: 'http://localhost:4500/games/' + gameId,
+        url: 'https://hex-reviews.herokuapp.com/games/' + gameId,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result.game_title));
@@ -57,7 +57,7 @@ function displayGame(result) {
 
     //  Delete game button properties.
     var deleteButton = document.createElement("a");
-    deleteButton.className = "btn btn-primary btn-lg";
+    deleteButton.className = "btn btn-danger btn-lg";
     deleteButton.id="deleteButton";
     deleteButton.setAttribute("onclick", "deleteGame(this)");
     deleteButton.textContent = "Delete";

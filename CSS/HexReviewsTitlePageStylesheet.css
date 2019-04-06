@@ -1,0 +1,45 @@
+#mainPageImage {
+    animation: fadeInUp;
+    animation-duration: 1s;
+    margin: 30px;
+}
+
+#mainPageImageGrey {
+    width: 200px;
+    height: 200px;
+    animation: rotateIn;
+    animation-duration: 1s;
+    margin: 30px;
+}
+
+#mainButtonDiv {
+    text-align: center;
+}
+
+#mainPageImageContainer {
+    text-align: center;
+}
+
+#mainTitle {
+    font-size: 80px;
+    color: rgb(70, 70, 70)
+}
+
+#titleContainer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#titlePageLoginButton {
+    font-size: 40px;
+    height: 90px;
+    width: 250px;
+    box-shadow: 5px 10px 20px grey;
+}
+
+#titlePageSignUpButton {
+    font-size: 40px;
+    height: 90px;
+    width: 250px;
+    box-shadow: 5px 10px 20px grey;
+}
