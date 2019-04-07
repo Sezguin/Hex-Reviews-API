@@ -71,7 +71,7 @@ function postUser() {
         gameOnline = false;
     }
 
-    $.post("https://hex-reviews.herokuapp.com//users/", 
+    $.post("https://hex-reviews.herokuapp.com/users/", 
     {   
         user_email: userEmail,
         user_password: userPassword,

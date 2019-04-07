@@ -17,7 +17,7 @@ function loginUser(callback) {
     var username   = $('#usernameField').val();
 
     $.ajax({
-        url: 'https://hex-reviews.herokuapp.com//username/login/' + username,
+        url: 'https://hex-reviews.herokuapp.com/username/login/' + username,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));
@@ -44,7 +44,7 @@ function checkPassword() {
     var username = $('#usernameField').val();
     var password = $('#passwordField').val();
 
-    $.post("https://hex-reviews.herokuapp.com//username/login/", 
+    $.post("https://hex-reviews.herokuapp.com/username/login/", 
     {   
         user_username: username,
         user_password: password,
@@ -86,7 +86,7 @@ function goToUserHomePage(username) {
 
     //  Get ID of user.
     $.ajax({
-        url: 'https://hex-reviews.herokuapp.com//users/id/' + username,
+        url: 'https://hex-reviews.herokuapp.com/users/id/' + username,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));

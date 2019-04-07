@@ -88,7 +88,7 @@ $(function () {
 function getGameImage() {
     imageID = "";
     $.ajax({
-        url: 'https://hex-reviews.herokuapp.com//images/game/' + imageID,
+        url: 'https://hex-reviews.herokuapp.com/images/game/' + imageID,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result.game_title));
@@ -126,7 +126,7 @@ function postGame() {
         gameOnline = false;
     }
 
-    $.post("https://hex-reviews.herokuapp.com//games/", 
+    $.post("https://hex-reviews.herokuapp.com/games/", 
     {   
         game_title: gameTitle,
         game_description: gameDesc,
@@ -179,7 +179,7 @@ function collectImages(callback) {
     });
 
     function receivedText(imageData) {
-        $.post("https://hex-reviews.herokuapp.com//images/game", {
+        $.post("https://hex-reviews.herokuapp.com/images/game", {
             game_title: gameTitle,
             game_image_data: imageData
         },
