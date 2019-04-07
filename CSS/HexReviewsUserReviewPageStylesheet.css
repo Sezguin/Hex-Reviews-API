@@ -18,3 +18,23 @@
     border-radius: 500px;
     box-shadow: 5px 10px 20px grey;
 }
+
+#viewReviewButton {
+    color: white !important;
+    width: 200px;
+}
+
+#deleteButton {
+    width: 200px;
+}
+
+#reviewContentDiv {
+    background-image: url("/Images/LightGreenFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(194, 207, 194);
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 30px;
+    margin: 30px auto;
+}

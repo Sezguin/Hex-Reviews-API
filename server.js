@@ -40,6 +40,7 @@ app.get('/CreateAccountPage', (req, res) => res.render('HexReviewsCreateAccountP
 app.get('/UserHomePage', (req, res) => res.render("HexReviewsUserHomePage.ejs"));
 app.get('/UserReviewPage', (req, res) => res.render("HexReviewsUserReviewPage.ejs"));
 app.get('/AddReviewPage', (req, res) => res.render("HexReviewsAddReviewPage.ejs"));
+app.get('/UserViewGamesPage', (req, res) => res.render("HexReviewsUserViewGamesPage.ejs"));
 
 //  Admin Pages.
 app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'));

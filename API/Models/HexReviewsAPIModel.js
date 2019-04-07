@@ -113,6 +113,10 @@ var UserSchema = new Schema({
     user_reviews: {
         type: Array,
         default: []
+    },
+    user_creation_date: {
+        type: Date,
+        default: Date.now
     }
 });
 
@@ -136,6 +140,10 @@ var ReviewSchema = new Schema({
     review_comments: {
         type: Array,
         default: []
+    },
+    review_creation_date: {
+        type: Date,
+        default: Date.now
     },
     game_id: {
         type: Array,
