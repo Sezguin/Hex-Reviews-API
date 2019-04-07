@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 function getGame(gameId) {
     $.ajax({
-        url: 'http://localhost:4500/games/' + gameId,
+        url: 'https://hex-reviews.herokuapp.com/games/' + gameId,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result.game_title));
