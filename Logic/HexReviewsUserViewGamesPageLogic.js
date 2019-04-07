@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function getGameList() {
-    $.get("http://localhost:4500/games/", function(data) {
+    $.get("https://hex-reviews.herokuapp.com//games/", function(data) {
         Object.keys(data).forEach(function(k) {
             console.log(JSON.stringify(data[k]));
 
@@ -80,7 +80,7 @@ function getSearchedGameList() {
     console.log("Query to be searched: " + query);
 
     $.ajax({
-        url: 'http://localhost:4500/games/search/' + query,
+        url: 'https://hex-reviews.herokuapp.com//games/search/' + query,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));

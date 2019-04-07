@@ -9,7 +9,7 @@ $(document).ready(function() {
 });
 
 function getGameList() {
-    $.get("http://localhost:4500/games/", function(data) {
+    $.get("https://hex-reviews.herokuapp.com//games/", function(data) {
         Object.keys(data).forEach(function(k) {
             console.log(JSON.stringify(data[k]));
 

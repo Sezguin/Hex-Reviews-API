@@ -12,7 +12,7 @@ $(document).ready(function() {
 //  Fetch the list of reviews by the user.
 function getReviewList() {
     $.ajax({
-        url: 'http://localhost:4500/reviews/' + cookies.user_id,
+        url: 'https://hex-reviews.herokuapp.com//reviews/' + cookies.user_id,
         type: 'GET',
         success: function(data) {
 
