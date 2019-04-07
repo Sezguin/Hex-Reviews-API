@@ -1,0 +1,16 @@
+#viewGameButton {
+    width: 200px;
+}
+
+#searchBoxDiv {
+    width: 40%;
+    height: 100px;
+    background-image: url("/Images/LightGreyFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: rgb(172, 172, 172);
+    margin: 30px auto;
+    padding: 25px;
+}

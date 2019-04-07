@@ -102,18 +102,21 @@ border-color: rgb(107, 107, 107) !important;
 
 /*  Green colours for all buttons. */
 .hexButtons {
+  color: white;
   background-color: #27AE60;
   outline-color: #58D68D;
   border-color: #27AE60;
 }
 
 .hexButtons:hover {
+  color: white;
   background-color: rgb(33, 150, 81);
   outline-color: #58D68D;
   border-color: #27AE60;
 }
 
 .hexButtons:focus {
+  color: white;
   background-color: rgb(33, 150, 81) !important;
   outline-color: #58D68D !important;
   border-color: #27AE60 !important;
@@ -169,7 +172,7 @@ border-color: rgb(107, 107, 107) !important;
   border-width: 5px;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 20px 10px 60px 20px;
+  padding: 20px 20px 60px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
@@ -184,7 +187,7 @@ border-color: rgb(107, 107, 107) !important;
   border-width: 5px;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 20px 10px 60px 20px;
+  padding: 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;

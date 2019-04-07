@@ -11,14 +11,6 @@ $(document).ready(function() {
 
 //  Fetch the list of reviews by the user.
 function getReviewList() {
-    // $.get("http://localhost:4500/reviews/" + cookies.user_id, function(data) {
-    //     Object.keys(data).forEach(function(k) {
-    //         console.log(JSON.stringify(data[k]));
-
-    //         buildGameCard(data[k]);
-    //     });
-    // });    
-
     $.ajax({
         url: 'http://localhost:4500/reviews/' + cookies.user_id,
         type: 'GET',
@@ -61,6 +53,7 @@ function buildReviewCard(data) {
     var reviewIdElement = document.createElement("p");
     reviewIdElement.id = "reviewIdElement";
     reviewIdElement.textContent = reviewID;
+    reviewIdElement.setAttribute("hidden", true);
 
     //  Review title area properties.
     var reviewTitleElement = document.createElement("h1");
@@ -71,9 +64,16 @@ function buildReviewCard(data) {
     var reviewSubtitleElement = document.createElement("h3");
     reviewSubtitleElement.textContent = reviewSubtitle;
 
+    //  Review content div.
+    var reviewContentDiv = document.createElement("div");
+    reviewContentDiv.id = "reviewContentDiv";
+
     //  Review content area.
     var reviewContentElement = document.createElement("h5");
     reviewContentElement.textContent = reviewContent;
+
+    //  Combine review content elements.
+    reviewContentDiv.appendChild(reviewContentElement);
 
     //  Line separator.
     var lineSeparator = document.createElement("hr");
@@ -88,7 +88,7 @@ function buildReviewCard(data) {
 
     //  View review button properties.
     var viewReviewButton = document.createElement("a");
-    viewReviewButton.className = "btn btn-primary btn-lg";
+    viewReviewButton.className = "btn btn-primary btn-lg hexButtons";
     viewReviewButton.id="viewReviewButton";
     viewReviewButton.setAttribute("onclick", "viewReview(this)");
     viewReviewButton.textContent = "View";
@@ -98,7 +98,7 @@ function buildReviewCard(data) {
     reviewJumbotron.appendChild(reviewTitleElement);
     reviewJumbotron.appendChild(lineSeparator);    
     reviewJumbotron.appendChild(reviewSubtitleElement);
-    reviewJumbotron.appendChild(reviewContentElement);
+    reviewJumbotron.appendChild(reviewContentDiv);
     reviewJumbotron.appendChild(deleteButton);
     reviewJumbotron.appendChild(viewReviewButton);
 
