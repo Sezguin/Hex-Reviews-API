@@ -158,15 +158,15 @@ exports.create_a_user = function(req, res) {
 //  Check a username exists in the database.
 exports.check_a_username = function(req, res) {
 
-    console.log("Checking if " + req.params.userID + " exists...");
+    console.log("Checking if " + req.params.username + " exists...");
 
-    Users.find({user_username: req.params.userID}, function(err, user) {
+    Users.find({user_username: req.params.username}, function(err, user) {
         if(user.length) {
             res.send(true);
             console.log("User exists in the database.");
         } else {
             res.send(false);
-            console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+            console.log("There was an error when retrieving " + req.params.username + " from the database.");
             console.log("Error: " + err);
         }
     });
@@ -175,19 +175,40 @@ exports.check_a_username = function(req, res) {
 //  Retrieve user's ID from the database.
 exports.get_user_id = function(req, res) {
 
-    console.log("Retrieving ID of user " + req.params.userID + "...");
+    console.log("Retrieving ID of user " + req.params.username + "...");
 
-    Users.find({user_username: req.params.userID}, function(err, user) {
+    Users.find({user_username: req.params.username}, function(err, user) {
         if(user.length) {
             console.log("Sending user ID...");
             res.send(user[0]._id);
         } else {
             res.send("failure");
-            console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+            console.log("There was an error when retrieving " + req.params.username + " from the database.");
             console.log("Error: " + err);
+            res.send(false);
         }
     });
 }
+
+//  Retrieve user from database from provided ID.
+exports.get_a_user = function(req, res) {
+
+    console.log("Retrieving username for user");
+
+    Users.find({_id: req.params.userID}, function(err, user) {
+        if(user.length) {
+            console.log("Sending user ID...");
+            res.send(user[0]);
+        } else {
+            res.send("failure");
+            console.log("There was an error when retrieving " + req.params.userID + " from the database.");
+            console.log("Error: " + err);
+            res.send(false);
+        }
+    });
+}
+
+
 
 //  Check that the submitted password is correct.
 exports.check_user_password = function(req, res) {
@@ -209,7 +230,6 @@ exports.check_user_password = function(req, res) {
             res.send("err");
         }
     });
-
 }
 
 
@@ -261,8 +281,6 @@ exports.add_review_ids = function(req, res) {
     var gameID      = req.body.game_id;
     var reviewID    = req.body.review_id;
 
-    console.log("User ID: " + userID + " Game ID: " + gameID + " Review ID: " + reviewID);
-
     //  Add review ID to user's collection.
     Users.findOneAndUpdate(
         { _id: userID },
@@ -287,3 +305,34 @@ exports.add_review_ids = function(req, res) {
         }
     );
 }
+
+//  View all reviews for a particular game.
+exports.view_game_reviews = function(req, res) {
+
+    console.log("Fetching reviews for game: " + req.params.gameID);
+
+    Reviews.find({game_id: req.params.gameID}, function(err, reviews) {
+        if(reviews.length) {
+            res.send(reviews);
+            console.log("Reviews have been found.");
+        } else {
+            res.send(false);
+            console.log("No reviews were found.");
+            console.log("Error: " + err);
+        }
+    });
+}
+
+//  Delete a review from the database from supplied ID.
+exports.delete_a_review = function(req, res) {
+    
+    console.log("A review is being deleted...");
+
+    Reviews.deleteOne({
+        _id: req.params.reviewID        
+    }, function(err, review) {
+        if (err)
+            res.send(err);
+        res.json({ message: 'Review was successfully deleted.'});
+    });
+};

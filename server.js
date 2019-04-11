@@ -20,8 +20,8 @@ app.use('/Images', express.static(__dirname + "/Images"));
 
 // Configuring app.
 app.use(cors());
-app.use(bodyParser.json({limit: '10mb'}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 //  MongoDB configuration.
 const mongoURI = 'mongodb+srv://SamPepper:moistman@hexdatabase-cejgb.mongodb.net/hex-reviews-database?retryWrites=true';
@@ -41,6 +41,9 @@ app.get('/UserHomePage', (req, res) => res.render("HexReviewsUserHomePage.ejs"))
 app.get('/UserReviewPage', (req, res) => res.render("HexReviewsUserReviewPage.ejs"));
 app.get('/AddReviewPage', (req, res) => res.render("HexReviewsAddReviewPage.ejs"));
 app.get('/UserViewGamesPage', (req, res) => res.render("HexReviewsUserViewGamesPage.ejs"));
+
+//  Review pages.
+app.get('/ViewGameReviewsPage', (req, res) => res.render("HexReviewsViewGameReviews.ejs"));
 
 //  Admin Pages.
 app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'));

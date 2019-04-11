@@ -44,20 +44,23 @@ module.exports = function(app) {
     app.route('/users')
         .post(hexReviewController.create_a_user);
 
-    //  Retrieve a specific username.
-    app.route('/username/login/:userID')
+    //  Check whether a username exists within the database.
+    app.route('/username/login/:username')
         .get(hexReviewController.check_a_username);
 
-    //  Retrieve a user's ID.
-    app.route('/users/id/:userID')
-        .get(hexReviewController.get_user_id);
-
-    //  Check password entry.
+    //  Check the provided password is correct.
     app.route('/username/login')
         .post(hexReviewController.check_user_password);
 
-
+    //  Retrieve a user's ID from supplied username.
+    app.route('/users/id/:username')
+        .get(hexReviewController.get_user_id);
     
+    //  Get a user from provided ID.
+    app.route('/users/:userID')
+        .get(hexReviewController.get_a_user);
+
+
 
     /*****  All review related routes.  *****/
 
@@ -72,4 +75,12 @@ module.exports = function(app) {
     //  Update review IDs in games and users.
     app.route('/reviews/add/ids')
         .post(hexReviewController.add_review_ids);
+
+    //  View game reviews from ID.
+    app.route('/reviews/game/:gameID')
+        .get(hexReviewController.view_game_reviews);
+
+    //  Delete a review from the database from supplied ID.
+    app.route('/reviews/:reviewID')
+        .delete(hexReviewController.delete_a_review);
 };

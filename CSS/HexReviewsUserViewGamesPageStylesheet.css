@@ -14,3 +14,17 @@
     margin: 30px auto;
     padding: 25px;
 }
+
+#gameReviewCountArea {
+    background-image: url("/Images/LightGreenFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    float: right;
+    margin-left: 20px;
+}
