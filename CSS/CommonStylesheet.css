@@ -10,8 +10,7 @@ body {
 /*****  Buttons ****/
 
 #deleteButton {
-    width: 100px;
-    height: 50px;
+    width: 200px;
     color: white;
     float: right;
 }
@@ -25,6 +24,11 @@ body {
 
 #gameIdElement {
     display: none;
+}
+
+#viewReviewButton {
+  color: white !important;
+  width: 200px;
 }
 
 #successfulModalCloseButton {
@@ -134,6 +138,17 @@ border-color: rgb(107, 107, 107) !important;
 
 /*****  General Divs  *****/
 
+.reviewContentDiv {
+  background-image: url("/Images/LightGreenFabric.png");
+  background-repeat: repeat;
+  border: solid;
+  border-color: rgb(168, 168, 168);
+  border-radius: 5px;
+  border-width: 2px;
+  padding: 30px;
+  margin: 30px auto;
+}
+
 .badgeDiv {
   background-color: white;
 }
@@ -165,6 +180,7 @@ border-color: rgb(107, 107, 107) !important;
 
 .gameJumbotron {
   width: 70%;
+  min-width: 900px;
   background-image: url("/Images/BackgroundLightGreen.png");
   background-repeat: repeat;
   border-color: #27AE60;
@@ -176,10 +192,15 @@ border-color: rgb(107, 107, 107) !important;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
+  animation: slideInLeft;
+  animation-duration: 0.5s;
+
 }
 
 .reviewJumbotron {
-  width: 70%;
+  width: 60%;
+  min-width: 900px;
+  height: 400px;
   background-image: url("/Images/BackgroundLightGreen.png");
   background-repeat: repeat;
   border-color: #27AE60;
@@ -187,10 +208,12 @@ border-color: rgb(107, 107, 107) !important;
   border-width: 5px;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px 20px 0px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
+  animation: slideInLeft;
+  animation-duration: 0.5s;
 }
 
 

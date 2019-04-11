@@ -1,5 +1,4 @@
 #reviewUserArea {
-    width: 300px;
     background-image: url("/Images/LightGreenFabric.png");
     background-repeat: repeat;
     border: solid;
@@ -11,49 +10,50 @@
     float: right;
 }
 
-#addReviewButtonContainer {
-    width: 60%;
-    background-image: url("/Images/LightGreyFabric.png");
-    background-repeat: repeat;
-    box-shadow: 5px 5px 10px grey inset;
-    border: solid;
-    border-color: rgb(190, 190, 190);
-    border-radius: 20px;
-    margin: 0 auto;
+#sideDiv {
+    float: right;
+    width: 300px;
     text-align: center;
 }
 
-#addButton {
-    font-size: 120px;
-    height: 200px;
-    width: 200px;
-    margin: 50px;
-    border-radius: 500px;
-    box-shadow: 5px 10px 20px grey;
+#subscribeButton {
+    width: 60%;
+    float: right;
+    margin: 10px 0px 10px 0px;
+}
+
+#viewProfileButton {
+    width: 60%;
+    float: right;
+    margin: 10px 0px 10px 0px;
 }
 
 #viewReviewButton {
+    margin-top: 10px;
     width: 100%;
-    float: right;
-    margin: 10px 0px 10px 0px;
 }
 
-#deleteButton {
+#reviewRatingElement {
     width: 100%;
-    float: right;
+    margin: 0px 0px 10px 0px;
+}
+
+#userReviewAvatar {
+    float: left;
+    width: 80px;
+    margin: 0px 0px 10px 0px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+}
+
+#userReviewRankContainer {
+    width: 80px;
     margin: 10px 0px 10px 0px;
+    text-align: center;
+    float: left;
 }
-
-#reviewTitleElement {
-    width: 60%;
-    font-size: 2.05vw;
-}
-
-#reviewSubtitleElement {
-    width: 60%;
-    font-size: 1vw;
-}
-
 
 #reviewContentElement {
     width: 60%;
@@ -67,9 +67,27 @@
     background-image: url("/Images/LightGreyFabric.png");
 }
 
-#reviewRatingElement {
-    width: 100%;
-    margin: 0px 0px 10px 0px;
+#reviewTitleElement {
+    width: 60%;
+    font-size: 2.05vw;
+}
+
+#reviewSubtitleElement {
+    width: 60%;
+    font-size: 1vw;
+}
+
+#userReviewRank {
+    font-size: 12px;
+}
+
+#reviewUserText {
+    width: 90%;
+}
+
+.userDivButtons {
+    width: 150px;
+    font-size: 18px;
 }
 
 /*  Setting a maximum size for fonts.   */

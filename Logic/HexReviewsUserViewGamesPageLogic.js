@@ -10,7 +10,7 @@ $(document).ready(function() {
 });
 
 function getGameList() {
-    $.get("https://hex-reviews.herokuapp.com//games/", function(data) {
+    $.get(GlobalURL + "/games/", function(data) {
         Object.keys(data).forEach(function(k) {
             console.log(JSON.stringify(data[k]));
 
@@ -26,6 +26,7 @@ function buildGameCard(data) {
     var gameId              = gameData._id
     var gameTitle           = gameData.game_title;
     var gameDescription     = gameData.game_description;
+    var reviewCount         = countArrayElements(gameData.game_reviews);
 
     //  Results container to add game entries to.
     var resultsContainer = document.getElementById("gameResultsContainer");
@@ -39,10 +40,35 @@ function buildGameCard(data) {
     gameIdElement.id = "gameIdElement";
     gameIdElement.textContent = gameId;
 
+    //  Game title div.
+    var GTDiv = document.createElement("div");
+    GTDiv.id = "gameTitleDiv";
+
     //  Game title area properties.
     var gameTitleElement = document.createElement("h1");
     gameTitleElement.className = "display-4";
     gameTitleElement.textContent = gameTitle;
+
+    GTDiv.appendChild(gameTitleElement);
+
+    //  Game review count area.
+    var gameReviewCountArea = document.createElement("div");
+    gameReviewCountArea.id = "gameReviewCountArea";
+
+    //  Game review count text.
+    var GRCText = document.createElement("h2");
+    GRCText.textContent = reviewCount.toString() + " total reviews"
+
+    // Game review view button.
+    var GRVButton = document.createElement("button");
+    GRVButton.id = "viewReviews";
+    GRVButton.setAttribute("onclick", "viewReviews(this)");
+    GRVButton.textContent = "View";
+    GRVButton.className = "btn btn-lg hexButtons";
+
+    //  Configure review count div.
+    gameReviewCountArea.appendChild(GRCText);
+    gameReviewCountArea.appendChild(GRVButton);
 
     //  Game description area.
     var gameDescriptionElement = document.createElement("h5");
@@ -54,18 +80,18 @@ function buildGameCard(data) {
 
     //  View game button properties.
     var viewGameButton = document.createElement("a");
-    viewGameButton.className = "btn btn-primary btn-lg hexButtons";
+    viewGameButton.className = "btn btn-lg hexButtons";
     viewGameButton.id="viewGameButton";
     viewGameButton.setAttribute("onclick", "viewGame(this)");
     viewGameButton.textContent = "View Game";
 
     //  Configure game entry to be added.
     gameJumbotron.appendChild(gameIdElement);
-    gameJumbotron.appendChild(gameTitleElement);
+    gameJumbotron.appendChild(gameReviewCountArea);
+    gameJumbotron.appendChild(GTDiv);
     gameJumbotron.appendChild(gameDescriptionElement);
     gameJumbotron.appendChild(lineSeparator);
     gameJumbotron.appendChild(viewGameButton);
-
 
     //  Add game entry to results container.
     resultsContainer.appendChild(gameJumbotron);
@@ -80,7 +106,7 @@ function getSearchedGameList() {
     console.log("Query to be searched: " + query);
 
     $.ajax({
-        url: 'https://hex-reviews.herokuapp.com//games/search/' + query,
+        url: GlobalURL + '/games/search/' + query,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));
@@ -109,4 +135,12 @@ function viewGame(button) {
     var id = button.parentNode.childNodes[0].innerHTML;
 
     goToViewSingleGamePage(id);
+}
+
+function viewReviews(button) {
+    var id = button.parentNode.parentNode.childNodes[0].innerHTML;
+
+    console.log("ID of GAME = " + id);
+
+    goToViewGameReviewsPage(id);
 }

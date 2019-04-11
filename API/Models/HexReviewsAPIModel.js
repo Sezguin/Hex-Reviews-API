@@ -127,7 +127,7 @@ var ReviewSchema = new Schema({
     },
     review_subtitle: {
         type: String,
-        default: ""
+        default: "I haven't thought of a punchy line yet..."
     },
     review_content: {
         type: String,
