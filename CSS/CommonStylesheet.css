@@ -192,7 +192,7 @@ border-color: rgb(107, 107, 107) !important;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
-  animation: slideInLeft;
+  animation: fadeInLeft;
   animation-duration: 0.5s;
 
 }
@@ -212,8 +212,8 @@ border-color: rgb(107, 107, 107) !important;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
-  animation: slideInLeft;
-  animation-duration: 0.5s;
+  animation: fadeInLeft;
+  animation-duration: 0.2s;
 }
 
 

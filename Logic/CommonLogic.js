@@ -1,7 +1,7 @@
-//  For live:           https://hex-reviews.herokuapp.com/
+//  For live:           https://hex-reviews.herokuapp.com
 //  For Development:    http://localhost:4500
 
-var GlobalURL = "https://hex-reviews.herokuapp.com"
+var GlobalURL = "http://localhost:4500"
 
 $(document).ready(function () {
     $("#viewGamesPageButton").click(function () {
@@ -196,6 +196,70 @@ function getUsernameFromID(userID) {
             } else {
                 return result;
             }
+        }
+    });
+}
+
+//  Subscribe to a user.
+function subscribe(subscriberData, subscribeeData) {
+
+    //  Subscriber to user.
+    $.post(GlobalURL + "/users/subscribe", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("User has subscribed.")
+        } else {
+            console.log("Error when subscribing to user.");
+        }
+    });
+
+    //  Update subscribee's follower list.
+    $.post(GlobalURL + "/users/follower", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("Follower has been added to subscribee's list.")
+        } else {
+            console.log("Error when updating subscribee's followers.");
+        }
+    });
+}
+
+//  Unsubscribe to a user.
+function unsubscribe(subscriberData, subscribeeData) {
+
+    //  Subscriber to user.
+    $.post(GlobalURL + "/users/unsubscribe", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("User has unsubscribed.")
+        } else {
+            console.log("Error when subscribing to user.");
+        }
+    });
+
+    //  Update subscribee's follower list.
+    $.post(GlobalURL + "/users/unfollow", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("Follower has been removed from subscibee's list.")
+        } else {
+            console.log("Error when updating subscribee's followers.");
         }
     });
 }

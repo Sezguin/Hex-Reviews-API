@@ -25,45 +25,57 @@ function getReviews(gameID) {
                 $('#titleElement').text("Reviews for " + data[0].review_title);
 
                 Object.keys(data).forEach(function(k) {
-                    console.log(JSON.stringify(data[k]));
+                    console.log("Review (datak) " + JSON.stringify(data[k]));
     
-                    getUserInformation((data[k]));
+                    getUserInformation((data[k]), checkSubscriptionList);
                 });
             }
         }
     });
 }
 
-function getUserInformation(data) {
+function getUserInformation(review, callback) {
+    console.log("Review: " + review);
     $.ajax({
-        url: GlobalURL + '/users/' + data.user_id,
+        url: GlobalURL + '/users/' + review.user_id,
         type: 'GET',
-        success: function(result) {
-            if(result == false) {
+        success: function(user) {
+            if(user == false) {
                 console.log("No user found with that ID.");
             } else {
-                if(result.user_avatar != "") {
-                    displayReview(data, result.user_username, result.user_avatar, result.user_rank);
-                } else {
-                    displayReview(data, result.user_username, "/Images/DefaultAvatar.jpg", result.user_rank);
-                }
-                
+                callback(review, user);
             }
         }
     });
 }
 
-function displayAvatar(data) {
-    var output = document.getElementById("userAvatar");
+//  Check if user is on current subscription list.
+function checkSubscriptionList(review, user) {
 
-    if(data != "") {
-        output.src = data;
-    } else {
-        output.src = "/Images/DefaultAvatar.jpg";
-    }
+    console.log("Checking subscription to: " + user.user_username);
+
+    var subscriberData = cookies.user_id;
+    var subscribeeData = review.user_id;
+
+    $.post(GlobalURL + "/users/subscribe/check", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(subbed) {
+        console.log("Posted from " + user.user_username);
+        if(user.user_avatar != "") {
+            displayReview(review, user.user_username, user.user_avatar, user.user_rank, subbed);
+        } else {
+            displayReview(review, user.user_username, "/Images/DefaultAvatar.jpg", user.user_rank, subbed);
+
+        }
+    });
 }
 
-function displayReview(data, username, avatar, rank) {
+function displayReview(data, username, avatar, rank, subbed) {
+
+    console.log("Displaying review for: " + username);
 
     //  Data collected from database split into individual values.
     var reviewID        = data._id
@@ -96,6 +108,7 @@ function displayReview(data, username, avatar, rank) {
     var reviewUser      = username;
     var userAvatar      = avatar;
     var userRank        = rank;
+    var userSubbed      = subbed;
 
     //  Results container to add game entries to.
     var resultsContainer = document.getElementById("reviewResultsContainer");
@@ -148,11 +161,20 @@ function displayReview(data, username, avatar, rank) {
     var subscribeButton = document.createElement("button");
     subscribeButton.className = "btn btn-lg hexButtons userDivButtons";
     subscribeButton.id = "subscribeButton";
+
+    //  Disable subscribe button on self.
     if(cookies.user_id == reviewUserId) {
         subscribeButton.setAttribute("disabled", true);
     }
-    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\")");
-    subscribeButton.textContent = "Subscribe";
+
+    //  Check if user is on subscriptin list already.    
+    if(userSubbed) {
+        subscribeButton.textContent = "Unsubscribe";
+        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + reviewUserId + "\")");
+    } else {
+        subscribeButton.textContent = "Subscribe";
+        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\")");
+    }
 
     //  View profile button.
     var viewProfileButton = document.createElement("button");
@@ -227,4 +249,11 @@ function subscribeToUser(subscribee) {
     console.log("Subsciber: " + subscriber + " Subscribee: " + subscribee);
 
     subscribe(subscriber, subscribee);
+}
+
+function unsubscribeToUser(subscribee) {
+    var subscriber = cookies.user_id;
+    console.log("Subsciber: " + subscriber + " Subscribee: " + subscribee);
+
+    unsubscribe(subscriber, subscribee);
 }

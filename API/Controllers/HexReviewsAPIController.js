@@ -208,8 +208,6 @@ exports.get_a_user = function(req, res) {
     });
 }
 
-
-
 //  Check that the submitted password is correct.
 exports.check_user_password = function(req, res) {
 
@@ -228,6 +226,128 @@ exports.check_user_password = function(req, res) {
             console.log("An unexpected error has occured.");
             console.log("Error: " + err);
             res.send("err");
+        }
+    });
+}
+
+//  Subscribe to a user.
+exports.subscribe_to_user = function (req, res) {
+
+    console.log("Subscribing " + req.body.subscriber + " to " + req.body.subscribee + "...");
+
+    var subscriber = req.body.subscriber;
+    var subscribee = req.body.subscribee;
+
+    //  Update subcriber's subscription list.
+    Users.findOneAndUpdate(
+        { _id: subscriber },
+        { $push: { user_subscribed_to: subscribee } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+                res.send("success");
+            } else {
+                console.log("Error: " + err);
+                res.send("failure");
+            }
+        }
+    );
+}
+
+//  Unsubscribe to a user.
+exports.unsubscribe_to_user = function (req, res) {
+
+    console.log("Unsubscribing " + req.body.subscriber + " from " + req.body.subscribee + "...");
+
+    var subscriber = req.body.subscriber;
+    var subscribee = req.body.subscribee;
+
+    //  Update subcriber's subscription list.
+    Users.findOneAndUpdate(
+        { _id: subscriber },
+        { $pull: { user_subscribed_to: subscribee } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+                res.send("success");
+            } else {
+                console.log("Error: " + err);
+                res.send("failure");
+            }
+        }
+    );
+}
+
+//  Update subscribee's follower list by adding user.
+exports.subscribee_add_follower = function (req, res) {
+
+    console.log("Updating follower list for: " + req.body.subscribee + " (addition)...");
+
+    var subscriber = req.body.subscriber;
+    var subscribee = req.body.subscribee;
+
+    Users.findOneAndUpdate(
+        { _id: subscribee },
+        { $push: { user_subscribers: subscriber } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+                res.send("success");
+            } else {
+                console.log("Error: " + err);
+                res.send("failure");
+            }
+        }
+    );
+}
+
+//  Update subscribee's follower list by removing user.
+exports.subscribee_remove_follower = function (req, res) {
+
+    console.log("Updating follower list for: " + req.body.subscribee + " (removal)...");
+
+    var subscriber = req.body.subscriber;
+    var subscribee = req.body.subscribee;
+
+    Users.findOneAndUpdate(
+        { _id: subscribee },
+        { $pull: { user_subscribers: subscriber } }, function(err, data) {
+            if(data) {
+                console.log("Success.");
+                res.send("success");
+            } else {
+                console.log("Error: " + err);
+                res.send("failure");
+            }
+        }
+    );
+}
+
+//  Check whether a user is subscribed to another user.
+exports.check_user_subscription = function (req, res) {
+
+    console.log("Checking user subscription information...");
+
+    var subscriber = req.body.subscriber;
+    var subscribee = req.body.subscribee;
+
+    Users.find({_id: subscriber}, function(err, user) {
+        if(user.length) {
+            var subscribedToArray = user[0].user_subscribed_to;
+            var found;
+            for(var i = 0; i < subscribedToArray.length; i++) {
+                if(subscribedToArray[i] == subscribee) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if(found) {
+                console.log("User found, sending true...");
+                res.send(true);
+            } else {
+                console.log("No user found, returning false...");
+                res.send(false);
+            }
+        } else {
+            console.log("Error: " + err);
         }
     });
 }
