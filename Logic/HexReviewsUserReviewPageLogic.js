@@ -80,7 +80,7 @@ function buildReviewCard(data) {
     reviewTitleElement.textContent = reviewTitle;
 
     //  Review subtitle area.
-    var reviewSubtitleElement = document.createElement("I");
+    var reviewSubtitleElement = document.createElement("h3");
     reviewSubtitleElement.id = "reviewSubtitleElement";
     reviewSubtitleElement.textContent = "\"" + reviewSubtitle + "\"";
 

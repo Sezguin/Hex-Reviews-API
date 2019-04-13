@@ -2,7 +2,6 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 var GameSchema = new Schema({
     game_title: {
         type: String,

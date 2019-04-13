@@ -22,7 +22,7 @@ function getReviews(gameID) {
                 $('#titleElement').text("Nothing to show!");
 
             } else {
-                $('#titleElement').text("Reviews for " + data[0].review_title);
+                $('#titleElement').text("Reviews for \"" + data[0].review_title + "\"");
 
                 Object.keys(data).forEach(function(k) {
                     console.log("Review (datak) " + JSON.stringify(data[k]));
@@ -123,6 +123,12 @@ function displayReview(data, username, avatar, rank, subbed) {
     reviewIdElement.textContent = reviewID;
     reviewIdElement.setAttribute("hidden", true);
 
+    //  Author ID area properties.
+    var userIdElement = document.createElement("p");
+    userIdElement.id = "userIdElement";
+    userIdElement.textContent = reviewUserId;
+    userIdElement.setAttribute("hidden", true);
+
     //  Review title area properties.
     var reviewTitleElement = document.createElement("h1");
     reviewTitleElement.id = "reviewTitleElement";
@@ -170,10 +176,10 @@ function displayReview(data, username, avatar, rank, subbed) {
     //  Check if user is on subscriptin list already.    
     if(userSubbed) {
         subscribeButton.textContent = "Unsubscribe";
-        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + reviewUserId + "\")");
+        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + reviewUserId + "\", this)");
     } else {
         subscribeButton.textContent = "Subscribe";
-        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\")");
+        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\", this)");
     }
 
     //  View profile button.
@@ -235,6 +241,7 @@ function displayReview(data, username, avatar, rank, subbed) {
     
     //  Configure review entry to be added.
     reviewJumbotron.appendChild(reviewIdElement);
+    reviewJumbotron.appendChild(userIdElement);
     reviewJumbotron.appendChild(sideDiv);
     reviewJumbotron.appendChild(reviewTitleElement);
     reviewJumbotron.appendChild(reviewSubtitleElement);
@@ -244,16 +251,24 @@ function displayReview(data, username, avatar, rank, subbed) {
     resultsContainer.appendChild(reviewJumbotron);
 }
 
-function subscribeToUser(subscribee) {
+function subscribeToUser(subscribee, button) {
     var subscriber = cookies.user_id;
-    console.log("Subsciber: " + subscriber + " Subscribee: " + subscribee);
+    var subscribee = button.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
 
     subscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Unsubscribe";
+    subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
 }
 
-function unsubscribeToUser(subscribee) {
+function unsubscribeToUser(subscribee, button) {
     var subscriber = cookies.user_id;
-    console.log("Subsciber: " + subscriber + " Subscribee: " + subscribee);
+    var subscribee = button.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
 
     unsubscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Subscribe";
+    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
 }

@@ -8,6 +8,7 @@
     padding: 20px;
     text-align: center;
     float: right;
+    width: 100%;
 }
 
 #sideDiv {
@@ -69,12 +70,16 @@
 
 #reviewTitleElement {
     width: 60%;
-    font-size: 2.05vw;
+    font-size: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 #reviewSubtitleElement {
     width: 60%;
-    font-size: 1vw;
+    font-size: 20px;
 }
 
 #userReviewRank {
@@ -83,19 +88,14 @@
 
 #reviewUserText {
     width: 90%;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 .userDivButtons {
     width: 150px;
     font-size: 18px;
-}
-
-/*  Setting a maximum size for fonts.   */
-@media screen and (min-width: 1920px) {
-    #reviewTitleElement {
-       font-size: 38px;
-    }
-    #reviewSubtitleElement {
-        font-size: 24px;
-     }
 }

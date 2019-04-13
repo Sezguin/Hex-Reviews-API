@@ -1,0 +1,84 @@
+#userReviewAvatar {
+    float: left;
+    width: 150px;
+    margin: 10px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+}
+
+#sideButtonDiv {
+    background-image: url("/Images/LightGreenFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 10px;
+    float: right;
+    text-align: center;
+    width: 220px;
+    height: 100%;
+    padding: 10px;
+}
+
+#viewReviewsDiv {
+    width: 100%;
+    background-image: url("/Images/LightGreyFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 10px;
+    float: left;
+}
+
+#userInformationDiv {
+    float: left;
+    height: 100%;
+    width: 500px;
+}
+
+#totalReviewsText {
+    float: left;
+    margin: 20px;
+    font-size: 24px;
+}
+
+#usernameElement {
+    width: 100%;
+    float: left;
+    font-size: 2vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+}
+
+#userReviewRank {
+    float: right;
+    width: 100%;
+}
+
+#viewReviewButton {
+    width: 100px;
+    float: right;
+    margin: 10px;
+}
+
+#viewProfileButton {
+    width: 180px;
+    margin: 10px 5px 10px 5px;
+}
+
+#subscribeButton {
+    width: 180px;
+    margin: 10px 5px 10px 5px;
+}
+
+/*  Setting a maximum size for fonts.   */
+@media screen and (min-width: 1920px) {
+    #usernameElement {
+       font-size: 38px;
+    }
+}

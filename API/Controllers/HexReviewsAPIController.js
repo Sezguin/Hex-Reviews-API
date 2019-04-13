@@ -352,6 +352,25 @@ exports.check_user_subscription = function (req, res) {
     });
 }
 
+exports.get_user_subscriptions = function(req, res) {
+
+    console.log("Fetching list of user subscriptions...");
+
+    Users.findById(req.params.userID, function(err, user) {
+        if(err) {
+            console.log("There was an error when trying to retrieve the subscription list.")
+            console.log("Error: " + err);
+        } else {
+            console.log("User has been found, sending subscription list...");
+            if (user.user_subscribed_to === undefined || user.user_subscribed_to.length == 0) {
+                res.send(false);
+            } else {
+                res.send(user.user_subscribed_to);
+            }
+        }
+    });
+}
+
 
 
 /*****  All review related functionality    *****/
