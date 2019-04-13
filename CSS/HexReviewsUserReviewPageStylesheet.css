@@ -46,12 +46,21 @@
 
 #reviewTitleElement {
     width: 60%;
-    font-size: 2.05vw;
+    font-size: 32px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
 }
 
 #reviewSubtitleElement {
     width: 60%;
-    font-size: 1vw;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 
@@ -70,14 +79,4 @@
 #reviewRatingElement {
     width: 100%;
     margin: 0px 0px 10px 0px;
-}
-
-/*  Setting a maximum size for fonts.   */
-@media screen and (min-width: 1920px) {
-    #reviewTitleElement {
-       font-size: 38px;
-    }
-    #reviewSubtitleElement {
-        font-size: 24px;
-     }
 }

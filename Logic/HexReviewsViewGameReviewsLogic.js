@@ -22,48 +22,60 @@ function getReviews(gameID) {
                 $('#titleElement').text("Nothing to show!");
 
             } else {
-                $('#titleElement').text("Reviews for " + data[0].review_title);
+                $('#titleElement').text("Reviews for \"" + data[0].review_title + "\"");
 
                 Object.keys(data).forEach(function(k) {
-                    console.log(JSON.stringify(data[k]));
+                    console.log("Review (datak) " + JSON.stringify(data[k]));
     
-                    getUserInformation((data[k]));
+                    getUserInformation((data[k]), checkSubscriptionList);
                 });
             }
         }
     });
 }
 
-function getUserInformation(data) {
+function getUserInformation(review, callback) {
+    console.log("Review: " + review);
     $.ajax({
-        url: GlobalURL + '/users/' + data.user_id,
+        url: GlobalURL + '/users/' + review.user_id,
         type: 'GET',
-        success: function(result) {
-            if(result == false) {
+        success: function(user) {
+            if(user == false) {
                 console.log("No user found with that ID.");
             } else {
-                if(result.user_avatar != "") {
-                    displayReview(data, result.user_username, result.user_avatar, result.user_rank);
-                } else {
-                    displayReview(data, result.user_username, "/Images/DefaultAvatar.jpg", result.user_rank);
-                }
-                
+                callback(review, user);
             }
         }
     });
 }
 
-function displayAvatar(data) {
-    var output = document.getElementById("userAvatar");
+//  Check if user is on current subscription list.
+function checkSubscriptionList(review, user) {
 
-    if(data != "") {
-        output.src = data;
-    } else {
-        output.src = "/Images/DefaultAvatar.jpg";
-    }
+    console.log("Checking subscription to: " + user.user_username);
+
+    var subscriberData = cookies.user_id;
+    var subscribeeData = review.user_id;
+
+    $.post(GlobalURL + "/users/subscribe/check", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(subbed) {
+        console.log("Posted from " + user.user_username);
+        if(user.user_avatar != "") {
+            displayReview(review, user.user_username, user.user_avatar, user.user_rank, subbed);
+        } else {
+            displayReview(review, user.user_username, "/Images/DefaultAvatar.jpg", user.user_rank, subbed);
+
+        }
+    });
 }
 
-function displayReview(data, username, avatar, rank) {
+function displayReview(data, username, avatar, rank, subbed) {
+
+    console.log("Displaying review for: " + username);
 
     //  Data collected from database split into individual values.
     var reviewID        = data._id
@@ -96,6 +108,7 @@ function displayReview(data, username, avatar, rank) {
     var reviewUser      = username;
     var userAvatar      = avatar;
     var userRank        = rank;
+    var userSubbed      = subbed;
 
     //  Results container to add game entries to.
     var resultsContainer = document.getElementById("reviewResultsContainer");
@@ -109,6 +122,12 @@ function displayReview(data, username, avatar, rank) {
     reviewIdElement.id = "reviewIdElement";
     reviewIdElement.textContent = reviewID;
     reviewIdElement.setAttribute("hidden", true);
+
+    //  Author ID area properties.
+    var userIdElement = document.createElement("p");
+    userIdElement.id = "userIdElement";
+    userIdElement.textContent = reviewUserId;
+    userIdElement.setAttribute("hidden", true);
 
     //  Review title area properties.
     var reviewTitleElement = document.createElement("h1");
@@ -148,11 +167,20 @@ function displayReview(data, username, avatar, rank) {
     var subscribeButton = document.createElement("button");
     subscribeButton.className = "btn btn-lg hexButtons userDivButtons";
     subscribeButton.id = "subscribeButton";
+
+    //  Disable subscribe button on self.
     if(cookies.user_id == reviewUserId) {
         subscribeButton.setAttribute("disabled", true);
     }
-    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\")");
-    subscribeButton.textContent = "Subscribe";
+
+    //  Check if user is on subscriptin list already.    
+    if(userSubbed) {
+        subscribeButton.textContent = "Unsubscribe";
+        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + reviewUserId + "\", this)");
+    } else {
+        subscribeButton.textContent = "Subscribe";
+        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\", this)");
+    }
 
     //  View profile button.
     var viewProfileButton = document.createElement("button");
@@ -213,6 +241,7 @@ function displayReview(data, username, avatar, rank) {
     
     //  Configure review entry to be added.
     reviewJumbotron.appendChild(reviewIdElement);
+    reviewJumbotron.appendChild(userIdElement);
     reviewJumbotron.appendChild(sideDiv);
     reviewJumbotron.appendChild(reviewTitleElement);
     reviewJumbotron.appendChild(reviewSubtitleElement);
@@ -222,9 +251,24 @@ function displayReview(data, username, avatar, rank) {
     resultsContainer.appendChild(reviewJumbotron);
 }
 
-function subscribeToUser(subscribee) {
+function subscribeToUser(subscribee, button) {
     var subscriber = cookies.user_id;
-    console.log("Subsciber: " + subscriber + " Subscribee: " + subscribee);
+    var subscribee = button.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
 
     subscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Unsubscribe";
+    subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
+}
+
+function unsubscribeToUser(subscribee, button) {
+    var subscriber = cookies.user_id;
+    var subscribee = button.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
+
+    unsubscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Subscribe";
+    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
 }

@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <title>View A Game</title>
+
+             <!-- All stylesheets and UI material. -->
+
+        <!-- Bootstrap Stylesheet dependencies. -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <!-- Custom client stylesheets. -->
+        <link rel="stylesheet" href="CommonStylesheet.css">
+        <link rel="stylesheet" href="Animations.css">
+        <link rel="stylesheet" href="HexReviewsUserSubscriptionsPageStylesheet.css">
+
+        <!-- Custom icons and fonts. -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body>
+        <!-- Top navigation bar. -->
+        <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
+            <a class="navbar-brand" href="#">Hex Reviews</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a id="navUserHome" class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="navViewSubcriptions" class="nav-link active" href="#">Subscriptions</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Account
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
+                            <a id="navLogout" class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="page-header mainPageHeading">
+            <h1 id="titleElement"></h1>
+        </div>
+
+        <div id="subscriptionsResultsContainer">
+            <!-- Full game information will be displayed here. -->
+        </div>
+
+        <!-- All JavaScript material. -->
+
+        <!-- JQuery JavaScript dependencies. -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Boostrap JavaScript Dependencies. -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+        <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+        <!-- Custom client JavaScript -->
+        <script src="CommonLogic.js"></script>
+        <script src="HexReviewsUserSubscriptionsPageLogic.js"></script>
+    </body>
+</html>

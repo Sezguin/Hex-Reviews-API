@@ -1,6 +1,8 @@
 'use strict';
 
 module.exports = function(app) {
+
+    //  Import controller.
     var hexReviewController = require('../Controllers/HexReviewsAPIController');
 
     /*****  All game related routes.    *****/
@@ -59,6 +61,30 @@ module.exports = function(app) {
     //  Get a user from provided ID.
     app.route('/users/:userID')
         .get(hexReviewController.get_a_user);
+
+    //  Subscribe to a user from provided ID.
+    app.route('/users/subscribe')
+        .post(hexReviewController.subscribe_to_user);
+    
+    //  Unsubscribe to a user from provided ID.
+    app.route('/users/unsubscribe')
+        .post(hexReviewController.unsubscribe_to_user);
+
+    //  Add follower to subscribee's list.
+    app.route('/users/follower')
+        .post(hexReviewController.subscribee_add_follower);
+    
+    //  Remove follower from subscribee's list.
+    app.route('/users/unfollow')
+        .post(hexReviewController.subscribee_remove_follower);
+
+    //  Check if user exists in another user's subscription list.
+    app.route('/users/subscribe/check')
+        .post(hexReviewController.check_user_subscription);
+    
+    //  Get subcription list of user from supplied ID.
+    app.route('/users/subscriptions/:userID')
+        .get(hexReviewController.get_user_subscriptions);
 
 
 
