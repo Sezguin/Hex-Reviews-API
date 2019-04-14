@@ -1,7 +1,7 @@
 //  For live:           https://hex-reviews.herokuapp.com
 //  For Development:    http://localhost:4500
 
-var GlobalURL = "https://hex-reviews.herokuapp.com"
+var GlobalURL = "http://localhost:4500"
 
 $(document).ready(function () {
     $("#viewGamesPageButton").click(function () {
@@ -73,6 +73,10 @@ function goToViewGameReviewsPage(gameId) {
     window.location.href = "/ViewGameReviewsPage?id=" + gameId;
 }
 
+function goToViewSingleReviewPage(reviewId) {
+    window.location.href = "/ViewSingleReviewPage?id=" + reviewId;
+}
+
 
 
 /*****  General functions for deleting from the database.   *****/
@@ -108,6 +112,17 @@ function deleteReview(id) {
     });
 
     location.reload();
+}
+
+//  A global function for retrieving the user ID.
+function getUser(userID) {
+    $.ajax({
+        url: GlobalURL + '/users/' + userID,
+        type: 'GET',
+        success: function (user) {
+            return user;
+        }
+    });
 }
 
 function logoutUser() {
