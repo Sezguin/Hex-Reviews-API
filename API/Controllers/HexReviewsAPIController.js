@@ -475,3 +475,70 @@ exports.delete_a_review = function(req, res) {
         res.json({ message: 'Review was successfully deleted.'});
     });
 };
+
+exports.get_a_review = function (req, res) {
+
+    console.log("Fetching a review...");
+
+    Reviews.findById(req.params.reviewID, function(err, review) {
+        if(err) {
+            console.log("There was an error when trying to retrieve the review.")
+            console.log("Error: " + err);
+        } else {
+            console.log("A review has been found.");
+
+            res.send(review);
+        }
+    });
+}
+
+
+
+/*****  All comment related functionality.  *****/
+
+//  Create a comment.
+exports.create_a_comment = function (req, res) {
+
+    console.log("Creating a comment in the database...");
+
+    var reviewID = req.body.review_id;
+    var userID = req.body.comment_user_id;
+    var commentContent = req.body.comment_content;
+
+    Reviews.findOneAndUpdate(
+        {_id: reviewID}, { 
+            $push: {
+                review_comments: {
+                    comment_content: commentContent,
+                    comment_user_id: userID
+                }
+            }
+        }, function(err, data) {
+            if(err) {
+                console.log("Error: " + err);
+                res.send(false);
+            } else {
+                console.log("Data: " + data);
+            }
+        }
+    )
+}
+
+//  Get all comments for a specific review.
+exports.get_all_comments = function (req, res) {
+
+    console.log("Fetching all comments...");
+
+    var reviewID = req.params.reviewID;
+
+    Reviews.findById(reviewID, function(err, review) {
+        if(err) {
+            console.log("THere was an error when trying to fetch the comments for that review.");
+            console.log("Error: " + err);
+            res.send(false);
+        } else {
+            console.log("Review found, sending comments...");
+            res.send(review.review_comments);
+        }
+    });
+}

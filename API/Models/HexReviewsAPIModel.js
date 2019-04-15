@@ -144,6 +144,22 @@ var ReviewSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    review_comments: [{
+        comment_user_id: String,
+        comment_content: String,
+        comment_creation_date: {
+            type: Date,
+            default: Date.now
+        },
+        comment_likes: {
+            type: Number,
+            default: 0
+        },
+        comment_dislikes: {
+            type: Number,
+            default: Number
+        }
+    }],
     game_id: {
         type: Array,
         default: []

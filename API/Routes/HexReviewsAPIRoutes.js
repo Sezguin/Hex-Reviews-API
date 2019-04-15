@@ -108,5 +108,21 @@ module.exports = function(app) {
 
     //  Delete a review from the database from supplied ID.
     app.route('/reviews/:reviewID')
-        .delete(hexReviewController.delete_a_review);
+        .delete(hexReviewController.delete_a_review)
+        
+    //  Get a single review from supplied ID.
+    app.route('/reviews/single/:reviewID')
+        .get(hexReviewController.get_a_review);
+
+
+    
+    /*****  All comment related routes. *****/
+
+    //  Create a new comment.
+    app.route('/reviews/comment')
+        .post(hexReviewController.create_a_comment);
+
+    //  Get all comments for a specific review.
+    app.route('/reviews/comment/:reviewID')
+        .get(hexReviewController.get_all_comments);
 };

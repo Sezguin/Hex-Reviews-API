@@ -45,6 +45,7 @@ app.get('/UserSubscriptionsPage', (req, res) => res.render("HexReviewsUserSubscr
 
 //  Review pages.
 app.get('/ViewGameReviewsPage', (req, res) => res.render("HexReviewsViewGameReviews.ejs"));
+app.get('/ViewSingleReviewPage', (req, res) => res.render("HexReviewsViewSingleReviewPage.ejs"));
 
 //  Admin Pages.
 app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'));

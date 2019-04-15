@@ -272,3 +272,11 @@ function unsubscribeToUser(subscribee, button) {
     subscribeButton.textContent = "Subscribe";
     subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
 }
+
+function viewReview(button) {
+    id = button.parentNode.parentNode.childNodes[0].innerHTML;
+
+    console.log("Review ID: " + id);
+
+    goToViewSingleReviewPage(id);
+}

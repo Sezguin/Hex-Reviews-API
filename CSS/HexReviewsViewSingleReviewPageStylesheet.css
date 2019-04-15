@@ -1,0 +1,158 @@
+#reviewSubtitle {
+    font-size: 28px;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#reviewTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#uberContainer {
+    width: 70%;
+    min-width: 1300px;
+    margin: 0 auto;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+}
+
+#userAvatar {
+    width: 100px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    margin-bottom: 10px;
+}
+
+#mainSingleReviewContainer {
+    width: 100%;
+    min-width: 1200px;
+    height: 250px;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#commentContainer {
+    width: 800px;
+    margin: 0 auto;
+    border: solid;
+    border-top: none;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+}
+
+#addCommentDiv {
+    text-align: center;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+    border-bottom: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    padding: 10px;
+}
+
+#commentsDiv {
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+}
+
+#singleCommentDiv {
+    height: 120px;
+    border-bottom: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    background-image: url('/Images/BackgroundWhite.png');
+    background-repeat: repeat;
+    padding: 10px;
+}
+
+#userDiv {
+    float: left;
+    height: 100px;
+    width: 150px;
+    border-right: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 1px;
+
+}
+
+#userRankElement {
+    font-size: 14px;
+}
+
+#usernameElement {
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#userAvatarElement {
+    width: 50px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    margin: 0px 0px 10px 0px;
+}
+
+#commentTextArea {
+    resize: none;
+}
+
+#addCommentButton {
+    margin-top: 10px;
+    width: 300px;
+}
+
+#singleReviewContainer {
+    float: left;
+}
+
+#titleElements {
+    width: 800px;
+    height: 120px;
+}
+
+#userInformationContainer {
+    float: right;
+    text-align: center;
+    width: 200px;
+}
+
+#viewProfileButton {
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+#subscribeButton {
+    width: 100%;
+}
+
+#ratingImage {
+    width: 400px;
+    float: left;
+}
+
+#reviewContentTextArea {
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 100px 50px 100px;
+    font-size: 22px;
+    resize: none;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+}
