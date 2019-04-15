@@ -518,7 +518,7 @@ exports.create_a_comment = function (req, res) {
                 console.log("Error: " + err);
                 res.send(false);
             } else {
-                console.log("Data: " + data);
+                res.send(true);
             }
         }
     )
@@ -533,7 +533,7 @@ exports.get_all_comments = function (req, res) {
 
     Reviews.findById(reviewID, function(err, review) {
         if(err) {
-            console.log("THere was an error when trying to fetch the comments for that review.");
+            console.log("There was an error when trying to fetch the comments for that review.");
             console.log("Error: " + err);
             res.send(false);
         } else {

@@ -23,7 +23,6 @@ function getReview(reviewID) {
         url: GlobalURL + '/reviews/single/' + reviewID,
         type: 'GET',
         success: function (result) {
-            console.log("Review: " + JSON.stringify(result));
             getUserInformation(result);
         }
     });
@@ -54,16 +53,15 @@ function checkSubscriptionList(review, user) {
         function (subbed) {
             if (user.user_avatar != "") {
                 displayReview(review, user, user.user_avatar, subbed);
-                displayComments(review._id);
+                displayCommentsAndSort(review._id);
             } else {
                 displayReview(review, user, "/Images/DefaultAvatar.jpg", subbed);
-                displayComments(review._id);
+                displayCommentsAndSort(review._id);
             }
         });
 }
 
 function displayReview(review, user, avatar, subbed) {
-    console.log("Displaying review for " + user.user_username);
 
     var reviewRating;
     var textArea = document.getElementById("reviewContentTextArea");
@@ -104,10 +102,6 @@ function displayReview(review, user, avatar, subbed) {
 
 function addComment() {
     var commentContent = $('#commentTextArea').val();
-
-    console.log("Comment to be sent: " + commentContent);
-    console.log("Global review ID: " + globalReviewId)
-
     $.post(GlobalURL + "/reviews/comment", 
     {   
         review_id: globalReviewId,
@@ -116,23 +110,46 @@ function addComment() {
     },
     function(data) {
         if(!data) {
-            console.log("Fail");
+            console.log("There was an error when posting the comment.");
         } else {
-            location.reload();
+            displayCommentsAndSort(globalReviewId);
+            document.getElementById("commentTextArea").value = "";
         }
     });
 }
 
-function displayComments(reviewID) {
+function displayCommentsAndSort(reviewID) {
+
+    //  Clear any previous comments.
+    document.getElementById("commentsDiv").innerHTML = "";
+
     $.ajax({
         url: GlobalURL + '/reviews/comment/' + reviewID,
         type: 'GET',
         success: function (comments) {
-            console.log("Comments: " + JSON.stringify(comments));
-            Object.keys(comments).forEach(function(k) {
-                getUserInformationComment(comments[k]);
-            });
+            sortArray(comments, displayCommments);
         }
+    });
+}
+
+function sortArray(comments, callback) {
+
+    console.log("Comments before: " + JSON.stringify(comments));
+
+    comments.sort(function(a, b) {
+        var dateA = new Date(a.comment_creation_date);
+        var dateB = new Date(b.comment_creation_date);
+        return dateB - dateA;
+    });
+
+    console.log("Comments after: " + JSON.stringify(comments));
+
+    callback(comments);
+}
+
+function displayCommments(comments) {
+    Object.keys(comments).forEach(function(k) {
+        getUserInformationComment(comments[k]);
     });
 }
 
@@ -175,21 +192,79 @@ function createComment(comment, user, avatar) {
     userAvatarElement.id = "userAvatarElement";
     userAvatarElement.src = avatar;
 
+    //  Like button.
+    var likeButton = document.createElement("button");
+    likeButton.id = "likeButton";
+    likeButton.className = "btn hexButtons";
+
+    //  Like amount.
+    var likeAmount = document.createElement("h5");
+    likeAmount.id = "likeAmount";
+    likeAmount.textContent = comment.comment_likes;
+
+    //  Like icon.
+    var likeIcon = document.createElement("i");
+    likeIcon.className = "material-icons commentIcons";
+    likeIcon.textContent = "thumb_up_alt";
+
+    //  Configure like button.
+    likeButton.appendChild(likeIcon);
+
+    //  Dislike button.
+    var dislikeButton = document.createElement("button");
+    dislikeButton.id = "dislikeButton";
+    dislikeButton.className = "btn btn-danger";
+
+    //  Dislike amount.
+    var dislikeAmount = document.createElement("h5");
+    dislikeAmount.id = "dislikeAmount";
+    dislikeAmount.textContent = comment.comment_dislikes;
+
+    //  Dislike icon.
+    var dislikeIcon = document.createElement("i")
+    dislikeIcon.className = "material-icons commentIcons";
+    dislikeIcon.textContent = "thumb_down_alt"
+
+    //  Configure dislike button.
+    dislikeButton.appendChild(dislikeIcon);
+
+    //  Comment content element.
+    var commentContent = document.createElement("textarea");
+    commentContent.id = "commentContent";
+    commentContent.className = "form-control";
+    commentContent.setAttribute("readonly", true);
+    commentContent.textContent = comment.comment_content;
+
     //  User area div.
     var userDiv = document.createElement("div");
     userDiv.id = "userDiv";
 
-    var commentContent = document.createElement("h5");
-    commentContent.textContent = comment.comment_content;
+    //  Like and dislike div.
+    var likeDiv = document.createElement("div");
+    likeDiv.id = "likeDiv";
 
-    //  Configure user area.
+    //  Comment content div.
+    var commentContentDiv = document.createElement("div");
+    commentContentDiv.id = "commentContentDiv";
+
+    //  Configure comment content div.
+    commentContentDiv.appendChild(commentContent);
+
+    //  Configure like/dislike div.
+    likeDiv.appendChild(likeButton);
+    likeDiv.appendChild(likeAmount);
+    likeDiv.appendChild(dislikeButton);
+    likeDiv.appendChild(dislikeAmount);
+
+    //  Configure user div.
     userDiv.appendChild(usernameElement);
     userDiv.appendChild(userAvatarElement);
     userDiv.appendChild(userRankElement);
 
     //  Build comment container.
     singleCommentDiv.appendChild(userDiv);
-    singleCommentDiv.appendChild(commentContent);
+    singleCommentDiv.appendChild(commentContentDiv);
+    singleCommentDiv.appendChild(likeDiv);
 
     //  Append all items to results container.
     resultsContainer.appendChild(singleCommentDiv);

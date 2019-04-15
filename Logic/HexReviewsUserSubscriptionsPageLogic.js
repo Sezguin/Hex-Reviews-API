@@ -6,7 +6,11 @@ $(document).ready(function() {
 });
 
 //  Fetch the list of reviews for a specific game.
-function getSubscriptions(userID) {  
+function getSubscriptions(userID) { 
+
+    //  Clear list on load.
+    document.getElementById("subscriptionsResultsContainer").innerHTML = "";
+
     $.ajax({
         url: GlobalURL + '/users/subscriptions/' + userID,
         type: 'GET',
@@ -133,6 +137,7 @@ function displayUser(user, avatar, subbed) {
     var viewProfileButton = document.createElement("button");
     viewProfileButton.className = "btn btn-lg hexButtons userDivButtons";
     viewProfileButton.id = "viewProfileButton";
+    viewProfileButton.setAttribute("onclick", "viewProfile(this)");
     viewProfileButton.textContent = "View Profile";
 
     //  View reviews button properties.
@@ -191,13 +196,17 @@ function displayUser(user, avatar, subbed) {
     resultsContainer.appendChild(reviewJumbotron);
 }
 
+function viewProfile(button) {
+    var userID = button.parentNode.parentNode.childNodes[0].innerHTML;
+
+    goToViewOtherUserProfilePage(userID);
+}
+
 function unsubscribeToUser(subscribee, button) {
     var subscriber = cookies.user_id;
     var subscribee = button.parentNode.parentNode.childNodes[0].innerHTML;
 
     unsubscribe(subscriber, subscribee);
-
-    console.log("Subscribee: " + subscribee);
 
     subscribeButton = button;
     subscribeButton.textContent = "Subscribe";
