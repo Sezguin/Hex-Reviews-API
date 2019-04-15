@@ -12,8 +12,6 @@ $(document).ready(function() {
 function getGameList() {
     $.get(GlobalURL + "/games/", function(data) {
         Object.keys(data).forEach(function(k) {
-            console.log(JSON.stringify(data[k]));
-
             buildGameCard(data[k]);
         });
     });    
@@ -109,22 +107,10 @@ function getSearchedGameList() {
         url: GlobalURL + '/games/search/' + query,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result));
-
             document.getElementById("gameResultsContainer").innerHTML = "";
 
-
             result.forEach(function(element) {
-
-                console.log("Individual game: " + JSON.stringify(element));
-
-                var data = {};
-
-                data._id = element.id;
-                data.game_title = element.game_title;
-                data.game_description = element.game_description;
-
-                buildGameCard(data);
+                buildGameCard(element);
             });
 
         }
@@ -139,8 +125,5 @@ function viewGame(button) {
 
 function viewReviews(button) {
     var id = button.parentNode.parentNode.childNodes[0].innerHTML;
-
-    console.log("ID of GAME = " + id);
-
     goToViewGameReviewsPage(id);
 }

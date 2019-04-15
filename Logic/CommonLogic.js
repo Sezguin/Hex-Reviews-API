@@ -1,7 +1,7 @@
 //  For live:           https://hex-reviews.herokuapp.com
 //  For Development:    http://localhost:4500
 
-var GlobalURL = "http://localhost:4500"
+var GlobalURL = "https://hex-reviews.herokuapp.com"
 
 $(document).ready(function () {
     $("#viewGamesPageButton").click(function () {
@@ -65,16 +65,20 @@ $(document).ready(function () {
     });
 });
 
-function goToViewSingleGamePage(gameId) {
-    window.location.href = "/ViewSingleGamePage?id=" + gameId;
+function goToViewSingleGamePage(gameID) {
+    window.location.href = "/ViewSingleGamePage?id=" + gameID;
 }
 
-function goToViewGameReviewsPage(gameId) {
-    window.location.href = "/ViewGameReviewsPage?id=" + gameId;
+function goToViewGameReviewsPage(gameID) {
+    window.location.href = "/ViewGameReviewsPage?id=" + gameID;
 }
 
-function goToViewSingleReviewPage(reviewId) {
-    window.location.href = "/ViewSingleReviewPage?id=" + reviewId;
+function goToViewSingleReviewPage(reviewID) {
+    window.location.href = "/ViewSingleReviewPage?id=" + reviewID;
+}
+
+function goToViewOtherUserProfilePage(userID) {
+    window.location.href = "/ViewOtherProfilePage?id=" + userID;
 }
 
 

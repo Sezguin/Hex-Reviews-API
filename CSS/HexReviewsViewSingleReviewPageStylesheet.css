@@ -55,7 +55,7 @@
 
 #addCommentDiv {
     text-align: center;
-    background-image: url('/Images/LightGreyFabric.png');
+    background-image: url('/Images/LightGreenFabric.png');
     background-repeat: repeat;
     border-bottom: solid;
     border-color: rgb(168, 168, 168);
@@ -86,6 +86,32 @@
     border-color: rgb(168, 168, 168);
     border-width: 1px;
 
+}
+
+#commentContentDiv {
+    float: left;
+    padding: 10px;
+    width: 475px;
+    height: 100px;
+}
+
+#commentContent {
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    resize: none;
+    border: none;
+    background-image: url("/Images/BackgroundWhite.png");
+}
+
+#likeDiv {
+    float: right;
+    width: 150px;
+    height: 100px;
+    padding-left: 10px;
+    border-left: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 1px;
 }
 
 #userRankElement {
@@ -133,6 +159,35 @@
     width: 200px;
 }
 
+#likeButton {
+    height: 40px;
+    width: 60px;
+    margin: 5px;
+}
+
+#likeAmount {
+    float: right;
+    width: 50px;
+    height: 20px;
+    font-size: 16px;
+    padding: 15px;
+}
+
+#dislikeButton {
+    height: 40px;
+    width: 60px;
+    margin: 5px;
+}
+
+#dislikeAmount {
+    float: right;
+    width: 50px;
+    height: 20px;
+    font-size: 16px;
+    padding: 15px;
+
+}
+
 #viewProfileButton {
     width: 100%; 
     margin-bottom: 20px;
@@ -155,4 +210,9 @@
     resize: none;
     background-image: url('/Images/LightGreyFabric.png');
     background-repeat: repeat;
+}
+
+.commentIcons {
+    color: white;
+    font-size: 18px;
 }

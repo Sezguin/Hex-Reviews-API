@@ -241,7 +241,8 @@ border-color: rgb(107, 107, 107) !important;
 
 /*  Green colours for all navigation bars. */
 .hexNavbar {
-  background-color: #27AE60;
+  background-image: url('/Images/BackgroundDarkGreen.png');
+  background-repeat: repeat;
 }
 
 
