@@ -1,93 +1,48 @@
 //  Globally get cookies.
 var cookies = getCookies();
+var globalUserID;
 
 $(document).ready(function () {
-    $("#addButton").click(function () {
-        window.location.href = "/AddReviewPage"
-    });
 
-    $("#dropDownMostRecent").click(function () {
-        getReviewList("date");
-    });
+    //  Grab ID from URL parameter.
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var userID = url.searchParams.get("id");
+    globalUserID = userID;
 
-    $("#dropDownRating").click(function () {
-        getReviewList("rating");
-    });
+    console.log("UserID: " + userID);
 
-    $("#dropDownName").click(function () {
-        getReviewList("name");
-    });
-
-    $('#searchButton').click(function() {
-        getSearchedReviewList();
-    });
-
-    $('#resetButton').click(function() {
-        $('#searchBox').val("");
-        getReviewList();
-    });
-
-    getReviewList();
+    getUserData(userID);
 });
 
-//  Fetch the list of reviews by the user.
-function getReviewList(sortType) {
+function getUserData(userID) {
+    $.ajax({
+        url: GlobalURL + '/users/' + userID,
+        type: 'GET',
+        success: function (user) {
+            getReviewList(user);
+        }
+    });
+}
 
-    //  Clear results container.
-    document.getElementById("userReviewsContainer").innerHTML = "";
+//  Fetch the list of reviews by the user.
+function getReviewList(user) {
 
     $.ajax({
-        url: GlobalURL + '/reviews/' + cookies.user_id,
+        url: GlobalURL + '/reviews/' + user._id,
         type: 'GET',
         success: function (data) {
 
             if (!data) {
                 console.log("No reviews found.");
             } else {
-                sortArray(sortType, data, displayReviews);
+                Object.keys(data).forEach(function (k) {
+                    console.log(JSON.stringify(data[k]));
+
+                    buildReviewCard(data[k]);
+                });
             }
         }
-    });
-}
-
-function sortArray(sortType, reviews, callback) {
-
-    switch (sortType) {
-        case "date":
-            reviews.sort(function(a, b) {
-                var dateA = new Date(a.review_creation_date);
-                var dateB = new Date(b.review_creation_date);
-                return dateB - dateA;
-            });
-            break;
-
-        case "rating":
-            reviews.sort(function(a, b) {
-                var ratingA = new Date(a.review_rating);
-                var ratingB = new Date(b.review_rating);
-                return ratingB - ratingA;
-            });
-            break;
-
-        case "name":
-            reviews.sort(function(a, b) {
-                var nameA = a.review_title.toLowerCase();
-                var nameB = b.review_title.toLowerCase();
-                if (nameA < nameB) {
-                    return -1;
-                }
-            });
-            break;
-
-        default:
-    }
-
-    callback(reviews);
-}
-
-function displayReviews(reviews) {
-    Object.keys(reviews).forEach(function(k) {
-        buildReviewCard(reviews[k]);
     });
 }
 
@@ -99,6 +54,7 @@ function buildReviewCard(data) {
     var reviewID = data._id
     var reviewTitle = data.review_title;
     var reviewSubtitle = data.review_subtitle;
+    var reviewContent = data.review_content;
     var reviewRating;
 
     // Set up review rating.
@@ -153,13 +109,6 @@ function buildReviewCard(data) {
     var reviewUserArea = document.createElement("div");
     reviewUserArea.id = "reviewUserArea";
 
-    //  Delete review button properties.
-    var deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger btn-lg";
-    deleteButton.id = "deleteButton";
-    deleteButton.setAttribute("onclick", "deleteUserReview(this)");
-    deleteButton.textContent = "Delete";
-
     //  View review button properties.
     var viewReviewButton = document.createElement("button");
     viewReviewButton.className = "btn btn-primary btn-lg hexButtons";
@@ -170,7 +119,6 @@ function buildReviewCard(data) {
     //  Configure user area.
     reviewUserArea.appendChild(reviewRatingElement);
     reviewUserArea.appendChild(viewReviewButton);
-    reviewUserArea.appendChild(deleteButton);
 
     //  Configure review entry to be added.
     reviewJumbotron.appendChild(reviewIdElement);
@@ -180,36 +128,5 @@ function buildReviewCard(data) {
 
     //  Add game entry to results container.
     resultsContainer.appendChild(reviewJumbotron);
-}
 
-//  Retrieve list of reviews searched for.
-function getSearchedReviewList() {
-
-    var query = $('#searchBox').val();
-
-    if(query != "") {
-        $.ajax({
-            url: GlobalURL + '/reviews/search/' + query,
-            type: 'GET',
-            success: function(result) {
-    
-                //  Clear out container.
-                document.getElementById("userReviewsContainer").innerHTML = "";
-    
-                result.forEach(function(element) {
-                    buildReviewCard(element);
-                });
-            }
-        });
-    }
-}
-
-function viewReview(button) {
-    var id = button.parentNode.parentNode.childNodes[0].innerHTML;
-    goToViewSingleReviewPage(id);
-}
-
-function deleteUserReview(button) {
-    var id = button.parentNode.parentNode.childNodes[0].innerHTML;
-    deleteReview(id);
 }

@@ -152,12 +152,12 @@ var ReviewSchema = new Schema({
             default: Date.now
         },
         comment_likes: {
-            type: Number,
-            default: 0
+            type: Array,
+            default: []
         },
         comment_dislikes: {
-            type: Number,
-            default: Number
+            type: Array,
+            default: []
         }
     }],
     game_id: {
@@ -174,7 +174,7 @@ var ReviewSchema = new Schema({
 
 /*****  Indexes for searching.   *****/
 
-//  Game title index.
+//  Game title and description index.
 GameSchema.index({
     game_title: 'text',
     game_description: 'text',    
@@ -182,6 +182,17 @@ GameSchema.index({
     weights: {
         game_title: 5,
         game_description: 1,
+    },
+});
+
+//  Review title and subtitle index.
+ReviewSchema.index({
+    review_title: 'text',
+    review_subtitle: 'text',    
+}, {
+    weights: {
+        review_title: 5,
+        review_subtitle: 1,
     },
 });
 

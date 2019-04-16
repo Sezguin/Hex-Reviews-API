@@ -144,7 +144,7 @@ function displayUser(user, avatar, subbed) {
     var viewReviewsButton = document.createElement("button");
     viewReviewsButton.className = "btn btn-primary btn-lg hexButtons";
     viewReviewsButton.id="viewReviewButton";
-    viewReviewsButton.setAttribute("onclick", "viewReview(this)");
+    viewReviewsButton.setAttribute("onclick", "viewUserReviews(this)");
     viewReviewsButton.textContent = "View";
 
     //  Total user reviews.
@@ -198,8 +198,12 @@ function displayUser(user, avatar, subbed) {
 
 function viewProfile(button) {
     var userID = button.parentNode.parentNode.childNodes[0].innerHTML;
-
     goToViewOtherUserProfilePage(userID);
+}
+
+function viewUserReviews(button) {
+    var userID = button.parentNode.parentNode.parentNode.childNodes[0].innerHTML;
+    goToViewOtherReviewsPage(userID);
 }
 
 function unsubscribeToUser(subscribee, button) {

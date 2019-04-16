@@ -492,6 +492,21 @@ exports.get_a_review = function (req, res) {
     });
 }
 
+//  Get reviews from a search.
+exports.search_for_reviews = function(req, res) {
+
+    console.log("Searching for specific games containing " + req.params.query + "...");
+
+    Reviews.find({$text: {$search: req.params.query}}, function(err, reviews) {
+        if(err) {
+            console.log("There was an error when retrieving the reviews.");
+            console.log("Error: " + err);
+        } else {
+            res.send(reviews);
+        }
+    });
+}
+
 
 
 /*****  All comment related functionality.  *****/
@@ -533,7 +548,7 @@ exports.get_all_comments = function (req, res) {
 
     Reviews.findById(reviewID, function(err, review) {
         if(err) {
-            console.log("There was an error when trying to fetch the comments for that review.");
+            console.log("There was an error when trying to fetch that review.");
             console.log("Error: " + err);
             res.send(false);
         } else {
@@ -541,4 +556,69 @@ exports.get_all_comments = function (req, res) {
             res.send(review.review_comments);
         }
     });
+}
+
+//  Like a comment.
+exports.like_a_comment = function(req, res) {
+    console.log("Liking a comment...");
+
+    var commentID = req.body.comment_id;
+    var reviewID = req.body.review_id;
+    var userID = req.body.user_id;
+
+    Reviews.find(
+        { _id : reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
+            if(err) {
+                console.log("There was an error when retrieving that comment.");
+                console.log("Error: " + err);
+            } else {
+                comment[0].review_comments[0].comment_likes.push(userID);
+            }
+        } 
+    )
+}
+
+//  Like a comment.
+exports.like_a_comment = function(req, res) {
+    console.log("Liking a comment...");
+
+    var commentID = req.body.comment_id;
+    var reviewID = req.body.review_id;
+    var userID = req.body.user_id;
+
+    Reviews.find(
+        { _id : reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
+            if(err) {
+                console.log("There was an error when retrieving that comment.");
+                console.log("Error: " + err);
+            } else {
+                comment[0].review_comments[0].comment_likes.push(userID);
+                comment[0].save();
+            }
+        } 
+    )
+}
+
+//  Unike a comment.
+exports.unlike_a_comment = function(req, res) {
+    console.log("Unliking a comment...");
+
+    var commentID = req.body.comment_id;
+    var reviewID = req.body.review_id;
+    var userID = req.body.user_id;
+
+    Reviews.find(
+        { _id : reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
+            if(err) {
+                console.log("There was an error when retrieving that comment.");
+                console.log("Error: " + err);
+            } else {
+                comment[0].review_comments[0].comment_likes.pop(userID);
+                comment[0].save();
+            }
+        } 
+    )
 }

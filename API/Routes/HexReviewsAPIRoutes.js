@@ -114,6 +114,10 @@ module.exports = function(app) {
     app.route('/reviews/single/:reviewID')
         .get(hexReviewController.get_a_review);
 
+    //  Get a list of searched for games from supplied query.
+    app.route('/reviews/search/:query')
+        .get(hexReviewController.search_for_reviews);
+
 
     
     /*****  All comment related routes. *****/
@@ -125,4 +129,12 @@ module.exports = function(app) {
     //  Get all comments for a specific review.
     app.route('/reviews/comment/:reviewID')
         .get(hexReviewController.get_all_comments);
+
+    app.route('/reviews/comment/like')
+        .post(hexReviewController.like_a_comment);
+
+    app.route('/reviews/comment/unlike')
+        .post(hexReviewController.unlike_a_comment);
+
+    
 };

@@ -1,18 +1,20 @@
 #reviewUserArea {
-    width: 300px;
+    width: 250px;
+    height: 110px;
     background-image: url("/Images/LightGreenFabric.png");
     background-repeat: repeat;
     border: solid;
     border-color: rgb(168, 168, 168);
     border-width: 2px;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     float: right;
 }
 
 #addReviewButtonContainer {
     width: 60%;
+    height: 200px;
     background-image: url("/Images/LightGreyFabric.png");
     background-repeat: repeat;
     box-shadow: 5px 5px 10px grey inset;
@@ -23,25 +25,51 @@
     text-align: center;
 }
 
+#searchAndFilterMainContainer {
+    width: 60%;
+    height: 70px;
+    margin: 0 auto;
+    padding: 40px 0px 5px 0px;
+}
+
+#userReviewSearch {
+    float: left;
+    max-width: 400px;
+}
+
+#resetButton {
+    width: 100px;
+    margin: 0px 10px 0px 10px;
+}
+
+#reviewDropdownButton {
+    float: right;
+    width: 100px;
+}
+
 #addButton {
-    font-size: 120px;
-    height: 200px;
-    width: 200px;
-    margin: 50px;
+    font-size: 80px;
+    height: 130px;
+    width: 130px;
+    margin: 30px;
     border-radius: 500px;
     box-shadow: 5px 10px 20px grey;
 }
 
 #viewReviewButton {
-    width: 100%;
-    float: right;
-    margin: 10px 0px 10px 0px;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
+    float: left;
+    margin: 0px 0px 0px 0px;
 }
 
 #deleteButton {
-    width: 100%;
+    width: 100px;
+    height: 40px;
+    font-size: 16px;
     float: right;
-    margin: 10px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 #reviewTitleElement {
@@ -51,7 +79,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
-
 }
 
 #reviewSubtitleElement {
@@ -63,20 +90,7 @@
     max-width: 100%;
 }
 
-
-#reviewContentElement {
-    width: 60%;
-    height: 220px;
-    font-size: 18px;
-    margin: 10px 0px 20px 0px;
-    border: solid;
-    border-radius: 5px;
-    border-color: rgb(168, 168, 168);
-    border-width: 2px;
-    background-image: url("/Images/LightGreyFabric.png");
-}
-
 #reviewRatingElement {
-    width: 100%;
+    width: 90%;
     margin: 0px 0px 10px 0px;
 }

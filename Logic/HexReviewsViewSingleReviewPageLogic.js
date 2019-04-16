@@ -134,15 +134,12 @@ function displayCommentsAndSort(reviewID) {
 
 function sortArray(comments, callback) {
 
-    console.log("Comments before: " + JSON.stringify(comments));
-
+    //  Sort comments by most recent date.
     comments.sort(function(a, b) {
         var dateA = new Date(a.comment_creation_date);
         var dateB = new Date(b.comment_creation_date);
         return dateB - dateA;
     });
-
-    console.log("Comments after: " + JSON.stringify(comments));
 
     callback(comments);
 }
@@ -172,7 +169,19 @@ function getUserInformationComment(comment) {
 function createComment(comment, user, avatar) {
     console.log("create a comment..." + comment._id);
 
+    var commentLikeArray = comment.comment_likes;
+    var commentLiked = commentLikeArray.includes(cookies.user_id);
+    var commentLikes = commentLikeArray.length
+
+    console.log("Comment likes array: " + JSON.stringify(comment));
+
     var resultsContainer = document.getElementById("commentsDiv");
+
+    //  Comment ID area properties.
+    var commentIdElement = document.createElement("p");
+    commentIdElement.id = "commentIdElement";
+    commentIdElement.setAttribute("hidden", true);
+    commentIdElement.textContent = comment._id;
 
     var singleCommentDiv = document.createElement("div");
     singleCommentDiv.id = "singleCommentDiv";
@@ -195,12 +204,18 @@ function createComment(comment, user, avatar) {
     //  Like button.
     var likeButton = document.createElement("button");
     likeButton.id = "likeButton";
-    likeButton.className = "btn hexButtons";
+    if(commentLiked) {
+        likeButton.setAttribute("onclick", "unlikeComment(this)");
+        likeButton.className = "btn hexButtons";
+    } else {
+        likeButton.setAttribute("onclick", "likeComment(this)");
+        likeButton.className = "btn btn-secondary";
+    }
 
     //  Like amount.
     var likeAmount = document.createElement("h5");
     likeAmount.id = "likeAmount";
-    likeAmount.textContent = comment.comment_likes;
+    likeAmount.textContent = commentLikes;
 
     //  Like icon.
     var likeIcon = document.createElement("i");
@@ -209,24 +224,6 @@ function createComment(comment, user, avatar) {
 
     //  Configure like button.
     likeButton.appendChild(likeIcon);
-
-    //  Dislike button.
-    var dislikeButton = document.createElement("button");
-    dislikeButton.id = "dislikeButton";
-    dislikeButton.className = "btn btn-danger";
-
-    //  Dislike amount.
-    var dislikeAmount = document.createElement("h5");
-    dislikeAmount.id = "dislikeAmount";
-    dislikeAmount.textContent = comment.comment_dislikes;
-
-    //  Dislike icon.
-    var dislikeIcon = document.createElement("i")
-    dislikeIcon.className = "material-icons commentIcons";
-    dislikeIcon.textContent = "thumb_down_alt"
-
-    //  Configure dislike button.
-    dislikeButton.appendChild(dislikeIcon);
 
     //  Comment content element.
     var commentContent = document.createElement("textarea");
@@ -253,8 +250,7 @@ function createComment(comment, user, avatar) {
     //  Configure like/dislike div.
     likeDiv.appendChild(likeButton);
     likeDiv.appendChild(likeAmount);
-    likeDiv.appendChild(dislikeButton);
-    likeDiv.appendChild(dislikeAmount);
+
 
     //  Configure user div.
     userDiv.appendChild(usernameElement);
@@ -262,10 +258,61 @@ function createComment(comment, user, avatar) {
     userDiv.appendChild(userRankElement);
 
     //  Build comment container.
+    singleCommentDiv.appendChild(commentIdElement);
     singleCommentDiv.appendChild(userDiv);
     singleCommentDiv.appendChild(commentContentDiv);
     singleCommentDiv.appendChild(likeDiv);
 
     //  Append all items to results container.
     resultsContainer.appendChild(singleCommentDiv);
+}
+
+function likeComment(button) {
+    id = button.parentNode.parentNode.childNodes[0].innerHTML;
+    button.className = "btn hexButtons";
+    button.setAttribute("onclick", "unlikeComment(this)");
+
+    likeValue = parseInt(button.parentNode.childNodes[1].innerHTML);
+    likeValue = likeValue + 1;
+    button.parentNode.childNodes[1].innerHTML = likeValue;
+
+    $.post(GlobalURL + "/reviews/comment/like", 
+    {   
+        user_id: cookies.user_id,
+        review_id: globalReviewId,
+        comment_id: id
+    },
+    function(data) {
+        if(!data) {
+            console.log("There was an error when liking the comment.");
+        } else {
+            console.log("The comment was liked successfully.");
+        }
+    });
+
+    button.className = "btn hexButtons";
+}
+
+function unlikeComment(button) {
+    id = button.parentNode.parentNode.childNodes[0].innerHTML;
+    button.className = "btn btn-secondary";
+    button.setAttribute("onclick", "likeComment(this)");
+
+    dislikeValue = parseInt(button.parentNode.childNodes[1].innerHTML);
+    dislikeValue = dislikeValue - 1;
+    button.parentNode.childNodes[1].innerHTML = dislikeValue;
+
+    $.post(GlobalURL + "/reviews/comment/unlike", 
+    {   
+        user_id: cookies.user_id,
+        review_id: globalReviewId,
+        comment_id: id
+    },
+    function(data) {
+        if(!data) {
+            console.log("There was an error when unliking the comment.");
+        } else {
+            console.log("The comment was unliked successfully.");
+        }
+    });
 }

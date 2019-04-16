@@ -200,7 +200,7 @@ border-color: rgb(107, 107, 107) !important;
 .reviewJumbotron {
   width: 60%;
   min-width: 900px;
-  height: 400px;
+  height: 160px;
   background-image: url("/Images/BackgroundLightGreen.png");
   background-repeat: repeat;
   border-color: #27AE60;
@@ -212,7 +212,7 @@ border-color: rgb(107, 107, 107) !important;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
-  animation: fadeInLeft;
+  animation: zoomIn;
   animation-duration: 0.2s;
 }
 

@@ -1,0 +1,49 @@
+#reviewUserArea {
+    width: 250px;
+    height: 110px;
+    background-image: url("/Images/LightGreenFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    float: right;
+}
+
+#viewReviewButton {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+}
+
+#deleteButton {
+    width: 100%;
+    float: right;
+    margin: 10px 0px 10px 0px;
+}
+
+#reviewTitleElement {
+    width: 60%;
+    font-size: 32px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
+}
+
+#reviewSubtitleElement {
+    width: 60%;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#reviewRatingElement {
+    width: 90%;
+    margin: 0px 0px 10px 0px;
+}
