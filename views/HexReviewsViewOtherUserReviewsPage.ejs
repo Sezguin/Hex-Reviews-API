@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsUserReviewPageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsViewOtherUserReviewsPageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -35,7 +35,7 @@
                     <a id="navUserHome" class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navWriteReview" class="nav-link active" href="#">Your Reviews</a>
+                    <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
                     <a id="navUserViewGames" class="nav-link" href="#">View Games</a>
@@ -49,8 +49,7 @@
                         Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
-                        <a id="navMyReviews" class="dropdown-item" href="#">My Reviews</a>
+                        <a id="navViewUserProfile" class="dropdown-item" href="#">My Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
@@ -60,34 +59,7 @@
     </nav>
 
     <!-- Page heading. -->
-    <div class="page-header mainPageHeading">
-        <h1 id="userWelcome">Add a Review</h1>
-    </div>
-
-    <div id="addReviewButtonContainer">
-        <button id="addButton" class="bigMainButton hexButtons">+</button>
-    </div>
-
-  
-    <div id="searchAndFilterMainContainer">
-        <div id="reviewDropdownButton" class="btn-group">
-            <button type="button" class="btn hexButtons dropdown-toggle" data-toggle="dropdown">Sort</button>
-                <div class="dropdown-menu">
-                    <a id="dropDownName" class="dropdown-item" href="#">Alphabetical</a>
-                    <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
-                    <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
-            </div>
-        </div>
-
-        <div id="userReviewSearch" class="input-group mb-3">
-            <input id="searchBox" type="text" class="form-control" placeholder="Search your reviews...">
-            <div class="input-group-append">
-                <button id="searchButton" class="btn hexButtons" type="button">Search</button>
-            </div>
-        </div>
-        <button id="resetButton" class="btn hexButtons">Reset</button>
-    </div>
- 
+    <h1 id="userReviewHeading"></h1>
 
     <div id="userReviewsContainer">
 
@@ -112,7 +84,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsUserReviewPageLogic.js"></script>
+    <script src="HexReviewsViewOtherUserReviewsPageLogic.js"></script>
 
 </body>
 

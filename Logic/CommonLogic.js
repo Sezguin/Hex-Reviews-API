@@ -81,6 +81,10 @@ function goToViewOtherUserProfilePage(userID) {
     window.location.href = "/ViewOtherProfilePage?id=" + userID;
 }
 
+function goToViewOtherReviewsPage(userID) {
+    window.location.href = "/ViewOtherUserReviewsPage?id=" + userID;
+}
+
 
 
 /*****  General functions for deleting from the database.   *****/

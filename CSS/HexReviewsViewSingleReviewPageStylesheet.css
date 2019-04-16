@@ -108,7 +108,7 @@
     float: right;
     width: 150px;
     height: 100px;
-    padding-left: 10px;
+    padding: 25px 0px 30px 10px;
     border-left: solid;
     border-color: rgb(168, 168, 168);
     border-width: 1px;
@@ -171,21 +171,6 @@
     height: 20px;
     font-size: 16px;
     padding: 15px;
-}
-
-#dislikeButton {
-    height: 40px;
-    width: 60px;
-    margin: 5px;
-}
-
-#dislikeAmount {
-    float: right;
-    width: 50px;
-    height: 20px;
-    font-size: 16px;
-    padding: 15px;
-
 }
 
 #viewProfileButton {
