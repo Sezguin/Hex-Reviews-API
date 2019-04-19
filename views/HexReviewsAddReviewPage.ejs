@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
     <link rel="stylesheet" href="HexReviewsAddReviewPageStylesheet.css">
+    <link rel="stylesheet" href="Hexagons.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -86,13 +87,30 @@
                 <h5 class="addReviewh5">Review</h5>
                 <textarea id="reviewContent" type="text" class="form-control" rows="8" placeholder="..." required></textarea>
 
-                <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
-                <div id="ratingDiv">
-                    <input id="reviewRating" type="number" min="0" max="5" class="form-control" placeholder="...">
-                </div>
+
             </div>
         </form>
         <div class="alignCenterDiv">
+                <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
+                <div id="ratingDiv">
+
+                    <a  href="#">                    
+                        <button id="rating1" class="ratingButton hb hb-md spin" data-toggle="button">1</button>                    
+                    </a>
+                    <a href="#">                    
+                        <button id="rating2" class="ratingButton hb hb-md spin" data-toggle="button">2</button>                    
+                    </a>
+                    <a href="#">                    
+                        <button id="rating3" class="ratingButton hb hb-md spin" data-toggle="button">3</button>                    
+                    </a>
+                    <a href="#">                    
+                        <button id="rating4" class="ratingButton hb hb-md spin" data-toggle="button">4</button>                    
+                    </a>
+                    <a href="#">                    
+                        <button id="rating5" class="ratingButton hb hb-md spin" data-toggle="button">5</button>                    
+                    </a>
+                        
+                </div>
             <button id="submitReviewButton" class="bigMainButton">Submit</button>
         </div>
     </div>
@@ -165,6 +183,7 @@
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
     <script src="HexReviewsAddReviewPageLogic.js"></script>
+    <script src="Hexagons.min.js"></script>
 
 </body>
 
