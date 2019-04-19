@@ -8,6 +8,7 @@
 }
 
 #reviewTitle {
+    font-size: 32px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -146,10 +147,11 @@
 
 #singleReviewContainer {
     float: left;
+    width: 900px;
 }
 
 #titleElements {
-    width: 800px;
+    width: 1000px;
     height: 120px;
 }
 

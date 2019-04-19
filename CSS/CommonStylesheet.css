@@ -5,14 +5,12 @@ body {
   color: rgb(70, 70, 70);
 }
 
-
-
 /*****  Buttons ****/
 
 #deleteButton {
-    width: 200px;
-    color: white;
-    float: right;
+  width: 200px;
+  color: white;
+  float: right;
 }
 
 #viewGameButton {
@@ -23,7 +21,7 @@ body {
 }
 
 #gameIdElement {
-    display: none;
+  display: none;
 }
 
 #viewReviewButton {
@@ -40,23 +38,23 @@ body {
 }
 
 .label-danger {
-    position: absolute;
-    left: 3px;
-    top: 5px;
+  position: absolute;
+  left: 3px;
+  top: 5px;
 }
 
 .bigMainButton {
-    width: 180px;
-    height: 60px;
-    font-size: 20px;
-    background-color: #27AE60;
-    border: none;
-    color: white;
-    padding: 15px 15px;
-    text-align: center;
-    border-radius: 10px;
-    margin: 10px;
-    outline: none;
+  width: 180px;
+  height: 60px;
+  font-size: 20px;
+  background-color: #27AE60;
+  border: none;
+  color: white;
+  padding: 15px 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 10px;
+  outline: none;
 }
 
 .bigMainButton:hover {
@@ -64,6 +62,7 @@ body {
   outline-color: #58D68D;
   border-color: #27AE60;
 }
+
 .bigMainButton:focus {
   background-color: rgb(33, 150, 81) !important;
   outline-color: #58D68D !important;
@@ -85,14 +84,15 @@ body {
 }
 
 .bigMainButtonSecondary:hover {
-background-color: rgb(133, 133, 133);
-outline-color: rgb(128, 128, 128);
-border-color: rgb(107, 107, 107);
+  background-color: rgb(133, 133, 133);
+  outline-color: rgb(128, 128, 128);
+  border-color: rgb(107, 107, 107);
 }
+
 .bigMainButtonSecondary:focus {
-background-color: rgb(83, 83, 83) !important;
-outline-color: rgb(128, 128, 128) !important;
-border-color: rgb(107, 107, 107) !important;
+  background-color: rgb(83, 83, 83) !important;
+  outline-color: rgb(128, 128, 128) !important;
+  border-color: rgb(107, 107, 107) !important;
 }
 
 .successfulModalButton {
@@ -126,15 +126,12 @@ border-color: rgb(107, 107, 107) !important;
   border-color: #27AE60 !important;
 }
 
-
-
 /*****  Headings  *****/
 
 .mainPageHeading {
   text-align: center;
   margin-top: 40px;
 }
-
 
 /*****  General Divs  *****/
 
@@ -165,16 +162,12 @@ border-color: rgb(107, 107, 107) !important;
   padding: 200px 0;
 }
 
-
-
 /*****  Badges  *****/
 
 .badge {
   background-color: #27AE60 !important;
   margin-right: 5px !important;
 }
-
-
 
 /*****  Jumbotrons  *****/
 
@@ -188,13 +181,12 @@ border-color: rgb(107, 107, 107) !important;
   border-width: 5px;
   margin: 0 auto;
   border-radius: 10px;
-  padding: 20px 20px 60px 20px;
+  padding: 20px 20px 20px 20px;
   margin-top: 20px;
   margin-bottom: 20px;
   box-shadow: 5px 10px 20px grey;
   animation: fadeInLeft;
   animation-duration: 0.5s;
-
 }
 
 .reviewJumbotron {
@@ -235,23 +227,20 @@ border-color: rgb(107, 107, 107) !important;
   animation-duration: 0.2s;
 }
 
-
-
 /*****  Navigation Bars *****/
 
 /*  Green colours for all navigation bars. */
+
 .hexNavbar {
   background-image: url('/Images/BackgroundDarkGreen.png');
   background-repeat: repeat;
 }
 
-
-
 /*****  Icons *****/
 
 .material-icons.md-48 {
-   font-size: 150px;
-   margin: 50px;
+  font-size: 150px;
+  margin: 50px;
 }
 
 #successIcon {
@@ -262,8 +251,6 @@ border-color: rgb(107, 107, 107) !important;
   color: rgb(206, 94, 94);
 }
 
-
-
 /*****  Spinners  *****/
 
 #successfulPostModalSpinner {
@@ -272,18 +259,17 @@ border-color: rgb(107, 107, 107) !important;
   margin: 50px;
 }
 
-
-
 /*****  Modals  *****/
 
 /*  Animations and opacity settings for all modals. */
+
 .modal {
-    animation: zoomIn;
-    animation-duration: 0.5s;
+  animation: zoomIn;
+  animation-duration: 0.5s;
 }
 
 .modal-backdrop {
-    opacity: 0.5 !important;
+  opacity: 0.5 !important;
 }
 
 #successfulPostModalFooter {
@@ -291,130 +277,139 @@ border-color: rgb(107, 107, 107) !important;
   border-top: none;
 }
 
-
 /* Customize the label (the container) */
+
 .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 20px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 20px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-  .container-small {
-      font-size: 16px;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-  }
-  
-  /* On mouse-over, add a grey background color */
-  .container:hover input ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  /* When the checkbox is checked, add a blue background */
-  .container input:checked ~ .checkmark {
-    background-color: #2196F3;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+.container-small {
+  font-size: 16px;
+}
 
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+/* Hide the browser's default checkbox */
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+
+.container:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+.container input:checked~.checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 
 /* The switch - the box around the slider */
+
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #27AE60;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #27AE60;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #27AE60;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #27AE60;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}

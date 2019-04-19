@@ -40,7 +40,7 @@ function getUserInformation(review, callback) {
         url: GlobalURL + '/users/' + review.user_id,
         type: 'GET',
         success: function(user) {
-            if(user == false) {
+            if(!user) {
                 console.log("No user found with that ID.");
             } else {
                 callback(review, user);
@@ -63,7 +63,6 @@ function checkSubscriptionList(review, user) {
         subscribee: subscribeeData,
     },
     function(subbed) {
-        console.log("Posted from " + user.user_username);
         if(user.user_avatar != "") {
             displayReview(review, user.user_username, user.user_avatar, user.user_rank, subbed);
         } else {
@@ -81,7 +80,6 @@ function displayReview(data, username, avatar, rank, subbed) {
     var reviewID        = data._id
     var reviewTitle     = data.review_title;
     var reviewSubtitle  = data.review_subtitle;
-    var reviewContent   = data.review_content;
     var reviewUserId    = data.user_id;
     var reviewRating;
 
@@ -115,6 +113,7 @@ function displayReview(data, username, avatar, rank, subbed) {
 
     //  Main jumbotron container.
     var reviewJumbotron = document.createElement("div");
+    reviewJumbotron.id = "viewGameReviewJumbotron";
     reviewJumbotron.className = "jumbotron reviewJumbotron";
 
     //  Review ID area properties.
@@ -194,17 +193,10 @@ function displayReview(data, username, avatar, rank, subbed) {
     }
 
     //  Review subtitle area.
-    var reviewSubtitleElement = document.createElement("I");
+    var reviewSubtitleElement = document.createElement("h4");
     reviewSubtitleElement.id = "reviewSubtitleElement";
     reviewSubtitleElement.textContent = "\"" + reviewSubtitle + "\"";
 
-    //  Review content area.
-    var reviewContentElement = document.createElement("textArea");
-    reviewContentElement.id = "reviewContentElement";
-    reviewContentElement.className = "form-control";
-    reviewContentElement.setAttribute("readonly", true);
-    reviewContentElement.setAttribute("style", "resize: none");
-    reviewContentElement.textContent = reviewContent;
 
     //  Review rating container.
     var reviewRatingDiv = document.createElement("div");
@@ -221,23 +213,32 @@ function displayReview(data, username, avatar, rank, subbed) {
     viewReviewButton.setAttribute("onclick", "viewReview(this)");
     viewReviewButton.textContent = "View Review";
 
+    //  Create side div.
     var sideDiv = document.createElement("div");
     sideDiv.id = "sideDiv";
+
+    //  Create button div.
+    var buttonDiv = document.createElement("div");
+    buttonDiv.id = "buttonDiv";
+
+    //  Configure button div.
+    buttonDiv.appendChild(viewReviewButton);
 
     //  Configure user rank container.
     RURankDiv.appendChild(RUAvatar);
     RURankDiv.appendChild(RURank);
 
     //  Configure user area.
-    reviewUserArea.appendChild(reviewRatingElement);
-    reviewUserArea.appendChild(RUText);
+    // reviewUserArea.appendChild(reviewRatingElement);
+    // reviewUserArea.appendChild(RUText);
     reviewUserArea.appendChild(RURankDiv);
     reviewUserArea.appendChild(viewProfileButton);
     reviewUserArea.appendChild(subscribeButton);
 
     //  Configure side div.
     sideDiv.appendChild(reviewUserArea);
-    sideDiv.appendChild(viewReviewButton);
+    sideDiv.appendChild(reviewRatingElement);
+    sideDiv.appendChild(RUText);
     
     //  Configure review entry to be added.
     reviewJumbotron.appendChild(reviewIdElement);
@@ -245,7 +246,7 @@ function displayReview(data, username, avatar, rank, subbed) {
     reviewJumbotron.appendChild(sideDiv);
     reviewJumbotron.appendChild(reviewTitleElement);
     reviewJumbotron.appendChild(reviewSubtitleElement);
-    reviewJumbotron.appendChild(reviewContentElement);
+    reviewJumbotron.appendChild(buttonDiv);
 
     //  Add game entry to results container.
     resultsContainer.appendChild(reviewJumbotron);

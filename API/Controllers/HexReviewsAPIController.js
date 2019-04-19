@@ -384,7 +384,7 @@ exports.create_a_review = function(req, res) {
     
     new_review.save(function(err, review) {
         if(err) {
-            res.send("failure");
+            res.send(false);
             console.log("There was an error creating the review.");
             console.log("Error: " + err);
         } else {

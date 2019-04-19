@@ -4,7 +4,8 @@
 }
 
 #ratingDiv {
-    width: 70%;
+    width: 900px;
+    text-align: center;
     background-image: url('/Images/LightGreyFabric.png');
     background-repeat: repeat;
     padding: 30px;
@@ -27,6 +28,7 @@
 
 #chooseGameModalResultsContainer {
     height: 500px;
+    overflow: scroll;
 }
 
 #searchIcon {
@@ -43,9 +45,55 @@
     margin-top: 15px;
 }
 
-.list-group{
-    max-height: 500px;
-    margin-bottom: 10px;
-    overflow:scroll;
-    -webkit-overflow-scrolling: touch;
+.hb,
+.hb:before,
+.hb:after {
+	background-color: #27AE60 !important;
+	border-left:1px solid #27AE60 !important;
+	border-right:1px solid #27AE60 !important;
+    color: white !important;
+    outline: none !important;
 }
+
+.hb:hover,
+.hb:hover:before,
+.hb:hover:after {
+	background-color: #27AE60; 
+	border-left:1px solid #27AE60 !important;
+	border-right:1px solid #27AE60 !important;  
+    color: white !important;
+    outline: none !important;
+}
+
+
+.down,
+.down:before,
+.down:after {
+    background-color: rgb(30, 100, 59) !important;
+	border-left:1px solid rgb(30, 100, 59)!important;
+	border-right:1px solid rgb(30, 100, 59) !important;  
+    color: white !important;
+    outline: none !important;
+}
+
+.down,
+.down:hover:before,
+.down:hover:after {
+    background-color: rgb(30, 100, 59) !important;
+	border-left:1px solid rgb(30, 100, 59)!important;
+	border-right:1px solid rgb(30, 100, 59) !important;  
+    color: white !important;
+    outline: none !important;
+}
+
+/* .hb:focus,
+.hb:focus:before,
+.hb:focus:after {
+	background-color: rgb(30, 100, 59) !important;
+	border-left:1px solid rgb(30, 100, 59)!important;
+	border-right:1px solid rgb(30, 100, 59) !important;  
+    color: white !important;
+    outline: none !important;
+
+} */
+

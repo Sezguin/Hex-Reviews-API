@@ -84,6 +84,9 @@ function goToViewOtherUserProfilePage(userID) {
 function goToViewOtherReviewsPage(userID) {
     window.location.href = "/ViewOtherUserReviewsPage?id=" + userID;
 }
+function goToWriteReviewPage(gameID) {
+    window.location.href = "/AddReviewPage?id=" + gameID;
+}
 
 
 

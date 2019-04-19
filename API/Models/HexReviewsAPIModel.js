@@ -122,19 +122,19 @@ var UserSchema = new Schema({
 var ReviewSchema = new Schema({
     review_title: {
         type: String,
-        required: 'A review title is required.'
+        required: "A review title is required."
     },
     review_subtitle: {
         type: String,
-        default: "I haven't thought of a punchy line yet..."
+        required: "A review quote is required."
     },
     review_content: {
         type: String,
-        required: 'A review is required...'
+        required: "A review is required."
     },
     review_rating: {
         type: Number,
-        default: 0
+        required: "A review rating is required."
     },
     review_comments: {
         type: Array,

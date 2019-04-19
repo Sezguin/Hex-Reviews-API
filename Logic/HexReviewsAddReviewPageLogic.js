@@ -1,5 +1,6 @@
 //  Globally grab cookies.
 var cookies = getCookies();
+var globalRating;
 
 $(document).ready(function() {
     $("#showChooseGameModal").click(function() {
@@ -10,12 +11,67 @@ $(document).ready(function() {
         getGameList();
     });
 
+    $("#rating1").click(function() {
+        globalRating = 1;
+        $(this).toggleClass("down");
+        $("#rating5").removeClass("down");
+        $("#rating4").removeClass("down");
+        $("#rating3").removeClass("down");
+        $("#rating2").removeClass("down");
+    });
+    $("#rating2").click(function() {
+        globalRating = 2;
+        $(this).toggleClass("down");
+        $("#rating5").removeClass("down");
+        $("#rating4").removeClass("down");
+        $("#rating3").removeClass("down");
+        $("#rating1").removeClass("down");
+    });
+    $("#rating3").click(function() {
+        globalRating = 3;
+        $(this).toggleClass("down");
+        $("#rating5").removeClass("down");
+        $("#rating4").removeClass("down");
+        $("#rating2").removeClass("down");
+        $("#rating1").removeClass("down");
+    });
+    $("#rating4").click(function() {
+        globalRating = 4;
+        $(this).toggleClass("down");
+        $("#rating5").removeClass("down");
+        $("#rating3").removeClass("down");
+        $("#rating2").removeClass("down");
+        $("#rating1").removeClass("down");
+    });
+    $("#rating5").click(function() {
+        globalRating = 5;
+        $(this).toggleClass("down");
+        $("#rating4").removeClass("down");
+        $("#rating3").removeClass("down");
+        $("#rating2").removeClass("down");
+        $("#rating1").removeClass("down");
+    });
+
     $("#submitReviewButton").click(function() {
-
         $("#successfulPostModal").modal("show");
-
         window.setTimeout(postReview, 1000);
     });
+
+    //  Grab ID from URL parameter.
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var gameID = url.searchParams.get("id");
+
+    if (gameID != null) {
+        $.ajax({
+            url: GlobalURL + '/games/' + gameID,
+            type: 'GET',
+            success: function(result) {
+                $("#reviewGameId").val(gameID);
+                $("#reviewTitle").val(result.game_title);
+            }
+        });
+    }
 
     //  Hide certain elements on page load.
     document.getElementById("successIcon").style.display = 'none';
@@ -29,7 +85,7 @@ function getGameList() {
     console.log("Query to be searched: " + query);
 
     $.ajax({
-        url: 'https://hex-reviews.herokuapp.com/games/search/' + query,
+        url: GlobalURL + '/games/search/' + query,
         type: 'GET',
         success: function(result) {
             console.log("Information from API: " + JSON.stringify(result));
@@ -54,11 +110,6 @@ function addListItem(gameId, gameTitle , gameDescription) {
     
     //  Results container to add returned games from search.
     var resultsContainer = document.getElementById("searchedGamesContainer");
-
-    //  Game ID area properties.
-    // var gameIdElement = document.createElement("p");
-    // gameIdElement.id = "gameIdElement";
-    // gameIdElement.textContent = gameId;
 
     //  Main list item button.
     var gameListItemButton = document.createElement("button");
@@ -111,13 +162,13 @@ function postReview() {
     var reviewTitle     = $('#reviewTitle').val();
     var reviewSubtitle  = $('#reviewSubtitle').val();
     var reviewContent   = $('#reviewContent').val();
-    var reviewRating    = $('#reviewRating').val();
+    var reviewRating    = globalRating;
     
     var userID = cookies.user_id;
     var gameID = $('#reviewGameId').val();
 
     //  Post review.
-    $.post("https://hex-reviews.herokuapp.com/reviews/", 
+    $.post(GlobalURL + "/reviews/", 
     {   
         review_title: reviewTitle,
         review_subtitle: reviewSubtitle,
@@ -127,7 +178,7 @@ function postReview() {
         user_id: userID       
     },
     function(data, status) {
-        if(data == "failure") {
+        if(!data) {
             $("#successModalTitle").text("Error :/");
             $("#successfulPostModalSpinner").hide();
             document.getElementById("failureIcon").style.display = 'block';
@@ -154,7 +205,7 @@ function postReviewIds(data) {
         var reviewID = data;
 
         //  Post review IDs to games and users.
-        $.post("https://hex-reviews.herokuapp.com/reviews/add/ids", 
+        $.post(GlobalURL + "/reviews/add/ids", 
         {   
             review_id: reviewID,
             game_id: gameID,
