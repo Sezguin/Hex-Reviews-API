@@ -28,6 +28,7 @@
 
 #chooseGameModalResultsContainer {
     height: 500px;
+    overflow: scroll;
 }
 
 #searchIcon {
