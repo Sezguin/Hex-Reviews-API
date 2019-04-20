@@ -2,6 +2,30 @@ var cookies;
 
 $(document).ready(function() {
 
+    $("#browseGamesButton").click(function() {
+        window.location.href = "/UserViewGamesPage";
+    });
+
+    $("#writeReviewButton").click(function() {
+        window.location.href = "/AddReviewPage";
+    });
+
+    $("#subscriptionsButton").click(function() {
+        window.location.href = "/UserSubscriptionsPage";
+    });
+
+    $("#requestGameButton").click(function() {
+        window.location.href = "/UserViewGamesPage";
+    });
+
+    $("#myProfileButton").click(function() {
+        window.location.href = "/ViewUserProfilePage";
+    });
+
+    $("#helpButton").click(function() {
+        window.location.href = "/UserViewGamesPage";
+    });
+
     //  Grab session name from cookie.
     cookies = getCookies();
 
