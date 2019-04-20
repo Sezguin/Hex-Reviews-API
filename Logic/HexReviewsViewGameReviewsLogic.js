@@ -141,7 +141,7 @@ function displayReview(data, username, avatar, rank, subbed) {
     //  User information.
     var RUText = document.createElement("h4");
     RUText.id = "reviewUserText";
-    RUText.textContent = "Reviewed by " + reviewUser;
+    RUText.textContent = reviewUser;
 
     //  User avatar.
     var RUAvatar = document.createElement("img");

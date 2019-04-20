@@ -12,8 +12,7 @@
     margin: 30px auto;
     box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
     padding: 20px;
-    background-image: url("/Images/BackgroundDarkGreen.png");
-    background-repeat: repeat;
+    background-color: rgba(39, 174, 95, 0.76);
     border-radius: 100px;
     color: white;
 }
@@ -82,6 +81,7 @@
     -ms-transform: skewY(-30deg) rotate(60deg);
     transform: skewY(-30deg) rotate(60deg);
     overflow: hidden;
+
 }
 
 #grid li * {
@@ -107,3 +107,46 @@
 }
 
 .material-icons.md-48 { font-size: 72px; }
+
+#grid li .hexagon:hover .homeIcon {
+    animation: slideUp forwards;
+    animation-duration: 1s;
+}
+
+#grid li .hexagon:hover .hexText {
+    opacity: 1;
+}
+
+.hexText {
+    position: absolute;
+    top: 220px;
+    left: 35px;
+    font-size: 32px;
+    opacity: 0;
+    transition: 1s;
+}
+
+#mySubs {
+    left: 20px !important;
+}
+#myProf {
+    left: 75px !important;
+}
+#help {
+    left: 120px !important;
+}
+#gameReq {
+    left: 24px !important;
+}
+
+@keyframes slideUp {
+    from {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  
+    to {
+      -webkit-transform: translate3d(0, -100%, 0);
+      transform: translate3d(0, -100%, 0);
+    }
+  }
