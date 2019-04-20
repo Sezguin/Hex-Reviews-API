@@ -106,7 +106,7 @@
     margin-left: 0.5%;
 }
 
-.material-icons.md-48 { font-size: 72px; }
+.material-icons.md-48 { font-size: 4.5vw; }
 
 #grid li .hexagon:hover .homeIcon {
     animation: slideUp forwards;
@@ -119,24 +119,24 @@
 
 .hexText {
     position: absolute;
-    top: 220px;
-    left: 35px;
-    font-size: 32px;
+    top: 60%;
+    left: 15%;
+    font-size: 1.5vw;
     opacity: 0;
     transition: 1s;
 }
 
 #mySubs {
-    left: 20px !important;
+    left: 10% !important;
 }
 #myProf {
-    left: 75px !important;
+    left: 28% !important;
 }
 #help {
-    left: 120px !important;
+    left: 38% !important;
 }
 #gameReq {
-    left: 24px !important;
+    left: 12% !important;
 }
 
 @keyframes slideUp {
