@@ -12,7 +12,6 @@ function getGame(gameId) {
         url: GlobalURL + '/games/' + gameId,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result.game_title));
             displayGame(result);
         }
     });

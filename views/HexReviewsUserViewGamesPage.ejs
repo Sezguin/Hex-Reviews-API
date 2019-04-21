@@ -21,7 +21,7 @@
     <body>
     <!-- Top navigation bar. -->
     <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
-        <a class="navbar-brand" href="#">Hex Reviews</a>
+        <a id="navUserHome" class="navbar-brand" href="#">Hex Reviews</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,13 +29,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navUserHome " class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
                     <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navUserViewGames" class="nav-link active" href="#">View Games</a>
+                    <a id="navUserViewGames" class="nav-link active" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
@@ -51,23 +48,30 @@
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
 
-        <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
-            <h1>Browse Games</h1>
-        </div>
 
-        <div id="searchBoxDiv" class="alignCenterDiv">
-            <div class="input-group input-group-lg mb-3">
-                <input id="seachBox" type="text" class="form-control" placeholder="Search games...">
-                <div class="input-group-append">
-                  <button id="searchButton" class="btn btn-outline-secondary hexButtons" type="button">Search</button>
-                </div>
+    <div id="searchAndFilterMainContainer">
+        <div id="reviewDropdownButton" class="btn-group">
+            <button type="button" class="btn hexButtons dropdown-toggle" data-toggle="dropdown">Sort</button>
+            <div class="dropdown-menu">
+                <a id="dropDownName" class="dropdown-item" href="#">Alphabetical</a>
+                <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
+                <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
+                <a id="dropDownPopular" class="dropdown-item" href="#">Popular</a>
             </div>
         </div>
+
+        <div id="gameSearch" class="input-group mb-3">
+            <input id="searchBox" type="text" class="form-control" placeholder="Search games...">
+            <div class="input-group-append">
+                <button id="searchButton" class="btn hexButtons" type="button">Search</button>
+            </div>
+        </div>
+        <button id="resetButton" class="btn hexButtons">Reset</button>
+    </div>
 
 
         <div id="gameResultsContainer">

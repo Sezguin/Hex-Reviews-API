@@ -14,7 +14,6 @@ $(document).ready(function() {
     document.getElementById("failureIcon").style.display = 'none';
     document.getElementById("successfulModalCloseButton").style.display = 'none';
     document.getElementById("successfulModalLoginButton").style.display = 'none';
-
 });
 
 //  Preview uploaded avatar.
@@ -34,6 +33,7 @@ $(function () {
                     reader.onload = function (e) {
                         var img = $("<img />");
                         img.attr("style", "width: 200px");
+                        img.attr("id", "avatarImage");
                         img.attr("src", e.target.result);
                         dvPreview.append(img);
                     }

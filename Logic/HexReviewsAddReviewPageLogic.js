@@ -93,8 +93,6 @@ function getGameList() {
             document.getElementById("searchedGamesContainer").innerHTML = "";
 
             result.forEach(function(element) {
-                console.log("Individual game: " + JSON.stringify(element));
-
                 var gameTitle = element.game_title;
                 var gameDescription = element.game_description;
                 var gameId = element._id;

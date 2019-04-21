@@ -25,7 +25,7 @@
 
     <!-- Top navigation bar. -->
     <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
-        <a class="navbar-brand" href="#">Hex Reviews</a>
+        <a id="navUserHome" class="navbar-brand" href="#">Hex Reviews</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,13 +33,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navUserHome" class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
                     <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navUserViewGames" class="nav-link" href="#">View Games</a>
+                    <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
@@ -82,37 +79,38 @@
                 <input id="reviewTitle" type="text" class="form-control" placeholder="Please choose a game..." disabled>
 
                 <h5 class="addReviewh5">Subtitle</h5>
-                <input id="reviewSubtitle" type="text" class="form-control" placeholder="..." required>
+                <input id="reviewSubtitle" type="text" class="form-control" placeholder="..." maxlength="100" required>
 
                 <h5 class="addReviewh5">Review</h5>
                 <textarea id="reviewContent" type="text" class="form-control" rows="8" placeholder="..." required></textarea>
 
+                <div class="alignCenterDiv">
+                        <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
+                        <div id="ratingDiv">
+        
+                            <a  href="#">                    
+                                <button id="rating1" class="ratingButton hb hb-md spin" data-toggle="button">1</button>                    
+                            </a>
+                            <a href="#">                    
+                                <button id="rating2" class="ratingButton hb hb-md spin" data-toggle="button">2</button>                    
+                            </a>
+                            <a href="#">                    
+                                <button id="rating3" class="ratingButton hb hb-md spin" data-toggle="button">3</button>                    
+                            </a>
+                            <a href="#">                    
+                                <button id="rating4" class="ratingButton hb hb-md spin" data-toggle="button">4</button>                    
+                            </a>
+                            <a href="#">                    
+                                <button id="rating5" class="ratingButton hb hb-md spin" data-toggle="button">5</button>                    
+                            </a>
+                                
+                        </div>
+                    <button id="submitReviewButton" class="bigMainButton">Submit</button>
+                </div>
 
             </div>
         </form>
-        <div class="alignCenterDiv">
-                <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
-                <div id="ratingDiv">
 
-                    <a  href="#">                    
-                        <button id="rating1" class="ratingButton hb hb-md spin" data-toggle="button">1</button>                    
-                    </a>
-                    <a href="#">                    
-                        <button id="rating2" class="ratingButton hb hb-md spin" data-toggle="button">2</button>                    
-                    </a>
-                    <a href="#">                    
-                        <button id="rating3" class="ratingButton hb hb-md spin" data-toggle="button">3</button>                    
-                    </a>
-                    <a href="#">                    
-                        <button id="rating4" class="ratingButton hb hb-md spin" data-toggle="button">4</button>                    
-                    </a>
-                    <a href="#">                    
-                        <button id="rating5" class="ratingButton hb hb-md spin" data-toggle="button">5</button>                    
-                    </a>
-                        
-                </div>
-            <button id="submitReviewButton" class="bigMainButton">Submit</button>
-        </div>
     </div>
 
     <!-- Modals -->

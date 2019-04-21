@@ -65,7 +65,6 @@
     outline: none !important;
 }
 
-
 .down,
 .down:before,
 .down:after {
@@ -85,15 +84,3 @@
     color: white !important;
     outline: none !important;
 }
-
-/* .hb:focus,
-.hb:focus:before,
-.hb:focus:after {
-	background-color: rgb(30, 100, 59) !important;
-	border-left:1px solid rgb(30, 100, 59)!important;
-	border-right:1px solid rgb(30, 100, 59) !important;  
-    color: white !important;
-    outline: none !important;
-
-} */
-

@@ -25,6 +25,7 @@
   "dependencies": {
     "awesome-bootstrap-checkbox": "^1.0.1",
     "cors": "^2.8.5",
+    "croppie": "^2.6.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "gridfs-stream": "^1.1.1",

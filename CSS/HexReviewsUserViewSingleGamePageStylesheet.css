@@ -1,0 +1,29 @@
+#gameContentContainer {
+    width: 70%;
+    min-width: 1000px;
+    margin: 0 auto;
+}
+
+#gameCoverImage {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border: solid;
+    border-top: none;
+    border-bottom: none;
+    border-width: 3px;
+    border-color: rgb(173, 173, 173);
+
+    -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+#successfulPostModal {
+    background-color: rgba(0,0,0,.0001) !important;
+}
+.modal-lg{
+    background-color: rgba(0,0,0,.0001) !important;
+}
+.modal {
+    background-color: rgba(0,0,0,.0001) !important;
+}

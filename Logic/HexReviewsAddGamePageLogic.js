@@ -91,7 +91,6 @@ function getGameImage() {
         url: GlobalURL + '/images/game/' + imageID,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result.game_title));
             displayImage(result);
         }
     });
