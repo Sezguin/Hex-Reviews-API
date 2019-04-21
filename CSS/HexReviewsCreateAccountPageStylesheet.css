@@ -1,3 +1,15 @@
+#avatarPreview {
+    text-align: center;
+}
+
+#avatarImage {
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-radius: 5px;
+    border-width: 2px;
+    margin: 20px;
+}
+
 .createAccountFormGroup {
     margin: 0 auto;
     width: 40%;

@@ -1,18 +1,13 @@
 #reviewSubtitle {
-    font-size: 28px;
+    font-size: 22px;
     float: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    margin: 30px;
+    width: 900px;
 }
 
 #reviewTitle {
-    font-size: 32px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+    font-size: 42px;
+    margin: 10px;
 }
 
 #uberContainer {
@@ -23,6 +18,8 @@
     border-radius: 5px;
     border-color: rgb(168, 168, 168);
     border-width: 2px;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
 }
 
 #userAvatar {
@@ -37,7 +34,6 @@
 #mainSingleReviewContainer {
     width: 100%;
     min-width: 1200px;
-    height: 250px;
     background-image: url('/Images/LightGreyFabric.png');
     background-repeat: repeat;
     margin: 0 auto;
@@ -148,11 +144,11 @@
 #singleReviewContainer {
     float: left;
     width: 900px;
+    
 }
 
 #titleElements {
     width: 1000px;
-    height: 120px;
 }
 
 #userInformationContainer {
@@ -187,6 +183,7 @@
 #ratingImage {
     width: 400px;
     float: left;
+    margin: 10px;
 }
 
 #reviewContentTextArea {
@@ -202,4 +199,9 @@
 .commentIcons {
     color: white;
     font-size: 18px;
+}
+
+#reviewUsername {
+    margin: 10px;
+    width: 900px;
 }

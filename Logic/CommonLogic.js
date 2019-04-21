@@ -88,6 +88,10 @@ function goToWriteReviewPage(gameID) {
     window.location.href = "/AddReviewPage?id=" + gameID;
 }
 
+function goToUserViewSingleGamePage(gameID) {
+    window.location.href = "/UserViewSingleGamePage?id=" + gameID;
+}
+
 
 
 /*****  General functions for deleting from the database.   *****/

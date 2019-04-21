@@ -122,6 +122,8 @@ exports.create_an_image = function(req, res) {
     });
 };
 
+
+//  Retrieve an image by supplied ID.
 exports.get_an_image = function(req, res) {
 
     console.log("An image is being listed...");

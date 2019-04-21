@@ -173,7 +173,7 @@ body {
 
 .gameJumbotron {
   width: 70%;
-  min-width: 900px;
+  min-width: 1000px;
   background-image: url("/Images/BackgroundLightGreen.png");
   background-repeat: repeat;
   border-color: #27AE60;
