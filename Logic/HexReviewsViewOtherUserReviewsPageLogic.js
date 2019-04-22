@@ -10,23 +10,45 @@ $(document).ready(function () {
     var userID = url.searchParams.get("id");
     globalUserID = userID;
 
-    console.log("UserID: " + userID);
+    $("#dropDownMostRecent").click(function () {
+        getUserData(userID, "date");
+    });
+
+    $("#dropDownRating").click(function () {
+        getUserData(userID, "rating");
+    });
+
+    $("#dropDownName").click(function () {
+        getUserData(userID, "name");
+    });
+
+    $('#searchButton').click(function() {
+        getSearchedReviewList();
+    });
+
+    $('#resetButton').click(function() {
+        $('#searchBox').val("");
+        getUserData(userID);
+    });
 
     getUserData(userID);
 });
 
-function getUserData(userID) {
+function getUserData(userID, sortType) {
     $.ajax({
         url: GlobalURL + '/users/' + userID,
         type: 'GET',
         success: function (user) {
-            getReviewList(user);
+            getReviewList(user, sortType);
         }
     });
 }
 
 //  Fetch the list of reviews by the user.
-function getReviewList(user) {
+function getReviewList(user, sortType) {
+
+    //  Clear results container.
+    document.getElementById("userReviewsContainer").innerHTML = "";
 
     $.ajax({
         url: GlobalURL + '/reviews/' + user._id,
@@ -36,13 +58,50 @@ function getReviewList(user) {
             if (!data) {
                 console.log("No reviews found.");
             } else {
-                Object.keys(data).forEach(function (k) {
-                    console.log(JSON.stringify(data[k]));
-
-                    buildReviewCard(data[k]);
-                });
+                sortArray(sortType, data, displayReviews);
             }
         }
+    });
+}
+
+function sortArray(sortType, reviews, callback) {
+
+    switch (sortType) {
+        case "date":
+            reviews.sort(function(a, b) {
+                var dateA = new Date(a.review_creation_date);
+                var dateB = new Date(b.review_creation_date);
+                return dateB - dateA;
+            });
+            break;
+
+        case "rating":
+            reviews.sort(function(a, b) {
+                var ratingA = a.review_rating;
+                var ratingB = b.review_rating;
+                return ratingB - ratingA;
+            });
+            break;
+
+        case "name":
+            reviews.sort(function(a, b) {
+                var nameA = a.review_title.toLowerCase();
+                var nameB = b.review_title.toLowerCase();
+                if (nameA < nameB) {
+                    return -1;
+                }
+            });
+            break;
+
+        default:
+    }
+
+    callback(reviews);
+}
+
+function displayReviews(reviews) {
+    Object.keys(reviews).forEach(function(k) {
+        buildReviewCard(reviews[k]);
     });
 }
 
@@ -129,4 +188,26 @@ function buildReviewCard(data) {
     //  Add game entry to results container.
     resultsContainer.appendChild(reviewJumbotron);
 
+}
+
+//  Retrieve list of reviews searched for.
+function getSearchedReviewList() {
+
+    var query = $('#searchBox').val();
+
+    if(query != "") {
+        $.ajax({
+            url: GlobalURL + '/reviews/search/' + query,
+            type: 'GET',
+            success: function(result) {
+    
+                //  Clear out container.
+                document.getElementById("userReviewsContainer").innerHTML = "";
+    
+                result.forEach(function(element) {
+                    buildReviewCard(element);
+                });
+            }
+        });
+    }
 }
