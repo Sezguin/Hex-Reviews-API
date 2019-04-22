@@ -16,6 +16,10 @@ $(document).ready(function () {
         window.location.href = "/AdminHomePage"
     });
 
+    $("#navViewUserProfile").click(function () {
+        window.location.href = "/ViewUserProfilePage"
+    });
+
     $("#navAddGame").click(function () {
         window.location.href = "/AddGamePage"
     });
@@ -58,10 +62,6 @@ $(document).ready(function () {
 
     $("#createAccountButton").click(function () {
         window.location.href = "/CreateAccountPage"
-    });
-
-    $("#successfulModalCloseButton").click(function () {
-        location.reload();
     });
 });
 

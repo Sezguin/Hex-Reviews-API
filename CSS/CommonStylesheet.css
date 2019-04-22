@@ -29,7 +29,7 @@ body {
   width: 200px;
 }
 
-#successfulModalCloseButton {
+#successfulModalCloseButton, #successfulModalCloseButtonError {
   width: 150px;
   height: 50px;
   font-size: 24px;

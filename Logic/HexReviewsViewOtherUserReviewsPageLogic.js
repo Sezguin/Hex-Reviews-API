@@ -205,9 +205,16 @@ function getSearchedReviewList() {
                 document.getElementById("userReviewsContainer").innerHTML = "";
     
                 result.forEach(function(element) {
-                    buildReviewCard(element);
+                    if(element.user_id == globalUserID) {
+                        buildReviewCard(element);
+                    }
                 });
             }
         });
     }
+}
+
+function viewReview(button) {
+    id = button.parentNode.parentNode.childNodes[0].innerHTML;
+    goToViewSingleReviewPage(id);
 }

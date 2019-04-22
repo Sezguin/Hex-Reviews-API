@@ -145,7 +145,11 @@ function displayReviews(review, container) {
 }
 
 function buildProfile(user) {
-    $('#userAvatar').attr("src", user.user_avatar);
+    if(user.user_avatar != "") {
+        $('#userAvatar').attr("src", user.user_avatar);
+    } else {
+        $('#userAvatar').attr("src", "/Images/DefaultAvatar.jpg");
+    }
 
     document.getElementById("usernameHeading").textContent = user.user_username;
     getUserRank(user._id, $('#userRank'));

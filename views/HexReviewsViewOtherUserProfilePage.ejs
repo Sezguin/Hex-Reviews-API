@@ -56,14 +56,40 @@
     </nav>
 
     <!-- Page heading. -->
-    <h1 id="userProfile"></h1>
-
     <div id="mainProfileContentDiv">
+        <div id="userInformationDiv">
+            <h1 id="usernameHeading"></h1>
+            <h4 id="userRank"></h4>
+            <div id="statsDiv">
+                <h3 id="userStatsText">Statistics</h3>
+                <div id="subStatsDiv">
+                    <h5 id="totalReviews">Total Reviews: </h5>
+                    <h5 id="totalFollowers">Total Followers: </h5>
+                    <h5 id="totalSubscriptions">Total Subscriptions: </h5>
+                </div>
+            </div>
+            <div id="latestReviewsText">
+                <h2 id="yourLatestReviews" class="homeHeading"></h2>
+            </div>
+    
+            <div id="latestReviewsDiv" class="row latestReviewsDiv">
+    
+            </div>
+
+            <div id="mostPopularReviewsText">
+                <h2 id="mostPopularReviews" class="homeHeading"></h2>
+            </div>
+    
+            <div id="mostPopularReviewsDiv" class="row latestReviewsDiv">
+    
+            </div>                
+        </div>
+
+
+
         <div class="sidenav">
             <img id="userAvatar" src="" alt="">
-            <a href="#">About</a>
-            <a href="#">Reviews</a>
-            <a href="#">Statistics</a>
+            <button id="myReviewsButton" class="btn hexButtons sideNavButton">All Reviews</button>
         </div>
     </div>
 

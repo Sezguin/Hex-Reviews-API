@@ -403,7 +403,7 @@ exports.get_user_rank = function(req, res) {
         } else {
             console.log("User has been found, sending subscription list...");
             if (user.user_reviews === undefined || user.user_reviews.length == 0) {
-                res.send(false);
+                res.send("Baby");
             } else {
                 var totalReviews = user.user_reviews.length;
 
@@ -439,8 +439,7 @@ exports.get_user_rank = function(req, res) {
                 } else {
                     console.log("Default of novice.");
                     res.send("Novice");
-                }
-                
+                }                
             }
         }
     });

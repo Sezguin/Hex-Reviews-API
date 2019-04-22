@@ -48,7 +48,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
-                        <a id="navMyReviews" class="dropdown-item" href="#">My Reviews</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
@@ -110,7 +109,9 @@
             </div>
         </form>
 
-        <button id="submitReviewButton" class="bigMainButton">Submit</button>
+        <div style="text-align: center">
+            <button id="submitReviewButton" class="bigMainButton">Submit</button>
+        </div>
 
     </div>
 
@@ -156,7 +157,25 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="successfulModalCloseButtonError" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading modal. -->
+    <div id="loadingModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
+                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

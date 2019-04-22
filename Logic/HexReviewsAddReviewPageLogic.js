@@ -5,10 +5,27 @@ var globalRating;
 $(document).ready(function() {
     $("#showChooseGameModal").click(function() {
         $("#chooseGameModal").modal("show");
+        populateLatestGames();
+        $("#loadingModal").show();
     });
 
     $("#modalGameSearchButton").click(function() {
         getGameList();
+        $("#loadingModal").show();
+    });
+
+    $("#successfulModalCloseButtonError").click(function() {
+        $("#successModalTitle").text("Please wait...");
+        $("#successfulPostModalSpinner").show();
+        document.getElementById("successIcon").style.display = 'none';
+        document.getElementById("failureIcon").style.display = 'none';
+        document.getElementById("successfulModalCloseButtonError").style.display = 'none';
+        document.getElementById("successfulModalCloseButton").style.display = 'none';
+
+    });
+
+    $("#successfulModalCloseButton").click(function() {
+        window.location.href = "/UserReviewPage";
     });
 
     $("#rating1").click(function() {
@@ -77,6 +94,8 @@ $(document).ready(function() {
     document.getElementById("successIcon").style.display = 'none';
     document.getElementById("failureIcon").style.display = 'none';
     document.getElementById("successfulModalCloseButton").style.display = 'none';
+    document.getElementById("successfulModalCloseButtonError").style.display = 'none';
+
 });
 
 function getGameList() {
@@ -88,9 +107,8 @@ function getGameList() {
         url: GlobalURL + '/games/search/' + query,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result));
-
             document.getElementById("searchedGamesContainer").innerHTML = "";
+            $("#loadingModal").hide();
 
             result.forEach(function(element) {
                 var gameTitle = element.game_title;
@@ -104,7 +122,30 @@ function getGameList() {
     });
 }
 
-function addListItem(gameId, gameTitle , gameDescription) {
+function populateLatestGames() {
+    $.ajax({
+        url: GlobalURL + '/games/',
+        type: 'GET',
+        success: function(result) {
+            document.getElementById("searchedGamesContainer").innerHTML = "";
+            $("#loadingModal").hide();
+
+
+            result.sort(function(a, b) {
+                var dateA = new Date(a.game_creation_date);
+                var dateB = new Date(b.game_creation_date);
+                return dateB - dateA;
+            });
+    
+            for(var i = 0; i < 5; i++) {
+                addListItem(result[i]._id, result[i].game_title, result[i].game_description);
+            }
+
+        }
+    });   
+}
+
+function addListItem(gameId, gameTitle, gameDescription) {
     
     //  Results container to add returned games from search.
     var resultsContainer = document.getElementById("searchedGamesContainer");
@@ -177,10 +218,18 @@ function postReview() {
     },
     function(data, status) {
         if(!data) {
-            $("#successModalTitle").text("Error :/");
+            if($('#reviewTitle').val() == "") {
+                $("#successModalTitle").text("Please select a game!");
+            } else if ($('#reviewSubtitle').val() == "") {
+                $("#successModalTitle").text("Please include a quote!");
+            } else if ($('#reviewContent').val() == "") {
+                $("#successModalTitle").text("Please write something...");
+            } else {
+                $("#successModalTitle").text("Please select a rating!");
+            }
             $("#successfulPostModalSpinner").hide();
             document.getElementById("failureIcon").style.display = 'block';
-            document.getElementById("successfulModalCloseButton").style.display = 'block';
+            document.getElementById("successfulModalCloseButtonError").style.display = 'block';
 
         } else {
             $("#successModalTitle").text("Success!");
@@ -218,3 +267,4 @@ function postReviewIds(data) {
             console.log("Message from API: " + JSON.stringify(data));
         });
 }
+
