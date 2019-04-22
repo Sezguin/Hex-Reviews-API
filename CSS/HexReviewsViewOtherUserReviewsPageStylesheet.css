@@ -47,3 +47,25 @@
     width: 90%;
     margin: 0px 0px 10px 0px;
 }
+
+#searchAndFilterMainContainer {
+    width: 60%;
+    height: 70px;
+    margin: 0 auto;
+    padding: 40px 0px 5px 0px;
+}
+
+#userReviewSearch {
+    float: left;
+    max-width: 400px;
+}
+
+#resetButton {
+    width: 100px;
+    margin: 0px 10px 0px 10px;
+}
+
+#reviewDropdownButton {
+    float: right;
+    width: 100px;
+}

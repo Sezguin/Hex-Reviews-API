@@ -58,6 +58,25 @@
     <!-- Page heading. -->
     <h1 id="userReviewHeading"></h1>
 
+    <div id="searchAndFilterMainContainer">
+        <div id="reviewDropdownButton" class="btn-group">
+            <button type="button" class="btn hexButtons dropdown-toggle" data-toggle="dropdown">Sort</button>
+                <div class="dropdown-menu">
+                    <a id="dropDownName" class="dropdown-item" href="#">Alphabetical</a>
+                    <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
+                    <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
+            </div>
+        </div>
+
+        <div id="userReviewSearch" class="input-group mb-3">
+            <input id="searchBox" type="text" class="form-control" placeholder="Search...">
+            <div class="input-group-append">
+                <button id="searchButton" class="btn hexButtons" type="button">Search</button>
+            </div>
+        </div>
+        <button id="resetButton" class="btn hexButtons">Reset</button>
+    </div>
+
     <div id="userReviewsContainer">
 
     </div>

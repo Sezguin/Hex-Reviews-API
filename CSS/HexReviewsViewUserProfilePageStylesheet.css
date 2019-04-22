@@ -1,5 +1,6 @@
 #mainProfileContentDiv {
     width: 60%;
+    height: 1100px;
     min-width: 1200px;
     margin: 0 auto;
     background-image: url('/Images/LightGreyFabric.png');
@@ -40,6 +41,51 @@
     padding: 20px;
 }
 
+#latestReviewsText, #mostPopularReviewsText {
+    width: 50%;
+    min-width: 900px;
+    margin: 0 auto;
+}
+
+.latestReviewsDiv {
+    width: 50%;
+    min-width: 900px;
+    margin: 20px;
+}
+
+#latestReviewCard {
+    height: 200px;
+    box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
+    background-image: url('/Images/LightGreyFabric.png');
+}
+
+#viewReviewButton {
+    bottom: 5px;
+}
+
+#reviewCardContent {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-height: 15px;        /* fallback */
+    max-height: 58px;
+}
+
+#reviewCardTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+#reviewCardFooter {
+    background-image: url('/Images/LightGreyFabric.png');
+    text-align: center;
+}
+
 .sideNavButton {
     width: 140px;
     margin: 10px;
@@ -72,6 +118,11 @@
 .main {
     margin-left: 160px;
     padding: 0px 10px;
+}
+
+.homeHeading {
+    margin: 50px 0px 30px 0px;
+    color: rgb(97, 97, 97);
 }
 
 @media screen and (max-height: 450px) {

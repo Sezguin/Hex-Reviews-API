@@ -63,8 +63,8 @@ function sortArray(sortType, reviews, callback) {
 
         case "rating":
             reviews.sort(function(a, b) {
-                var ratingA = new Date(a.review_rating);
-                var ratingB = new Date(b.review_rating);
+                var ratingA = a.review_rating;
+                var ratingB = b.review_rating;
                 return ratingB - ratingA;
             });
             break;
