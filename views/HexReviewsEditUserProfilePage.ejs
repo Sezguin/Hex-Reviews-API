@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsViewUserProfilePageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsEditUserProfilePageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -56,24 +56,62 @@
     </nav>
 
     <div id="mainProfileContentDiv">
-        <div id="userInformationDiv">
+        <div id="profileContentDiv">
             <h1 id="usernameHeading"></h1>
-            <h4 id="userRank"></h4>
-            <div id="statsDiv">
-                    <h3>Your Statistics</h3>
-                    <div id="subStatsDiv">
-                        <h5 id="totalReviews">Total Reviews: </h5>
-                        <h5 id="totalFollowers">Total Followers: </h5>
-                        <h5 id="totalSubscriptions">Total Subscriptions: </h5>
-                    </div>
-                </div>
-        </div>
+            <h3 id="userRank"></h3>
 
+            <h5>Email Address</h5>
+            <div id="emailDiv"class="input-group mb-3">
+                <input id="userEmailAddress" type="email" class="form-control" readonly>
+                <div class="input-group-append">
+                      <button id="changeEmailButton" class="btn hexButtons changeButton" type="button">Edit</button>
+                </div>
+            </div>
+
+            <div id="changePasswordDiv">
+                <h5>Change Password</h5>
+                <h7>Old Password</h7>
+                <input id="userOldPassword" type="password" class="form-control" readonly>
+                <h7>New Password</h7>
+                <input id="userNewPassword1" type="password" class="form-control passwordInput" readonly>
+                <h7>Confirm New Password</h7>
+                <input id="userNewPassword2" type="password" class="form-control passwordInput" readonly>
+                <div id=passwordButtonDiv>
+                    <button id="changePasswordButton" class="btn hexButtons" type="button">Edit Password</button>
+                    <button id="cancelChangeButton" class="btn hexButtons" type="button" hidden>Cancel</button>
+                </div>
+            </div>
+            <button id="confirmChangesButton" class="btn btn-lg hexButtons">Confirm Changes</button>
+        </div>
         <div class="sidenav">
             <img id="userAvatar" src="" alt="">
-            <button id="myReviewsButton" class="btn hexButtons sideNavButton">My Reviews</button>
-            <button id="mySubscriptionsButton" class="btn hexButtons sideNavButton">Subscriptions</button>
-            <button id="editProfileButton" class="btn hexButtons sideNavButton">Edit Profile</button>
+            <div style="text-align: center">
+                <label class="btn btn-secondary">
+                    Change <input id="avatarUpload" type="file" class="form-control-file" hidden>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals. -->
+    <!-- Successful post modal. -->
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
+                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i id="successIcon" class="material-icons md-48">done</i>
+                        <i id="failureIcon" class="material-icons md-48">clear</i>
+                    </div>
+                </div>
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -97,7 +135,8 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsViewUserProfilePageLogic.js"></script>
+    <script src="HexReviewsEditUserProfilePageLogic.js"></script>
+    <script type="text/javascript" src="Filestyle.js"> </script>
 
 </body>
 

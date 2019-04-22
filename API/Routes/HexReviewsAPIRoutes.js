@@ -58,9 +58,10 @@ module.exports = function(app) {
     app.route('/users/id/:username')
         .get(hexReviewController.get_user_id);
     
-    //  Get a user from provided ID.
+    //  Get of update a user from provided ID.
     app.route('/users/:userID')
-        .get(hexReviewController.get_a_user);
+        .get(hexReviewController.get_a_user)
+        .put(hexReviewController.update_a_user);
 
     //  Subscribe to a user from provided ID.
     app.route('/users/subscribe')
@@ -85,6 +86,14 @@ module.exports = function(app) {
     //  Get subcription list of user from supplied ID.
     app.route('/users/subscriptions/:userID')
         .get(hexReviewController.get_user_subscriptions);
+
+    //  Calculate the rank of a user.
+    app.route('/users/rank/:userID')
+        .get(hexReviewController.get_user_rank);
+
+    //  Get user follower count from supplied ID.
+    app.route('/users/followers/:userID')
+        .get(hexReviewController.get_user_followers);
 
 
 
@@ -117,6 +126,10 @@ module.exports = function(app) {
     //  Get a list of searched for games from supplied query.
     app.route('/reviews/search/:query')
         .get(hexReviewController.search_for_reviews);
+
+    //  Get the latest review of a user from supplied ID.
+    app.route('/reviews/user/latest/:userID')
+        .get(hexReviewController.get_latest_user_review);
 
 
     

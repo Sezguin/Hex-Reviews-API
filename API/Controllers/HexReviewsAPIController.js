@@ -102,6 +102,7 @@ exports.get_an_avatar = function(req, res) {
         } else {
             console.log("Unexpected error when retrieving avatar from the database...");
             console.log("Perhaps the user has been deleted?");
+            res.send
         }
     });
 }
@@ -156,6 +157,22 @@ exports.create_a_user = function(req, res) {
         }
     });
 }
+
+//  Update a user in the database.
+exports.update_a_user = function(req, res) {
+
+    console.log("Updating a user in the database...")
+    
+    Users.findOneAndUpdate({_id: req.params.userID}, req.body, {new: true}, function(err, user) {
+        if (err) {
+            console.log("There was an error when updating the user in the database.")
+            console.log("Error: " + err);
+            res.send(false);
+        } else {
+            res.send(true);
+        }
+    });
+};
 
 //  Check a username exists in the database.
 exports.check_a_username = function(req, res) {
@@ -354,6 +371,7 @@ exports.check_user_subscription = function (req, res) {
     });
 }
 
+//  Get a list of user subscription from supplied ID.
 exports.get_user_subscriptions = function(req, res) {
 
     console.log("Fetching list of user subscriptions...");
@@ -373,6 +391,80 @@ exports.get_user_subscriptions = function(req, res) {
     });
 }
 
+//  Calculate the rank of a user.
+exports.get_user_rank = function(req, res) {
+
+    console.log("Getting user rank...");
+
+    Users.findById(req.params.userID, function(err, user) {
+        if(err) {
+            console.log("There was an error when trying to calculate the user's rank.")
+            console.log("Error: " + err);
+        } else {
+            console.log("User has been found, sending subscription list...");
+            if (user.user_reviews === undefined || user.user_reviews.length == 0) {
+                res.send(false);
+            } else {
+                var totalReviews = user.user_reviews.length;
+
+                console.log("Total reviews for user: " + totalReviews);
+
+                if(1 <= totalReviews && totalReviews < 10) {
+                    console.log("User is a novice.");
+                    res.send("Novice");
+                } else if (10 <= totalReviews && totalReviews < 20) {
+                    console.log("User is an apprentice.");
+                    res.send("Apprentice");
+                } else if (20 <= totalReviews && totalReviews < 50) {
+                    console.log("User is an adept.");
+                    res.send("Adept");
+                } else if (50 <= totalReviews && totalReviews < 100) {
+                    console.log("User is an expert.");
+                    res.send("Expert");
+                } else if (100 <= totalReviews && totalReviews < 500) {
+                    console.log("User is a master.");
+                    res.send("Master");
+                } else if (500 <= totalReviews && totalReviews < 1000) {
+                    console.log("User is a legend.")
+                    res.send("Legend");
+                } else if (1000 <= totalReviews && totalReviews < 5000) {
+                    console.log("User is a king.")
+                    res.send("King");
+                } else if (5000 <= totalReviews && totalReviews < 10000) {
+                    console.log("User is a God.")
+                    res.send("God");
+                } else if (10000 <= totalReviews) {
+                    console.log("User is... The one.")
+                    res.send("The One");
+                } else {
+                    console.log("Default of novice.");
+                    res.send("Novice");
+                }
+                
+            }
+        }
+    });
+}
+
+//  Get the follower count of a user from supplied ID.
+exports.get_user_followers = function(req, res) {
+
+    console.log("Getting user follower count...");
+
+    Users.findById(req.params.userID, function(err, user) {
+        if(err) {
+            console.log("There was an error when trying to retrieve the follower list.")
+            console.log("Error: " + err);
+        } else {
+            console.log("User has been found, sending follower count..." + user.user_subscribers.length);
+            if (user.user_subscribers === undefined || user.user_subscribers.length == 0) {
+                res.send(false);
+            } else {
+                res.send(user.user_subscribers);
+            }
+        }
+    });
+}
 
 
 /*****  All review related functionality    *****/
@@ -505,6 +597,28 @@ exports.search_for_reviews = function(req, res) {
             console.log("Error: " + err);
         } else {
             res.send(reviews);
+        }
+    });
+}
+
+//  Get the latest review of a user from supplied ID.
+exports.get_latest_user_review = function(req, res) {
+
+    console.log("Getting the latest review form a user...");
+
+    Reviews.find({user_id: req.params.userID}, function(err, reviews) {
+        if(reviews.length) {
+            reviews.sort(function(a, b) {
+                var dateA = new Date(a.review_creation_date);
+                var dateB = new Date(b.review_creation_date);
+                return dateB - dateA;
+            });
+            res.send(reviews[0]);
+            console.log("Latest review has been sent.");
+        } else {
+            res.send(false);
+            console.log("No reviews were found.");
+            console.log("Error: " + err);
         }
     });
 }

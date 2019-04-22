@@ -1,29 +1,130 @@
 #userAvatar {
-    height: 100px;
-    width: 100px;
+    height: 60px;
+    width: 60px;
     border: solid;
     border-radius: 5px;
     border-color: rgb(177, 177, 177);
     border-width: 2px;
 }
 
-#welcomeContainer { 
-    width: 70%;
+#welcomeContainer {
+    width: 50%;
+    height: 140px;
+    min-width: 900px;
+    text-align: left;
     margin: 30px auto;
     box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
     padding: 20px;
     background-color: rgba(39, 174, 95, 0.76);
-    border-radius: 100px;
+    border-radius: 20px;
     color: white;
+}
+
+#subUserAvatar {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    float: left;
+    border: solid;
+    border-radius: 2px;
+    border-color: rgb(177, 177, 177);
+    border-width: 1px;
+}
+
+#otherUserName {
+    font-size: 14px;
+    margin: 15px 10px 0px 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#userDiv {
+    float: left;
+    width: 60%;
+}
+
+#statsDiv {
+    padding: 5px;
+    float: right;
+    width: 40%;
+}
+
+#userWelcome {
+    font-size: 28px;
+}
+
+#latestReviewsText {
+    width: 50%;
+    min-width: 900px;
+    margin: 0 auto;
+}
+
+.latestReviewsDiv {
+    width: 50%;
+    min-width: 900px;
+    margin: 0 auto;
+}
+
+#latestReviewCard {
+    height: 200px;
+    box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
+    background-image: url('/Images/LightGreyFabric.png');
+}
+#latestReviewCardSub {
+    height: 260px;
+    box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
+    background-image: url('/Images/LightGreyFabric.png');
+}
+
+#viewReviewButton {
+    bottom: 5px;
+}
+
+#editProfileButton {
+    background-color:  rgb(42, 141, 83);
+    border-color:  rgb(40, 131, 78);
+    margin-left: 30px;
+    width: 150px;
+}
+
+#reviewCardContent {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-height: 15px;        /* fallback */
+    max-height: 58px;
+}
+
+#reviewCardTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+#reviewCardFooter {
+    background-image: url('/Images/LightGreyFabric.png');
+    text-align: center;
+}
+
+#reviewCardHeader {
+    background-image: url('/Images/LightGreyFabric.png');
 }
 
 #hexagonArray {
     margin: 20px;
+    margin-bottom: 80px;
 }
 
 #grid {
     position: relative;
-    width: 60%;
+    width: 50%;
+    min-width: 900px;
     margin: 0 auto;
     padding: 0;
 }
@@ -81,7 +182,6 @@
     -ms-transform: skewY(-30deg) rotate(60deg);
     transform: skewY(-30deg) rotate(60deg);
     overflow: hidden;
-
 }
 
 #grid li * {
@@ -106,7 +206,9 @@
     margin-left: 0.5%;
 }
 
-.material-icons.md-48 { font-size: 4.5vw; }
+.material-icons.md-48 {
+    font-size: 4.5vw;
+}
 
 #grid li .hexagon:hover .homeIcon {
     animation: slideUp forwards;
@@ -121,32 +223,47 @@
     position: absolute;
     top: 60%;
     left: 15%;
-    font-size: 1.5vw;
+    font-size: 1.25vw;
     opacity: 0;
     transition: 1s;
+}
+
+.homeHeading {
+    margin: 50px 0px 30px 0px;
+    color: rgb(97, 97, 97);
+}
+
+#yourLatestReviews{
+    margin-top: 80px;
+}
+
+#yourRev {
+    left: 18% !important;
 }
 
 #mySubs {
     left: 10% !important;
 }
+
 #myProf {
     left: 28% !important;
 }
+
 #help {
     left: 38% !important;
 }
+
 #gameReq {
     left: 12% !important;
 }
 
 @keyframes slideUp {
     from {
-      -webkit-transform: translate3d(0, 0, 0);
-      transform: translate3d(0, 0, 0);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
     }
-  
     to {
-      -webkit-transform: translate3d(0, -100%, 0);
-      transform: translate3d(0, -100%, 0);
+        -webkit-transform: translate3d(0, -80%, 0);
+        transform: translate3d(0, -80%, 0);
     }
-  }
+}
