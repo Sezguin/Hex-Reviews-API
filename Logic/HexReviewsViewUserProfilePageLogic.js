@@ -9,6 +9,15 @@ $(document).ready(function () {
     $('#addCommentButton').click(function () {
         addComment();
     });
+    $('#myReviewsButton').click(function () {
+        window.location.href = "/UserReviewPage";
+    });
+    $('#mySubscriptionsButton').click(function () {
+        window.location.href = "/UserSubscriptionsPage";
+    });
+    $('#editProfileButton').click(function () {
+        goToUserEditProfilePage(globalUserID)
+    });
 });
 
 function getUserData(userID) {
@@ -34,6 +43,18 @@ function buildProfile(user) {
         $('#totalSubscriptions').append("None :(");
     } else {
         $('#totalSubscriptions').append(user.user_subscribed_to.length);
+    }
+
+    if(user.user_subscribers === undefined || user.user_subscribers.length == 0) {
+        $('#totalFollowers').append("None :(");
+    } else {
+        $('#totalFollowers').append(user.user_subscribers.length);
+    }
+
+    if(user.user_reviews === undefined || user.user_reviews.length == 0) {
+        $('#totalReviews').append("None :(");
+    } else {
+        $('#totalReviews').append(user.user_reviews.length);
     }
 
 
