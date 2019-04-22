@@ -16,6 +16,10 @@
     margin: 0 auto;
 }
 
+#submitReviewButton {
+    width: 300px;
+}
+
 #showChooseGameModal {
     width: 60%;
     height: 70px;

@@ -188,8 +188,10 @@ function displayReview(data, username, avatar, rank, subbed) {
     if(cookies.user_id == reviewUserId) {
         subscribeButton.setAttribute("disabled", true);
         viewProfileButton.textContent = "My Profile";
+        viewProfileButton.setAttribute("onclick", "myProfile()");
     } else {
         viewProfileButton.textContent = "View Profile";
+        viewProfileButton.setAttribute("onclick", "goToViewOtherUserProfilePage(\"" + reviewUserId + "\")");
     }
 
     //  Review subtitle area.
@@ -276,8 +278,9 @@ function unsubscribeToUser(subscribee, button) {
 
 function viewReview(button) {
     id = button.parentNode.parentNode.childNodes[0].innerHTML;
-
-    console.log("Review ID: " + id);
-
     goToViewSingleReviewPage(id);
+}
+
+function myProfile() {
+    window.location.href = "/ViewUserProfilePage";
 }
