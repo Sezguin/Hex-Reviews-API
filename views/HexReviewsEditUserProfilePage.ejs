@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsCreateAccountPageStylesheet.css">    
+    <link rel="stylesheet" href="HexReviewsEditUserProfilePageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -24,7 +24,7 @@
 
     <!-- Top navigation bar. -->
     <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
-        <a id="navTitle" class="navbar-brand" href="#">Hex Reviews</a>
+        <a id="navUserHome" class="navbar-brand" href="#">Hex Reviews</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,51 +32,68 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navLogin" class="nav-link" href="#">Login</a>
+                    <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navCreateAccount" class="nav-link active" href="#">Create Account</a>
+                    <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navAbout" class="nav-link" href="#">About Us</a>
+                    <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
+                        <a id="navLogout" class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+
             </ul>
         </div>
     </nav>
 
-    <!-- Page heading. -->
-    <div class="page-header mainPageHeading">
-        <h2>Sign up here!</h2>
-    </div>
+    <div id="mainProfileContentDiv">
+        <div id="profileContentDiv">
+            <h1 id="usernameHeading"></h1>
+            <h3 id="userRank"></h3>
 
-    <!-- All fields for adding in a new game. -->
-    <div id="addNewGameArea">
-        <form>
-            <div class="form-group form-group-lg createAccountFormGroup">
-                <h5 class="createAccounth5">Email Address</h5>
-                <input id="userEmailAddress" type="email" class="form-control" placeholder="Enter Email" required>
-                
-                <h5 class="createAccounth5">Password</h5>
-                <input id="userPassword" type="password" class="form-control" placeholder="Enter Password" required>
-
-                <h5 class="createAccounth5">Username</h5>
-                <input id="userUsername" type="text" class="form-control" placeholder="Choose a Username" required>
-
-                <h5 class="createAccounth5">Choose Avatar</h5>
-                <input id="avatarUpload" type="file" class="form-control-file">
-
-                <div id="avatarPreview">
-                    <!-- Uploaded avatar will be shown here. -->
+            <h5>Email Address</h5>
+            <div id="emailDiv"class="input-group mb-3">
+                <input id="userEmailAddress" type="email" class="form-control" readonly>
+                <div class="input-group-append">
+                      <button id="changeEmailButton" class="btn hexButtons changeButton" type="button">Edit</button>
                 </div>
             </div>
-        </form>
-        <div class="alignCenterDiv">
-            <button id="createUserButton" type="submit" class="btn bigMainButton hexButtons">Submit</button>
+
+            <div id="changePasswordDiv">
+                <h5>Change Password</h5>
+                <h7>Old Password</h7>
+                <input id="userOldPassword" type="password" class="form-control" readonly>
+                <h7>New Password</h7>
+                <input id="userNewPassword1" type="password" class="form-control passwordInput" readonly>
+                <h7>Confirm New Password</h7>
+                <input id="userNewPassword2" type="password" class="form-control passwordInput" readonly>
+                <div id=passwordButtonDiv>
+                    <button id="changePasswordButton" class="btn hexButtons" type="button">Edit Password</button>
+                    <button id="cancelChangeButton" class="btn hexButtons" type="button" hidden>Cancel</button>
+                </div>
+            </div>
+            <button id="confirmChangesButton" class="btn btn-lg hexButtons">Confirm Changes</button>
+        </div>
+        <div class="sidenav">
+            <img id="userAvatar" src="" alt="">
+            <div style="text-align: center">
+                <label class="btn btn-secondary">
+                    Change <input id="avatarUpload" type="file" class="form-control-file" hidden>
+                </label>
+            </div>
         </div>
     </div>
 
-    <!-- All modals. -->
-
+    <!-- Modals. -->
     <!-- Successful post modal. -->
     <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -92,13 +109,12 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
-                    <h4 class="mr-auto" id="pleaseLogin"></h4>
-                    <button id="successfulModalLoginButton" type="button" class="btn hexButtons successfulModalButton">Login</button>
                     <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- All JavaScript material. -->
 
@@ -119,7 +135,8 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsCreateAccountPageLogic.js"></script>
+    <script src="HexReviewsEditUserProfilePageLogic.js"></script>
+    <script type="text/javascript" src="Filestyle.js"> </script>
 
 </body>
 

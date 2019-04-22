@@ -1,7 +1,7 @@
 //  For live:           https://hex-reviews.herokuapp.com
 //  For Development:    http://localhost:4500
 
-var GlobalURL = "https://hex-reviews.herokuapp.com"
+var GlobalURL = "http://localhost:4500"
 
 $(document).ready(function () {
     $("#viewGamesPageButton").click(function () {
@@ -92,6 +92,10 @@ function goToUserViewSingleGamePage(gameID) {
     window.location.href = "/UserViewSingleGamePage?id=" + gameID;
 }
 
+function goToUserEditProfilePage(userID) {
+    window.location.href = "/UserEditProfilePage?id=" + userID;
+}
+
 
 
 /*****  General functions for deleting from the database.   *****/
@@ -140,6 +144,7 @@ function getUser(userID) {
     });
 }
 
+//  Log out user when button is clicked.
 function logoutUser() {
 
     //  Forcefully expiring the cookie.
@@ -149,6 +154,7 @@ function logoutUser() {
     window.location.href = "/";
 }
 
+//  Get cookies stored on the machine.
 var getCookies = function () {
     var pairs = document.cookie.split(";");
     var cookies = {};
@@ -159,10 +165,8 @@ var getCookies = function () {
     return cookies;
 }
 
-
+//  Read cookies stored on the machine based on request.
 function readCookies(request) {
-
-    console.log("Request to be searched: " + request);
 
     //  Grab all cookie information.
     var cookieChunk = document.cookie;
@@ -192,6 +196,28 @@ function readCookies(request) {
     }
 }
 
+//  Get the user's rank from a supplied ID.
+function getUserRank(userID, item, append) {
+    $.ajax({
+        url: GlobalURL + '/users/rank/' + userID,
+        type: 'GET',
+        success: function(result) {
+            console.log("Rank: " + result);
+            if(append) {
+                item.append(result);
+            } else {
+                item.text(result);
+            }
+        }
+    });
+}
+
+
+
+/*****  All deprecated functionality.   *****/
+
+//  DEPRECATED. General function for counting elements in array...
+//  Because apparently 'array.length;' was too simple.
 function countArrayElements(array) {
     var count = 0;
 
@@ -209,6 +235,7 @@ function countArrayElements(array) {
     }
 }
 
+//  DEPRECATED. Grab game name from supplied ID.
 function getGameNameFromID(gameID) {
     $.ajax({
         url: GlobalURL + '/games/' + gameID,
@@ -219,6 +246,7 @@ function getGameNameFromID(gameID) {
     });
 }
 
+//  DEPRECATED. Grab username from supplied ID.
 function getUsernameFromID(userID) {
     $.ajax({
         url: GlobalURL + '/users/username/' + userID,
@@ -234,7 +262,7 @@ function getUsernameFromID(userID) {
     });
 }
 
-//  Subscribe to a user.
+//  DEPRECATED. General function for subscribing to a user.
 function subscribe(subscriberData, subscribeeData) {
 
     //  Subscriber to user.
@@ -266,7 +294,7 @@ function subscribe(subscriberData, subscribeeData) {
     });
 }
 
-//  Unsubscribe to a user.
+//  DEPRECATED. General function for unsubscribing from a user.
 function unsubscribe(subscriberData, subscribeeData) {
 
     //  Subscriber to user.

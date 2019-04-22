@@ -39,10 +39,6 @@ $(document).ready(function() {
     $("#viewImageButton").click(function() {
         getGameImage();
     });
-    
-    $("#viewModal").click(function() {
-        $("#successfulPostModal").modal("show");
-    });
 
     //  Hide certain elements on page load.
     document.getElementById("successIcon").style.display = 'none';
@@ -102,7 +98,6 @@ function displayImage(result) {
 }
 
 function addGame() {
-    console.log("Add game button has been clicked.");
     collectImages(postGame);
 }
 

@@ -1,0 +1,114 @@
+#mainProfileContentDiv {
+    width: 70%;
+    height: 1920px;
+    min-width: 1200px;
+    margin: 0 auto;
+    background-image: url('/Images/LightGreyFabric.png');
+    background-repeat: repeat;
+    box-shadow: 5px 10px 20px grey;
+}
+
+#userAvatar {
+    width: 140px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(83, 83, 83);
+    border-width: 2px;
+    margin: 10px;
+}
+
+#changeAvatarButton {
+    width: 100px;
+    background-color: rgb(28, 124, 68);
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+#profileContentDiv {
+    float: right;
+    width: 80%;
+    min-width: 1000px;
+}
+
+#usernameHeading {
+    margin: 30px 0px 30px 0px;
+}
+
+#userRank {
+    margin: 30px 0px 30px 0px;
+
+}
+
+#emailDiv {
+    width: 600px;
+}
+
+#changePasswordDiv {
+    width: 600px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(211, 211, 211);
+    border-width: 1px;
+    padding: 20px 20px 20px 20px;
+}
+
+#passwordButtonDiv
+
+#changePasswordButton, #donePasswordButton, #cancelChangeButton {
+    width: 200px;
+}
+
+#cancelChangeButton {
+    float: right;
+}
+
+#userOldPassword {
+    margin-bottom: 30px;
+}
+
+.passwordInput {
+    margin-bottom: 10px;
+}
+
+.changeButton {
+    width: 100px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 160px;
+    position: relative;
+    z-index: 1;
+    background-image: url('/Images/BackgroundDarkGreen.png');
+    background-repeat: repeat;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 160px;
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
