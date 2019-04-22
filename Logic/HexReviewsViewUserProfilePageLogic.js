@@ -27,4 +27,14 @@ function getUserData(userID) {
 function buildProfile(user) {
     $('#userAvatar').attr("src", user.user_avatar);
 
+    document.getElementById("usernameHeading").textContent = user.user_username;
+    getUserRank(user._id, $('#userRank'));
+
+    if(user.user_subscribed_to === undefined || user.user_subscribed_to.length == 0) {
+        $('#totalSubscriptions').append("None :(");
+    } else {
+        $('#totalSubscriptions').append(user.user_subscribed_to.length);
+    }
+
+
 }

@@ -1,6 +1,5 @@
 #mainProfileContentDiv {
-    width: 70%;
-    height: 1920px;
+    width: 60%;
     min-width: 1200px;
     margin: 0 auto;
     background-image: url('/Images/LightGreyFabric.png');
@@ -15,6 +14,36 @@
     border-color: rgb(83, 83, 83);
     border-width: 2px;
     margin: 10px;
+}
+
+#userInformationDiv {
+    float: right;
+    width: 80%;
+    min-width: 1000px;
+}
+
+#usernameHeading {
+    font-size: 48px;
+}
+
+#statsDiv {
+    margin: 30px 0px 30px 0px;
+    width: 700px;
+    padding: 20px;
+}
+
+#subStatsDiv {
+    border: solid;
+    border-radius: 5px;
+    border-color: rgb(168, 168, 168);
+    border-width: 1px;
+    padding: 20px;
+}
+
+.sideNavButton {
+    width: 140px;
+    margin: 10px;
+    background-color: rgb(32, 107, 63);
 }
 
 .sidenav {

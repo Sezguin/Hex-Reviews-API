@@ -80,8 +80,6 @@ function getUserData(userID) {
 function buildProfile(user) {
     $('#userAvatar').attr("src", user.user_avatar);
 
-    console.log("EMail " + user.user_email);
-
     document.getElementById("usernameHeading").textContent = user.user_username;
     $('#userEmailAddress').val(user.user_email);
     getUserRank(user._id, $('#userRank'));

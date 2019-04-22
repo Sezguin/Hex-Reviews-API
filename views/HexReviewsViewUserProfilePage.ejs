@@ -55,15 +55,25 @@
         </div>
     </nav>
 
-    <!-- Page heading. -->
-    <h1 id="userProfile"></h1>
-
     <div id="mainProfileContentDiv">
+        <div id="userInformationDiv">
+            <h1 id="usernameHeading"></h1>
+            <h4 id="userRank"></h4>
+            <div id="statsDiv">
+                    <h3>Your Statistics</h3>
+                    <div id="subStatsDiv">
+                        <h5 id="totalReviews">Total Reviews: </h5>
+                        <h5 id="totalFollowers">Total Followers: </h5>
+                        <h5 id="totalSubscriptions">Total Subscriptions: </h5>
+                    </div>
+                </div>
+        </div>
+
         <div class="sidenav">
             <img id="userAvatar" src="" alt="">
-            <a href="#">About</a>
-            <a href="#">Reviews</a>
-            <a href="#">Statistics</a>
+            <button id="myReviewsButton" class="btn hexButtons sideNavButton">My Reviews</button>
+            <button id="mySubscriptionsButton" class="btn hexButtons sideNavButton">Subscriptions</button>
+            <button id="editProfileButton" class="btn hexButtons sideNavButton">Edit Profile</button>
         </div>
     </div>
 
