@@ -9,6 +9,10 @@ $(document).ready(function() {
         window.location.href = "/LoginPage"
     });
 
+    $("#userUsername").keyup(function(){
+        validateUsername();
+    });
+
     //  Hide certain elements on page load.
     document.getElementById("successIcon").style.display = 'none';
     document.getElementById("failureIcon").style.display = 'none';
@@ -64,12 +68,6 @@ function postUser() {
     var userPassword    = $('#userPassword').val();
     var userUsername    = $('#userUsername').val();
 
-    //  Check whether the online checkbox is selected.
-    if($('#onlineCheckbox').prop("checked") == true) {
-        gameOnline = true;
-    } else if($('#onlineCheckbox').prop("checked") == false) {
-        gameOnline = false;
-    }
 
     $.post("https://hex-reviews.herokuapp.com/users/", 
     {   
@@ -91,7 +89,6 @@ function postUser() {
             document.getElementById("failureIcon").style.display = 'block';
             document.getElementById("successfulModalCloseButton").style.display = 'block';
         }
-        console.log("Message from API: " + JSON.stringify(data));
     });
 }
 
@@ -119,4 +116,44 @@ function collectAvatar(callback) {
     //  Calling the callback function to post user with a 2 second delay.
     $("#successfulPostModal").modal("show");
     window.setTimeout(callback, 2000);
+}
+
+function validateUsername(input) {
+
+    $("#userUsername").removeClass("bad");
+    $("#userUsername").removeClass("good");
+    document.getElementById("invalidUsername").style.color = "red";
+
+    var value = $("#userUsername").val();
+    console.log("Value: " + value);
+
+    if(value.length < 3) {
+        $("#userUsername").addClass("bad");
+        document.getElementById("invalidUsername").innerHTML = "Username is too short!";
+        document.getElementById("invalidUsername").style.color = "red";
+
+    } else if (value.length > 15) {
+        $("#userUsername").addClass("bad");
+        document.getElementById("invalidUsername").innerHTML = "Username is too long!";
+        document.getElementById("invalidUsername").style.color = "red";
+
+    } else {
+        $.ajax({
+            url: GlobalURL + '/username/login/' + value,
+            type: 'GET',
+            success: function(result) {
+                if(result) {
+                    $("#userUsername").addClass("bad");
+                    document.getElementById("invalidUsername").innerHTML = "Username already exists...";
+                    document.getElementById("invalidUsername").style.color = "red";
+
+                } else {
+                    $("#userUsername").addClass("good");
+                    document.getElementById("invalidUsername").innerHTML =  value + " is available!";
+                    document.getElementById("invalidUsername").style.color = "green";
+
+                }
+            }
+        });
+    }
 }

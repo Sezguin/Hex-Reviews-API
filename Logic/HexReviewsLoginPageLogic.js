@@ -3,40 +3,72 @@ $(document).ready(function() {
         loginUser(checkPassword);
     });
 
-    //  Hide certain elements on page load.
-    document.getElementById("successIcon").style.display = 'none';
-    document.getElementById("failureIcon").style.display = 'none';
-    document.getElementById("successfulModalCloseButton").style.display = 'none';
-    document.getElementById("successfulModalContinueButton").style.display = 'none';
+    document.getElementById("usernameField").addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            loginUser(checkPassword);
+        }
+    });
+
+    document.getElementById("passwordField").addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            loginUser(checkPassword);
+        }
+    });
 });
 
 function loginUser(callback) {
+    
+    document.getElementById("invalidUsername").innerHTML = "";
+    document.getElementById("invalidPassword").innerHTML = "";
+    $('#successfulPostModal').show();
+    $("#usernameField").removeClass("bad");
+    $("#usernameField").removeClass("good");
+    $("#passwordField").removeClass("bad");
+    $("#passwordField").removeClass("good");
 
-    console.log("Logging in...");
 
-    var username   = $('#usernameField').val();
+    var username = $('#usernameField').val();
+    var password = $('#passwordField').val();
 
-    $.ajax({
-        url: GlobalURL + '/username/login/' + username,
-        type: 'GET',
-        success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result));
+    if(username == "") {
+        document.getElementById("invalidUsername").innerHTML = "Please enter a username...";
+        $('#successfulPostModal').hide();
+        $("#usernameField").addClass("shake");
+        $("#usernameField").addClass("bad");
+        setTimeout(resetInputFields, 900);
 
-            if(result) {
-                console.log("Username exists in the database.");
+    } else {
+        $.ajax({
+            url: GlobalURL + '/username/login/' + username,
+            type: 'GET',
+            success: function(result) {    
+                if(result) {
+                    console.log("Username exists in the database.");
 
-                //  Calling the callback function to check the password with a 2 second delay.
-                $("#successfulPostModal").modal("show");
-                window.setTimeout(callback, 1000);
-            } else {
-                console.log("Username does not exist in the database.");
+                    $("#usernameField").addClass("good");
 
-                //  Displaying no username information.
-                $("#successfulPostModal").modal("show");
-                window.setTimeout(noUsernameExists, 2000);
+                    if(password == "") {
+                        document.getElementById("invalidPassword").innerHTML = "Please enter a password...";
+                        $('#successfulPostModal').hide();
+                        $("#passwordField").addClass("shake");
+                        $("#passwordField").addClass("bad");
+                        setTimeout(resetInputFields, 900);
+                    } else {
+                        //  Continue to check user's password.
+                        callback();
+                    }
+                } else {
+                    console.log("Username does not exist in the database.");
+
+                    document.getElementById("invalidUsername").innerHTML = "Username does not exist!";
+                    $('#successfulPostModal').hide();
+                    $("#usernameField").addClass("shake");
+                    $("#usernameField").addClass("bad");
+                    setTimeout(resetInputFields, 900);
+                }
             }
-        }
-    });
+        });
+    }
 }
 
 function checkPassword() {
@@ -50,18 +82,17 @@ function checkPassword() {
         user_password: password,
     },
     function(data) {
-        if(data == true) {
-            console.log("Password was correct.");
-            
-            window.setTimeout(goToUserHomePage(username), 1000);
+        if(data) {            
+            $("#usernameField").addClass("good");
+            $("#passwordField").addClass("good");
+            goToUserHomePage(username);
 
-        } else if (data == false) {
-            console.log("Password was incorrect.");
-
-            $("#successModalTitle").text("Incorrect Password");
-            $("#successfulPostModalSpinner").hide();
-            document.getElementById("failureIcon").style.display = 'block';
-            document.getElementById("successfulModalCloseButton").style.display = 'block';
+        } else if (!data) {
+            document.getElementById("invalidPassword").innerHTML = "Your password was incorrect.";
+            $('#successfulPostModal').hide();
+            $("#passwordField").addClass("shake");
+            $("#passwordField").addClass("bad");
+            setTimeout(resetInputFields, 900);
 
         } else if (data == "err") {
             console.log("An unexpected error has occured.")
@@ -69,27 +100,13 @@ function checkPassword() {
     });
 }
 
-function noUsernameExists() {
-
-    var username = $('#usernameField').val();
-
-    $("#successModalTitle").text("User: " + username + " does not exist...");
-    $("#successfulPostModalSpinner").hide();
-    document.getElementById("failureIcon").style.display = 'block';
-    document.getElementById("successfulModalCloseButton").style.display = 'block';
-}
-
 function goToUserHomePage(username) {
-
-    console.log("Transferring " + username + " to user home page...");
-
 
     //  Get ID of user.
     $.ajax({
         url: GlobalURL + '/users/id/' + username,
         type: 'GET',
         success: function(result) {
-            console.log("Information from API: " + JSON.stringify(result));
             if(result == "failure") {
                 console.log("Username does not exist in the database.");
             } else {
@@ -106,11 +123,12 @@ function configureCookie(id, username) {
     //  Setting cookie value for username.
     document.cookie = "username=" + username;
     document.cookie = "user_id=" + id;
-
-    var cookies = getCookies();
-
-    console.log("User ID from cookie: " + cookies.user_id);
-    console.log("User name from cookie: " + cookies.username);
         
     window.location.href = "/UserHomePage";
+}
+
+function resetInputFields() {
+    $("#usernameField").removeClass("shake");
+    $("#passwordField").removeClass("shake");
+
 }
