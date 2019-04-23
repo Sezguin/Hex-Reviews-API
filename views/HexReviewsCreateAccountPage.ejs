@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsCreateAccountPageStylesheet.css">    
+    <link rel="stylesheet" href="HexReviewsCreateAccountPageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -53,16 +53,26 @@
     <div id="addNewGameArea">
         <form>
             <div class="form-group form-group-lg createAccountFormGroup">
-                <h5 class="createAccounth5">Email Address</h5>
-                <input id="userEmailAddress" type="email" class="form-control" placeholder="Enter Email" required>
-                
-                <h5 class="createAccounth5">Password</h5>
-                <input id="userPassword" type="password" class="form-control" placeholder="Enter Password" required>
 
-                <h5 class="createAccounth5">Username</h5>
+                <h5 class="createAccounth5">Choose your username:</h5>
+                <h5 id="invalidUsername"></h5> 
                 <input id="userUsername" type="text" class="form-control" placeholder="Choose a Username" required>
 
-                <h5 class="createAccounth5">Choose Avatar</h5>
+                <h5 class="createAccounth5">Email Address:</h5>
+                <input id="userEmailAddress" type="email" class="form-control" placeholder="Enter Email" required>
+
+                <div id="passwordDiv">
+                    <h5 class="createAccounth5">Password:</h5>
+                    <h5 id="invalidPassword"></h5> 
+                    <input id="userPassword" type="password" class="form-control" placeholder="Enter Password" required>
+
+                    <h5 class="createAccounth5">Confirm password:</h5>
+                    <h5 id="invalidPasswordConfirm"></h5> 
+                    <input id="userPasswordConfirm" type="text" class="form-control" placeholder="Confirm Password"
+                        required>
+                </div>
+
+                <h5 class="createAccounth5">Choose Avatar:</h5>
                 <input id="avatarUpload" type="file" class="form-control-file">
 
                 <div id="avatarPreview">
@@ -71,14 +81,15 @@
             </div>
         </form>
         <div class="alignCenterDiv">
-            <button id="createUserButton" type="submit" class="btn bigMainButton hexButtons">Submit</button>
+            <button id="createUserButton" type="submit" class="btn hexButtons">Create Account</button>
         </div>
     </div>
 
     <!-- All modals. -->
 
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -93,8 +104,10 @@
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
                     <h4 class="mr-auto" id="pleaseLogin"></h4>
-                    <button id="successfulModalLoginButton" type="button" class="btn hexButtons successfulModalButton">Login</button>
-                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="successfulModalLoginButton" type="button"
+                        class="btn hexButtons successfulModalButton">Login</button>
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
