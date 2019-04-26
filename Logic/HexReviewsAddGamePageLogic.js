@@ -127,6 +127,7 @@ function postGame() {
         game_genre_tags: gameGenres,
         game_developer: gameDev,
         game_publisher: gamePub,
+        game_master_rating: [],
         game_age_rating_tags: gameAgeRatings,
         game_release_date: gameRelease,
         game_platform_tags: gamePlatforms,
@@ -146,7 +147,6 @@ function postGame() {
             document.getElementById("failureIcon").style.display = 'block';
             document.getElementById("successfulModalCloseButton").style.display = 'block';
         }
-        console.log("Message from API: " + JSON.stringify(data));
     });
 }
 
@@ -239,7 +239,7 @@ function submitPlatforms() {
     $('input[type=checkbox][class=platformCheckbox]').each(function () {
         if(this.checked) {
             elementValue = this.getAttribute("aria-label");
-            gameAgeRatings.push(elementValue);
+            gamePlatforms.push(elementValue);
 
             tempBadge = document.createElement("span");
             tempBadge.className = "badge badge-primary";

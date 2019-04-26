@@ -22,6 +22,10 @@ module.exports = function(app) {
     app.route('/games/search/:query')
         .get(hexReviewController.list_games_from_search);
 
+    //  Add a game rating.
+    app.route('/games/rating')
+        .post(hexReviewController.add_game_rating);
+
 
 
     /*****  All game image related routes.  *****/
@@ -149,5 +153,24 @@ module.exports = function(app) {
     app.route('/reviews/comment/unlike')
         .post(hexReviewController.unlike_a_comment);
 
-    
+
+
+    /*****  All request related routes. *****/
+
+    //  Create and get requests.
+    app.route('/requests/')
+        .post(hexReviewController.create_a_request)
+        .get(hexReviewController.get_all_requests);
+
+    //  Get a request from a user ID.
+    app.route('/requests/:userID')
+        .get(hexReviewController.get_user_requests);
+
+    //  Reject a request.
+    app.route('/requests/reject')
+        .post(hexReviewController.reject_a_request);
+
+    //  Complete a request.
+    app.route('/requests/complete')
+        .post(hexReviewController.complete_a_request);
 };

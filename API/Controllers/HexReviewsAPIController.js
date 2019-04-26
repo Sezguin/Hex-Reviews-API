@@ -7,14 +7,15 @@ var Games = mongoose.model('Games');
 var GameImages = mongoose.model('GameImages');
 var Users = mongoose.model('Users');
 var Reviews = mongoose.model('Reviews');
+var Requests = mongoose.model('Requests');
 
 
 
 /*****  All game related functionality  *****/
 
 //  List all games in the database.
-exports.list_all_games = function(req, res) {
-    Games.find({}, function(err, game) {
+exports.list_all_games = function (req, res) {
+    Games.find({}, function (err, game) {
         if (err)
             res.send(err);
         res.json(game);
@@ -22,26 +23,26 @@ exports.list_all_games = function(req, res) {
 };
 
 //  Create a new game in the database.
-exports.create_a_game = function(req, res) {
+exports.create_a_game = function (req, res) {
 
     console.log("A new game is being created...");
-    
+
     var new_game = new Games(req.body);
-    
-    new_game.save(function(err, game) {
-        if(err) {
+
+    new_game.save(function (err, game) {
+        if (err) {
             res.send("failure");
             console.log("There was an error creating the new game.");
         } else {
             res.send("success");
             console.log("A new game has been created successfully.");
-        }       
+        }
     });
 };
 
 //  List a single game from the database, by using supplied ID.
-exports.list_a_game = function(req, res) {
-    Games.findById(req.params.gameID, function(err, game) {
+exports.list_a_game = function (req, res) {
+    Games.findById(req.params.gameID, function (err, game) {
         if (err)
             res.send(err);
         res.json(game);
@@ -49,8 +50,8 @@ exports.list_a_game = function(req, res) {
 };
 
 //  Update a game in the database.
-exports.update_a_game = function(req, res) {
-    Games.findOneAndUpdate({_id: req.params.gameID}, req.body, {new: true}, function(err, game) {
+exports.update_a_game = function (req, res) {
+    Games.findOneAndUpdate({ _id: req.params.gameID }, req.body, { new: true }, function (err, game) {
         if (err)
             res.send(err);
         res.json(game);
@@ -58,26 +59,26 @@ exports.update_a_game = function(req, res) {
 };
 
 //  Delete a game from the database.
-exports.delete_a_game = function(req, res) {
-    
+exports.delete_a_game = function (req, res) {
+
     console.log("A game is being deleted...");
 
     Games.deleteOne({
-        _id: req.params.gameID        
-    }, function(err, game) {
+        _id: req.params.gameID
+    }, function (err, game) {
         if (err)
             res.send(err);
-        res.json({ message: 'Game was successfully deleted.'});
+        res.json({ message: 'Game was successfully deleted.' });
     });
 };
 
 //  Get games from a search.
-exports.list_games_from_search = function(req, res) {
+exports.list_games_from_search = function (req, res) {
 
     console.log("Searching for specific games containing " + req.params.query + "...");
 
-    Games.find({$text: {$search: req.params.query}}, function(err, games) {
-        if(err) {
+    Games.find({ $text: { $search: req.params.query } }, function (err, games) {
+        if (err) {
             console.log("There was an error when retrieving the games.");
             console.log("Error: " + err);
         } else {
@@ -86,17 +87,36 @@ exports.list_games_from_search = function(req, res) {
     });
 }
 
+//  Add a game rating.
+exports.add_game_rating = function (req, res) {
+
+    console.log("Adding a game rating..." + req.body.rating);
+
+    Games.findOneAndUpdate(
+        { _id: req.body.game_id },
+        { $push: { game_rating: req.body.rating } }, function (err, data) {
+            if (data) {
+                console.log("Success.");
+                res.send(true);
+            } else {
+                console.log("Error: " + err);
+                res.send(false);
+            }
+        }
+    );
+}
+
 
 
 /*****  All image related functionality.    *****/
 
 //  Get a user's avatar.
-exports.get_an_avatar = function(req, res) {
+exports.get_an_avatar = function (req, res) {
 
     console.log("Fetching user avatar...");
 
-    Users.find({user_username: req.params.userID}, function(err, user) {
-        if(user.length) {
+    Users.find({ user_username: req.params.userID }, function (err, user) {
+        if (user.length) {
             console.log("Sending avatar data...");
             res.send(user[0].user_avatar);
         } else {
@@ -108,7 +128,7 @@ exports.get_an_avatar = function(req, res) {
 }
 
 //  Create a new image in the database.
-exports.create_an_image = function(req, res) {
+exports.create_an_image = function (req, res) {
 
     console.log("A new game image is being created...");
 
@@ -116,8 +136,8 @@ exports.create_an_image = function(req, res) {
 
     console.log("Creating image for: " + new_game_image.game_title);
 
-    new_game_image.save(function(err, game_image) {
-        if(err)
+    new_game_image.save(function (err, game_image) {
+        if (err)
             res.send(err);
         res.json(game_image._id);
     });
@@ -125,11 +145,11 @@ exports.create_an_image = function(req, res) {
 
 
 //  Retrieve an image by supplied ID.
-exports.get_an_image = function(req, res) {
+exports.get_an_image = function (req, res) {
 
     console.log("An image is being listed...");
 
-    GameImages.findById(req.params.imageID, function(err, game_image) {
+    GameImages.findById(req.params.imageID, function (err, game_image) {
         if (err)
             res.send(err);
         res.json(game_image);
@@ -140,14 +160,14 @@ exports.get_an_image = function(req, res) {
 /*****  All user related functionality. *****/
 
 //  Create a user in the database.
-exports.create_a_user = function(req, res) {
+exports.create_a_user = function (req, res) {
 
     console.log("A user is being created...");
 
     var new_user = new Users(req.body);
 
-    new_user.save(function(err, user) {
-        if(err) {
+    new_user.save(function (err, user) {
+        if (err) {
             res.send("failure");
             console.log("There was an error when creating a user in the database.");
             console.log("Error: " + err);
@@ -159,11 +179,11 @@ exports.create_a_user = function(req, res) {
 }
 
 //  Update a user in the database.
-exports.update_a_user = function(req, res) {
+exports.update_a_user = function (req, res) {
 
     console.log("Updating a user in the database...")
-    
-    Users.findOneAndUpdate({_id: req.params.userID}, req.body, {new: true}, function(err, user) {
+
+    Users.findOneAndUpdate({ _id: req.params.userID }, req.body, { new: true }, function (err, user) {
         if (err) {
             console.log("There was an error when updating the user in the database.")
             console.log("Error: " + err);
@@ -175,12 +195,12 @@ exports.update_a_user = function(req, res) {
 };
 
 //  Check a username exists in the database.
-exports.check_a_username = function(req, res) {
+exports.check_a_username = function (req, res) {
 
     console.log("Checking if " + req.params.username + " exists...");
 
-    Users.find({user_username: req.params.username}, function(err, user) {
-        if(user.length) {
+    Users.find({ user_username: req.params.username }, function (err, user) {
+        if (user.length) {
             res.send(true);
             console.log("User exists in the database.");
         } else {
@@ -192,12 +212,12 @@ exports.check_a_username = function(req, res) {
 }
 
 //  Retrieve user's ID from the database.
-exports.get_user_id = function(req, res) {
+exports.get_user_id = function (req, res) {
 
     console.log("Retrieving ID of user " + req.params.username + "...");
 
-    Users.find({user_username: req.params.username}, function(err, user) {
-        if(user.length) {
+    Users.find({ user_username: req.params.username }, function (err, user) {
+        if (user.length) {
             console.log("Sending user ID...");
             res.send(user[0]._id);
         } else {
@@ -210,12 +230,12 @@ exports.get_user_id = function(req, res) {
 }
 
 //  Retrieve user from database from provided ID.
-exports.get_a_user = function(req, res) {
+exports.get_a_user = function (req, res) {
 
     console.log("Retrieving username for user");
 
-    Users.find({_id: req.params.userID}, function(err, user) {
-        if(user.length) {
+    Users.find({ _id: req.params.userID }, function (err, user) {
+        if (user.length) {
             console.log("Sending user ID...");
             res.send(user[0]);
         } else {
@@ -228,13 +248,13 @@ exports.get_a_user = function(req, res) {
 }
 
 //  Check that the submitted password is correct.
-exports.check_user_password = function(req, res) {
+exports.check_user_password = function (req, res) {
 
     console.log("Checking password for " + req.body.user_username + "...");
 
-    Users.find({user_username: req.body.user_username}, function(err, user) {
-        if(user.length) {
-            if(req.body.user_password === user[0].user_password) {
+    Users.find({ user_username: req.body.user_username }, function (err, user) {
+        if (user.length) {
+            if (req.body.user_password === user[0].user_password) {
                 console.log("Password was correct.");
                 res.send(true);
             } else {
@@ -260,8 +280,8 @@ exports.subscribe_to_user = function (req, res) {
     //  Update subcriber's subscription list.
     Users.findOneAndUpdate(
         { _id: subscriber },
-        { $push: { user_subscribed_to: subscribee } }, function(err, data) {
-            if(data) {
+        { $push: { user_subscribed_to: subscribee } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
                 res.send("success");
             } else {
@@ -283,8 +303,8 @@ exports.unsubscribe_to_user = function (req, res) {
     //  Update subcriber's subscription list.
     Users.findOneAndUpdate(
         { _id: subscriber },
-        { $pull: { user_subscribed_to: subscribee } }, function(err, data) {
-            if(data) {
+        { $pull: { user_subscribed_to: subscribee } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
                 res.send("success");
             } else {
@@ -305,8 +325,8 @@ exports.subscribee_add_follower = function (req, res) {
 
     Users.findOneAndUpdate(
         { _id: subscribee },
-        { $push: { user_subscribers: subscriber } }, function(err, data) {
-            if(data) {
+        { $push: { user_subscribers: subscriber } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
                 res.send("success");
             } else {
@@ -327,8 +347,8 @@ exports.subscribee_remove_follower = function (req, res) {
 
     Users.findOneAndUpdate(
         { _id: subscribee },
-        { $pull: { user_subscribers: subscriber } }, function(err, data) {
-            if(data) {
+        { $pull: { user_subscribers: subscriber } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
                 res.send("success");
             } else {
@@ -347,18 +367,18 @@ exports.check_user_subscription = function (req, res) {
     var subscriber = req.body.subscriber;
     var subscribee = req.body.subscribee;
 
-    Users.find({_id: subscriber}, function(err, user) {
-        if(user.length) {
+    Users.find({ _id: subscriber }, function (err, user) {
+        if (user.length) {
             var subscribedToArray = user[0].user_subscribed_to;
             var found;
-            for(var i = 0; i < subscribedToArray.length; i++) {
-                if(subscribedToArray[i] == subscribee) {
+            for (var i = 0; i < subscribedToArray.length; i++) {
+                if (subscribedToArray[i] == subscribee) {
                     found = true;
                     break;
                 }
             }
 
-            if(found) {
+            if (found) {
                 console.log("User found, sending true...");
                 res.send(true);
             } else {
@@ -372,12 +392,12 @@ exports.check_user_subscription = function (req, res) {
 }
 
 //  Get a list of user subscription from supplied ID.
-exports.get_user_subscriptions = function(req, res) {
+exports.get_user_subscriptions = function (req, res) {
 
     console.log("Fetching list of user subscriptions...");
 
-    Users.findById(req.params.userID, function(err, user) {
-        if(err) {
+    Users.findById(req.params.userID, function (err, user) {
+        if (err) {
             console.log("There was an error when trying to retrieve the subscription list.")
             console.log("Error: " + err);
         } else {
@@ -392,12 +412,12 @@ exports.get_user_subscriptions = function(req, res) {
 }
 
 //  Calculate the rank of a user.
-exports.get_user_rank = function(req, res) {
+exports.get_user_rank = function (req, res) {
 
     console.log("Getting user rank...");
 
-    Users.findById(req.params.userID, function(err, user) {
-        if(err) {
+    Users.findById(req.params.userID, function (err, user) {
+        if (err) {
             console.log("There was an error when trying to calculate the user's rank.")
             console.log("Error: " + err);
         } else {
@@ -409,7 +429,7 @@ exports.get_user_rank = function(req, res) {
 
                 console.log("Total reviews for user: " + totalReviews);
 
-                if(1 <= totalReviews && totalReviews < 10) {
+                if (1 <= totalReviews && totalReviews < 10) {
                     console.log("User is a novice.");
                     res.send("Novice");
                 } else if (10 <= totalReviews && totalReviews < 20) {
@@ -439,19 +459,19 @@ exports.get_user_rank = function(req, res) {
                 } else {
                     console.log("Default of novice.");
                     res.send("Novice");
-                }                
+                }
             }
         }
     });
 }
 
 //  Get the follower count of a user from supplied ID.
-exports.get_user_followers = function(req, res) {
+exports.get_user_followers = function (req, res) {
 
     console.log("Getting user follower count...");
 
-    Users.findById(req.params.userID, function(err, user) {
-        if(err) {
+    Users.findById(req.params.userID, function (err, user) {
+        if (err) {
             console.log("There was an error when trying to retrieve the follower list.")
             console.log("Error: " + err);
         } else {
@@ -469,31 +489,31 @@ exports.get_user_followers = function(req, res) {
 /*****  All review related functionality    *****/
 
 //  Create a new review.
-exports.create_a_review = function(req, res) {
+exports.create_a_review = function (req, res) {
 
     console.log("Adding a new review...");
 
     var new_review = new Reviews(req.body);
-    
-    new_review.save(function(err, review) {
-        if(err) {
+
+    new_review.save(function (err, review) {
+        if (err) {
             res.send(false);
             console.log("There was an error creating the review.");
             console.log("Error: " + err);
         } else {
             res.send(review._id);
             console.log("The review has been created successfully.");
-        }       
+        }
     });
 }
 
 //  Get a user's reviews.
-exports.get_user_reviews = function(req, res) {
-    
+exports.get_user_reviews = function (req, res) {
+
     console.log("Fetching reviews for " + req.params.userID + "...");
 
-    Reviews.find({user_id: req.params.userID}, function(err, reviews) {
-        if(reviews.length) {
+    Reviews.find({ user_id: req.params.userID }, function (err, reviews) {
+        if (reviews.length) {
             res.send(reviews);
             console.log("Reviews have been found.");
         } else {
@@ -505,19 +525,19 @@ exports.get_user_reviews = function(req, res) {
 }
 
 //  Add review ID to game and user.
-exports.add_review_ids = function(req, res) {
-    
+exports.add_review_ids = function (req, res) {
+
     console.log("Adding review ids...");
 
-    var userID      = req.body.user_id;
-    var gameID      = req.body.game_id;
-    var reviewID    = req.body.review_id;
+    var userID = req.body.user_id;
+    var gameID = req.body.game_id;
+    var reviewID = req.body.review_id;
 
     //  Add review ID to user's collection.
     Users.findOneAndUpdate(
         { _id: userID },
-        { $push: { user_reviews: reviewID } }, function(err, data) {
-            if(data) {
+        { $push: { user_reviews: reviewID } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
             } else {
                 console.log("Error: " + err);
@@ -528,8 +548,8 @@ exports.add_review_ids = function(req, res) {
     //  Add review ID to game's collection.
     Games.findOneAndUpdate(
         { _id: gameID },
-        { $push: { game_reviews: reviewID } }, function(err, data) {
-            if(data) {
+        { $push: { game_reviews: reviewID } }, function (err, data) {
+            if (data) {
                 console.log("Success.");
             } else {
                 console.log("Error: " + err);
@@ -539,12 +559,12 @@ exports.add_review_ids = function(req, res) {
 }
 
 //  View all reviews for a particular game.
-exports.view_game_reviews = function(req, res) {
+exports.view_game_reviews = function (req, res) {
 
     console.log("Fetching reviews for game: " + req.params.gameID);
 
-    Reviews.find({game_id: req.params.gameID}, function(err, reviews) {
-        if(reviews.length) {
+    Reviews.find({ game_id: req.params.gameID }, function (err, reviews) {
+        if (reviews.length) {
             res.send(reviews);
             console.log("Reviews have been found.");
         } else {
@@ -556,16 +576,16 @@ exports.view_game_reviews = function(req, res) {
 }
 
 //  Delete a review from the database from supplied ID.
-exports.delete_a_review = function(req, res) {
-    
+exports.delete_a_review = function (req, res) {
+
     console.log("A review is being deleted...");
 
     Reviews.deleteOne({
-        _id: req.params.reviewID        
-    }, function(err, review) {
+        _id: req.params.reviewID
+    }, function (err, review) {
         if (err)
             res.send(err);
-        res.json({ message: 'Review was successfully deleted.'});
+        res.json({ message: 'Review was successfully deleted.' });
     });
 };
 
@@ -573,8 +593,8 @@ exports.get_a_review = function (req, res) {
 
     console.log("Fetching a review...");
 
-    Reviews.findById(req.params.reviewID, function(err, review) {
-        if(err) {
+    Reviews.findById(req.params.reviewID, function (err, review) {
+        if (err) {
             console.log("There was an error when trying to retrieve the review.")
             console.log("Error: " + err);
         } else {
@@ -586,12 +606,12 @@ exports.get_a_review = function (req, res) {
 }
 
 //  Get reviews from a search.
-exports.search_for_reviews = function(req, res) {
+exports.search_for_reviews = function (req, res) {
 
     console.log("Searching for specific games containing " + req.params.query + "...");
 
-    Reviews.find({$text: {$search: req.params.query}}, function(err, reviews) {
-        if(err) {
+    Reviews.find({ $text: { $search: req.params.query } }, function (err, reviews) {
+        if (err) {
             console.log("There was an error when retrieving the reviews.");
             console.log("Error: " + err);
         } else {
@@ -601,13 +621,13 @@ exports.search_for_reviews = function(req, res) {
 }
 
 //  Get the latest review of a user from supplied ID.
-exports.get_latest_user_review = function(req, res) {
+exports.get_latest_user_review = function (req, res) {
 
     console.log("Getting the latest review form a user...");
 
-    Reviews.find({user_id: req.params.userID}, function(err, reviews) {
-        if(reviews.length) {
-            reviews.sort(function(a, b) {
+    Reviews.find({ user_id: req.params.userID }, function (err, reviews) {
+        if (reviews.length) {
+            reviews.sort(function (a, b) {
                 var dateA = new Date(a.review_creation_date);
                 var dateB = new Date(b.review_creation_date);
                 return dateB - dateA;
@@ -636,15 +656,15 @@ exports.create_a_comment = function (req, res) {
     var commentContent = req.body.comment_content;
 
     Reviews.findOneAndUpdate(
-        {_id: reviewID}, { 
+        { _id: reviewID }, {
             $push: {
                 review_comments: {
                     comment_content: commentContent,
                     comment_user_id: userID
                 }
             }
-        }, function(err, data) {
-            if(err) {
+        }, function (err, data) {
+            if (err) {
                 console.log("Error: " + err);
                 res.send(false);
             } else {
@@ -661,8 +681,8 @@ exports.get_all_comments = function (req, res) {
 
     var reviewID = req.params.reviewID;
 
-    Reviews.findById(reviewID, function(err, review) {
-        if(err) {
+    Reviews.findById(reviewID, function (err, review) {
+        if (err) {
             console.log("There was an error when trying to fetch that review.");
             console.log("Error: " + err);
             res.send(false);
@@ -674,7 +694,7 @@ exports.get_all_comments = function (req, res) {
 }
 
 //  Like a comment.
-exports.like_a_comment = function(req, res) {
+exports.like_a_comment = function (req, res) {
     console.log("Liking a comment...");
 
     var commentID = req.body.comment_id;
@@ -682,20 +702,20 @@ exports.like_a_comment = function(req, res) {
     var userID = req.body.user_id;
 
     Reviews.find(
-        { _id : reviewID },
-        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
-            if(err) {
+        { _id: reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
+            if (err) {
                 console.log("There was an error when retrieving that comment.");
                 console.log("Error: " + err);
             } else {
                 comment[0].review_comments[0].comment_likes.push(userID);
             }
-        } 
+        }
     )
 }
 
 //  Like a comment.
-exports.like_a_comment = function(req, res) {
+exports.like_a_comment = function (req, res) {
     console.log("Liking a comment...");
 
     var commentID = req.body.comment_id;
@@ -703,21 +723,21 @@ exports.like_a_comment = function(req, res) {
     var userID = req.body.user_id;
 
     Reviews.find(
-        { _id : reviewID },
-        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
-            if(err) {
+        { _id: reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
+            if (err) {
                 console.log("There was an error when retrieving that comment.");
                 console.log("Error: " + err);
             } else {
                 comment[0].review_comments[0].comment_likes.push(userID);
                 comment[0].save();
             }
-        } 
+        }
     )
 }
 
 //  Unike a comment.
-exports.unlike_a_comment = function(req, res) {
+exports.unlike_a_comment = function (req, res) {
     console.log("Unliking a comment...");
 
     var commentID = req.body.comment_id;
@@ -725,15 +745,123 @@ exports.unlike_a_comment = function(req, res) {
     var userID = req.body.user_id;
 
     Reviews.find(
-        { _id : reviewID },
-        { review_comments: { $elemMatch: { _id: commentID } } }, function(err, comment) {
-            if(err) {
+        { _id: reviewID },
+        { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
+            if (err) {
                 console.log("There was an error when retrieving that comment.");
                 console.log("Error: " + err);
             } else {
                 comment[0].review_comments[0].comment_likes.pop(userID);
                 comment[0].save();
             }
-        } 
+        }
     )
+}
+
+
+
+/*****  All request related functionality.  *****/
+
+//  Get all requests.
+exports.get_all_requests = function (req, res) {
+
+    console.log("Retrieving all game requests...");
+
+    Requests.find({}, function (err, requests) {
+        if (err) {
+            console.log("There was an error retrieving all requests.");
+            console.log("Error: " + err);
+        } else {
+            res.send(requests);
+        }
+    });
+
+}
+
+//  Get all user requests from supplied ID.
+exports.get_user_requests = function (req, res) {
+    
+    console.log("Getting all requests for user...");
+
+    Requests.find({ request_user_id: req.params.userID }, function (err, requests) {
+        if (requests.length) {
+            res.send(requests);
+            console.log("Requests have been found.");
+        } else {
+            res.send(false);
+            console.log("No requests were found.");
+            console.log("Error: " + err);
+        }
+    });
+
+}
+
+//  Create a new request.
+exports.create_a_request = function (req, res) {
+
+    console.log("Creating a new request for: " + req.body.gameTitle);
+
+    var new_request = new Requests(req.body);
+
+    new_request.save(function (err) {
+        if (err) {
+            res.send(false);
+            console.log("There was an error creating the new request.");
+            console.log("Error: " + err);
+        } else {
+            res.send(true);
+            console.log("A new game request has been created successfully.");
+        }
+    });
+}
+
+//  Reject a request.
+exports.reject_a_request = function (req, res) {
+
+    console.log("Rejecting a request...");
+
+    console.log("Request ID: " + req.body.request_id);
+
+    Requests.findOne({ _id: req.body.request_id }, function (err, request) {
+        if (request) {
+            request.request_state = "REJECTED";
+            request.request_reject_reason = req.body.rejection_reason;
+            request.save(function(err) {
+                if(err) {
+                    console.log("There was an error saving the document " + err);
+                } else {
+                    res.send(true);
+                }
+            });
+        } else {
+            console.log("There was an error during rejection.");
+            console.log("Error: " + err);
+            res.send(false);
+        }
+    });
+}
+
+//  Complete a request.
+exports.complete_a_request = function (req, res) {
+
+    console.log("Completing a request...");
+
+    console.log("Request ID: " + req.body.request_id);
+
+    Requests.findOne({ _id: req.body.request_id }, function (err, request) {
+        if (request) {
+            request.request_state = "COMPLETE";
+            request.save(function(err) {
+                if(err) {
+                    console.log("There was an error saving the document " + err);
+                } else {
+                    res.send(true);
+                }
+            });
+        } else {
+            console.log("There was an error during rejection.");
+            console.log("Error: " + err);
+            res.send(false);
+        }
+    });
 }

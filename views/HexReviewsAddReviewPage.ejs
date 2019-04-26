@@ -58,13 +58,13 @@
 
     <!-- Page heading. -->
     <div class="page-header mainPageHeading">
-        <h1 id="userWelcome">Add a Review</h1>
+        <h1>Add a Review</h1>
     </div>
 
     <!-- All fields for adding in a new game. -->
     <div id="addNewReviewContainer">
         <div id="chooseGameButtonContianer">
-            <button id="showChooseGameModal" class="bigMainButton">Choose a Game 
+            <button id="showChooseGameModal" class="bigMainButton">Search for a Game 
                 <i id="searchIcon" class="material-icons">search</i>
             </button>
         </div>
@@ -121,7 +121,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Choose a Game</h3>
+                    <h3 class="modal-title">Search for a Game</h3>
                 </div>
                 <div class="modal-body">
                     <div id="chooseGameModalSearchContainer">
@@ -132,11 +132,16 @@
                             </div>
                         </div>
                     </div>
+                    <h4>Latest Additions:</h4>
                     <div id="chooseGameModalResultsContainer">
                         <div id="searchedGamesContainer" class="list-group">
                             <!-- Game will appear here when searched. -->
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <h4 id="requestText">Can't what you're looking for?</h4>
+                    <button id="requestButton" class="btn hexButtons" onclick="requestGame()">Request a Game</button>
                 </div>
             </div>
         </div>

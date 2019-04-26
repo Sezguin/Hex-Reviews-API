@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Add Game</title>
+    <title>Review Page</title>
 
     <!-- All stylesheets and UI material. -->
 
@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsUserViewSingleGamePageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserGameRequestPageStylesheet.css">
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a id="navWriteReview" class="nav-link" href="#">Your Reviews</a>
+                    <a id="navWriteReview" class="nav-link active" href="#">Your Reviews</a>
                 </li>
                 <li class="nav-item">
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
@@ -55,59 +55,78 @@
         </div>
     </nav>
 
-    <div id="viewGameContainer">
-        <div id="gameContentContainer">
-            <img id="gameCoverImage" src="" alt="">
-            <div id="gameTitleDiv">
-                <h1 id="gameTitle"></h1>
-            </div>
-            <div id="ratingDiv">
-                <div id="ratingRank">
-                    <h1 id="rating"></h1>
-                </div>
-                    <div id="gameInfoDiv">
-                        <h3 id=totalReviewsText>Total Reviews:</h3>
-                        <h3 id="totalReviews"></h3>
-                        <br>
-                        <h3 id="releaseDateText">Release Date:</h3>
-                        <h3 id="releaseDate"></h3>
-                        <br>
-                        <h3 id="developerText">Developed by:</h3>
-                        <h3 id="developer"></h3>
-                        <br>
-                        <h3 id="publisherText">Published by:</h3>
-                        <h3 id="publisher"></h3>
-                    </div>
-                    <button id="writeReviewButton" class="btn hexButtons" onclick="writeReview()">Write Review</button>
-                    <button id="viewReviewsButton" class="btn hexButtons" onclick="viewReviews()">View Reviews</button>
-                </div>
-            <div id="genreDiv">
+    <!-- Page heading. -->
+    <div class="page-header mainPageHeading">
+        <h1 id="userWelcome">Make a Request</h1>
+        <button id="addRequestButton" class="btn hexButtons">New Request</button>
+    </div>
+
+
+    <div id="userRequestsContainer">
+        <div id="openRequestsContainer">
+            <h2>Open Requests</h1>
+            <div id=openRequestList class="list-group">
 
             </div>
-
-            <h3 id="gameDescription"></h3>
-
-            <h3 id="ageText">Age Restrictions:</h3>
-            <div id="ageDiv">
+        </div>
+        <div id="closedRequestsContainer">
+            <h2>Completed Requests</h1>
+            <div id=closedRequestList class="list-group">
 
             </div>
-            <h3 id="platformText">Platforms:</h3>
-            <div id="platformDiv">
+        </div>
+
+        <div id="rejectedRequestsContainer">
+            <h2>Rejected Requests</h1>
+            <div id=rejectedRequestList class="list-group">
 
             </div>
         </div>
     </div>
 
+    <!-- Modals -->
+    <!-- Add request modal. -->
+    <div id="addRequestModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Add a Request</h3>
+                </div>
+                <div class="modal-body">
+                    <label id="gameTitleLabel" for="gameTitleInput" style="font-size: 16px;">Game Title</label>
+                    <input id="gameTitleInput" class="form-control" type="text">
+
+                    <label for="additionInformationInput" style="font-size: 16px;">Additional Information</label>
+                    <input id="additionInformationInput" max-length="40" class="form-control" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button id="submitRequestButton" class="btn hexButtons" onclick="submitRequest()">Submit</button>
+                    <button id="cancel" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
                         <div id="successfulPostModalSpinner" class="spinner-border" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>
+                        <i id="successIcon" class="material-icons md-48">done</i>
+                        <i id="failureIcon" class="material-icons md-48">clear</i>
                     </div>
+                </div>
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="successfulModalCloseButtonError" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -132,8 +151,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsUserViewSingleGamePageLogic.js"></script>
-    <script src="Hexagons.min.js"></script>
+    <script src="HexReviewsUserGameRequestPageLogic.js"></script>
 
 </body>
 

@@ -1,21 +1,88 @@
 #gameContentContainer {
-    width: 70%;
+    width: 60%;
     min-width: 1000px;
+    height: 1000px;
     margin: 0 auto;
+    background-image: url('/Images/LightGreyFabric.png');
+    box-shadow: 5px 10px 20px rgba(128, 128, 128, 0.541);
+
 }
 
 #gameCoverImage {
     width: 100%;
-    height: 400px;
+    height: 200px;
     object-fit: cover;
-    border: solid;
-    border-top: none;
-    border-bottom: none;
-    border-width: 3px;
-    border-color: rgb(173, 173, 173);
-
     -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+    animation: fadeIn;
+    animation-duration: 2s;
+}
+
+#gameTitleDiv {
+    width: 100%;
+}
+
+#gameTitle {
+    font-size: 60px;
+    margin: 20px;
+    width: 100%;
+    min-width: 700px;
+}
+
+#ratingDiv {
+    padding: 20px;
+    height: 610px;
+    text-align: center;
+    margin: 20px;
+    float: right;
+    border: solid;
+    border-width: 1px;
+    border-color: grey;
+    border-radius: 5px;
+}
+
+#ratingRank {
+    padding: 15px 0px 10px 0px;
+    margin-bottom: 20px;
+}
+
+#genreDiv, #ageDiv, #platformDiv {
+    margin: 20px;
+    width: 70%
+}
+
+#ageText, #platformText {
+    margin: 20px;
+}
+
+#genreButton, #ageButton, #platformButton {
+    margin: 5px;
+    color: white;
+}
+
+#viewReviewsButton, #writeReviewButton {
+    width: 90%;
+    margin: 10px;
+}
+
+#totalReviewsText, #releaseDateText, #developerText, #publisherText {
+    font-size: 18px;
+}
+
+#gameDescription {
+    margin: 20px 20px 50px 20px;
+    font-size: 20px;
+    width: 70%;
+    min-width: 650px;
+}
+
+#gameInfoDiv {
+    text-align: left;
+    width: 100%;
+}
+
+#rating {
+    font-size: 65px;
 }
 
 #successfulPostModal {
@@ -26,4 +93,47 @@
 }
 .modal {
     background-color: rgba(0,0,0,.0001) !important;
+}
+
+.terrible {
+    border-style: outset;
+    border-color: rgb(255, 0, 0);
+    background-image: url('/Images/RatingTerrible.png');
+    background-repeat: repeat;
+}
+
+.bad {
+    border-style: outset;
+    border-color: rgb(255, 153, 0);
+    background-image: url('/Images/RatingBad.png');
+    background-repeat: repeat;
+}
+
+.okay {
+    border-style: outset;
+    border-color: rgb(242, 255, 0);
+    background-image: url('/Images/RatingOkay.png');
+    background-repeat: repeat;
+}
+
+.good {
+    border-style: outset;
+    border-color: rgb(154, 223, 98);
+    background-image: url('/Images/RatingGood.png');
+    background-repeat: repeat;
+}
+
+.excellent {
+    border-style: outset;
+    border-color: #27AE60;
+    color: white;
+    background-image: url('/Images/RatingGreat.png');
+    background-repeat: repeat;
+}
+
+.perfect {
+    border-style: outset;
+    border-color: rgb(126, 236, 255);
+    background-image: url('/Images/RatingPerfect.png');
+    background-repeat: repeat;
 }

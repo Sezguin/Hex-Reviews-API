@@ -16,7 +16,7 @@ $(document).ready(function() {
     });
 
     $("#requestGameButton").click(function() {
-        window.location.href = "/UserViewGamesPage";
+        window.location.href = "/UserGameRequestPage";
     });
 
     $("#myProfileButton").click(function() {
@@ -111,7 +111,11 @@ function sortReviewArray(reviews, callback) {
     });
 
     for(var i = 0; i < 3; i++) {
-        callback(reviews[i], "latestReviewsDiv");
+        try {
+            callback(reviews[i], "latestReviewsDiv");
+        } catch (err) {
+            console.log("Ran out of reviews to display...");
+        }        
     }
 }
 

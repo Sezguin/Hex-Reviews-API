@@ -1,4 +1,6 @@
 var avatarData = "";
+var goodPass = false;
+var goodUser = false;
 
 $(document).ready(function() {
     $("#createUserButton").click(function() {
@@ -11,6 +13,14 @@ $(document).ready(function() {
 
     $("#userUsername").keyup(function(){
         validateUsername();
+    });
+
+    $("#userPassword").keyup(function(){
+        validatePassword();
+    });
+
+    $("#userPasswordConfirm").keyup(function(){
+        confirmPassword();
     });
 
     //  Hide certain elements on page load.
@@ -56,12 +66,12 @@ $(function () {
 });
 
 function addUser() {
-    console.log("Create account button has been clicked.");
-    collectAvatar(postUser);
+    if((goodUser) && (goodPass)) {
+        collectAvatar(postUser);
+    }
 }
 
 function postUser() {
-    console.log("User is being posted...");
 
     //  All game attributes from form.
     var userEmail       = $('#userEmailAddress').val();
@@ -69,7 +79,7 @@ function postUser() {
     var userUsername    = $('#userUsername').val();
 
 
-    $.post("https://hex-reviews.herokuapp.com/users/", 
+    $.post( GlobalURL + "/users/", 
     {   
         user_email: userEmail,
         user_password: userPassword,
@@ -93,7 +103,6 @@ function postUser() {
 }
 
 function collectAvatar(callback) {
-    console.log("Avatar is being collected...");
 
     //  All image attributes from form.
     var imageInput  = $('#avatarUpload').get(0);
@@ -118,25 +127,29 @@ function collectAvatar(callback) {
     window.setTimeout(callback, 2000);
 }
 
-function validateUsername(input) {
+function validateUsername() {
 
     $("#userUsername").removeClass("bad");
     $("#userUsername").removeClass("good");
     document.getElementById("invalidUsername").style.color = "red";
 
     var value = $("#userUsername").val();
-    console.log("Value: " + value);
 
-    if(value.length < 3) {
+    if(value == "") {
+        $("#userUsername").addClass("bad");
+        document.getElementById("invalidUsername").innerHTML = "Please enter a username!";
+        document.getElementById("invalidUsername").style.color = "red";
+        goodUser = false;
+    } else if(value.length < 3) {
         $("#userUsername").addClass("bad");
         document.getElementById("invalidUsername").innerHTML = "Username is too short!";
         document.getElementById("invalidUsername").style.color = "red";
-
+        goodUser = false;
     } else if (value.length > 15) {
         $("#userUsername").addClass("bad");
         document.getElementById("invalidUsername").innerHTML = "Username is too long!";
         document.getElementById("invalidUsername").style.color = "red";
-
+        goodUser = false;
     } else {
         $.ajax({
             url: GlobalURL + '/username/login/' + value,
@@ -146,14 +159,64 @@ function validateUsername(input) {
                     $("#userUsername").addClass("bad");
                     document.getElementById("invalidUsername").innerHTML = "Username already exists...";
                     document.getElementById("invalidUsername").style.color = "red";
+                    goodUser = false;
 
                 } else {
                     $("#userUsername").addClass("good");
                     document.getElementById("invalidUsername").innerHTML =  value + " is available!";
                     document.getElementById("invalidUsername").style.color = "green";
-
+                    goodUser = true;
                 }
             }
         });
+    }
+}
+
+function validatePassword() {
+
+    $("#userPassword").removeClass("bad");
+    $("#userPassword").removeClass("good");
+    document.getElementById("invalidPassword").style.color = "red";
+
+    var value = $("#userPassword").val();
+
+    if(value == "") {
+        $("#userPassword").addClass("bad");
+        document.getElementById("invalidPassword").innerHTML = "Please enter a password!";
+        document.getElementById("invalidPassword").style.color = "red";
+        $("#userPasswordConfirm").attr("disabled", true);
+        goodPass = false;
+    } else if(value.length < 5) {
+        $("#userPassword").addClass("bad");
+        document.getElementById("invalidPassword").innerHTML = "Your password must be more than 5 characters.";
+        document.getElementById("invalidPassword").style.color = "red";
+        $("#userPasswordConfirm").attr("disabled", true);
+        goodPass = false;
+    } else {
+        $("#userPassword").removeClass("bad");
+        $("#userPassword").addClass("good");
+        $("#userPasswordConfirm").attr("disabled", false);
+        document.getElementById("invalidPassword").innerHTML = "";
+        goodPass = false;
+    }
+}
+
+function confirmPassword() {
+    $("#userPasswordConfirm").removeClass("bad");
+    $("#userPasswordConfirm").removeClass("good");
+    document.getElementById("invalidPasswordConfirm").style.color = "red";
+
+    var pass1 = $("#userPassword").val();
+    var pass2 = $("#userPasswordConfirm").val();
+
+    if (pass1 == pass2) {
+        document.getElementById("invalidPassword").innerHTML = "";
+        document.getElementById("invalidPasswordConfirm").innerHTML = "";
+        $("#userPasswordConfirm").addClass("good");
+        goodPass = true;
+    } else {
+        document.getElementById("invalidPasswordConfirm").innerHTML = "Passwords do not match!";
+        $("#userPasswordConfirm").addClass("bad");
+        goodPass = false;
     }
 }
