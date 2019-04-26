@@ -46,6 +46,7 @@ app.get('/UserSubscriptionsPage', (req, res) => res.render("HexReviewsUserSubscr
 app.get('/ViewOtherProfilePage', (req, res) => res.render("HexReviewsViewOtherUserProfilePage.ejs"));
 app.get('/ViewUserProfilePage', (req, res) => res.render("HexReviewsViewUserProfilePage.ejs"));
 app.get('/UserEditProfilePage', (req, res) => res.render("HexReviewsEditUserProfilePage.ejs"));
+app.get('/UserGameRequestPage', (req, res) => res.render("HexReviewsUserGameRequestPage.ejs"));
 
 //  Review pages.
 app.get('/ViewGameReviewsPage', (req, res) => res.render("HexReviewsViewGameReviews.ejs"));
@@ -57,6 +58,7 @@ app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'
 app.get('/AddGamePage', (req, res) => res.render('HexReviewsAddGamePage.ejs'));
 app.get('/ViewGamesPage', (req, res) => res.render('HexReviewsViewGamesPage.ejs'));
 app.get('/ViewSingleGamePage', (req, res) => res.render('HexReviewsViewSingleGamePage.ejs'));
+app.get('/AdminRequestPage', (req, res) => res.render('HexReviewsAdminRequestPage.ejs'));
 
 var routes = require('./API/Routes/HexReviewsAPIRoutes');
 routes(app);

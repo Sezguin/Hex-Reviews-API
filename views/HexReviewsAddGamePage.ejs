@@ -66,7 +66,7 @@
 
                 <!-- Game Title -->
                 <h5 class="addGameh5">Game Title</h5>
-                <input id="game_title" type="text" class="form-control" placeholder="..." required>
+                <input id="game_title" type="text" class="form-control" maxlength="60" placeholder="..." required>
 
                 <h5 class="addGameh5">Description</h5>
                 <textarea id="game_description" type="text" class="form-control" rows="4" placeholder="..."></textarea>
@@ -88,7 +88,7 @@
 
                 <button id="gameGenreButton" class="btn btn-primary btn-block tagBlockButton hexButtons"
                     class="btn btn-outline-secondary" type="button">Add Genre Tags</button>
-                
+
                 <h5 class="addGameh5">Age Rating</h5>
                 <div id="ageRatingBadges" class="badgeDiv">
                 </div>
@@ -106,7 +106,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="addGameh5">Release Date</h5>
-                        <input id="game_release_date" type="date" class="form-control" placeholder="...">   
+                        <input id="game_release_date" type="date" class="form-control" placeholder="...">
                     </div>
                     <div class="col">
                         <h5 class="addGameh5">Launch Price</h5>
@@ -114,11 +114,12 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">£</span>
                             </div>
-                            <input id="game_launch_price" type="number" min="0.00" class="form-control" step="any" placeholder="...">
+                            <input id="game_launch_price" type="number" min="0.00" class="form-control" step="any"
+                                placeholder="...">
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col">
                         <h5 class="addGameh5">Mulitplayer Capability</h5>
@@ -155,40 +156,185 @@
                 </div>
                 <div class="modal-body">
                     <div class="custom-control custom-checkbox">
-                        <ul style="list-style-type:none;">
-                            <li>
-                                <label class="container">Action
-                                    <input type="checkbox" class="genresCheckbox" id="actionCheckbox"
-                                        aria-label="Action">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">Adventure
-                                    <input type="checkbox" class="genresCheckbox" id="adventureCheckbox"
-                                        aria-label="Adventure">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">Survival
-                                    <input type="checkbox" class="genresCheckbox" id="survivalCheckbox"
-                                        aria-label="Survival">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">Horror
-                                    <input type="checkbox" class="genresCheckbox" id="horrorCheckbox"
-                                        aria-label="Horror">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">Adventure
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Adventure">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Beat'em Up
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Beat'em Up">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Competitive
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Competitive">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Fighting
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Fighting">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">FPS
+                                            <input type="checkbox" class="genresCheckbox" aria-label="FPS">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">First Person
+                                            <input type="checkbox" class="genresCheckbox" aria-label="First Person">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Horror
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Horror">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Interactive
+                                            <input type="checkbox" class="genresCheckbox"
+                                                aria-label="Interactive Novel">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">MMO
+                                            <input type="checkbox" class="genresCheckbox" aria-label="MMO">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Metroidvania
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Metroidvania">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Party Game
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Party Game">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Platformer
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Platformer">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr style="margin-bottom: 25px;">
+                        <div class="row">
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">Racing
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Racing">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">RTS
+                                            <input type="checkbox" class="genresCheckbox" aria-label="RTS">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Rhythm
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Rhythm">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Rogue Like
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Rogue Like">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">RPG
+                                            <input type="checkbox" class="genresCheckbox" aria-label="RPG">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Sandbox
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Sandbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Shooter
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Shooter">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Simulation
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Simulation">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">Stealth
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Stealth">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Survival
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Survival">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Tactical
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Tactical">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Team Sports
+                                            <input type="checkbox" class="genresCheckbox" aria-label="Team Sports">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitGenresButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
+                    <button id="submitGenresButton" type="button" class="btn btn-primary hexButtons">Save
+                        changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -206,30 +352,53 @@
                     <div class="custom-control custom-checkbox">
                         <ul style="list-style-type:none;">
                             <li>
-                                <label class="container">Includes in-game purchases
-                                    <input type="checkbox" class="ageRatingCheckbox" id="purchasesCheckbox"
+                                <label class="container">Includes in-game Purchases
+                                    <input type="checkbox" class="ageRatingCheckbox"
                                         aria-label="Includes in-game purchases">
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
                             <li>
-                                <label class="container">Encourages gambling
-                                    <input type="checkbox" class="ageRatingCheckbox" id="gamblingCheckbox"
-                                        aria-label="Encourages gambling">
+                                <label class="container">Encourages Gambling
+                                    <input type="checkbox" class="ageRatingCheckbox" aria-label="Encourages Gambling">
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
                             <li>
-                                <label class="container">Frightening to children
-                                    <input type="checkbox" class="ageRatingCheckbox" id="drugsCheckbox"
-                                        aria-label="Frightening to children">
+                                <label class="container">Frightening to Children
+                                    <input type="checkbox" class="ageRatingCheckbox"
+                                        aria-label="Frightening to Children">
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
                             <li>
-                                <label class="container">Nudity or sexual behaviour
-                                    <input type="checkbox" class="ageRatingCheckbox" id="sexBox"
-                                        aria-label="Nudity or sexual behaviour">
+                                <label class="container">Nudity or Sexual Behaviour
+                                    <input type="checkbox" class="ageRatingCheckbox"
+                                        aria-label="Nudity or Sexual Behaviour">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Bad Language
+                                    <input type="checkbox" class="ageRatingCheckbox" aria-label="Bad Language">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Violence
+                                    <input type="checkbox" class="ageRatingCheckbox" aria-label="Violence">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Drug Usage
+                                    <input type="checkbox" class="ageRatingCheckbox" aria-label="Drug Usage">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </li>
+                            <li>
+                                <label class="container">Online Interaction
+                                    <input type="checkbox" class="ageRatingCheckbox" aria-label="Online Interaction">
                                     <span class="checkmark"></span>
                                 </label>
                             </li>
@@ -237,7 +406,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitAgeRatingsButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
+                    <button id="submitAgeRatingsButton" type="button" class="btn btn-primary hexButtons">Save
+                        changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -253,40 +423,159 @@
                 </div>
                 <div class="modal-body">
                     <div class="custom-control custom-checkbox">
-                        <ul style="list-style-type:none;">
-                            <li>
-                                <label class="container">PC
-                                    <input type="checkbox" class="platformCheckbox" id="pcCheckbox"
-                                        aria-label="PC">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">Xbox
-                                    <input type="checkbox" class="platformCheckbox" id="xboxCheckbox"
-                                        aria-label="Xbox">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">PlayStation
-                                    <input type="checkbox" class="platformCheckbox" id="playstationCheckbox"
-                                        aria-label="PlayStation">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                            <li>
-                                <label class="container">Switch
-                                    <input type="checkbox" class="platformCheckbox" id="switchCheckbox"
-                                        aria-label="Switch">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </li>
-                        </ul>
+                        <div class="row">
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">Xbox
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Xbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Xbox 360
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Xbox 360">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Xbox One
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Xbox One">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Xbox One X
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Xbox One X">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation
+                                            <input type="checkbox" class="platformCheckbox" aria-label="PlayStation">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation 2
+                                            <input type="checkbox" class="platformCheckbox" aria-label="PlayStation 2">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation 3
+                                            <input type="checkbox" class="platformCheckbox" aria-label="PlayStation 3">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation 4
+                                            <input type="checkbox" class="platformCheckbox" aria-label="PlayStation 4">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation Pro
+                                            <input type="checkbox" class="platformCheckbox"
+                                                aria-label="PlayStation Pro">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">PlayStation Vita
+                                            <input type="checkbox" class="platformCheckbox"
+                                                aria-label="PlayStation Vita">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Dreamcast
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Dreamcast">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul style="list-style-type:none;">
+                                    <li>
+                                        <label class="container">GameBoy Colour
+                                            <input type="checkbox" class="platformCheckbox" aria-label="GameBoy Colour">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">GameBoy Advance
+                                            <input type="checkbox" class="platformCheckbox"
+                                                aria-label="GameBoy Advance">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo DS
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Nintendo DS">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo 3DS
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Nintendo 3DS">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo Switch
+                                            <input type="checkbox" class="platformCheckbox"
+                                                aria-label="Nintendo Switch">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo Wii
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Nintendo Wii">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo GameCube
+                                            <input type="checkbox" class="platformCheckbox"
+                                                aria-label="Nintendo GameCube">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Nintendo 64
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Nintendo 64">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">NES
+                                            <input type="checkbox" class="platformCheckbox" aria-label="NES">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">SNES
+                                            <input type="checkbox" class="platformCheckbox" aria-label="SNES">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="container">Sega Genesis
+                                            <input type="checkbox" class="platformCheckbox" aria-label="Sega Genesis">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="submitPlatformsButton" type="button" class="btn btn-primary hexButtons">Save changes</button>
+                    <button id="submitPlatformsButton" type="button" class="btn btn-primary hexButtons">Save
+                        changes</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -294,7 +583,8 @@
     </div>
 
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -308,7 +598,8 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
-                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

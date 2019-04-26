@@ -32,8 +32,8 @@ var GameSchema = new Schema({
         default: '2000-01-01'
     },
     game_rating: {
-        type: Number,
-        default: 0.0
+        type: Array,
+        default: []
     },
     game_online: {
         type: Boolean,
@@ -170,6 +170,34 @@ var ReviewSchema = new Schema({
     }
 });
 
+var RequestSchema = new Schema({
+    request_game_title: {
+        type: String,
+        required: "A game title is required for the request."
+    },
+    request_game_info: {
+        type: String,
+        default: ""
+    },
+    request_state: {
+        type: String,
+        enum: ['OPEN', 'COMPLETE', 'REJECTED'],
+        default: 'OPEN'
+    },
+    request_user_id: {
+        type: String,
+        default: ""
+    },
+    request_reject_reason: {
+        type: String,
+        default: ""
+    },
+    request_creation_date: {
+        type: Date,
+        default: Date.now
+    }
+});
+
 
 
 /*****  Indexes for searching.   *****/
@@ -204,3 +232,4 @@ module.exports = mongoose.model('Games', GameSchema);
 module.exports = mongoose.model('GameImages', GameImageSchema);
 module.exports = mongoose.model('Users', UserSchema);
 module.exports = mongoose.model('Reviews', ReviewSchema);
+module.exports = mongoose.model('Requests', RequestSchema);

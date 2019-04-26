@@ -20,29 +20,40 @@
     width: 300px;
 }
 
+#requestButton {
+    float: right;
+    width: 200px;
+    height: 50px;
+    font-size: 18px;
+}
+
 #showChooseGameModal {
-    width: 60%;
+    width: 320px;
     height: 70px;
 }
 
 #chooseGameButtonContianer {
     text-align: center;
-    margin: 50px;
+    margin: 0px 0px 30px 0px;
 }
 
 #chooseGameModalResultsContainer {
     height: 500px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #searchIcon {
-    margin-left: 30px;
+    margin-left: 10px;
     font-size: 30px;
     position: absolute;
 }
 
 #modalGameSearchButton {
     color: white !important;
+}
+
+#requestText {
+    margin-right: 60px;
 }
 
 .addReviewh5 {
