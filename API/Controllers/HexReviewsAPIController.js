@@ -488,6 +488,19 @@ exports.get_user_followers = function (req, res) {
 
 /*****  All review related functionality    *****/
 
+//  List all reviews from the database.
+exports.get_all_reviews = function (req, res) {
+    Reviews.find({}, function (err, reviews) {
+        if (err) {
+            console.log("There was an error when retrieving all the reviews from the database.");
+            console.log("Error: " + err);
+            res.send(false);
+        } else {
+            res.send(reviews)
+        }
+    });
+};
+
 //  Create a new review.
 exports.create_a_review = function (req, res) {
 

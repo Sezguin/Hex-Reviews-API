@@ -13,7 +13,10 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsUserHomePageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserViewReviewsPageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsViewGameReviewsStylesheet.css">
+
+
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -38,9 +41,6 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
-                        <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
-                    </li>
-                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -58,91 +58,39 @@
         </div>
     </nav>
 
-    <!-- Page heading. -->
-    <div id="welcomeContainer" class="page-header mainPageHeading">
-        <div id="userDiv">
-            <h1 id="userWelcome"></h1>
-            <div id="userSubDiv">
-                <img id="userAvatar" src="" alt="">
-                <button id="editProfileButton" class="btn hexButtons" onclick="editProfile()">Edit Profile</button>
+    <div id="mainContainer">
+        <div id="latestReviewsText">
+            <h2>Latest Reviews:</h2>
+        </div>
+        
+        <div id="latestReviewsDiv" class="row latestReviewsDiv">
+
+        </div>
+        
+        <div id="searchAndFilterMainContainer">
+            <div id="reviewDropdownButton" class="btn-group">
+                <button type="button" class="btn hexButtons dropdown-toggle" data-toggle="dropdown">Sort</button>
+                    <div class="dropdown-menu">
+                        <a id="dropDownName" class="dropdown-item" href="#">Popular</a>
+                        <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
+                        <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
+                </div>
             </div>
+    
+            <div id="userReviewSearch" class="input-group mb-3">
+                <input id="searchBox" type="text" class="form-control" placeholder="Search...">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn hexButtons" type="button">Search</button>
+                </div>
+            </div>
+            <button id="resetButton" class="btn hexButtons">Reset</button>
         </div>
-        <div id="statsDiv">
-            <h5 id="userRankStat">Your Rank: </h5>
-            <h5 id="totalReviews">Total Reviews: </h5>
-            <h5 id="totalFollowers">Total followers: </h5>
+
+        <div id="reviewsContainer">
+
         </div>
     </div>
 
-    <div id="hexagonArray">
-        <ul id="grid" class="clear">
-            <li>
-                <button id="browseGamesButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        games
-                    </i>
-                    <span class="hexText">Browse Games</span>
-                </button>
-            </li>
-            <li>
-                <button id="writeReviewButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        create
-                    </i>
-                    <span id="yourRev" class="hexText">Your Reviews</span>
-                </button>
-            </li>
-            <li>
-                <button id="subscriptionsButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        subscriptions
-                    </i>
-                    <span id="mySubs" class="hexText"> My Subscriptions</span>
-                </button>
-            </li>
-            <li>
-                <button id="requestGameButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        playlist_add
-                    </i>
-                    <span id="gameReq" class="hexText">Request a Game</span>
-                </button>
-            </li>
-            <li>
-                <button id="myProfileButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        face
-                    </i>
-                    <span id="myProf" class="hexText">My Profile</span>
-                </button>
-            </li>
-            <li>
-                <button id="helpButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        contact_support
-                    </i>
-                    <span id="help" class="hexText">Help</span>
-                </button>
-            </li>
-        </ul>
-    </div>
-
-
-    <div id="latestReviewsText">
-        <h2 id="yourLatestReviews" class="homeHeading"></h2>
-    </div>
-
-    <div id="latestReviewsDiv" class="row latestReviewsDiv">
-
-    </div>
-
-    <div id="latestReviewsText">
-        <h2 id="subscriptionReviewsText" class="homeHeading"></h2>
-    </div>
-
-    <div id="subscribtionReviewsDiv" class="row latestReviewsDiv">
-
-    </div>
 
     <!-- All JavaScript material. -->
 
@@ -163,7 +111,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsUserHomePageLogic.js"></script>
+    <script src="HexReviewsUserViewReviewsPageLogic.js"></script>
 
 </body>
 
