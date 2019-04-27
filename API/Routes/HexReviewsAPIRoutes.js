@@ -103,9 +103,10 @@ module.exports = function(app) {
 
     /*****  All review related routes.  *****/
 
-    //  Creating a new review.
+    //  Creating a new review or getting all reviews.
     app.route('/reviews')
-        .post(hexReviewController.create_a_review);
+        .post(hexReviewController.create_a_review)
+        .get(hexReviewController.get_all_reviews);
 
     //  Getting a user's reviews.
     app.route('/reviews/:userID')

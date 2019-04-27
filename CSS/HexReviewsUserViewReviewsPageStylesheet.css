@@ -1,0 +1,134 @@
+#mainContainer {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#reviewUserArea {
+    width: 250px;
+    height: 110px;
+    background-image: url("/Images/LightGreenFabric.png");
+    background-repeat: repeat;
+    border: solid;
+    border-color: rgb(168, 168, 168);
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    float: right;
+}
+
+#viewReviewButton {
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+}
+
+#deleteButton {
+    width: 100%;
+    float: right;
+    margin: 10px 0px 10px 0px;
+}
+
+#reviewTitleElement {
+    width: 60%;
+    font-size: 32px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+
+}
+
+#reviewSubtitleElement {
+    width: 60%;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+#reviewRatingElement {
+    width: 90%;
+    margin: 0px 0px 10px 0px;
+}
+
+#searchAndFilterMainContainer {
+    width: 100%;
+    min-width: 1000px;
+    height: 70px;
+    margin: 0 auto;
+    padding: 40px 0px 5px 0px;
+}
+
+#viewGameReviewJumbotron {
+    width: 100% !important;
+}
+
+#reviewsContainer {
+    width: 100%;
+    min-width: 1000px;
+}
+
+#userReviewSearch {
+    float: left;
+    max-width: 400px;
+}
+
+#resetButton {
+    width: 100px;
+    margin: 0px 10px 0px 10px;
+}
+
+#reviewDropdownButton {
+    float: right;
+    width: 100px;
+}
+
+#latestReviewCardSub {
+    height: 280px;
+    box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.658);
+    background-image: url('/Images/LightGreyFabric.png');
+}
+
+#viewReviewButton {
+    bottom: 5px;
+}
+
+#reviewCardContent {
+    overflow: hidden;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5; /* number of lines to show */
+    line-height: 15px;        /* fallback */
+    max-height: 58px;
+}
+
+#reviewCardTitle {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+#reviewCardFooter {
+    background-image: url('/Images/LightGreyFabric.png');
+    text-align: center;
+}
+
+#reviewCardHeader {
+    background-image: url('/Images/LightGreyFabric.png');
+}
+
+#subUserAvatar {
+    height: 40px;
+    width: 40px;
+    margin-right: 10px;
+    float: left;
+    border: solid;
+    border-radius: 2px;
+    border-color: rgb(177, 177, 177);
+    border-width: 1px;
+}
