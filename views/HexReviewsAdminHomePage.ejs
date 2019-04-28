@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
     <link rel="stylesheet" href="HexReviewsAdminHomePageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserHomePageStylesheet.css">
+
 
     <!-- Custom icons and fonts. -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -56,16 +58,61 @@
 
     <!-- Page heading. -->
     <div class="page-header mainPageHeading">
-        <h2>Admin Home</h2>
+        <h2 id="adminHomeHeader">Admin Home</h2>
     </div>
 
-    <div class="page-header mainPageHeading verticallyCentered">
-        <h1>Something will go here.</h1>
-    </div>
-
-    <div class="page-header mainPageHeading verticallyCentered">
-        <h3>Eventually.</h3>
-    </div>
+    <div id="hexagonArray">
+            <ul id="grid" class="clear">
+                <li>
+                    <button id="browseGamesButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            games
+                        </i>
+                        <span class="hexText">Browse Games</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="writeReviewButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            create
+                        </i>
+                        <span id="yourRev" class="hexText">Your Reviews</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="subscriptionsButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            subscriptions
+                        </i>
+                        <span id="mySubs" class="hexText"> My Subscriptions</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="requestGameButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            playlist_add
+                        </i>
+                        <span id="gameReq" class="hexText">Request a Game</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="myProfileButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            face
+                        </i>
+                        <span id="myProf" class="hexText">My Profile</span>
+                    </button>
+                </li>
+                <li>
+                    <button id="helpButton" class="btn hexagon">
+                        <i class="material-icons md-48 homeIcon">
+                            contact_support
+                        </i>
+                        <span id="help" class="hexText">Help</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
 
     <!-- All JavaScript material. -->
 

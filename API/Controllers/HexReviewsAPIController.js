@@ -239,7 +239,6 @@ exports.get_a_user = function (req, res) {
             console.log("Sending user ID...");
             res.send(user[0]);
         } else {
-            res.send("failure");
             console.log("There was an error when retrieving " + req.params.userID + " from the database.");
             console.log("Error: " + err);
             res.send(false);
