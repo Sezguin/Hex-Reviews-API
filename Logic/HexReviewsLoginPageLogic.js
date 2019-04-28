@@ -109,22 +109,47 @@ function goToUserHomePage(username) {
         success: function(result) {
             if(result == "failure") {
                 console.log("Username does not exist in the database.");
-            } else {
-                console.log("ID of user: " + result);
-                
-                configureCookie(result, username);
+            } else {                
+                getUserInformation(result);
             }
         }
     });
 }
 
-function configureCookie(id, username) {
+function getUserInformation(id) {
+
+    //  Get ID of user.
+    $.ajax({
+        url: GlobalURL + '/users/' + id,
+        type: 'GET',
+        success: function(result) {
+            if(!result) {
+                console.log("Username does not exist in the database.");
+            } else {                
+                configureCookie(result);
+            }
+        }
+    });
+}
+
+function configureCookie(user) {
 
     //  Setting cookie value for username.
-    document.cookie = "username=" + username;
-    document.cookie = "user_id=" + id;
-        
-    window.location.href = "/UserHomePage";
+    document.cookie = "username=" + user.user_username;
+    document.cookie = "user_id=" + user._id;
+
+    if(user.user_admin) {
+        console.log("User is an admin.");
+        document.cookie = "user_admin=" + true;
+        window.location.href = "/AdminHomePage";
+
+
+    } else if (!user.user_admin) {
+        console.log("User is not an admin.");
+        document.cookie = "user_admin=" + false;
+        window.location.href = "/UserHomePage";
+
+    }
 }
 
 function resetInputFields() {
