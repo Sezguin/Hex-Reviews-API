@@ -45,11 +45,10 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        Admin Tools
+                        Account
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Delete User</a>
-                        <a class="dropdown-item" href="#">Delete Review</a>
+                        <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
             </ul>
@@ -57,58 +56,44 @@
     </nav>
 
     <!-- Page heading. -->
-    <div class="page-header mainPageHeading">
-        <h2 id="adminHomeHeader">Admin Home</h2>
+    <div id="welcomeContainer" class="page-header mainPageHeading">
+        <div id="userDiv">
+            <h1 id="userWelcome"></h1>
+            <div id="userSubDiv">
+                <img id="userAvatar" src="" alt="">
+            </div>
+        </div>
+        <div id="statsDiv">
+            <h5 id="adminOpenRequests">Open Requests: </h5>
+            <h5 id="totalReviews">Total Games: </h5>
+            <h5 id="totalFollowers">Total Users: </h5>
+        </div>
     </div>
 
     <div id="hexagonArray">
             <ul id="grid" class="clear">
                 <li>
-                    <button id="browseGamesButton" class="btn hexagon">
+                    <button id="adminViewGamesButton" class="btn hexagon">
                         <i class="material-icons md-48 homeIcon">
-                            games
+                            view_list
                         </i>
-                        <span class="hexText">Browse Games</span>
+                        <span id="adminViewGames" class="hexText">View Games</span>
                     </button>
                 </li>
                 <li>
-                    <button id="writeReviewButton" class="btn hexagon">
+                    <button id="adminAddGameButton" class="btn hexagon">
                         <i class="material-icons md-48 homeIcon">
-                            create
+                            build
                         </i>
-                        <span id="yourRev" class="hexText">Your Reviews</span>
+                        <span id="adminAddGame" class="hexText">Add a Game</span>
                     </button>
                 </li>
                 <li>
-                    <button id="subscriptionsButton" class="btn hexagon">
+                    <button id="adminGameRequests" class="btn hexagon">
                         <i class="material-icons md-48 homeIcon">
-                            subscriptions
+                            feedback
                         </i>
-                        <span id="mySubs" class="hexText"> My Subscriptions</span>
-                    </button>
-                </li>
-                <li>
-                    <button id="requestGameButton" class="btn hexagon">
-                        <i class="material-icons md-48 homeIcon">
-                            playlist_add
-                        </i>
-                        <span id="gameReq" class="hexText">Request a Game</span>
-                    </button>
-                </li>
-                <li>
-                    <button id="myProfileButton" class="btn hexagon">
-                        <i class="material-icons md-48 homeIcon">
-                            face
-                        </i>
-                        <span id="myProf" class="hexText">My Profile</span>
-                    </button>
-                </li>
-                <li>
-                    <button id="helpButton" class="btn hexagon">
-                        <i class="material-icons md-48 homeIcon">
-                            contact_support
-                        </i>
-                        <span id="help" class="hexText">Help</span>
+                        <span id="adminGameReq" class="hexText"> Game Requests</span>
                     </button>
                 </li>
             </ul>

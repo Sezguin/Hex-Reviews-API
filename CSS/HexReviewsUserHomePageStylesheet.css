@@ -124,8 +124,7 @@
 
 #grid {
     position: relative;
-    width: 50%;
-    min-width: 900px;
+    width: 900px;
     margin: 0 auto;
     padding: 0;
 }
@@ -224,7 +223,7 @@
     position: absolute;
     top: 60%;
     left: 15%;
-    font-size: 1.25vw;
+    font-size: 23px;
     opacity: 0;
     transition: 1s;
 }
@@ -255,6 +254,18 @@
 }
 
 #gameReq {
+    left: 12% !important;
+}
+
+#adminViewGames {
+    left: 22% !important;
+}
+
+#adminAddGame {
+    left: 22% !important;
+}
+
+#adminGameReq {
     left: 12% !important;
 }
 
