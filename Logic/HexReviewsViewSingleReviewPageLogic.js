@@ -1,8 +1,11 @@
 //  Globally get cookies.
 var cookies = getCookies();
 var globalReviewId;
+var globalReviewerId;
 
 $(document).ready(function () {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
 
     //  Grab ID from URL parameter.
     var url_string = window.location.href;
@@ -15,6 +18,7 @@ $(document).ready(function () {
     $('#addCommentButton').click(function () {
         addComment();
     });
+
 });
 
 //  Get review information from supplied ID.
@@ -23,6 +27,7 @@ function getReview(reviewID) {
         url: GlobalURL + '/reviews/single/' + reviewID,
         type: 'GET',
         success: function (result) {
+            globalReviewerId = result.user_id;
             getUserInformation(result);
         }
     });
@@ -35,6 +40,13 @@ function getUserInformation(review) {
         type: 'GET',
         success: function (user) {
             checkSubscriptionList(review, user);
+            if (globalReviewerId == review.user_id) {
+                document.getElementById("viewProfileButton").textContent = "My Profile";
+                document.getElementById("viewProfileButton").setAttribute("onclick", "viewMyProfile()");
+            } else {
+                document.getElementById("viewProfileButton").textContent = "View Profile";
+                document.getElementById("viewProfileButton").setAttribute("onclick", "viewProfile()");
+            }
         }
     });
 }
@@ -65,6 +77,7 @@ function displayReview(review, user, avatar, subbed) {
 
     var reviewRating;
     var textArea = document.getElementById("reviewContentTextArea");
+    var subscribee = review.user_id;
 
     // Set up review rating.
     switch (review.review_rating) {
@@ -95,9 +108,31 @@ function displayReview(review, user, avatar, subbed) {
 
     if (subbed) {
         $('#subscribeButton').text("Unsubsribe");
+        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
     } else {
         $('#subscribeButton').text("Subscribe");
+        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
     }
+}
+
+function subscribeToUser(subscribee, button) {
+    var subscriber = cookies.user_id;
+
+    subscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Unsubscribe";
+    subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
+}
+
+function unsubscribeToUser(subscribee, button) {
+    var subscriber = cookies.user_id;
+
+    unsubscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Subscribe";
+    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
 }
 
 function addComment() {
@@ -315,4 +350,12 @@ function unlikeComment(button) {
             console.log("The comment was unliked successfully.");
         }
     });
+}
+
+function viewProfile() {
+    goToViewOtherUserProfilePage(globalReviewerId);
+}
+
+function viewMyProfile() {
+    window.location.href = "/ViewUserProfilePage";
 }

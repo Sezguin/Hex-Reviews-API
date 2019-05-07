@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Add Game</title>
+    <title>Home</title>
 
     <!-- All stylesheets and UI material. -->
 
@@ -38,22 +38,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
-                        <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
-                    </li>
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
                 <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -82,6 +85,14 @@
                         games
                     </i>
                     <span class="hexText">Browse Games</span>
+                </button>
+            </li>
+            <li>
+                <button id="browseReviewsButton" class="btn hexagon">
+                    <i class="material-icons md-48 homeIcon">
+                        assignment
+                    </i>
+                    <span id="browseRev" class="hexText">Browse Reviews</span>
                 </button>
             </li>
             <li>
@@ -116,14 +127,6 @@
                     <span id="myProf" class="hexText">My Profile</span>
                 </button>
             </li>
-            <li>
-                <button id="helpButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        contact_support
-                    </i>
-                    <span id="help" class="hexText">Help</span>
-                </button>
-            </li>
         </ul>
     </div>
 
@@ -142,6 +145,44 @@
 
     <div id="subscribtionReviewsDiv" class="row latestReviewsDiv">
 
+    </div>
+
+    <!-- Cookies modal. -->
+    <div id="cookiesModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="successModalTitle" class="modal-title">In order to continue...</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <p id="cookiesText">
+                            ...you must agree to the use of cookies while using Hex Reviews.
+                            <br><br>
+                            By clicking continue, you are accepting permissions for personal data to be stored on your
+                            local device in the form of cookies.
+                            <br><br>
+                            Cookies on Hex Reviews are used to store basic information about you including certain login
+                            details to
+                            assist with user identification.
+                            <br><br>
+                            If you do not consent to the use of cookies on your machine, please decline this message,
+                            after which you will be returned to the title page of Hex Reviews.
+                            <br><br>
+                            More information about cookies and how they are used can be found <a
+                                href="https://en.wikipedia.org/wiki/HTTP_cookie">here</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="acceptCookiesButton" type="button" class="btn btn-block hexButtons">Continue
+                        to Hex Reviews</button>
+                    <button id="rejectCookiesButton" type="button" class="btn btn-block btn-secondary"
+                        data-dismiss="modal">Decline</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- All JavaScript material. -->

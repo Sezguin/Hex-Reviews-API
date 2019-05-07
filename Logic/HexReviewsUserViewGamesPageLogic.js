@@ -1,11 +1,20 @@
 var globalGamesList = null;
 var globalCount = 0;
-var globalScrollEnable = true
+var globalScrollEnable = true;
+
+//  Globally get cookies.
+var cookies = getCookies();
 
 $(document).ready(function() {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     $('#searchButton').click(function() {
         getSearchedGameList();
+    });
+
+    $('#requestGameButton').click(function() {
+        window.location.href = "/UserGameRequestPage";
     });
 
     $("#dropDownMostRecent").click(function () {
@@ -22,6 +31,12 @@ $(document).ready(function() {
     
     $("#dropDownPopular").click(function () {
         getGameList("popular");
+    });
+
+    document.getElementById("searchBox").addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            getSearchedGameList();
+        }
     });
 
     $('#resetButton').click(function() {
@@ -244,13 +259,19 @@ function getSearchedGameList() {
     //  Re-enable scrolling.
     globalScrollEnable = true;
 
-    $.ajax({
-        url: GlobalURL + '/games/search/' + query,
-        type: 'GET',
-        success: function(result) {
-            displayGames(result);
-        }
-    });
+    if(query != "") {
+        $.ajax({
+            url: GlobalURL + '/games/search/' + query,
+            type: 'GET',
+            success: function(result) {
+                if(result.length == 0) {
+                    document.getElementById("gameResultsContainer").innerHTML = "<br><br>";
+                } else {
+                    displayGames(result);
+                }
+            }
+        });
+    }
 }
 
 function viewGame(button) {

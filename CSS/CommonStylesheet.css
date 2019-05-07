@@ -260,6 +260,15 @@ body {
   margin: 50px;
 }
 
+/*****  Avatars *****/
+
+#miniAv {
+  height: 25px;
+  width: 25px;
+  float: left;
+}
+
+
 /*****  Modals  *****/
 
 /*  Animations and opacity settings for all modals. */

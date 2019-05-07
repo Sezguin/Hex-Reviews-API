@@ -3,6 +3,8 @@ var cookies = getCookies();
 
 $(document).ready(function() {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     var url_string = window.location.href;
     var url = new URL(url_string);
     var gameID = url.searchParams.get("id");

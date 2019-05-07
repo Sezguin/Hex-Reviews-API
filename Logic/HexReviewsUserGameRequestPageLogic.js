@@ -3,6 +3,9 @@ var cookies = getCookies();
 
 
 $(document).ready(function () {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
+    
     $('#addRequestButton').click(function () {
         $('#addRequestModal').modal("show");
     });

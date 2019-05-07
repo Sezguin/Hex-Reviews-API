@@ -1,7 +1,12 @@
 var gameImages = [];
 var globalGame;
 
+//  Globally get cookies.
+var cookies = getCookies();
+
 $(document).ready(function() {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
 
     var url_string = window.location.href;
     var url = new URL(url_string);

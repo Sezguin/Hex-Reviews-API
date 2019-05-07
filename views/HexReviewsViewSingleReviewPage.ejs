@@ -38,19 +38,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -71,14 +77,14 @@
                 <h4 id="reviewUsername"></h4>
 
                 <img id="ratingImage" src="" alt="">
-    
+
             </div>
-    
+
             <div id="userInformationContainer">
                 <img id="userAvatar" src="" alt="">
                 <button id="viewProfileButton" class="btn btn-lg hexButtons">View Profile</button>
                 <button id="subscribeButton" class="btn btn-lg hexButtons"></button>
-            </div>    
+            </div>
         </div>
         <textarea id="reviewContentTextArea" class="form-control" readonly></textarea>
     </div>

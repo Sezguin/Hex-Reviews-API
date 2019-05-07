@@ -1,101 +1,195 @@
 //  Globally get cookies.
 var cookies = getCookies();
+var globalReviews = [];
 
 $(document).ready(function () {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     $("#dropDownMostRecent").click(function () {
-        getReviews(sortReviewArray, "latest");
+        getReviews("latest");
     });
 
     $("#dropDownRating").click(function () {
-        getReviews(sortReviewArray, "rating");
+        getReviews("rating");
+    });
+
+    $("#dropDownPopular").click(function () {
+        getReviews("popular");
     });
 
     $("#dropDownName").click(function () {
-        getReviews(sortReviewArray, "popular");
+        getReviews("name");
     });
 
-    $('#searchButton').click(function() {
+    $('#searchButton').click(function () {
         getSearchedReviewList();
     });
 
-    $('#resetButton').click(function() {
+    $('#resetButton').click(function () {
         $('#searchBox').val("");
-        getReviews(sortReviewArray);
+        getReviews("latest");
     });
 
-    getReviews(sortReviewArray);
+    document.getElementById("searchBox").addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            getSearchedReviewList();
+        }
+    });
+
+    getReviews("latest");
 });
 
 //  Get a list of all reviews.
-function getReviews(callback, sortType) {
+function getReviews(sortType) {
+
+    //  Clear containers.
     document.getElementById("reviewsContainer").innerHTML = "";
     document.getElementById("latestReviewsDiv").innerHTML = "";
+
+    //  Clear global reviews.
+    globalReviews = [];
+
+    //  Show loading modal.
+    $('#loadingModal').modal("show");
 
     $.ajax({
         url: GlobalURL + '/reviews',
         type: 'GET',
-        success: function(data) {
-            if(!data) {
+        success: function (reviews) {
+            if (!reviews) {
                 console.log("No reviews found.");
             } else {
-                callback(data, sortType, displayEach);
-                latestThreeReviews(data);
+                console.log("Array length: " + reviews.length);
+                for (var i = 0; i < reviews.length; i++) {
+
+                    console.log(i);
+                    console.log("Review before: " + JSON.stringify(reviews[i]));
+
+                    // reviews[i] = addUserData(reviews[i]);
+
+                    if (i + 1 == reviews.length) {
+                        reviews[i] = addUserData(reviews[i], true, sortType);
+                    } else {
+                        reviews[i] = addUserData(reviews[i], false, sortType);
+                    }
+                }
+                // callback(reviews, sortType, displayEach);
+                // latestThreeReviews(reviews);
             }
         }
     });
 }
 
-function sortReviewArray(reviews, sorting, callback) {
+function addUserData(review, done, sortType) {
+    $.ajax({
+        url: GlobalURL + '/users/' + review.user_id,
+        type: 'GET',
+        success: function (user) {
+            if (!user) {
+                console.log("No user found with that ID.");
+            } else {
+                var avatar;
 
-    if(sorting == "latest") {
+                if (user.user_avatar != "") {
+                    avatar = user.user_avatar
+                } else {
+                    avatar = "/Images/DefaultAvatar.jpg"
+                }
+
+                review.user_username = user.user_username;
+                review.user_avatar = avatar;
+                review.user_rank = user.user_rank;
+
+                globalReviews.push(review);
+
+                if (done) {
+                    window.setTimeout(function () {
+                        sortGlobalReviewArray(sortType);
+                        latestThreeReviews();
+                    }, 1000);
+                }
+            }
+        }
+    });
+}
+
+function sortGlobalReviewArray(sorting) {
+
+    //  Hide the loading modal.
+    $('#loadingModal').modal("hide");
+
+    if (sorting == "latest") {
+
         //  Sort recieved reviews by date.
-        reviews.sort(function(a, b) {
+        globalReviews.sort(function (a, b) {
             var dateA = new Date(a.review_creation_date);
             var dateB = new Date(b.review_creation_date);
             return dateB - dateA;
         });
 
-        callback(reviews, checkSubscriptionList);
-
+        for (var i = 0; i < globalReviews.length; i++) {
+            displayMassReview(globalReviews[i]);
+        }
     }
 
-    if(sorting == "popular") {
-        //  Sort recieved reviews by date.
-        reviews.sort(function(a, b) {
+    if (sorting == "popular") {
+
+        //  Sort recieved reviews by popularity.
+        globalReviews.sort(function (a, b) {
             var numA = a.review_comments.length;
             var numB = b.review_comments.length;
             return numB - numA;
         });
-        window.setTimeout(callback(reviews, checkSubscriptionList), 2000);
+
+        for (var i = 0; i < globalReviews.length; i++) {
+            displayMassReview(globalReviews[i]);
+        }
 
     }
 
-    if(sorting == "rating") {
-        //  Sort recieved reviews by date.
-        reviews.sort(function(a, b) {
+    if (sorting == "rating") {
+
+        //  Sort recieved reviews by rating.
+        globalReviews.sort(function (a, b) {
             var numA = a.review_rating;
             var numB = b.review_rating;
             return numB - numA;
         });
 
-        window.setTimeout(callback(reviews, checkSubscriptionList));
+        for (var i = 0; i < globalReviews.length; i++) {
+            displayMassReview(globalReviews[i]);
+        }
     }
 
-    else {
-        callback(reviews, checkSubscriptionList);
+    if (sorting == "name") {
+        globalReviews.sort(function (a, b) {
+            var nameA = a.review_title.toLowerCase();
+            var nameB = b.review_title.toLowerCase();
+            if (nameA < nameB) {
+                return -1;
+            }
+        });
+
+        for (var i = 0; i < globalReviews.length; i++) {
+            displayMassReview(globalReviews[i]);
+        }
     }
 }
 
-function latestThreeReviews(reviews) {
-    reviews.sort(function(a, b) {
+function latestThreeReviews() {
+    globalReviews.sort(function (a, b) {
         var dateA = new Date(a.review_creation_date);
         var dateB = new Date(b.review_creation_date);
         return dateB - dateA;
     });
 
-    for(var i=0; i < 3; i++) {
-        getUserForLatest(reviews[i]);
+    for (var i = 0; i < 3; i++) {
+        try {
+            displayReviews(globalReviews[i]);
+        } catch (err) {
+            console.log("No more reviews.")
+        }
     }
 }
 
@@ -103,11 +197,11 @@ function getUserForLatest(review) {
     $.ajax({
         url: GlobalURL + '/users/' + review.user_id,
         type: 'GET',
-        success: function(user) {
-            if(!user) {
+        success: function (user) {
+            if (!user) {
                 console.log("No user found with that ID.");
             } else {
-                if(user.user_avatar != "") {
+                if (user.user_avatar != "") {
                     displayReviews(review, user.user_avatar, user.user_username);
                 } else {
                     displayReviews(review, "/Images/DefaultAvatar.jpg", user.user_username);
@@ -117,82 +211,38 @@ function getUserForLatest(review) {
     });
 }
 
-function displayEach(reviews, callback) {
-    Object.keys(reviews).forEach(function(k) {
-        getUserInformation((reviews[k]), callback);
-    });
-}
-
-function getUserInformation(review, callback) {
-    $.ajax({
-        url: GlobalURL + '/users/' + review.user_id,
-        type: 'GET',
-        success: function(user) {
-            if(!user) {
-                console.log("No user found with that ID.");
-            } else {
-                callback(review, user);
-            }
-        }
-    });
-}
-
-//  Check if user is on current subscription list.
-function checkSubscriptionList(review, user) {
-
-    console.log("Checking subscription to: " + user.user_username);
-
-    var subscriberData = cookies.user_id;
-    var subscribeeData = review.user_id;
-
-    $.post(GlobalURL + "/users/subscribe/check", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(subbed) {
-        if(user.user_avatar != "") {
-            displayMassReview(review, user.user_username, user.user_avatar, user.user_rank, subbed);
-        } else {
-            displayMassReview(review, user.user_username, "/Images/DefaultAvatar.jpg", user.user_rank, subbed);
-
-        }
-    });
-}
-
-function displayMassReview(data, username, avatar, rank, subbed) {
+function displayMassReview(data) {
 
     //  Data collected from database split into individual values.
-    var reviewID        = data._id
-    var reviewTitle     = data.review_title;
-    var reviewSubtitle  = data.review_subtitle;
-    var reviewUserId    = data.user_id;
+    var reviewID = data._id
+    var reviewTitle = data.review_title;
+    var reviewSubtitle = data.review_subtitle;
+    var reviewUserId = data.user_id;
     var reviewRating;
 
     // Set up review rating.
     switch (data.review_rating) {
         case 5:
-            reviewRating    = "/Images/5Star.png";
+            reviewRating = "/Images/5Star.png";
             break;
         case 4:
-            reviewRating    = "/Images/4Star.png";
+            reviewRating = "/Images/4Star.png";
             break;
         case 3:
-            reviewRating    = "/Images/3Star.png";
+            reviewRating = "/Images/3Star.png";
             break;
         case 2:
-            reviewRating    = "/Images/2Star.png";
+            reviewRating = "/Images/2Star.png";
             break;
         case 1:
-            reviewRating    = "/Images/1Star.png";
+            reviewRating = "/Images/1Star.png";
             break;
     }
 
     //  User information.
-    var reviewUser      = username;
-    var userAvatar      = avatar;
-    var userRank        = rank;
-    var userSubbed      = subbed;
+    var reviewUser = data.user_username;
+    var userAvatar = data.user_avatar;
+    var userRank = data.user_rank;
 
     //  Results container to add game entries to.
     var resultsContainer = document.getElementById("reviewsContainer");
@@ -248,31 +298,11 @@ function displayMassReview(data, username, avatar, rank, subbed) {
     reviewRatingElement.id = "reviewRatingElement";
     reviewRatingElement.src = reviewRating;
 
-    //  Subscribe button.
-    var subscribeButton = document.createElement("button");
-    subscribeButton.className = "btn btn-lg hexButtons userDivButtons";
-    subscribeButton.id = "subscribeButton";
-
-    //  Disable subscribe button on self.
-    if(cookies.user_id == reviewUserId) {
-        subscribeButton.setAttribute("disabled", true);
-    }
-
-    //  Check if user is on subscriptin list already.    
-    if(userSubbed) {
-        subscribeButton.textContent = "Unsubscribe";
-        subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + reviewUserId + "\", this)");
-    } else {
-        subscribeButton.textContent = "Subscribe";
-        subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + reviewUserId + "\", this)");
-    }
-
     //  View profile button.
     var viewProfileButton = document.createElement("button");
-    viewProfileButton.className = "btn btn-lg hexButtons userDivButtons";
+    viewProfileButton.className = "btn btn-lg hexButtons";
     viewProfileButton.id = "viewProfileButton";
-    if(cookies.user_id == reviewUserId) {
-        subscribeButton.setAttribute("disabled", true);
+    if (cookies.user_id == reviewUserId) {
         viewProfileButton.textContent = "My Profile";
         viewProfileButton.setAttribute("onclick", "myProfile()");
     } else {
@@ -297,7 +327,7 @@ function displayMassReview(data, username, avatar, rank, subbed) {
     //  View review button properties.
     var viewReviewButton = document.createElement("button");
     viewReviewButton.className = "btn btn-primary btn-lg hexButtons";
-    viewReviewButton.id="viewReviewButton";
+    viewReviewButton.id = "viewReviewButton";
     viewReviewButton.setAttribute("onclick", "viewReview(this)");
     viewReviewButton.textContent = "View Review";
 
@@ -317,17 +347,14 @@ function displayMassReview(data, username, avatar, rank, subbed) {
     RURankDiv.appendChild(RURank);
 
     //  Configure user area.
-    // reviewUserArea.appendChild(reviewRatingElement);
-    // reviewUserArea.appendChild(RUText);
     reviewUserArea.appendChild(RURankDiv);
     reviewUserArea.appendChild(viewProfileButton);
-    reviewUserArea.appendChild(subscribeButton);
 
     //  Configure side div.
     sideDiv.appendChild(reviewUserArea);
     sideDiv.appendChild(reviewRatingElement);
     sideDiv.appendChild(RUText);
-    
+
     //  Configure review entry to be added.
     reviewJumbotron.appendChild(reviewIdElement);
     reviewJumbotron.appendChild(userIdElement);
@@ -340,7 +367,10 @@ function displayMassReview(data, username, avatar, rank, subbed) {
     resultsContainer.appendChild(reviewJumbotron);
 }
 
-function displayReviews(review, avatar, otherUser) {
+function displayReviews(review) {
+
+    var avatar = review.user_avatar;
+    var otherUser = review.user_username;
 
     //  Create a hidden review ID element.
     var reviewIdElement = document.createElement("p");
@@ -353,7 +383,7 @@ function displayReviews(review, avatar, otherUser) {
 
     //  Create card element.
     var reviewCard = document.createElement("div");
-        reviewCard.id = "latestReviewCardSub";
+    reviewCard.id = "latestReviewCardSub";
     reviewCard.className = "card col-md-4";
 
     //  Create card body.
@@ -421,40 +451,56 @@ function displayReviews(review, avatar, otherUser) {
     resultsContainer.appendChild(reviewCard);
 }
 
-function buildProfile(user) {
-    if(user.user_avatar != "") {
-        $('#userAvatar').attr("src", user.user_avatar);
-    } else {
-        $('#userAvatar').attr("src", "/Images/DefaultAvatar.jpg");
+//  Retrieve list of reviews searched for.
+function getSearchedReviewList() {
+
+    //  Clear containers.
+    document.getElementById("reviewsContainer").innerHTML = "";
+    document.getElementById("latestReviewsDiv").innerHTML = "";
+
+    //  Clear global reviews.
+    globalReviews = [];
+
+    //  Show loading modal.
+    $('#loadingModal').modal("show");
+
+    var query = $('#searchBox').val();
+
+    if (query != "") {
+        $.ajax({
+            url: GlobalURL + '/reviews/search/' + query,
+            type: 'GET',
+            success: function (reviews) {
+
+                //  Clear out container.
+                document.getElementById("reviewsContainer").innerHTML = "";
+
+                if(reviews.length == 0) {
+                    $('#resultsText').text("No Results!");
+                    $('#loadingModal').modal("hide");
+
+
+                } else {
+                    for (var i = 0; i < reviews.length; i++) {
+
+                        if (i + 1 == reviews.length) {
+                            reviews[i] = addUserData(reviews[i], true, "latest");
+                        } else {
+                            reviews[i] = addUserData(reviews[i], false, "latest");
+                        }
+                    }
+                }
+            }
+        });
     }
-
-    document.getElementById("usernameHeading").textContent = user.user_username;
-    getUserRank(user._id, $('#userRank'));
-
-    if(user.user_subscribed_to === undefined || user.user_subscribed_to.length == 0) {
-        $('#totalSubscriptions').append("None :(");
-    } else {
-        $('#totalSubscriptions').append(user.user_subscribed_to.length);
-    }
-
-    if(user.user_subscribers === undefined || user.user_subscribers.length == 0) {
-        $('#totalFollowers').append("None :(");
-    } else {
-        $('#totalFollowers').append(user.user_subscribers.length);
-    }
-
-    if(user.user_reviews === undefined || user.user_reviews.length == 0) {
-        $('#totalReviews').append("None :(");
-    } else {
-        $('#totalReviews').append(user.user_reviews.length);
-    }
-
-    $('#successfulPostModal').hide();
-
 }
 
 function viewReview(button) {
     id = button.parentNode.parentNode.childNodes[0].innerHTML;
 
     goToViewSingleReviewPage(id);
+}
+
+function myProfile() {
+    window.location.href = "/ViewUserProfilePage"
 }

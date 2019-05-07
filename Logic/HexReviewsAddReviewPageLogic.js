@@ -3,6 +3,9 @@ var cookies = getCookies();
 var globalRating;
 
 $(document).ready(function () {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
+    
     $("#showChooseGameModal").click(function () {
         $("#chooseGameModal").modal("show");
         populateLatestGames();
@@ -11,7 +14,6 @@ $(document).ready(function () {
 
     $("#modalGameSearchButton").click(function () {
         getGameList();
-        $("#loadingModal").show();
     });
 
     $("#successfulModalCloseButtonError").click(function () {
@@ -101,25 +103,33 @@ $(document).ready(function () {
 function getGameList() {
     var query = $('#gameSearchBox').val();
 
-    console.log("Query to be searched: " + query);
+    if (query != "") {
+        document.getElementById("resultsHeading").textContent = "Results:";
+        $("#loadingModal").show();
 
-    $.ajax({
-        url: GlobalURL + '/games/search/' + query,
-        type: 'GET',
-        success: function (result) {
-            document.getElementById("searchedGamesContainer").innerHTML = "";
-            $("#loadingModal").hide();
+        $.ajax({
+            url: GlobalURL + '/games/search/' + query,
+            type: 'GET',
+            success: function (result) {
+                
+                if(result.length == 0) {
+                    document.getElementById("resultsHeading").textContent = "No games found!";
+                }
 
-            result.forEach(function (element) {
-                var gameTitle = element.game_title;
-                var gameDescription = element.game_description;
-                var gameId = element._id;
+                document.getElementById("searchedGamesContainer").innerHTML = "";
+                $("#loadingModal").hide();
 
-                addListItem(gameId, gameTitle, gameDescription);
-            });
+                result.forEach(function (element) {
+                    var gameTitle = element.game_title;
+                    var gameDescription = element.game_description;
+                    var gameId = element._id;
 
-        }
-    });
+                    addListItem(gameId, gameTitle, gameDescription);
+                });
+
+            }
+        });
+    }
 }
 
 function populateLatestGames() {

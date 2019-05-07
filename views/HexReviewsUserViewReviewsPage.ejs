@@ -41,19 +41,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link active" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -62,21 +68,22 @@
         <div id="latestReviewsText">
             <h2>Latest Reviews:</h2>
         </div>
-        
+
         <div id="latestReviewsDiv" class="row latestReviewsDiv">
 
         </div>
-        
+
         <div id="searchAndFilterMainContainer">
             <div id="reviewDropdownButton" class="btn-group">
                 <button type="button" class="btn hexButtons dropdown-toggle" data-toggle="dropdown">Sort</button>
-                    <div class="dropdown-menu">
-                        <a id="dropDownName" class="dropdown-item" href="#">Popular</a>
-                        <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
-                        <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
+                <div class="dropdown-menu">
+                    <a id="dropDownName" class="dropdown-item" href="#">Alphabetical</a>
+                    <a id="dropDownPopular" class="dropdown-item" href="#">Popular</a>
+                    <a id="dropDownRating" class="dropdown-item" href="#">Highest Rated</a>
+                    <a id="dropDownMostRecent" class="dropdown-item" href="#">Most Recent</a>
                 </div>
             </div>
-    
+
             <div id="userReviewSearch" class="input-group mb-3">
                 <input id="searchBox" type="text" class="form-control" placeholder="Search...">
                 <div class="input-group-append">
@@ -85,9 +92,25 @@
             </div>
             <button id="resetButton" class="btn hexButtons">Reset</button>
         </div>
-
+        <h2 id="resultsText"></h2>
         <div id="reviewsContainer">
 
+        </div>
+    </div>
+
+    <!-- Loading modal. -->
+    <div id="loadingModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
+                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

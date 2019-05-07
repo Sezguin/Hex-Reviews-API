@@ -99,6 +99,14 @@ module.exports = function(app) {
     app.route('/users/followers/:userID')
         .get(hexReviewController.get_user_followers);
 
+    //  Check cookies acceptance.
+    app.route('/users/cookies/check/:userID')
+        .get(hexReviewController.check_user_cookies);
+    
+    //  Accept cookies for user.
+    app.route('/users/cookies/accept/:userID')
+        .get(hexReviewController.accept_user_cookies);
+
 
 
     /*****  All review related routes.  *****/
@@ -135,6 +143,14 @@ module.exports = function(app) {
     //  Get the latest review of a user from supplied ID.
     app.route('/reviews/user/latest/:userID')
         .get(hexReviewController.get_latest_user_review);
+
+    //  Return a sorted array of review by date.
+    app.route('/reviews/sort/date')
+        .get(hexReviewController.sort_reviews_date);
+
+    //  Delete user reviews.
+    app.route('/reviews/delete')
+        .post(hexReviewController.delete_user_reviews);
 
 
     
