@@ -5,6 +5,9 @@ var globalUser;
 var tempPassword = "";
 
 $(document).ready(function () {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
+    
     getUserData(globalUserID);
 
     $('#confirmChangesButton').click(function() {

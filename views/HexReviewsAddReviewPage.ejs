@@ -39,19 +39,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -64,7 +70,7 @@
     <!-- All fields for adding in a new game. -->
     <div id="addNewReviewContainer">
         <div id="chooseGameButtonContianer">
-            <button id="showChooseGameModal" class="bigMainButton">Search for a Game 
+            <button id="showChooseGameModal" class="bigMainButton">Search for a Game
                 <i id="searchIcon" class="material-icons">search</i>
             </button>
         </div>
@@ -77,33 +83,34 @@
                 <h5 class="addReviewh5">Title</h5>
                 <input id="reviewTitle" type="text" class="form-control" placeholder="Please choose a game..." disabled>
 
-                <h5 class="addReviewh5">Subtitle</h5>
+                <h5 class="addReviewh5">Summary</h5>
                 <input id="reviewSubtitle" type="text" class="form-control" placeholder="..." maxlength="100" required>
 
                 <h5 class="addReviewh5">Review</h5>
-                <textarea id="reviewContent" type="text" class="form-control" rows="8" placeholder="..." required></textarea>
+                <textarea id="reviewContent" type="text" class="form-control" rows="8" placeholder="..."
+                    required></textarea>
 
                 <div class="alignCenterDiv">
-                        <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
-                        <div id="ratingDiv">
-        
-                            <a  href="#">                    
-                                <button id="rating1" class="ratingButton hb hb-md spin" data-toggle="button">1</button>                    
-                            </a>
-                            <a href="#">                    
-                                <button id="rating2" class="ratingButton hb hb-md spin" data-toggle="button">2</button>                    
-                            </a>
-                            <a href="#">                    
-                                <button id="rating3" class="ratingButton hb hb-md spin" data-toggle="button">3</button>                    
-                            </a>
-                            <a href="#">                    
-                                <button id="rating4" class="ratingButton hb hb-md spin" data-toggle="button">4</button>                    
-                            </a>
-                            <a href="#">                    
-                                <button id="rating5" class="ratingButton hb hb-md spin" data-toggle="button">5</button>                    
-                            </a>
-                                
-                        </div>
+                    <h5 class="addReviewh5 alignCenterDiv">Rating</h5>
+                    <div id="ratingDiv">
+
+                        <a href="#">
+                            <button id="rating1" class="ratingButton hb hb-md spin" data-toggle="button">1</button>
+                        </a>
+                        <a href="#">
+                            <button id="rating2" class="ratingButton hb hb-md spin" data-toggle="button">2</button>
+                        </a>
+                        <a href="#">
+                            <button id="rating3" class="ratingButton hb hb-md spin" data-toggle="button">3</button>
+                        </a>
+                        <a href="#">
+                            <button id="rating4" class="ratingButton hb hb-md spin" data-toggle="button">4</button>
+                        </a>
+                        <a href="#">
+                            <button id="rating5" class="ratingButton hb hb-md spin" data-toggle="button">5</button>
+                        </a>
+
+                    </div>
                 </div>
 
             </div>
@@ -126,13 +133,15 @@
                 <div class="modal-body">
                     <div id="chooseGameModalSearchContainer">
                         <div class="input-group mb-3">
-                        <input id="gameSearchBox" type="text" class="form-control" placeholder="Game title..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input id="gameSearchBox" type="text" class="form-control" placeholder="Game title..."
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append">
-                                <button id="modalGameSearchButton" class="btn btn-outline-secondary hexButtons" type="button">Search</button>
+                                <button id="modalGameSearchButton" class="btn btn-outline-secondary hexButtons"
+                                    type="button">Search</button>
                             </div>
                         </div>
                     </div>
-                    <h4>Latest Additions:</h4>
+                    <h4 id="resultsHeading">Latest Additions:</h4>
                     <div id="chooseGameModalResultsContainer">
                         <div id="searchedGamesContainer" class="list-group">
                             <!-- Game will appear here when searched. -->
@@ -148,7 +157,8 @@
     </div>
 
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -162,8 +172,10 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
-                    <button id="successfulModalCloseButtonError" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="successfulModalCloseButtonError" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
 
                 </div>
             </div>

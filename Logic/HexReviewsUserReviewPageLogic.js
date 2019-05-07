@@ -1,7 +1,13 @@
 //  Globally get cookies.
 var cookies = getCookies();
 
+//  Global variable for review to delete.
+var reviewToDelete;
+
 $(document).ready(function () {
+    
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     $("#addButton").click(function () {
         window.location.href = "/AddReviewPage"
     });
@@ -20,6 +26,18 @@ $(document).ready(function () {
 
     $('#searchButton').click(function() {
         getSearchedReviewList();
+    });
+
+    $('#confirmDeleteReviewButton').click(function() {
+        confirmDeleteReview();
+        $('#confirmDeleteModal').modal("hide");
+    });
+
+    
+    document.getElementById("searchBox").addEventListener("keyup", function(event) {
+        if(event.keyCode === 13) {
+            getSearchedReviewList();
+        }
     });
 
     $('#resetButton').click(function() {
@@ -210,6 +228,11 @@ function viewReview(button) {
 }
 
 function deleteUserReview(button) {
-    var id = button.parentNode.parentNode.childNodes[0].innerHTML;
-    deleteReview(id);
+    reviewToDelete = button.parentNode.parentNode.childNodes[0].innerHTML;
+
+    $('#confirmDeleteModal').modal("show");
+}
+
+function confirmDeleteReview() {
+    deleteReview(reviewToDelete, cookies.user_id);
 }

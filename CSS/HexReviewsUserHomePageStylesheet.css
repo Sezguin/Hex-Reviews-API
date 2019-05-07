@@ -96,8 +96,8 @@
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5; /* number of lines to show */
-    line-height: 15px;        /* fallback */
+    -webkit-line-clamp: 5;
+    line-height: 15px;
     max-height: 58px;
 }
 
@@ -127,6 +127,15 @@
     width: 900px;
     margin: 0 auto;
     padding: 0;
+}
+
+#cookiesText {
+    font-size: 16px;
+    text-align: left;
+}
+
+#rejectCookiesButton {
+    margin: 5px;
 }
 
 .clear:after {
@@ -249,8 +258,8 @@
     left: 28% !important;
 }
 
-#help {
-    left: 38% !important;
+#browseRev {
+    left: 12% !important;
 }
 
 #gameReq {

@@ -1,24 +1,26 @@
 <!doctype html>
 <html>
-    <head>
-        <title>View Games</title>
 
-            <!-- All stylesheets and UI material. -->
+<head>
+    <title>View Games</title>
 
-        <!-- Bootstrap Stylesheet dependencies. -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <!-- All stylesheets and UI material. -->
+
+    <!-- Bootstrap Stylesheet dependencies. -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Custom client stylesheets. -->
-        <link rel="stylesheet" href="CommonStylesheet.css">
-        <link rel="stylesheet" href="HexReviewsUserViewGamesPageStylesheet.css">
+    <!-- Custom client stylesheets. -->
+    <link rel="stylesheet" href="CommonStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserViewGamesPageStylesheet.css">
 
-        <!-- Custom icons and fonts. -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Custom icons and fonts. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
-    </head>
-    <body>
+</head>
+
+<body>
     <!-- Top navigation bar. -->
     <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
         <a id="navUserHome" class="navbar-brand" href="#">Hex Reviews</a>
@@ -35,14 +37,21 @@
                     <a id="navUserViewGames" class="nav-link active" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
@@ -73,22 +82,34 @@
     </div>
 
 
-        <div id="gameResultsContainer">
-            <!-- All games from database will be added in here upon page load. -->
-        </div>
+    <div id="gameResultsContainer">
+        <!-- All games from database will be added in here upon page load. -->
+    </div>
 
-        <!-- All JavaScript material. -->
+    <div id="noResultsDiv">
+        <h2>Can't find what you're looking for?</h2>
+        <button id="requestGameButton" class="btn hexButtons">Request a Game</button>
+    </div>
 
-        <!-- JQuery JavaScript dependencies. -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- All JavaScript material. -->
 
-        <!-- Boostrap JavaScript Dependencies. -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-        <!-- Custom client JavaScript -->
-        <script src="CommonLogic.js"></script>
-        <script src="HexReviewsUserViewGamesPageLogic.js"></script>
-    </body>
+    <!-- JQuery JavaScript dependencies. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Boostrap JavaScript Dependencies. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom client JavaScript -->
+    <script src="CommonLogic.js"></script>
+    <script src="HexReviewsUserViewGamesPageLogic.js"></script>
+</body>
+
 </html>

@@ -4,6 +4,8 @@ var globalUserID;
 
 $(document).ready(function () {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     //  Grab ID from URL parameter.
     var url_string = window.location.href;
     var url = new URL(url_string);
@@ -23,7 +25,29 @@ $(document).ready(function () {
 
     //  Display user's latest reviews.
     getReviews(sortReviewArray);
+    checkSubscriptionList();
 });
+
+function checkSubscriptionList() {
+    var subscriberData = cookies.user_id;
+    var subscribeeData = globalUserID;
+
+    $.post(GlobalURL + "/users/subscribe/check", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(subbed) {
+        subscribeButton = document.getElementById("subscribeButton");
+        if(subbed) {
+            subscribeButton.textContent = "Unsubscribe";
+            subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + globalUserID + "\", this)");
+        } else {
+            subscribeButton.textContent = "Subscribe";
+            subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + globalUserID + "\", this)");
+        }
+    });
+}
 
 function getUserData(userID) {
     $.ajax({
@@ -189,6 +213,26 @@ function buildProfile(user) {
 
     $('#successfulPostModal').hide();
 
+}
+
+function subscribeToUser(subscribee, button) {
+
+    var subscriber = cookies.user_id;
+    subscribe(subscriber, globalUserID);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Unsubscribe";
+    subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
+}
+
+function unsubscribeToUser(subscribee, button) {
+
+    var subscriber = cookies.user_id;
+    unsubscribe(subscriber, subscribee);
+
+    subscribeButton = button;
+    subscribeButton.textContent = "Subscribe";
+    subscribeButton.setAttribute("onclick", "subscribeToUser(\"" + subscribee + "\", this)");
 }
 
 function viewReview(button) {

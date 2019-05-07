@@ -123,14 +123,28 @@ function deleteGame(button) {
 }
 
 //  Delete a review by ID supplied.
-function deleteReview(id) {
+function deleteReview(reviewID, userID) {
 
     $.ajax({
-        url: GlobalURL + '/reviews/' + id,
+        url: GlobalURL + '/reviews/' + reviewID,
         type: 'DELETE',
         success: function (result) {
             console.log("The review has successfully been removed from the database.");
-            console.log("Information from API: " + result.message);
+        }
+    });
+
+    console.log("Review: " + reviewID + " User: " + userID)
+
+    $.post(GlobalURL + "/reviews/delete", 
+    {   
+        userId: userID,
+        reviewId: reviewID,
+    },
+    function(data) {
+        if(data) {
+            console.log("Review removed.")
+        } else {
+            console.log("Error when removing review.");
         }
     });
 
@@ -216,6 +230,85 @@ function getUserRank(userID, item, append) {
     });
 }
 
+function subscribe(subscriberData, subscribeeData) {
+
+    //  Subscriber to user.
+    $.post(GlobalURL + "/users/subscribe", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("User has subscribed.")
+        } else {
+            console.log("Error when subscribing to user.");
+        }
+    });
+
+    //  Update subscribee's follower list.
+    $.post(GlobalURL + "/users/follower", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("Follower has been added to subscribee's list.")
+        } else {
+            console.log("Error when updating subscribee's followers.");
+        }
+    });
+}
+
+function unsubscribe(subscriberData, subscribeeData) {
+
+    //  Subscriber to user.
+    $.post(GlobalURL + "/users/unsubscribe", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("User has unsubscribed.")
+        } else {
+            console.log("Error when subscribing to user.");
+        }
+    });
+
+    //  Update subscribee's follower list.
+    $.post(GlobalURL + "/users/unfollow", 
+    {   
+        subscriber: subscriberData,
+        subscribee: subscribeeData,
+    },
+    function(data, status) {
+        if(data == "success") {
+            console.log("Follower has been removed from subscibee's list.")
+        } else {
+            console.log("Error when updating subscribee's followers.");
+        }
+    });
+}
+
+function setMiniAvatar(image, id) {
+
+    console.log("ID" + id);
+    $.ajax({
+        url: GlobalURL + '/images/avatar/' + id,
+        type: 'GET',
+        success: function(result) {
+            if(!result) {
+                console.log("There was an error.");
+            } else {
+                console.log("Res: " + result);
+                image.attr("src", result);
+            }
+        }
+    });
+}
+
 
 
 /*****  All deprecated functionality.   *****/
@@ -262,70 +355,6 @@ function getUsernameFromID(userID) {
             } else {
                 return result;
             }
-        }
-    });
-}
-
-//  DEPRECATED. General function for subscribing to a user.
-function subscribe(subscriberData, subscribeeData) {
-
-    //  Subscriber to user.
-    $.post(GlobalURL + "/users/subscribe", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("User has subscribed.")
-        } else {
-            console.log("Error when subscribing to user.");
-        }
-    });
-
-    //  Update subscribee's follower list.
-    $.post(GlobalURL + "/users/follower", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("Follower has been added to subscribee's list.")
-        } else {
-            console.log("Error when updating subscribee's followers.");
-        }
-    });
-}
-
-//  DEPRECATED. General function for unsubscribing from a user.
-function unsubscribe(subscriberData, subscribeeData) {
-
-    //  Subscriber to user.
-    $.post(GlobalURL + "/users/unsubscribe", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("User has unsubscribed.")
-        } else {
-            console.log("Error when subscribing to user.");
-        }
-    });
-
-    //  Update subscribee's follower list.
-    $.post(GlobalURL + "/users/unfollow", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("Follower has been removed from subscibee's list.")
-        } else {
-            console.log("Error when updating subscribee's followers.");
         }
     });
 }

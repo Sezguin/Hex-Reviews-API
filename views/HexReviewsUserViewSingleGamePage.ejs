@@ -38,19 +38,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -65,22 +71,22 @@
                 <div id="ratingRank">
                     <h1 id="rating"></h1>
                 </div>
-                    <div id="gameInfoDiv">
-                        <h3 id=totalReviewsText>Total Reviews:</h3>
-                        <h3 id="totalReviews"></h3>
-                        <br>
-                        <h3 id="releaseDateText">Release Date:</h3>
-                        <h3 id="releaseDate"></h3>
-                        <br>
-                        <h3 id="developerText">Developed by:</h3>
-                        <h3 id="developer"></h3>
-                        <br>
-                        <h3 id="publisherText">Published by:</h3>
-                        <h3 id="publisher"></h3>
-                    </div>
-                    <button id="writeReviewButton" class="btn hexButtons" onclick="writeReview()">Write Review</button>
-                    <button id="viewReviewsButton" class="btn hexButtons" onclick="viewReviews()">View Reviews</button>
+                <div id="gameInfoDiv">
+                    <h3 id=totalReviewsText>Total Reviews:</h3>
+                    <h3 id="totalReviews"></h3>
+                    <br>
+                    <h3 id="releaseDateText">Release Date:</h3>
+                    <h3 id="releaseDate"></h3>
+                    <br>
+                    <h3 id="developerText">Developed by:</h3>
+                    <h3 id="developer"></h3>
+                    <br>
+                    <h3 id="publisherText">Published by:</h3>
+                    <h3 id="publisher"></h3>
                 </div>
+                <button id="writeReviewButton" class="btn hexButtons" onclick="writeReview()">Write Review</button>
+                <button id="viewReviewsButton" class="btn hexButtons" onclick="viewReviews()">View Reviews</button>
+            </div>
             <div id="genreDiv">
 
             </div>
@@ -99,7 +105,8 @@
     </div>
 
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">

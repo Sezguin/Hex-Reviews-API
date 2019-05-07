@@ -116,6 +116,10 @@ var UserSchema = new Schema({
     user_creation_date: {
         type: Date,
         default: Date.now
+    },
+    user_accept_cookies: {
+        type: Boolean,
+        default: false
     }
 });
 

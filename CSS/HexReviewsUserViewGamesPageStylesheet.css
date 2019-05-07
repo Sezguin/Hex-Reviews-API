@@ -14,6 +14,10 @@
     height: 60px;
 }
 
+#noResultsDiv {
+    text-align: center;
+}
+
 #gameReviewCountArea {
     background-image: url("/Images/LightGreenFabric.png");
     background-repeat: repeat;

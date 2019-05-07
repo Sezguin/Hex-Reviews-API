@@ -2,6 +2,9 @@
 var cookies = getCookies();
 
 $(document).ready(function() {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
+    
     getSubscriptions(cookies.user_id);
 });
 

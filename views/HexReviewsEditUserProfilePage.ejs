@@ -38,19 +38,25 @@
                     <a id="navUserViewGames" class="nav-link" href="#">Browse Games</a>
                 </li>
                 <li class="nav-item">
+                    <a id="navUserViewReviews" class="nav-link" href="#">Browse Reviews</a>
+                </li>
+                <li class="nav-item">
                     <a id="navViewSubcriptions" class="nav-link" href="#">Subscriptions</a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
                         Account
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
                         <a id="navLogout" class="dropdown-item" href="#">Logout</a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>
@@ -61,10 +67,10 @@
             <h3 id="userRank"></h3>
 
             <h5>Email Address</h5>
-            <div id="emailDiv"class="input-group mb-3">
+            <div id="emailDiv" class="input-group mb-3">
                 <input id="userEmailAddress" type="email" class="form-control" readonly>
                 <div class="input-group-append">
-                      <button id="changeEmailButton" class="btn hexButtons changeButton" type="button">Edit</button>
+                    <button id="changeEmailButton" class="btn hexButtons changeButton" type="button">Edit</button>
                 </div>
             </div>
 
@@ -95,7 +101,8 @@
 
     <!-- Modals. -->
     <!-- Successful post modal. -->
-    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-body">
@@ -109,7 +116,8 @@
                     </div>
                 </div>
                 <div id="successfulPostModalFooter" class="modal-footer">
-                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

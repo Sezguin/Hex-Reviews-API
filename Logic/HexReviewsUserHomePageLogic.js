@@ -3,6 +3,10 @@ var cookies = getCookies();
 
 $(document).ready(function() {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
+    checkCookieAccept();
+
     $("#browseGamesButton").click(function() {
         window.location.href = "/UserViewGamesPage";
     });
@@ -23,8 +27,17 @@ $(document).ready(function() {
         window.location.href = "/ViewUserProfilePage";
     });
 
-    $("#helpButton").click(function() {
-        window.location.href = "/UserViewGamesPage";
+    $("#browseReviewsButton").click(function() {
+        window.location.href = "/UserViewReviewsPage";
+    });
+
+    $("#acceptCookiesButton").click(function() {
+        acceptCookies();
+    });
+
+    $("#rejectCookiesButton").click(function() {
+        logoutUser();
+        window.location.href = "/";
     });
 
     $("#userWelcome").text("Welcome, " + cookies.username);
@@ -44,6 +57,34 @@ $(document).ready(function() {
     //  Grab user's subscriptions.
     getSubscriptions(cookies.user_id, getSubscriptionReviews)
 });
+
+function checkCookieAccept() {
+    $.ajax({
+        url: GlobalURL + '/users/cookies/check/' + cookies.user_id,
+        type: 'GET',
+        success: function(result) {
+            if(result) {
+                console.log("User has accepted cookies.")
+            } else {
+                $('#cookiesModal').modal("show");
+            }
+        }
+    });
+}
+
+function acceptCookies() {
+    $.ajax({
+        url: GlobalURL + '/users/cookies/accept/' + cookies.user_id,
+        type: 'GET',
+        success: function(result) {
+            if(result) {
+                location.reload();
+            } else {
+                console.log("There was an error when accepting cookies.")
+            }
+        }
+    });
+}
 
 function collectAvatar(callback) {
     $.ajax({
@@ -93,6 +134,7 @@ function getUserFollowerCount(userID) {
 
 function displayAvatar(data) {
     var output = document.getElementById("userAvatar");
+    // $('#miniAv').attr("src", data);
 
     if(data != "") {
         output.src = data;
@@ -136,7 +178,6 @@ function getSubscriptions(userID, callback) {
 
 function getSubscriptionReviews(subscriptions, callback) {
     for(var i = 0; i < subscriptions.length; i++) {
-        console.log("Sub: " + subscriptions[i]);
         $.ajax({
             url: GlobalURL + '/reviews/user/latest/' + subscriptions[i],
             type: 'GET',

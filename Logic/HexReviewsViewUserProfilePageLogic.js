@@ -3,6 +3,8 @@ var cookies = getCookies();
 var globalUserID = cookies.user_id;
 
 $(document).ready(function () {
+
+    setMiniAvatar($('#miniAv'), cookies.username);
     
     getUserData(globalUserID);
 
@@ -64,7 +66,11 @@ function sortReviewArray(reviews, callback, sorting) {
         });
 
         for(var i = 0; i < 3; i++) {
-            callback(reviews[i], "latestReviewsDiv");
+            try {
+                callback(reviews[i], "latestReviewsDiv");
+            } catch (err) {
+                console.log("Ran out of reviews to display...");
+            }  
         }
     }
 
@@ -77,7 +83,11 @@ function sortReviewArray(reviews, callback, sorting) {
         });
 
         for(var i = 0; i < 3; i++) {
-            callback(reviews[i], "mostPopularReviewsDiv");
+            try {
+                callback(reviews[i], "mostPopularReviewsDiv");
+            } catch (err) {
+                console.log("Ran out of reviews to display...");
+            }  
         }
     }
 

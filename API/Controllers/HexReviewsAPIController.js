@@ -122,7 +122,7 @@ exports.get_an_avatar = function (req, res) {
         } else {
             console.log("Unexpected error when retrieving avatar from the database...");
             console.log("Perhaps the user has been deleted?");
-            res.send
+            res.send(false);
         }
     });
 }
@@ -484,8 +484,66 @@ exports.get_user_followers = function (req, res) {
     });
 }
 
+//  Check the status of a user's cookie acceptance.
+exports.check_user_cookies = function (req, res) {
+
+    console.log("Checking status of cookies...");
+
+    Users.findById(req.params.userID, function (err, user) {
+        if (err) {
+            console.log("There was an error when trying to retrieve the user.")
+            console.log("Error: " + err);
+        } else {
+            if (user.user_accept_cookies) {
+                res.send(true);
+            } else {
+                res.send(false);
+            }
+        }
+    });
+}
+
+//  Check the status of a user's cookie acceptance.
+exports.accept_user_cookies = function (req, res) {
+
+    console.log("Accepting cookies...");
+
+    Users.findById(req.params.userID, function (err, user) {
+        if (err) {
+            console.log("There was an error when trying to retrieve the user.")
+            console.log("Error: " + err);
+            res.send(false);
+        } else {
+            user.user_accept_cookies = true;
+            user.save();
+            res.send(true);
+        }
+    });
+}
+
+
+
 
 /*****  All review related functionality    *****/
+
+//  Sort all reviews by date.
+exports.sort_reviews_date = function (req, res) {
+    Reviews.find({}, function (err, reviews) {
+        if (err) {
+            console.log("There was an error when retrieving all the reviews from the database.");
+            console.log("Error: " + err);
+            res.send(false);
+        } else {
+            reviews.sort(function (a, b) {
+                console.log("sorting");
+                var dateA = new Date(a.review_creation_date);
+                var dateB = new Date(b.review_creation_date);
+                return dateB - dateA;
+            });
+            res.send(reviews)
+        }
+    });
+}
 
 //  List all reviews from the database.
 exports.get_all_reviews = function (req, res) {
@@ -594,12 +652,32 @@ exports.delete_a_review = function (req, res) {
 
     Reviews.deleteOne({
         _id: req.params.reviewID
-    }, function (err, review) {
-        if (err)
+    }, function (err) {
+        if (err) {
             res.send(err);
-        res.json({ message: 'Review was successfully deleted.' });
+        } else {
+            res.send(true);
+        }
     });
 };
+
+exports.delete_user_reviews = function (req, res) {
+
+    console.log("Removing reviews from User...");
+
+    Users.findOneAndUpdate(
+        { _id: req.body.userId },
+        { $pull: { user_reviews: req.body.reviewId } }, function (err, data) {
+            if (data) {
+                console.log("Success.");
+                res.send("success");
+            } else {
+                console.log("Error: " + err);
+                res.send("failure");
+            }
+        }
+    );
+}
 
 exports.get_a_review = function (req, res) {
 
@@ -792,7 +870,7 @@ exports.get_all_requests = function (req, res) {
 
 //  Get all user requests from supplied ID.
 exports.get_user_requests = function (req, res) {
-    
+
     console.log("Getting all requests for user...");
 
     Requests.find({ request_user_id: req.params.userID }, function (err, requests) {
@@ -838,8 +916,8 @@ exports.reject_a_request = function (req, res) {
         if (request) {
             request.request_state = "REJECTED";
             request.request_reject_reason = req.body.rejection_reason;
-            request.save(function(err) {
-                if(err) {
+            request.save(function (err) {
+                if (err) {
                     console.log("There was an error saving the document " + err);
                 } else {
                     res.send(true);
@@ -863,8 +941,8 @@ exports.complete_a_request = function (req, res) {
     Requests.findOne({ _id: req.body.request_id }, function (err, request) {
         if (request) {
             request.request_state = "COMPLETE";
-            request.save(function(err) {
-                if(err) {
+            request.save(function (err) {
+                if (err) {
                     console.log("There was an error saving the document " + err);
                 } else {
                     res.send(true);

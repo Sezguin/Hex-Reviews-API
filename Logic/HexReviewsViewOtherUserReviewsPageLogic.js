@@ -4,6 +4,8 @@ var globalUserID;
 
 $(document).ready(function () {
 
+    setMiniAvatar($('#miniAv'), cookies.username);
+
     //  Grab ID from URL parameter.
     var url_string = window.location.href;
     var url = new URL(url_string);
@@ -39,6 +41,7 @@ function getUserData(userID, sortType) {
         url: GlobalURL + '/users/' + userID,
         type: 'GET',
         success: function (user) {
+            document.getElementById("userReviewHeading").innerHTML = user.user_username + "'s Reviews"
             getReviewList(user, sortType);
         }
     });
