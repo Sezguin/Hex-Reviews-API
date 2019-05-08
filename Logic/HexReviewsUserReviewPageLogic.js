@@ -203,6 +203,8 @@ function buildReviewCard(data) {
 //  Retrieve list of reviews searched for.
 function getSearchedReviewList() {
 
+    $('#nothingFound').attr("hidden", true);
+
     var query = $('#searchBox').val();
 
     if(query != "") {
@@ -213,10 +215,17 @@ function getSearchedReviewList() {
     
                 //  Clear out container.
                 document.getElementById("userReviewsContainer").innerHTML = "";
-    
-                result.forEach(function(element) {
-                    buildReviewCard(element);
-                });
+
+                if (result.length == 0 ) {
+                    console.log("No reviews found.");
+                    $('#nothingFound').attr("hidden", false);
+                } else {
+                    result.forEach(function(element) {
+                        if (element.user_id == cookies.user_id) {
+                            buildReviewCard(element);
+                        }                        
+                    });
+                }
             }
         });
     }

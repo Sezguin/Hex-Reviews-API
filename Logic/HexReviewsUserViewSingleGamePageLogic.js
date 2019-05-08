@@ -13,42 +13,42 @@ $(document).ready(function() {
     var gameID = url.searchParams.get("id");
 
     getGame(gameID);
+    $('#successfulPostModal').modal("show");
 });
 
 function getGame(gameID) {
-
-    $("#successfulPostModal").show();
-
     $.ajax({
         url: GlobalURL + '/games/' + gameID,
         type: 'GET',
         success: function(result) {
             globalGame = result;
-            getGameImages(result);
+            getGameImages(result.game_images_id);
         }
     });
 }
 
-function getGameImages(game) {
+function getGameImages(gameImagesResult) {
 
-    var gameImageArray = game.game_images_id;
-
-    for(var i = 0; i < gameImageArray.length; i++) {
-        console.log("Image ID: " + gameImageArray[i]);
-
+    for(var i = 0; i < gameImagesResult.length; i++) {
         $.ajax({
-            url: GlobalURL + '/images/game/' + gameImageArray[i],
+            url: GlobalURL + '/images/game/' + gameImagesResult[i],
             type: 'GET',
             success: function(result) {
                 gameImages.push(result.game_image_data);
             }
         });
+
+        if(i + 1 == gameImagesResult.length) {
+            window.setTimeout(function () {
+                displayGame();
+            }, 500);
+        }
     }
 }
 
-setTimeout(function displayGame() {
+function displayGame() {
 
-    $("#successfulPostModal").hide();
+    $('#successfulPostModal').modal("hide");
 
     var reviewsAmount;
     var cutReleaseDate;
@@ -60,38 +60,31 @@ setTimeout(function displayGame() {
 
     for (var i = 0; i < globalGame.game_rating.length; i++) {
         total = total + parseInt(globalGame.game_rating[i]);
-        console.log("Total: " + total);
     }
 
     rating = total / parseInt(globalGame.game_rating.length);
 
     if(0 <= rating && rating < 1) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("terrible");
     }
 
     if(1 <= rating && rating < 2) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("bad");
     }
 
     if(2 <= rating && rating < 3) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("okay");
     }
 
     if(3 <= rating && rating < 4) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("good");
     }
 
     if(4 <= rating && rating < 5) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("excellent");
     }
 
     if(rating == 5) {
-        console.log("dsggdsf");
         $('#ratingRank').addClass("perfect");
     }
 
@@ -166,7 +159,7 @@ setTimeout(function displayGame() {
 
 
 
-}, 500);
+};
 
 function viewReviews() {
     goToViewGameReviewsPage(globalGame._id);

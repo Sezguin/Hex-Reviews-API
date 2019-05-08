@@ -36,10 +36,6 @@ $(document).ready(function() {
         addGame();
     });
 
-    $("#viewImageButton").click(function() {
-        getGameImage();
-    });
-
     //  Hide certain elements on page load.
     document.getElementById("successIcon").style.display = 'none';
     document.getElementById("failureIcon").style.display = 'none';
@@ -80,22 +76,6 @@ $(function () {
         }
     });
 });
-
-function getGameImage() {
-    imageID = "";
-    $.ajax({
-        url: GlobalURL + '/images/game/' + imageID,
-        type: 'GET',
-        success: function(result) {
-            displayImage(result);
-        }
-    });
-}
-
-function displayImage(result) {
-    var output = document.getElementById("imageOutput");
-        output.src = result.game_image_data;
-}
 
 function addGame() {
     collectImages(postGame);

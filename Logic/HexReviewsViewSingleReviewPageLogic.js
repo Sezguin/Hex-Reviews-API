@@ -40,7 +40,7 @@ function getUserInformation(review) {
         type: 'GET',
         success: function (user) {
             checkSubscriptionList(review, user);
-            if (globalReviewerId == review.user_id) {
+            if (globalReviewerId == cookies.user_id) {
                 document.getElementById("viewProfileButton").textContent = "My Profile";
                 document.getElementById("viewProfileButton").setAttribute("onclick", "viewMyProfile()");
             } else {

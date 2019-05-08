@@ -293,8 +293,6 @@ function unsubscribe(subscriberData, subscribeeData) {
 }
 
 function setMiniAvatar(image, id) {
-
-    console.log("ID" + id);
     $.ajax({
         url: GlobalURL + '/images/avatar/' + id,
         type: 'GET',
@@ -302,7 +300,6 @@ function setMiniAvatar(image, id) {
             if(!result) {
                 console.log("There was an error.");
             } else {
-                console.log("Res: " + result);
                 image.attr("src", result);
             }
         }
