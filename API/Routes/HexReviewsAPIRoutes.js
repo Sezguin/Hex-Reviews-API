@@ -34,9 +34,10 @@ module.exports = function(app) {
     app.route('/images/game')
         .post(hexReviewController.create_an_image);
 
-    //  Retrieve a specific image.
+    //  Retrieve a specific image or delete a specific image.
     app.route('/images/game/:imageID')
-        .get(hexReviewController.get_an_image);
+        .get(hexReviewController.get_an_image)
+        .delete(hexReviewController.delete_game_image);
     
     //  Retrieve a user's avatar.
     app.route('/images/avatar/:userID')
@@ -62,10 +63,11 @@ module.exports = function(app) {
     app.route('/users/id/:username')
         .get(hexReviewController.get_user_id);
     
-    //  Get of update a user from provided ID.
+    //  Get or update a user from provided ID.
     app.route('/users/:userID')
         .get(hexReviewController.get_a_user)
-        .put(hexReviewController.update_a_user);
+        .put(hexReviewController.update_a_user)
+        .delete(hexReviewController.delete_a_user);
 
     //  Subscribe to a user from provided ID.
     app.route('/users/subscribe')

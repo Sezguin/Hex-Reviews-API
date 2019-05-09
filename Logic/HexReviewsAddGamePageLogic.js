@@ -36,6 +36,10 @@ $(document).ready(function() {
         addGame();
     });
 
+    $('#successfulModalCloseButton').click(function() {
+        location.reload();
+    });
+
     //  Hide certain elements on page load.
     document.getElementById("successIcon").style.display = 'none';
     document.getElementById("failureIcon").style.display = 'none';

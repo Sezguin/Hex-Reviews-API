@@ -140,7 +140,6 @@ function appendGames(games, arrayIndex) {
     }
 } 
 
-
 function displayGames(games) {
     for(var i = 0; i < 4; i++) {
         buildGameCard(games[i]);

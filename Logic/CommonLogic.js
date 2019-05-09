@@ -16,6 +16,18 @@ $(document).ready(function () {
         window.location.href = "/AdminHomePage"
     });
 
+    $("#adminDeleteItems").click(function () {
+        window.location.href = "/AdminControlPage"
+    });
+
+    $("#navGameRequests").click(function () {
+        window.location.href = "/AdminRequestPage"
+    });
+
+    $("#navDeleteItems").click(function () {
+        window.location.href = "/AdminControlPage"
+    });
+
     $("#navViewUserProfile").click(function () {
         window.location.href = "/ViewUserProfilePage"
     });
@@ -105,21 +117,36 @@ function goToUserEditProfilePage(userID) {
 /*****  General functions for deleting from the database.   *****/
 
 //  Delete a game by ID supplied.
-function deleteGame(button) {
-
-    var id = button.parentNode.childNodes[0].innerHTML;
-    var name = button.parentNode.childNodes[1].innerHTML;
-
+function deleteGame(id) {
     $.ajax({
         url: GlobalURL + '/games/' + id,
         type: 'DELETE',
         success: function (result) {
-            console.log(name + " has successfully been removed from the database.");
-            console.log("Information from API: " + result.message);
+            console.log("The game has successfully been removed from the database.");
         }
     });
+}
 
-    window.location.href = "/ViewGamesPage"
+//  Delete a game image by supplied ID.
+function deleteGameImages(imageID) {
+    $.ajax({
+        url: GlobalURL + '/images/game/' + imageID,
+        type: 'DELETE',
+        success: function (result) {
+            console.log("Image was deleted successfully.");
+        }
+    });
+}
+
+//  Delete a user by supplied ID.
+function deleteUser(userID) {
+    $.ajax({
+        url: GlobalURL + '/users/' + userID,
+        type: 'DELETE',
+        success: function (result) {
+            console.log("User was deleted successfully.");
+        }
+    });
 }
 
 //  Delete a review by ID supplied.
@@ -133,22 +160,22 @@ function deleteReview(reviewID, userID) {
         }
     });
 
-    console.log("Review: " + reviewID + " User: " + userID)
-
-    $.post(GlobalURL + "/reviews/delete", 
-    {   
-        userId: userID,
-        reviewId: reviewID,
-    },
-    function(data) {
-        if(data) {
-            console.log("Review removed.")
-        } else {
-            console.log("Error when removing review.");
-        }
-    });
-
-    location.reload();
+    if(userID == undefined) {
+        console.log("No userID.");
+    } else {
+        $.post(GlobalURL + "/reviews/delete",
+        {
+            userId: userID,
+            reviewId: reviewID,
+        },
+        function (data) {
+            if (data) {
+                console.log("Review removed.")
+            } else {
+                console.log("Error when removing review.");
+            }
+        });
+    }
 }
 
 //  A global function for retrieving the user ID.
@@ -219,9 +246,9 @@ function getUserRank(userID, item, append) {
     $.ajax({
         url: GlobalURL + '/users/rank/' + userID,
         type: 'GET',
-        success: function(result) {
+        success: function (result) {
             console.log("Rank: " + result);
-            if(append) {
+            if (append) {
                 item.append(result);
             } else {
                 item.text(result);
@@ -233,71 +260,71 @@ function getUserRank(userID, item, append) {
 function subscribe(subscriberData, subscribeeData) {
 
     //  Subscriber to user.
-    $.post(GlobalURL + "/users/subscribe", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("User has subscribed.")
-        } else {
-            console.log("Error when subscribing to user.");
-        }
-    });
+    $.post(GlobalURL + "/users/subscribe",
+        {
+            subscriber: subscriberData,
+            subscribee: subscribeeData,
+        },
+        function (data, status) {
+            if (data == "success") {
+                console.log("User has subscribed.")
+            } else {
+                console.log("Error when subscribing to user.");
+            }
+        });
 
     //  Update subscribee's follower list.
-    $.post(GlobalURL + "/users/follower", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("Follower has been added to subscribee's list.")
-        } else {
-            console.log("Error when updating subscribee's followers.");
-        }
-    });
+    $.post(GlobalURL + "/users/follower",
+        {
+            subscriber: subscriberData,
+            subscribee: subscribeeData,
+        },
+        function (data, status) {
+            if (data == "success") {
+                console.log("Follower has been added to subscribee's list.")
+            } else {
+                console.log("Error when updating subscribee's followers.");
+            }
+        });
 }
 
 function unsubscribe(subscriberData, subscribeeData) {
 
     //  Subscriber to user.
-    $.post(GlobalURL + "/users/unsubscribe", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("User has unsubscribed.")
-        } else {
-            console.log("Error when subscribing to user.");
-        }
-    });
+    $.post(GlobalURL + "/users/unsubscribe",
+        {
+            subscriber: subscriberData,
+            subscribee: subscribeeData,
+        },
+        function (data, status) {
+            if (data == "success") {
+                console.log("User has unsubscribed.")
+            } else {
+                console.log("Error when subscribing to user.");
+            }
+        });
 
     //  Update subscribee's follower list.
-    $.post(GlobalURL + "/users/unfollow", 
-    {   
-        subscriber: subscriberData,
-        subscribee: subscribeeData,
-    },
-    function(data, status) {
-        if(data == "success") {
-            console.log("Follower has been removed from subscibee's list.")
-        } else {
-            console.log("Error when updating subscribee's followers.");
-        }
-    });
+    $.post(GlobalURL + "/users/unfollow",
+        {
+            subscriber: subscriberData,
+            subscribee: subscribeeData,
+        },
+        function (data, status) {
+            if (data == "success") {
+                console.log("Follower has been removed from subscibee's list.")
+            } else {
+                console.log("Error when updating subscribee's followers.");
+            }
+        });
 }
 
 function setMiniAvatar(image, id) {
     $.ajax({
         url: GlobalURL + '/images/avatar/' + id,
         type: 'GET',
-        success: function(result) {
-            if(!result) {
+        success: function (result) {
+            if (!result) {
                 console.log("There was an error.");
             } else {
                 image.attr("src", result);

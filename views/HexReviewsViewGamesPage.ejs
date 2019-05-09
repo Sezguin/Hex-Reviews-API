@@ -1,76 +1,99 @@
 <!doctype html>
 <html>
-    <head>
-        <title>View Games</title>
 
-            <!-- All stylesheets and UI material. -->
+<head>
+    <title>View Games</title>
 
-        <!-- Bootstrap Stylesheet dependencies. -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    <!-- All stylesheets and UI material. -->
+
+    <!-- Bootstrap Stylesheet dependencies. -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Custom client stylesheets. -->
-        <link rel="stylesheet" href="CommonStylesheet.css">
-        <link rel="stylesheet" href="HexReviewsViewGamesPageStylesheet.css">
+    <!-- Custom client stylesheets. -->
+    <link rel="stylesheet" href="CommonStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsViewGamesPageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsUserViewGamesPageStylesheet.css">
 
-        <!-- Custom icons and fonts. -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- Custom icons and fonts. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
-    </head>
-    <body>
+</head>
+
+<body>
     <!-- Top navigation bar. -->
     <nav class="navbar navbar-expand-lg navbar-dark hexNavbar">
-            <a class="navbar-brand" href="#">Hex Reviews</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a id="navHome" class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="navAddGame" class="nav-link" href="#">Add Game</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="navViewGames" class="nav-link active" href="#">View Games</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Admin Tools
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Delete User</a>
-                            <a class="dropdown-item" href="#">Delete Review</a>
-                        </div>
-                    </li>
-                </ul>
+        <a id="navHome" class="navbar-brand" href="#">Hex Reviews</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a id="navAddGame" class="nav-link" href="#">Add Game</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navViewGames" class="nav-link active" href="#">View Games</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navGameRequests" class="nav-link" href="#">Game Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a id="navDeleteItems" class="nav-link" href="#">Delete Items</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li id="accountDrop" class="nav-item dropdown">
+                    <img id="miniAv" src="" alt="">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <img id="miniAv" src="" alt="">
+                        Account
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                        <a id="navViewUserProfile" class="dropdown-item" href="#">View Profile</a>
+                        <a id="navLogout" class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="searchAndFilterMainContainer" style="width: 70%;">
+        <div id="gameSearch" class="input-group mb-3">
+            <input id="searchBox" type="text" class="form-control" placeholder="Search games...">
+            <div class="input-group-append">
+                <button id="searchButton" class="btn hexButtons" type="button">Search</button>
             </div>
-        </nav>
-
-        <div class="page-header" style="width:40%; margin: 50px auto; text-align: center; ">
-            <h1>View Games</h1>
         </div>
+        <button id="resetButton" class="btn hexButtons">Reset</button>
+    </div>
 
-        <div id="gameResultsContainer">
-            <!-- All games from database will be added in here upon page load. -->
-        </div>
+    <div id="gameResultsContainer">
+        <!-- All games from database will be added in here upon page load. -->
+    </div>
 
-        <!-- All JavaScript material. -->
+    <!-- All JavaScript material. -->
 
-        <!-- JQuery JavaScript dependencies. -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- JQuery JavaScript dependencies. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <!-- Boostrap JavaScript Dependencies. -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-        <!-- Custom client JavaScript -->
-        <script src="CommonLogic.js"></script>
-        <script src="HexReviewsViewGamesPageLogic.js"></script>
-    </body>
+    <!-- Boostrap JavaScript Dependencies. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom client JavaScript -->
+    <script src="CommonLogic.js"></script>
+    <script src="HexReviewsViewGamesPageLogic.js"></script>
+</body>
+
 </html>
