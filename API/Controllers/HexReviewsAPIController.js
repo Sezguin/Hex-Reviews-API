@@ -110,6 +110,22 @@ exports.add_game_rating = function (req, res) {
 
 /*****  All image related functionality.    *****/
 
+//  Delete a game image from the database.
+exports.delete_game_image = function (req, res) {
+
+    console.log("A game image is being deleted...");
+
+    GameImages.deleteOne({
+        _id: req.params.imageID
+    }, function (err) {
+        if (err) {
+            console.log("There was an error: " + err);
+        } else {
+            console.log("Game image was successfully deleted.");
+        }
+    });
+};
+
 //  Get a user's avatar.
 exports.get_an_avatar = function (req, res) {
 
@@ -157,6 +173,8 @@ exports.get_an_image = function (req, res) {
 };
 
 
+
+
 /*****  All user related functionality. *****/
 
 //  Create a user in the database.
@@ -177,6 +195,22 @@ exports.create_a_user = function (req, res) {
         }
     });
 }
+
+//  Delete a game image from the database.
+exports.delete_a_user = function (req, res) {
+
+    console.log("A user is being deleted...");
+
+    Users.deleteOne({
+        _id: req.params.userID
+    }, function (err) {
+        if (err) {
+            console.log("There was an error: " + err);
+        } else {
+            console.log("User was successfully deleted.");
+        }
+    });
+};
 
 //  Update a user in the database.
 exports.update_a_user = function (req, res) {

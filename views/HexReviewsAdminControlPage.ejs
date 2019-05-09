@@ -13,7 +13,7 @@
     <!-- Custom client stylesheets. -->
     <link rel="stylesheet" href="CommonStylesheet.css">
     <link rel="stylesheet" href="Animations.css">
-    <link rel="stylesheet" href="HexReviewsAdminHomePageStylesheet.css">
+    <link rel="stylesheet" href="HexReviewsAdminControlPageStylesheet.css">
     <link rel="stylesheet" href="HexReviewsUserHomePageStylesheet.css">
 
 
@@ -43,7 +43,7 @@
                     <a id="navGameRequests" class="nav-link" href="#">Game Requests</a>
                 </li>
                 <li class="nav-item">
-                    <a id="navDeleteItems" class="nav-link" href="#">Delete Items</a>
+                    <a id="navDeleteItems" class="nav-link active" href="#">Delete Items</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -63,56 +63,61 @@
         </div>
     </nav>
 
-    <!-- Page heading. -->
-    <div id="welcomeContainer" class="page-header mainPageHeading">
-        <div id="userDiv">
-            <h1 id="userWelcome"></h1>
-            <div id="userSubDiv">
-                <img id="userAvatar" src="" alt="">
+    <div id="controlTitle">
+        <h2 style="margin: 20px;">Delete Items</h2>
+    </div>
+
+    <div id="mainControlContainer">
+        <h4>Delete Game</h4>
+        <div id=deleteGameContainer class="deleteContainer">
+            <div class="input-group mb-3">
+                <input id="deleteGameInput" type="text" class="form-control" placeholder="ID of game...">
+                <div class="input-group-append">
+                    <button id="deleteGameButton" class="btn btn-danger" type="button">Delete</button>
+                </div>
             </div>
         </div>
-        <div id="statsDiv">
-            <h5 id="adminOpenRequests">Open Requests: </h5>
-            <h5 id="adminTotalGames">Total Games: </h5>
-            <h5 id="adminTotalReviews">Total Reviews: </h5>
+        <h4>Delete Review</h4>
+        <div id=deleteReviewContainer class="deleteContainer">
+            <div class="input-group mb-3">
+                <input id="deleteReviewInput" type="text" class="form-control" placeholder="ID of review...">
+                <div class="input-group-append">
+                    <button id="deleteReviewButton" class="btn btn-danger" type="button">Delete</button>
+                </div>
+            </div>
+        </div>
+        <h4>Delete User</h4>
+        <div id=deleteUserContainer class="deleteContainer">
+            <div class="input-group mb-3">
+                <input id="deleteUserInput" type="text" class="form-control" placeholder="ID of user...">
+                <div class="input-group-append">
+                    <button id="deleteUserButton" class="btn btn-danger" type="button">Delete</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="hexagonArray">
-        <ul id="grid" class="clear">
-            <li>
-                <button id="adminViewGamesButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        view_list
-                    </i>
-                    <span id="adminViewGames" class="hexText">View Games</span>
-                </button>
-            </li>
-            <li>
-                <button id="adminAddGameButton" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        build
-                    </i>
-                    <span id="adminAddGame" class="hexText">Add a Game</span>
-                </button>
-            </li>
-            <li>
-                <button id="adminGameRequests" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        feedback
-                    </i>
-                    <span id="adminGameReq" class="hexText"> Game Requests</span>
-                </button>
-            </li>
-            <li>
-                <button id="adminDeleteItems" class="btn hexagon">
-                    <i class="material-icons md-48 homeIcon">
-                        clear
-                    </i>
-                    <span id="adminDelete" class="hexText">Delete Items</span>
-                </button>
-            </li>
-        </ul>
+    <!-- Successful post modal. -->
+    <div id="successfulPostModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-center">
+                        <h3 id="successModalTitle" class="modal-title">Please Wait...</h3>
+                        <div id="successfulPostModalSpinner" class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <i id="successIcon" class="material-icons md-48">done</i>
+                        <i id="failureIcon" class="material-icons md-48">clear</i>
+                    </div>
+                </div>
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button id="successfulModalCloseButton" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- All JavaScript material. -->
@@ -134,7 +139,7 @@
 
     <!-- Custom client JavaScript -->
     <script src="CommonLogic.js"></script>
-    <script src="HexReviewsAdminHomePageLogic.js"></script>
+    <script src="HexReviewsAdminControlPageLogic.js"></script>
 
 </body>
 

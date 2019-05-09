@@ -58,8 +58,8 @@ app.get('/UserViewReviewsPage', (req, res) => res.render("HexReviewsUserViewRevi
 app.get('/AdminHomePage', (req, res) => res.render('HexReviewsAdminHomePage.ejs'));
 app.get('/AddGamePage', (req, res) => res.render('HexReviewsAddGamePage.ejs'));
 app.get('/ViewGamesPage', (req, res) => res.render('HexReviewsViewGamesPage.ejs'));
-app.get('/ViewSingleGamePage', (req, res) => res.render('HexReviewsViewSingleGamePage.ejs'));
 app.get('/AdminRequestPage', (req, res) => res.render('HexReviewsAdminRequestPage.ejs'));
+app.get('/AdminControlPage', (req, res) => res.render('HexReviewsAdminControlPage.ejs'));
 
 var routes = require('./API/Routes/HexReviewsAPIRoutes');
 routes(app);

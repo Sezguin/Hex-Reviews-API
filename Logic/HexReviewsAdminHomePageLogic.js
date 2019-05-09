@@ -20,7 +20,9 @@ $(document).ready(function() {
     //  Grab user's avatar.
     collectAvatar();
 
-    getOpenRequests(displayRequests);
+    getOpenRequests();
+    getGameCount();
+    getReviewCount();
 
 });
 
@@ -40,7 +42,38 @@ function collectAvatar() {
     });
 }
 
-function getOpenRequests(callback) {
+function getGameCount() {
+    $.ajax({
+        url: GlobalURL + '/games/',
+        type: 'GET',
+        success: function (data) {
+            if (!data) {
+                console.log("No games found.");
+            } else {
+                $("#adminTotalGames").text("Total Games: ");
+                $("#adminTotalGames").append(data.length);
+            }
+        }
+    });
+}
+
+function getReviewCount() {
+    $.ajax({
+        url: GlobalURL + '/reviews/',
+        type: 'GET',
+        success: function (data) {
+            if (!data) {
+                console.log("No games found.");
+            } else {
+                $("#adminTotalReviews").text("Total Reviews: ");
+                $("#adminTotalReviews").append(data.length);
+            }
+        }
+    });
+}
+
+
+function getOpenRequests() {
     var amount = 0;
     $.ajax({
         url: GlobalURL + '/requests/',
@@ -54,15 +87,10 @@ function getOpenRequests(callback) {
                     if(element.request_state == "OPEN") {
                         amount = amount + 1;
                     }
-                    displayRequests(amount);
-                
+                    $("#adminOpenRequests").text("Open Requests: ");
+                    $("#adminOpenRequests").append(amount);
                 });
             }
         }
     });
-}
-
-function displayRequests(amount) {
-    $("#adminOpenRequests").text("Open Requests: ");
-    $("#adminOpenRequests").append(amount);
 }

@@ -1,0 +1,23 @@
+#mainControlContainer {
+    width: 60%;
+    min-width: 1000px;
+    margin: 0 auto;
+    background-image: url("/Images/LightGreyFrabric.png");
+    background-repeat: repeat;
+}
+
+#controlTitle {
+    margin: 10px;
+    text-align: center;
+}
+
+.deleteContainer {
+    margin: 20px 0px 40px 0px;
+    padding: 20px;
+    background-image: url('/Images/LightGreyFabric.png');
+    box-shadow: 2px 2px 10px 3px grey;
+    border: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: rgb(179, 179, 179);
+}

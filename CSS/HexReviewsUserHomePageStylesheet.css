@@ -278,6 +278,10 @@
     left: 12% !important;
 }
 
+#adminDelete {
+    left: 20% !important;
+}
+
 @keyframes slideUp {
     from {
         -webkit-transform: translate3d(0, 0, 0);
