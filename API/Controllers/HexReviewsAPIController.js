@@ -817,26 +817,26 @@ exports.get_all_comments = function (req, res) {
     });
 }
 
-//  Like a comment.
-exports.like_a_comment = function (req, res) {
-    console.log("Liking a comment...");
+// //  Like a comment.
+// exports.like_a_comment = function (req, res) {
+//     console.log("Liking a comment...");
 
-    var commentID = req.body.comment_id;
-    var reviewID = req.body.review_id;
-    var userID = req.body.user_id;
+//     var commentID = req.body.comment_id;
+//     var reviewID = req.body.review_id;
+//     var userID = req.body.user_id;
 
-    Reviews.find(
-        { _id: reviewID },
-        { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
-            if (err) {
-                console.log("There was an error when retrieving that comment.");
-                console.log("Error: " + err);
-            } else {
-                comment[0].review_comments[0].comment_likes.push(userID);
-            }
-        }
-    )
-}
+//     Reviews.find(
+//         { _id: reviewID },
+//         { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
+//             if (err) {
+//                 console.log("There was an error when retrieving that comment.");
+//                 console.log("Error: " + err);
+//             } else {
+//                 comment[0].review_comments[0].comment_likes.push(userID);
+//             }
+//         }
+//     )
+// }
 
 //  Like a comment.
 exports.like_a_comment = function (req, res) {
