@@ -1,7 +1,7 @@
 #mainContainer {
     width: 70%;
     margin: 0 auto;
-    min-width: 1000px;
+    min-width: 1200px;
 }
 
 #reviewUserArea {
@@ -34,7 +34,7 @@
 }
 
 #reviewTitleElement {
-    width: 60%;
+    width: 550px !important;
     font-size: 32px;
     white-space: nowrap;
     overflow: hidden;

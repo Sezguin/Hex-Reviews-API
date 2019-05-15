@@ -798,6 +798,28 @@ exports.create_a_comment = function (req, res) {
     )
 }
 
+//  Delete a comment.
+exports.delete_a_comment = function (req, res) {
+    console.log("Deleting a comment...");
+
+    var reviewID = req.body.review_id;
+    var commentID = req.body.comment_id;
+
+        Reviews.findOneAndUpdate(
+        { _id: reviewID }, 
+        { $pull: { review_comments: {_id: commentID}  } }, {multi: true}, function (err) {
+            if (err) {
+                console.log("Error: " + err);
+                res.send(false);
+            } else {
+                console.log("Comment removed.")
+                res.send(true);
+            }
+        }
+    )
+}
+
+
 //  Get all comments for a specific review.
 exports.get_all_comments = function (req, res) {
 
@@ -817,26 +839,6 @@ exports.get_all_comments = function (req, res) {
     });
 }
 
-// //  Like a comment.
-// exports.like_a_comment = function (req, res) {
-//     console.log("Liking a comment...");
-
-//     var commentID = req.body.comment_id;
-//     var reviewID = req.body.review_id;
-//     var userID = req.body.user_id;
-
-//     Reviews.find(
-//         { _id: reviewID },
-//         { review_comments: { $elemMatch: { _id: commentID } } }, function (err, comment) {
-//             if (err) {
-//                 console.log("There was an error when retrieving that comment.");
-//                 console.log("Error: " + err);
-//             } else {
-//                 comment[0].review_comments[0].comment_likes.push(userID);
-//             }
-//         }
-//     )
-// }
 
 //  Like a comment.
 exports.like_a_comment = function (req, res) {

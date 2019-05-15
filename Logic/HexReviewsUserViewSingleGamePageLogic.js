@@ -28,25 +28,30 @@ function getGame(gameID) {
 }
 
 function getGameImages(gameImagesResult) {
-
-    for(var i = 0; i < gameImagesResult.length; i++) {
-        $.ajax({
-            url: GlobalURL + '/images/game/' + gameImagesResult[i],
-            type: 'GET',
-            success: function(result) {
-                gameImages.push(result.game_image_data);
+    if (gameImagesResult.length === undefined || gameImagesResult.length == 0) {
+        window.setTimeout(function () {
+            displayGame(true);
+        }, 500);
+    } else {
+        for(var i = 0; i < gameImagesResult.length; i++) {
+            $.ajax({
+                url: GlobalURL + '/images/game/' + gameImagesResult[i],
+                type: 'GET',
+                success: function(result) {
+                    gameImages.push(result.game_image_data);
+                }
+            });
+    
+            if(i + 1 == gameImagesResult.length) {
+                window.setTimeout(function () {
+                    displayGame(false);
+                }, 500);
             }
-        });
-
-        if(i + 1 == gameImagesResult.length) {
-            window.setTimeout(function () {
-                displayGame();
-            }, 500);
         }
     }
 }
 
-function displayGame() {
+function displayGame(noImage) {
 
     $('#successfulPostModal').modal("hide");
 
@@ -142,8 +147,11 @@ function displayGame() {
         platformResults.appendChild(platformButton);
     }
 
-    var number = Math.floor(Math.random() * gameImages.length)
-    $("#gameCoverImage").attr("src", gameImages[number]);
+    if (!noImage) {
+        var number = Math.floor(Math.random() * gameImages.length)
+        $("#gameCoverImage").attr("src", gameImages[number]);
+    }
+
 
     $('#gameTitle').text(globalGame.game_title);
     $('#gameDescription').text(globalGame.game_description);
@@ -156,9 +164,6 @@ function displayGame() {
     } else {
         $('#rating').text( "Unranked");
     }
-
-
-
 };
 
 function viewReviews() {

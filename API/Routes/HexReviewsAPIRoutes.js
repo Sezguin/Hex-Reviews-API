@@ -162,6 +162,10 @@ module.exports = function(app) {
     app.route('/reviews/comment')
         .post(hexReviewController.create_a_comment);
 
+    //  Delete a comment.
+    app.route('/reviews/delete/comment')
+        .post(hexReviewController.delete_a_comment);
+
     //  Get all comments for a specific review.
     app.route('/reviews/comment/:reviewID')
         .get(hexReviewController.get_all_comments);

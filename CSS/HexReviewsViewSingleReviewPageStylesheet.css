@@ -10,6 +10,14 @@
     margin: 10px;
 }
 
+a {
+    color: rgb(53, 53, 53);
+}
+
+a:hover {
+    color: #27AE60;
+  }
+
 #uberContainer {
     width: 70%;
     min-width: 1300px;
@@ -105,10 +113,15 @@
     float: right;
     width: 150px;
     height: 100px;
-    padding: 25px 0px 30px 10px;
-    border-left: solid;
-    border-color: rgb(168, 168, 168);
-    border-width: 1px;
+    padding: 10px 0px 30px 10px;
+}
+
+#deleteCommentButton {
+    width: 30px;
+    margin: 0px, 20px 0px 20px;
+    height: 20px;
+    font-size: 7px;
+    float: right;
 }
 
 #userRankElement {

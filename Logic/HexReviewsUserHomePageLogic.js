@@ -134,8 +134,7 @@ function getUserFollowerCount(userID) {
 
 function displayAvatar(data) {
     var output = document.getElementById("userAvatar");
-    // $('#miniAv').attr("src", data);
-
+    
     if(data != "") {
         output.src = data;
     } else {
