@@ -46,6 +46,8 @@ function getReviews(sortType) {
     //  Clear containers.
     document.getElementById("reviewsContainer").innerHTML = "";
     document.getElementById("latestReviewsDiv").innerHTML = "";
+    $('#resultsText').attr("hidden", true);
+    $('#latestReviewsText').attr("hidden", false);
 
     //  Clear global reviews.
     globalReviews = [];
@@ -60,22 +62,13 @@ function getReviews(sortType) {
             if (!reviews) {
                 console.log("No reviews found.");
             } else {
-                console.log("Array length: " + reviews.length);
                 for (var i = 0; i < reviews.length; i++) {
-
-                    console.log(i);
-                    console.log("Review before: " + JSON.stringify(reviews[i]));
-
-                    // reviews[i] = addUserData(reviews[i]);
-
                     if (i + 1 == reviews.length) {
                         reviews[i] = addUserData(reviews[i], true, sortType);
                     } else {
                         reviews[i] = addUserData(reviews[i], false, sortType);
                     }
                 }
-                // callback(reviews, sortType, displayEach);
-                // latestThreeReviews(reviews);
             }
         }
     });
@@ -163,6 +156,8 @@ function sortGlobalReviewArray(sorting) {
     }
 
     if (sorting == "name") {
+
+        //  Sort revieved reviews by name.
         globalReviews.sort(function (a, b) {
             var nameA = a.review_title.toLowerCase();
             var nameB = b.review_title.toLowerCase();
@@ -463,6 +458,8 @@ function getSearchedReviewList() {
 
     //  Show loading modal.
     $('#loadingModal').modal("show");
+    $('#resultsText').attr("hidden", true);
+    $('#latestReviewsText').attr("hidden", false);
 
     var query = $('#searchBox').val();
 
@@ -476,10 +473,10 @@ function getSearchedReviewList() {
                 document.getElementById("reviewsContainer").innerHTML = "";
 
                 if(reviews.length == 0) {
+                    $('#resultsText').attr("hidden", false);
+                    $('#latestReviewsText').attr("hidden", true);
                     $('#resultsText').text("No Results!");
                     $('#loadingModal').modal("hide");
-
-
                 } else {
                     for (var i = 0; i < reviews.length; i++) {
 

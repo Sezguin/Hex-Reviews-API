@@ -99,6 +99,7 @@ function displayReview(review, user, avatar, subbed) {
     }
 
     $('#reviewTitle').text(review.review_title);
+    $('#reviewTitle').attr("href", "/UserViewSingleGamePage?id=" + review.game_id);
     $('#reviewSubtitle').text("\"" + review.review_subtitle + "\"");
     $('#reviewUsername').text("Reviewed by " + user.user_username);
     $('#userAvatar').attr("src", avatar);
@@ -106,6 +107,10 @@ function displayReview(review, user, avatar, subbed) {
     textArea.textContent = review.review_content;
     textArea.style.height = (5 + textArea.scrollHeight) + "px";
 
+    if (review.user_id == cookies.user_id) {
+        $('#subscribeButton').attr("hidden", true);
+
+    }
     if (subbed) {
         $('#subscribeButton').text("Unsubsribe");
         subscribeButton.setAttribute("onclick", "unsubscribeToUser(\"" + subscribee + "\", this)");
@@ -137,20 +142,20 @@ function unsubscribeToUser(subscribee, button) {
 
 function addComment() {
     var commentContent = $('#commentTextArea').val();
-    $.post(GlobalURL + "/reviews/comment", 
-    {   
-        review_id: globalReviewId,
-        comment_user_id: cookies.user_id,
-        comment_content: commentContent,
-    },
-    function(data) {
-        if(!data) {
-            console.log("There was an error when posting the comment.");
-        } else {
-            displayCommentsAndSort(globalReviewId);
-            document.getElementById("commentTextArea").value = "";
-        }
-    });
+    $.post(GlobalURL + "/reviews/comment",
+        {
+            review_id: globalReviewId,
+            comment_user_id: cookies.user_id,
+            comment_content: commentContent,
+        },
+        function (data) {
+            if (!data) {
+                console.log("There was an error when posting the comment.");
+            } else {
+                displayCommentsAndSort(globalReviewId);
+                document.getElementById("commentTextArea").value = "";
+            }
+        });
 }
 
 function displayCommentsAndSort(reviewID) {
@@ -170,7 +175,7 @@ function displayCommentsAndSort(reviewID) {
 function sortArray(comments, callback) {
 
     //  Sort comments by most recent date.
-    comments.sort(function(a, b) {
+    comments.sort(function (a, b) {
         var dateA = new Date(a.comment_creation_date);
         var dateB = new Date(b.comment_creation_date);
         return dateB - dateA;
@@ -180,7 +185,7 @@ function sortArray(comments, callback) {
 }
 
 function displayCommments(comments) {
-    Object.keys(comments).forEach(function(k) {
+    Object.keys(comments).forEach(function (k) {
         getUserInformationComment(comments[k]);
     });
 }
@@ -202,14 +207,10 @@ function getUserInformationComment(comment) {
 }
 
 function createComment(comment, user, avatar) {
-    console.log("create a comment..." + comment._id);
 
     var commentLikeArray = comment.comment_likes;
     var commentLiked = commentLikeArray.includes(cookies.user_id);
     var commentLikes = commentLikeArray.length
-
-    console.log("Comment likes array: " + JSON.stringify(comment));
-
     var resultsContainer = document.getElementById("commentsDiv");
 
     //  Comment ID area properties.
@@ -239,12 +240,20 @@ function createComment(comment, user, avatar) {
     //  Like button.
     var likeButton = document.createElement("button");
     likeButton.id = "likeButton";
-    if(commentLiked) {
+    if (commentLiked) {
         likeButton.setAttribute("onclick", "unlikeComment(this)");
         likeButton.className = "btn hexButtons";
     } else {
         likeButton.setAttribute("onclick", "likeComment(this)");
         likeButton.className = "btn btn-secondary";
+    }
+
+    if(comment.comment_user_id == cookies.user_id) {
+        var deleteCommentButton = document.createElement("button");
+        deleteCommentButton.textContent = "X";
+        deleteCommentButton.id="deleteCommentButton";
+        deleteCommentButton.className = "btn btn-danger";
+        deleteCommentButton.setAttribute("onclick", "deleteComment(\"" + comment._id + "\")");
     }
 
     //  Like amount.
@@ -296,6 +305,9 @@ function createComment(comment, user, avatar) {
     singleCommentDiv.appendChild(commentIdElement);
     singleCommentDiv.appendChild(userDiv);
     singleCommentDiv.appendChild(commentContentDiv);
+    if(comment.comment_user_id == cookies.user_id) {
+        singleCommentDiv.appendChild(deleteCommentButton);
+    }
     singleCommentDiv.appendChild(likeDiv);
 
     //  Append all items to results container.
@@ -311,19 +323,19 @@ function likeComment(button) {
     likeValue = likeValue + 1;
     button.parentNode.childNodes[1].innerHTML = likeValue;
 
-    $.post(GlobalURL + "/reviews/comment/like", 
-    {   
-        user_id: cookies.user_id,
-        review_id: globalReviewId,
-        comment_id: id
-    },
-    function(data) {
-        if(!data) {
-            console.log("There was an error when liking the comment.");
-        } else {
-            console.log("The comment was liked successfully.");
-        }
-    });
+    $.post(GlobalURL + "/reviews/comment/like",
+        {
+            user_id: cookies.user_id,
+            review_id: globalReviewId,
+            comment_id: id
+        },
+        function (data) {
+            if (!data) {
+                console.log("There was an error when liking the comment.");
+            } else {
+                console.log("The comment was liked successfully.");
+            }
+        });
 
     button.className = "btn hexButtons";
 }
@@ -337,17 +349,34 @@ function unlikeComment(button) {
     dislikeValue = dislikeValue - 1;
     button.parentNode.childNodes[1].innerHTML = dislikeValue;
 
-    $.post(GlobalURL + "/reviews/comment/unlike", 
-    {   
-        user_id: cookies.user_id,
+    $.post(GlobalURL + "/reviews/comment/unlike",
+        {
+            user_id: cookies.user_id,
+            review_id: globalReviewId,
+            comment_id: id
+        },
+        function (data) {
+            if (!data) {
+                console.log("There was an error when unliking the comment.");
+            } else {
+                console.log("The comment was unliked successfully.");
+            }
+        });
+}
+
+function deleteComment(commentId) {
+    console.log("ID: " + commentId);
+
+    $.post(GlobalURL + "/reviews/delete/comment",
+    {
+        comment_id: commentId,
         review_id: globalReviewId,
-        comment_id: id
     },
-    function(data) {
-        if(!data) {
-            console.log("There was an error when unliking the comment.");
+    function (data) {
+        if (data) {
+            displayCommentsAndSort(globalReviewId);
         } else {
-            console.log("The comment was unliked successfully.");
+            console.log("Error when removing comment.");
         }
     });
 }
