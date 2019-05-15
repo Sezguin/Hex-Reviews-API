@@ -20,6 +20,10 @@ $(document).ready(function () {
         window.location.href = "/AdminControlPage"
     });
 
+    $("#navTerms").click(function () {
+        $('#termsModal').modal("show");
+    });
+
     $("#navGameRequests").click(function () {
         window.location.href = "/AdminRequestPage"
     });

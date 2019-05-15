@@ -41,6 +41,9 @@
                 <li class="nav-item">
                     <a id="navCreateAccount" class="nav-link" href="#">Create Account</a>
                 </li>
+                <li class="nav-item">
+                    <a id="navTerms" class="nav-link" href="#">Terms of Use</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -49,7 +52,7 @@
         <h1 id="mainTitle">Hex Reviews</h1>
     </div>
 
-    <div id="mainPageImageContainer">   
+    <div id="mainPageImageContainer">
         <img id="mainPageImageGrey" src="/Images/MainLogoGreyNoText.png" alt="">
         <img id="mainPageImage" src="/Images/MainGreenLogoNoText.png" alt="">
         <img id="mainPageImageGrey" src="/Images/MainLogoGreyNoText.png" alt="">
@@ -58,6 +61,42 @@
     <div id="mainButtonDiv">
         <button id="titlePageLoginButton" class="bigMainButton hexButtons">Login</button>
         <button id="titlePageSignUpButton" class="bigMainButton hexButtons">Sign Up</button>
+    </div>
+
+    <!-- Terms of Use modal. -->
+    <div id="termsModal" class="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="successModalTitle" class="modal-title">Terms of Use</h3>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <p id="termsText">
+                            By accessing and using Hex Reviews, you agree not to use the service for any purpose that is unlawful or prohibited by the terms stated below.
+                            You agree NOT to use the services:
+                            <br><br>
+                            1.	To harass, threaten or abuse any other user on the site through means of writing text or otherwise.
+                            <br><br>
+                            2.	To post or submit any content that obscene, pornographic, abusive in nature or that infringes any copyright laws.
+                            <br><br>
+                            3.	To create multiple accounts for abusive purposes or for personal gain.
+                            <br><br>
+                            4.	For any purpose that is not permitted under the laws of where you are using the services from.
+                            <br><br>
+                            5.	To create or send any unnecessary spam in an abusive or offensive manner to other member of the site.
+                            <br><br>
+                            6.	To communicate with the Hex Reviews administrators in an abusive or offensive manner.                            
+                        </p>
+                    </div>
+                </div>
+
+                <div id="successfulPostModalFooter" class="modal-footer">
+                    <button type="button" class="btn btn-block btn-secondary"
+                        data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- All JavaScript material. -->
