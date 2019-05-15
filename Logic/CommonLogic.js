@@ -1,7 +1,7 @@
 //  For live:           https://hex-reviews.herokuapp.com
 //  For Development:    http://localhost:4500
 
-var GlobalURL = "http://localhost:4500"
+var GlobalURL = "https://hex-reviews.herokuapp.com"
 
 $(document).ready(function () {
     $("#viewGamesPageButton").click(function () {
